@@ -8,7 +8,7 @@ Feel free to [contribute]().
 
 ### Contents:
 - [Writeups]()
-- [List of WAFs]()
+- [List of Common WAFs]()
 - [WAF Detection]()
 - [Evasion Techniques]()
 - [Writeups]()
