@@ -8,10 +8,19 @@ __A Concise Definition:__ A web application firewall is a form of firewall with 
 Feel free to [contribute]().
 
 ### Contents:
-- [Common WAFs]()
-- [Methodology]()
-- [WAF Detection]()
-- [Evasion Techniques]()
-- [Writeups]()
-- [Research Papers]()
+- [Awsome WAFs]()
+- [Awesome Methodology]()
+- [Awesome WAF Detection]()
+- [Awesome Evasion Techniques]()
+- [Awesome Blogs & Writeups]()
+- [Presentations & Research Papers]()
 
+## Presentations & Research Papers
+### Presentations:
+- [WAF Profiling & Evasion](presentations/OWASP WAF Profiling & Evasion.pdf) - A WAF testing and evasion guide from [OWASP](https://www.owasp.org).
+- [Protocol Level WAF Techniques](presentations/BlackHat US 12 - Protocol Level WAF Evasion (Slides).pdf) - A presentation at about efficiently evading WAFs at protocol level from [BlackHat US 12](https://www.blackhat.com/html/bh-us-12/).
+
+### Research Papers:
+- [WASC WAF Evaluation Criteria](papers/WASC WAF Evaluation Criteria.pdf) - A guide for WAF Evaluation from [Web Application Security Consortium](http://www.webappsec.org)
+- [Protocol Level WAF Evasion](papers/Qualys Guide - Protocol-Level WAF Evasion.pdf) - A protocol level WAF evasion techniques and analysis by [Qualys](https://www.qualys.com).
+- [WAF Evasion Testing](papers/SANS Guide - WAF Evasion Testing.pdf) - A WAF evasion testing guide from [SANS](https://www.sans.org).
