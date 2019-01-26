@@ -1,5 +1,5 @@
 # Awesome WAF ![Awesome](https://camo.githubusercontent.com/13c4e50d88df7178ae1882a203ed57b641674f94/68747470733a2f2f63646e2e7261776769742e636f6d2f73696e647265736f726875732f617765736f6d652f643733303566333864323966656437386661383536353265336136336531353464643865383832392f6d656469612f62616467652e737667 "Awesome")
-> A curated list of awesome WAF stuff. 🔥
+> A curated list of awesome WAF stuff. 
 
 ![Main Logo](images/how-wafs-work.png 'How wafs work')
 
@@ -11,7 +11,6 @@ Feel free to [contribute]().
 - [Awesome WAFs List](#awesome-waf-list)
 - [Awesome Testing Methodology](#testing-methodology)
 - [Awesome WAF Detection](#)
-- [Awesome WAF Rule Testing](#waf-rule-testing)
 - [Awesome Evasion Techniques]()
 - [Awesome Tools](#awesome-tools)
 - [Awesome Blogs & Writeups](#blogs-and-writeups)
@@ -57,16 +56,13 @@ One that uses a mixed concept of blacklisting and whitelisting stuff.
 Wanna detect WAFs? Lets see how.
 > __NOTE__: This section contains manual WAF detection techniques. You might want to switch over to [next section](#awesome-tools). 
 
-## WAF Rule Testing
-Lets head over to testing WAF rules.
-
-
 ## WAF Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
 
 ## Awesome Tools
 ### WAF Fingerprinting:
 __1. Fingerprinting with [NMap](https://nmap.org)__:
+
 __Source:__ [GitHub](https://github.com/nmap/nmap) | [SVN](http://svn.nmap.org)
 - Normal WAF Fingerprinting
 ```
@@ -74,7 +70,7 @@ nmap --script=http-waf-fingerprint <target>
 ```
 - Intensive WAF Fingerprinting
 ```
-nmap --script=http-waf-fingerprint –script-args http-waf-fingerprint.intensive=1 <target>
+nmap --script=http-waf-fingerprint  --script-args http-waf-fingerprint.intensive=1 <target>
 ```
 - Generic Detection
 ```	
@@ -108,7 +104,24 @@ tamper=between,bluecoat,charencode,charunicodeencode,concat2concatws,equaltolike
 ```
 sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostrophenullencode,appendnullbyte,base64encode,between,bluecoat,chardoubleencode,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,randomcomments,securesphere,space2comment,space2dash,space2hash,space2morehash,space2mssqlblank,space2mssqlhash,space2mysqlblank,space2mysqldash,space2plus,space2randomblank,sp_password,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords
 ```
-__2. Evading WAFs with [WhatWaf](https://github.com/ekultek/whatwaf)__:
+
+__2. Evading WAFs with [WAFNinja](https://github.com/khalilbijjou/WAFNinja)
+- Fuzzing
+```
+python wafninja.py fuzz -u <target> -t xss
+```
+- Bypassing
+```
+python wafninja.py bypass -u <target> -p "name=<payload>&Submit=Submit" -t xss
+```
+- Insert Fuzzing
+```
+python wafninja.py insert-fuzz -i select -e select -t sql
+```
+
+__3. Evading WAFs with [WhatWaf](https://github.com/ekultek/whatwaf)__:
+
+Source: [GitHub](https://github.com/ekultek/whatwaf)
 ```
 whatwaf -u <target> --ra --throttle 2
 ```
@@ -126,3 +139,4 @@ whatwaf -u <target> --ra --throttle 2
 - [Protocol Level WAF Evasion](papers/Qualys%20Guide%20-%20Protocol-Level%20WAF%20Evasion.pdf) - A protocol level WAF evasion techniques and analysis by [Qualys](https://www.qualys.com).
 - [WAF Evasion Testing](papers/SANS%20Guide%20-%20WAF%20Evasion%20Testing.pdf) - A WAF evasion testing guide from [SANS](https://www.sans.org).
 - [Bypassing all WAF XSS Filters](papers/Evading%20All%20Web-Application%20Firewalls%20XSS%20Filters.pdf) - A paper about bypassing all XSS filter rules and evading WAFs for XSS. 
+- [Neural Network based WAF for SQLi](papers/Artificial%20Neural%20Network%20based%20WAF%20for%20SQL%20Injection) - A paper about building a neural network based WAF for detecting SQLi attacks.
