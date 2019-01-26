@@ -74,7 +74,7 @@ nmap --script=http-waf-fingerprint  --script-args http-waf-fingerprint.intensive
 ```
 - Generic Detection
 ```	
-nmap --script=http-waf-detect <target>
+nmapï¿½--script=http-waf-detect <target>
 ```
 
 __2. Fingerprinting with [WafW00f](https://github.com/EnableSecurity/wafw00f)__:
@@ -105,7 +105,9 @@ tamper=between,bluecoat,charencode,charunicodeencode,concat2concatws,equaltolike
 sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostrophenullencode,appendnullbyte,base64encode,between,bluecoat,chardoubleencode,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,randomcomments,securesphere,space2comment,space2dash,space2hash,space2morehash,space2mssqlblank,space2mssqlhash,space2mysqlblank,space2mysqldash,space2plus,space2randomblank,sp_password,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords
 ```
 
-__2. Evading WAFs with [WAFNinja](https://github.com/khalilbijjou/WAFNinja)
+__2. Evading WAFs with [WAFNinja](https://waf.ninja/)__
+
+__Source:__ [GitHub](https://githubÃ§
 - Fuzzing
 ```
 python wafninja.py fuzz -u <target> -t xss
