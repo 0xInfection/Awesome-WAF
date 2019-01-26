@@ -8,12 +8,110 @@ __A Concise Definition:__ A web application firewall is a form of firewall with 
 Feel free to [contribute]().
 
 ### Contents:
-- [Awesome Web Application Firewalls]()
-- [Awesome Testing Methodology]()
+- [Awesome WAFs List]()
+- [Awesome Testing Methodology](#testing-methodology)
 - [Awesome WAF Detection]()
+- [Awesome WAF Rule Testing](#waf-rule-testing)
 - [Awesome Evasion Techniques]()
-- [Awesome Blogs & Writeups]()
-- [Presentations & Research Papers](#presentations--research-papers)
+- [Awesome Tools](#awesome-tools)
+- [Awesome Blogs & Writeups](#blogs-and-writeups)
+- [Awesome Presentations & Papers](#presentations--research-papers)
+
+## Awesome WAFs List
+
+## Testing Methodology
+Alright, now lets see the approach of testing WAFs. Wait, before that we need to know how they work right? Here you go.
+
+### How WAFs Work:
+- Using a set of rules to distinguish between normal requests and malicious requests.
+- Sometimes they use a learning mode to add rules automatically through learning about user behaviour.
+
+### Operation Modes:
+- __Negative Model (Blacklist based)__ - 
+One that defines what is not allowed. Eg. Block all `<script>*</script>` inputs.
+- __Positive Model (Whitelist based)__ - 
+One that defines what is allowed and rejects everything else.
+- __Mixed/Hybrid Model (Inclusive model)__ -
+One that uses a mixed concept of blacklisting and whitelisting stuff.
+
+### Where To Look:
+- Always look out for common ports that expose that a WAF `80`, `443`, `8000`, `8008`, `8080`, `8088`.
+> __Tip:__ You can use automate this easily by commandline using a screenshot taker like [WebScreenShot](https://github.com/maaaaz/webscreenshot).
+- Some WAFs set their own cookies in requests (eg. Citrix Netscaler, Yunsuo WAF).
+- Some associate themselves with separate headers (eg. Anquanbao WAF, Amazon AWS WAF). 
+- Some often alter headers and jumble characters to confuse attacker (eg. Citrix Netscaler, Big IP WAF).
+- Some WAFs expose themselves in the response content (eg. DotDefender, Armor, truShield Sitelock).
+- Other WAFs reply with unusual response codes upon malicious requests (eg. WebKnight).
+
+### Detection Techniques:
+1. Make a normal GET request from a browser, intercept and test response headers (specifically cookies).
+2. Make a request from command line (eg. cURL), and test response content and headers (no user-agent included).
+3. If there is a login page somewhere, try some common (easily detectable) payloads like `' or 1 = 1 --`.
+4. If there is some search box or input field somewhere, try detecting payloads like `<script>alert()</script>`.
+5. Make GET requests with outdated protocols like `HTTP/0.9` (`HTTP/0.9` does not support POST type queries).
+6. Drop Action Technique - Send a raw crafted FIN/RST packet to server and identify response.
+> __Tip:__ This method could be easily achieved with [HPing3](http://www.hping.org) or [Scapy](https://scapy.net).
+7. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
+
+## WAF Detection
+Wanna detect WAFs? Lets see how.
+> __NOTE__: This section contains manual WAF detection techniques. You might want to switch over to [next section](#awesome-tools). 
+
+## WAF Rule Testing
+Lets head over to testing WAF rules.
+
+
+## WAF Evasion Techniques
+Lets look at some methods of bypassing and evading WAFs.
+
+## Awesome Tools
+### WAF Fingerprinting:
+__1. Fingerprinting with [NMap](https://nmap.org)__:
+__Source:__ https://
+- Normal WAF Fingerprinting
+```
+nmap --script=http-waf-fingerprint <target>
+```
+- Intensive WAF Fingerprinting
+```
+nmap --script=http-waf-fingerprint –script-args http-waf-fingerprint.intensive=1 <target>
+```
+- Generic Detection
+```	
+nmap --script=http-waf-detect <target>
+```
+
+__2. Fingerprinting with [WafW00f](https://github.com/EnableSecurity/wafw00f)__:
+```
+wafw00f <target>
+```
+
+### WAF Testing:
+- [WAFBench](https://github.com/microsoft/wafbench)
+- [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483)
+
+### WAF Evading:
+__1. Evading WAFs with [SQLMap Tamper Scripts](https://medium.com/@drag0n/sqlmap-tamper-scripts-sql-injection-and-waf-bypass-c5a3f5764cb3)__:
+- General Tamper Testing
+```
+tamper=apostrophemask,apostrophenullencode,base64encode,between,chardoubleencode,charencode,charunicodeencode,equaltolike,greatest,ifnull2ifisnull,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2plus,space2randomblank,unionalltounion,unmagicquotes
+```
+- MSSQL Tamper Testing
+```
+tamper=between,charencode,charunicodeencode,equaltolike,greatest,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,sp_password,space2comment,space2dash,space2mssqlblank,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes
+```
+- MySQL Tamper Testing
+```
+tamper=between,bluecoat,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2hash,space2morehash,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords,xforwardedfor
+``` 
+- Generic Tamper Testing 
+```
+sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostrophenullencode,appendnullbyte,base64encode,between,bluecoat,chardoubleencode,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,randomcomments,securesphere,space2comment,space2dash,space2hash,space2morehash,space2mssqlblank,space2mssqlhash,space2mysqlblank,space2mysqldash,space2plus,space2randomblank,sp_password,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords
+```
+__2. Evading WAFs with [WhatWaf](https://github.com/ekultek/whatwaf)__:
+```
+whatwaf -u <target> --ra --throttle 2
+```
 
 ## Presentations & Research Papers
 ### Presentations:
