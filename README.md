@@ -1,5 +1,5 @@
-# Awesome WAF Evasion ![Awesome](https://camo.githubusercontent.com/13c4e50d88df7178ae1882a203ed57b641674f94/68747470733a2f2f63646e2e7261776769742e636f6d2f73696e647265736f726875732f617765736f6d652f643733303566333864323966656437386661383536353265336136336531353464643865383832392f6d656469612f62616467652e737667 "Awesome")
-> A curated list of awesome WAF evasion stuff. 🔥
+# Awesome WAF ![Awesome](https://camo.githubusercontent.com/13c4e50d88df7178ae1882a203ed57b641674f94/68747470733a2f2f63646e2e7261776769742e636f6d2f73696e647265736f726875732f617765736f6d652f643733303566333864323966656437386661383536353265336136336531353464643865383832392f6d656469612f62616467652e737667 "Awesome")
+> A curated list of awesome WAF stuff. 🔥
 
 ![Main Logo](images/how-wafs-work.png 'How wafs work')
 
@@ -8,9 +8,9 @@ __A Concise Definition:__ A web application firewall is a form of firewall with 
 Feel free to [contribute]().
 
 ### Contents:
-- [Awesome WAFs List]()
+- [Awesome WAFs List](#awesome-waf-list)
 - [Awesome Testing Methodology](#testing-methodology)
-- [Awesome WAF Detection]()
+- [Awesome WAF Detection](#)
 - [Awesome WAF Rule Testing](#waf-rule-testing)
 - [Awesome Evasion Techniques]()
 - [Awesome Tools](#awesome-tools)
@@ -50,7 +50,7 @@ One that uses a mixed concept of blacklisting and whitelisting stuff.
 4. If there is some search box or input field somewhere, try detecting payloads like `<script>alert()</script>`.
 5. Make GET requests with outdated protocols like `HTTP/0.9` (`HTTP/0.9` does not support POST type queries).
 6. Drop Action Technique - Send a raw crafted FIN/RST packet to server and identify response.
-> __Tip:__ This method could be easily achieved with [HPing3](http://www.hping.org) or [Scapy](https://scapy.net).
+> __Tip:__ This method could be easily achieved with tools like [HPing3](http://www.hping.org) or [Scapy](https://scapy.net).
 7. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
 
 ## WAF Detection
@@ -67,7 +67,7 @@ Lets look at some methods of bypassing and evading WAFs.
 ## Awesome Tools
 ### WAF Fingerprinting:
 __1. Fingerprinting with [NMap](https://nmap.org)__:
-__Source:__ https://
+__Source:__ [GitHub](https://github.com/nmap/nmap) | [SVN](http://svn.nmap.org)
 - Normal WAF Fingerprinting
 ```
 nmap --script=http-waf-fingerprint <target>
@@ -78,7 +78,7 @@ nmap --script=http-waf-fingerprint –script-args http-waf-fingerprint.intensive
 ```
 - Generic Detection
 ```	
-nmap --script=http-waf-detect <target>
+nmap�--script=http-waf-detect <target>
 ```
 
 __2. Fingerprinting with [WafW00f](https://github.com/EnableSecurity/wafw00f)__:
@@ -87,8 +87,8 @@ wafw00f <target>
 ```
 
 ### WAF Testing:
-- [WAFBench](https://github.com/microsoft/wafbench)
-- [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483)
+- [WAFBench](https://github.com/microsoft/wafbench) - A WAF performance testing suite by [Microsoft](https://github.com/microsoft).
+- [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483) - A free WAF testing tool by [Imperva](https://imperva.com).
 
 ### WAF Evading:
 __1. Evading WAFs with [SQLMap Tamper Scripts](https://medium.com/@drag0n/sqlmap-tamper-scripts-sql-injection-and-waf-bypass-c5a3f5764cb3)__:
