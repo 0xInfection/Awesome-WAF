@@ -8,12 +8,12 @@ __A Concise Definition:__ A web application firewall is a form of firewall with 
 Feel free to [contribute]().
 
 ### Contents:
-- [Awsome WAFs]()
-- [Awesome Methodology]()
+- [Awesome Web Application Firewalls]()
+- [Awesome Testing Methodology]()
 - [Awesome WAF Detection]()
 - [Awesome Evasion Techniques]()
 - [Awesome Blogs & Writeups]()
-- [Presentations & Research Papers]()
+- [Presentations & Research Papers](#presentations--research-papers)
 
 ## Presentations & Research Papers
 ### Presentations:
@@ -21,7 +21,7 @@ Feel free to [contribute]().
 - [Protocol Level WAF Evasion Techniques](presentations/BlackHat%20US%2012%20-%20Protocol%20Level%20WAF%20Evasion%20(Slides).pdf) - A presentation at about efficiently evading WAFs at protocol level from [BlackHat US 12](https://www.blackhat.com/html/bh-us-12/).
 - [Analysing Attacking Detection Logic Mechanisms](presentations/BlackHat%20US%2016%20-%20Analysis%20of%20Attack%20Detection%20Logic.pdf) - A presentation about WAF logic applied to detecting attacks from [BlackHat US 16](https://www.blackhat.com/html/bh-us-16/).
 - [WAF Bypasses and PHP Exploits](presentations/WAF%20Bypasses%20and%20PHP%20Exploits%20(Slides).pdf) - A presentation about evading WAFs and developing related PHP exploits.
-- [Playing Around with WAFs](presentations/Playing%20Around%20with%20WAFs.pdf) - A small pressentation about WAF profiling and playing around with them.
+- [Playing Around with WAFs](presentations/Playing%20Around%20with%20WAFs.pdf) - A small presentation about WAF profiling and playing around with them from [Defcon 16](http://www.defcon.org/html/defcon-16/dc-16-post.html).
 
 ### Research Papers:
 - [WASC WAF Evaluation Criteria](papers/WASC%20WAF%20Evaluation%20Criteria.pdf) - A guide for WAF Evaluation from [Web Application Security Consortium](http://www.webappsec.org)
