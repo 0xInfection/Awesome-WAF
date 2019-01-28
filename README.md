@@ -20,7 +20,7 @@ Feel free to [contribute]().
 <table>
 	<tr>
 		<td>
-			<a href="http://360.cn">360 WangZhanBao WAF</a>
+			<a href="http://360.cn">360 WangZhanBao</a>
 		</td>
 		<td>
 			A WAF solution from 360 Security Team.
@@ -31,8 +31,68 @@ Feel free to [contribute]().
 			<a href="https://www.airlock.com/products/airlock-waf/">Airlock</a>
 		</td>
 		<td>
-			The Airlock Web Application Firewall offers a unique combination of protective mechanisms for web applications. Each access is systematically monitored and filtered at every level. Used in conjunction with an authentication solution such as Airlock Login or IAM, Airlock WAF can force upstream user authentication and authorization.
-			- __Brochure:__ https://www.airlock.com/media/medialibrary/2016/09/Airlock-Suite-en_web.pdf
+			The Airlock Web Application Firewall offers a unique combination of protective mechanisms for web applications. Each access is systematically monitored and filtered at every level. It features reverse proxy, central checkpoint, filtering, API security and dynamic whitelisting.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="http://www.anquanbao.com">Anquanbao</a>
+		</td>
+		<td>
+			A cloud based WAF solution for enterprises featuring big data analysis, clustering solutions, content optimisations, and access accelerations.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="https://www.armor.com/armor-web-application-firewall-service">Armor</a>
+		</td>
+		<td>
+			A virtual WAF solution by Armor technologies. which protects web-applications from OWASP top 10 attacks and features accurate response and remediation via applied intelligence from their threat centre.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="BIG-IP ASM"></a>
+		</td>
+		<td>
+			A comprehensive web application firewall from F5 Networks that protects apps and data from known and unknown threats, defends against bots that bypass standard protections, and virtually patches app vulnerabilities.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="https://aws.amazon.com/waf/">Amazon AWS WAF</a>
+		</td>
+		<td>
+			A WAF solution from Amazon AWS that features full time web-traffic filtering, virtual patching, traffic visibility, attack transparency integrated with customisable rules.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="https://cloud.baidu.com">Baidu Cloud WAF</a>
+		</td>
+		<td>
+			A cloud based protection system from Baidu to effectively defend against web application attacks. It features cloud based real-time protections, load balancing, DDoS protection and its own content-delivery network. 
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="https://www.barracuda.com/products/webapplicationfirewall">Barracuda</a>
+		</td>
+		<td>
+			A WAF solution from Barracuda Networks featuring web aplication, API, and mobile apps against various attacks. Beside it provides DDoS protections, automated attack and bot protections, access controls and authentication protections.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href=""></a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="">Kona Site Defender</a>
+		</td>
+		<td>
+			A cloud based WAF solution from Akamai technologies that feaures a proprietary WAF rule set, created and automatically updated based on visibility into the latest attacks with protections. It provides API security integrated with DevOps security, report visibility, etc. 
 		</td>
 	</tr>
 </table>
@@ -74,6 +134,28 @@ One that uses a mixed concept of blacklisting and whitelisting stuff.
 ## WAF Detection
 Wanna detect WAFs? Lets see how.
 > __NOTE__: This section contains manual WAF detection techniques. You might want to switch over to [next section](#awesome-tools). 
+
+<table>
+	<tr>
+		<td>
+			360 Web Application Firewall
+		</td>
+		<td>
+			<b>Detectability: </b>Easy 
+			<ul>
+				<li>Returns status code <code>493</code> upon unusual requests.</li>
+				<li>On viewing source-code of error page, you will find reference to <code>wzws-waf-cgi/</code> directory.</li>
+				<li>Source code may contain reference to <code>wangshan.360.cn</code> URL.</li>
+				<li>Response headers contain <code>X-Powered-By</code> Header.</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			
+		</td>
+	</tr>
+</table>
 
 ## WAF Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
@@ -162,5 +244,6 @@ whatwaf -u <target> --ra --throttle 2
 - [WASC WAF Evaluation Criteria](papers/WASC%20WAF%20Evaluation%20Criteria.pdf) - A guide for WAF Evaluation from [Web Application Security Consortium](http://www.webappsec.org)
 - [Protocol Level WAF Evasion](papers/Qualys%20Guide%20-%20Protocol-Level%20WAF%20Evasion.pdf) - A protocol level WAF evasion techniques and analysis by [Qualys](https://www.qualys.com).
 - [WAF Evasion Testing](papers/SANS%20Guide%20-%20WAF%20Evasion%20Testing.pdf) - A WAF evasion testing guide from [SANS](https://www.sans.org).
+- [WAF Evaluation and Analysis](papers/Web%20Application%20Firewalls%20-%20Evaluation%20and%20Analysis) - A paper about WAF evaluation and analysis of 2 most used WAFs (ModSecurity & WebKnight) from [University of Amsterdam](http://www.uva.nl).
 - [Bypassing all WAF XSS Filters](papers/Evading%20All%20Web-Application%20Firewalls%20XSS%20Filters.pdf) - A paper about bypassing all XSS filter rules and evading WAFs for XSS. 
 - [Neural Network based WAF for SQLi](papers/Artificial%20Neural%20Network%20based%20WAF%20for%20SQL%20Injection) - A paper about building a neural network based WAF for detecting SQLi attacks.
