@@ -17,6 +17,25 @@ Feel free to [contribute]().
 - [Awesome Presentations & Papers](#presentations--research-papers)
 
 ## Awesome WAFs List
+<table>
+	<tr>
+		<td>
+			<a href="http://360.cn">360 WangZhanBao WAF</a>
+		</td>
+		<td>
+			A WAF solution from 360 Security Team.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="https://www.airlock.com/products/airlock-waf/">Airlock</a>
+		</td>
+		<td>
+			The Airlock Web Application Firewall offers a unique combination of protective mechanisms for web applications. Each access is systematically monitored and filtered at every level. Used in conjunction with an authentication solution such as Airlock Login or IAM, Airlock WAF can force upstream user authentication and authorization.
+			- __Brochure:__ https://www.airlock.com/media/medialibrary/2016/09/Airlock-Suite-en_web.pdf
+		</td>
+	</tr>
+</table>
 
 ## Testing Methodology
 Alright, now lets see the approach of testing WAFs. Wait, before that we need to know how they work right? Here you go.
@@ -65,6 +84,7 @@ __1. Fingerprinting with [NMap](https://nmap.org)__:
 
 __Source:__ [GitHub](https://github.com/nmap/nmap) | [SVN](http://svn.nmap.org)
 - Normal WAF Fingerprinting
+
 ```
 nmap --script=http-waf-fingerprint <target>
 ```
@@ -74,10 +94,12 @@ nmap --script=http-waf-fingerprint  --script-args http-waf-fingerprint.intensive
 ```
 - Generic Detection
 ```	
-nmap�--script=http-waf-detect <target>
+nmap --script=http-waf-detect <target>
 ```
 
 __2. Fingerprinting with [WafW00f](https://github.com/EnableSecurity/wafw00f)__:
+
+__Source:__ [GitHub](https://github.com/enablesecurity/wafw00f) | [Pypi](https://pypi.org/project/wafw00f)
 ```
 wafw00f <target>
 ```
@@ -107,7 +129,7 @@ sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostro
 
 __2. Evading WAFs with [WAFNinja](https://waf.ninja/)__
 
-__Source:__ [GitHub](https://githubç
+__Source:__ [GitHub](https://github.com/khalilbijjou/wafninja)
 - Fuzzing
 ```
 python wafninja.py fuzz -u <target> -t xss
