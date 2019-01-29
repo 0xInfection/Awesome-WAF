@@ -10,91 +10,91 @@ Feel free to [contribute]().
 ### Contents:
 - [Awesome WAFs List](#awesome-waf-list)
 - [Awesome Testing Methodology](#testing-methodology)
-- [Awesome WAF Detection](#)
-- [Awesome Evasion Techniques]()
+- [Awesome WAF Detection](#waf-detection)
+- [Awesome Evasion Techniques](#evasion-techniques)
 - [Awesome Tools](#awesome-tools)
 - [Awesome Blogs & Writeups](#blogs-and-writeups)
 - [Awesome Presentations & Papers](#presentations--research-papers)
 
 ## Awesome WAFs List
 <table>
-	<tr>
-		<td>
-			<a href="http://360.cn">360 WangZhanBao</a>
-		</td>
-		<td>
-			A WAF solution from 360 Security Team.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="https://www.airlock.com/products/airlock-waf/">Airlock</a>
-		</td>
-		<td>
-			The Airlock Web Application Firewall offers a unique combination of protective mechanisms for web applications. Each access is systematically monitored and filtered at every level. It features reverse proxy, central checkpoint, filtering, API security and dynamic whitelisting.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="http://www.anquanbao.com">Anquanbao</a>
-		</td>
-		<td>
-			A cloud based WAF solution for enterprises featuring big data analysis, clustering solutions, content optimisations, and access accelerations.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="https://www.armor.com/armor-web-application-firewall-service">Armor</a>
-		</td>
-		<td>
-			A virtual WAF solution by Armor technologies. which protects web-applications from OWASP top 10 attacks and features accurate response and remediation via applied intelligence from their threat centre.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="BIG-IP ASM"></a>
-		</td>
-		<td>
-			A comprehensive web application firewall from F5 Networks that protects apps and data from known and unknown threats, defends against bots that bypass standard protections, and virtually patches app vulnerabilities.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="https://aws.amazon.com/waf/">Amazon AWS WAF</a>
-		</td>
-		<td>
-			A WAF solution from Amazon AWS that features full time web-traffic filtering, virtual patching, traffic visibility, attack transparency integrated with customisable rules.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="https://cloud.baidu.com">Baidu Cloud WAF</a>
-		</td>
-		<td>
-			A cloud based protection system from Baidu to effectively defend against web application attacks. It features cloud based real-time protections, load balancing, DDoS protection and its own content-delivery network. 
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="https://www.barracuda.com/products/webapplicationfirewall">Barracuda</a>
-		</td>
-		<td>
-			A WAF solution from Barracuda Networks featuring web aplication, API, and mobile apps against various attacks. Beside it provides DDoS protections, automated attack and bot protections, access controls and authentication protections.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href=""></a>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<a href="">Kona Site Defender</a>
-		</td>
-		<td>
-			A cloud based WAF solution from Akamai technologies that feaures a proprietary WAF rule set, created and automatically updated based on visibility into the latest attacks with protections. It provides API security integrated with DevOps security, report visibility, etc. 
-		</td>
-	</tr>
+    <tr>
+        <td>
+            <a href="http://360.cn">360 WangZhanBao</a>
+        </td>
+        <td>
+            A WAF solution from 360 Security Team.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://www.airlock.com/products/airlock-waf/">Airlock</a>
+        </td>
+        <td>
+            The Airlock Web Application Firewall offers a unique combination of protective mechanisms for web applications. Each access is systematically monitored and filtered at every level. It features reverse proxy, central checkpoint, filtering, API security and dynamic whitelisting.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="http://www.anquanbao.com">Anquanbao</a>
+        </td>
+        <td>
+            A cloud based WAF solution for enterprises featuring big data analysis, clustering solutions, content optimisations, and access accelerations.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://www.armor.com/armor-web-application-firewall-service">Armor</a>
+        </td>
+        <td>
+            A virtual WAF solution by Armor technologies. which protects web-applications from OWASP top 10 attacks and features accurate response and remediation via applied intelligence from their threat centre.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="BIG-IP ASM"></a>
+        </td>
+        <td>
+            A comprehensive web application firewall from F5 Networks that protects apps and data from known and unknown threats, defends against bots that bypass standard protections, and virtually patches app vulnerabilities.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://aws.amazon.com/waf/">Amazon AWS WAF</a>
+        </td>
+        <td>
+            A WAF solution from Amazon AWS that features full time web-traffic filtering, virtual patching, traffic visibility, attack transparency integrated with customisable rules.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://cloud.baidu.com">Baidu Cloud WAF</a>
+        </td>
+        <td>
+            A cloud based protection system from Baidu to effectively defend against web application attacks. It features cloud based real-time protections, load balancing, DDoS protection and its own content-delivery network. 
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://www.barracuda.com/products/webapplicationfirewall">Barracuda</a>
+        </td>
+        <td>
+            A WAF solution from Barracuda Networks featuring web aplication, API, and mobile apps against various attacks. Beside it provides DDoS protections, automated attack and bot protections, access controls and authentication protections.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href=""></a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="">Kona Site Defender</a>
+        </td>
+        <td>
+            A cloud based WAF solution from Akamai technologies that feaures a proprietary WAF rule set, created and automatically updated based on visibility into the latest attacks with protections. It provides API security integrated with DevOps security, report visibility, etc. 
+        </td>
+    </tr>
 </table>
 
 ## Testing Methodology
@@ -136,28 +136,515 @@ Wanna detect WAFs? Lets see how.
 > __NOTE__: This section contains manual WAF detection techniques. You might want to switch over to [next section](#awesome-tools). 
 
 <table>
-	<tr>
-		<td>
-			360 Web Application Firewall
-		</td>
-		<td>
-			<b>Detectability: </b>Easy 
-			<ul>
-				<li>Returns status code <code>493</code> upon unusual requests.</li>
-				<li>On viewing source-code of error page, you will find reference to <code>wzws-waf-cgi/</code> directory.</li>
-				<li>Source code may contain reference to <code>wangshan.360.cn</code> URL.</li>
-				<li>Response headers contain <code>X-Powered-By</code> Header.</li>
-			</ul>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			
-		</td>
-	</tr>
+    <tr>
+        <td>
+            360 Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability:</b> Easy </li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Returns status code <code>493</code> upon unusual requests.</li>
+                    <li>On viewing source-code of error page, you will find reference to <code>wzws-waf-cgi/</code> directory.</li>
+                    <li>Source code may contain reference to <code>wangshan.360.cn</code> URL.</li>
+                    <li>Response headers contain <code>X-Powered-By-360WZB</code> Header.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            aeSecure
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains <code>aesecure_denied.png</code> image (view source to see).</li>
+                    <li>Response headers contain <code>aeSecure-code</code> value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Airlock (Phion/Ergon)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate/Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Set-Cookie</code> headers may contain <code>AL-SESS={some value}</code> value (case insensitive).</li>
+                    <li>Response headers may contain <code>AL-LB={some value}</code> value (case insensitive).</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Anquanbao WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Returns blocked HTTP response code <code>405</code> upon malicious requests.</li>
+                    <li>Blocked response content may contain <code>/aqb_cc/error/</code> or <code>hidden_intercept_time</code>.</li>
+                    <li>Response headers contain <code>X-Powered-by-Anquanbao</code> header field.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Armor Defense
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains warning<br>
+                        <code>This request has been blocked by website protection from Armor.</code>
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Application Security Manager (F5 Networks)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains warning<br>
+                        <code>The requested URL was rejected. Please consult with your administrator.</code>
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Amazon AWS WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>AWS</code> value.</li>
+                    <li>Blocked response status code return <code>403 Forbidden</code> response.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Yunjiasu WAF (Baidu)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>Yunjiasu-ngnix</code> value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Barracuda WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response cookies may contain <code>barra_counter_session</code> value.</li>
+                    <li>Response headers may contain <code>barracude_</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            BIG-IP ASM (F5 Networks)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers may contain <code>BigIP</code> or <code>F5</code> keyword value.</li>
+                    <li>Response header fields may contain <code>X-WA-Info</code> header.</li>
+                    <li>Response headers might have jumbled <code>X-Cnection</code> field value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            BinarySec WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>binarysec</code> keyword value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            BlockDos
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers may contain reference to <code>BlockDos.net</code> URL.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ChinaCache Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>Powered-by-ChinaCache</code> field.</li>
+                    <li>Blocked response codes contain <code>400 Bad Request</code> error upon malicious request.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ACE XML Gateway (Cisco)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers have <code>ACE XML Gateway</code> value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Cloudbric
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response content has<code> Cloudbric</code> and <code>Malicious Code Detected</code> values.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Cloudflare 
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers might have <code>cf-ray</code> field value.</li>
+                    <li><code>Server</code> header field has value <code>cloudflare</code>.</li>
+                    <li><code>Set-Cookie</code> response headers have <code>__cfuid=</code> cookie field.</li>
+                    <li>Page content might have <code>Attention Required!</code> or <code>Cloudflare Ray ID:</code>.</li>
+                    <li>You may encounter <code>CLOUDFLARE_ERROR_500S_BOX</code> upon hitting invalid URLs.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Cloudfront (Amazon)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains <code>Error from cloudfront</code> error upon malicious request.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Comodo Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>Protected by COMODO WAF</code> value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            CrawlProtect (Jean-Denis Brun)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response content contains value<br> <code>This site is protected by CrawlProtect</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            IBM WebSphere DataPower
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contains field value value <code>X-Backside-Transport</code> with value <code>OK</code> or <code>FAIL</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Deny-All Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response content contains value <code>Condition Intercepted</code>.</li>
+                    <li><code>Set-Cookie</code> header contains cookie field <code>sessioncookie</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Distil Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain field value <code>X-Distil-CS</code> in all requests.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            DoSArrest Internet Security
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain field value <code>X-DIS-Request-ID</code>.</li>
+                    <li>Response headers might contain <code>DOSarrest</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            dotDefender
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains value<br> <code>dotDefender Blocked Your Request</code>.</li>
+                    <li>Blocked response headers contain <code>X-dotDefender-denied</code> field value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            EdgeCast (Verizon)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains value<br> <code>Please contact the site administrator, and provide the following Reference ID:EdgeCast Web Application Firewall (Verizon)</code>.</li>
+                    <li>Blocked response code returns <code>400 Bad Request</code> on malicious requests.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Expression Engine (EllisLab)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains value <code>Invalid GET Request</code> upon malicious GET queries.</li>
+                    <li>Blocked POST type queries contain <code>Invalid POST Request</code> in response content.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            FortiWeb Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains value <code>.fgd_icon</code> keyword.</li>
+                    <li>Response headers contain <code>FORTIWAFSID=</code> on malicious requests.</li>
+                    <li><code>Set-Cookie</code> header has cookie field <code>cookiesession1=</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            HyperGuard Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Set-Cookie</code> header has cookie field <code>ODSESSION=</code> in response headers.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Imperva Incapsula
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page content may contain:</li>
+                        <ul>
+                            <li><code>Incapsula incident ID</code> keyword.</li>
+                            <li><code>_Incapsula_Resource</code> keyword.</li>
+                            <li><code>subject=WAF Block Page</code> keyword.</li>
+                        </ul>
+                    <li>Normal GET request headers contain <code>visid_incap</code> value.</li>
+                    <li>Response headers may contain <code>X-Iinfo</code> header field name.</li>
+                    <li><code>Set-Cookie</code> header has cookie field <code>incap_ses</code> in response headers.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Jiasule Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains reference to <code>static.jiasule.com/static/js/http_error.js</code> URL.</li>
+                    <li><code>Set-Cookie</code> header has cookie field <code>__jsluid=</code> in response headers.</li>
+                    <li>Response headers have <code>jiasule-WAF</code> or <code>jsl_tracking</code> keywords.</li>
+                    <li>Blocked response content has <code>notice-jiasule</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            KnownSec Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page displays <code>ks-waf-error.png</code> image (view source to see).</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            KONA Site Defender (Akamai)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Headers contain <code>AkamaiGHost</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ModSecurity (Trustwave)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate/Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains:</li>
+                        <ul>
+                            <li><code>This error was generated by Mod_Security</code> text.</li>
+                            <li><code>One or more things in your request were suspicious</code> text.</li>
+                            <li><code>rules of the mod_security module</code> text.</li>
+                        </ul>
+                    <li>Response headers may contain <code>Mod_Security</code> or <code>NYOB</code> keywords.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
 </table>
 
-## WAF Evasion Techniques
+## Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
 
 ## Awesome Tools
@@ -175,7 +662,7 @@ nmap --script=http-waf-fingerprint <target>
 nmap --script=http-waf-fingerprint  --script-args http-waf-fingerprint.intensive=1 <target>
 ```
 - Generic Detection
-```	
+``` 
 nmap --script=http-waf-detect <target>
 ```
 
@@ -194,15 +681,15 @@ wafw00f <target>
 __1. Evading WAFs with [SQLMap Tamper Scripts](https://medium.com/@drag0n/sqlmap-tamper-scripts-sql-injection-and-waf-bypass-c5a3f5764cb3)__:
 - General Tamper Testing
 ```
-tamper=apostrophemask,apostrophenullencode,base64encode,between,chardoubleencode,charencode,charunicodeencode,equaltolike,greatest,ifnull2ifisnull,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2plus,space2randomblank,unionalltounion,unmagicquotes
+sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostrophenullencode,base64encode,between,chardoubleencode,charencode,charunicodeencode,equaltolike,greatest,ifnull2ifisnull,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2plus,space2randomblank,unionalltounion,unmagicquotes
 ```
 - MSSQL Tamper Testing
 ```
-tamper=between,charencode,charunicodeencode,equaltolike,greatest,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,sp_password,space2comment,space2dash,space2mssqlblank,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes
+sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=between,charencode,charunicodeencode,equaltolike,greatest,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,sp_password,space2comment,space2dash,space2mssqlblank,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes
 ```
 - MySQL Tamper Testing
 ```
-tamper=between,bluecoat,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2hash,space2morehash,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords,xforwardedfor
+sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=between,bluecoat,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2hash,space2morehash,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords,xforwardedfor
 ``` 
 - Generic Tamper Testing 
 ```
