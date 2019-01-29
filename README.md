@@ -47,12 +47,12 @@ Feel free to [contribute]().
             <a href="https://www.armor.com/armor-web-application-firewall-service">Armor</a>
         </td>
         <td>
-            A virtual WAF solution by Armor technologies. which protects web-applications from OWASP top 10 attacks and features accurate response and remediation via applied intelligence from their threat centre.
+            A virtual WAF solution by Armor technologies which protects web-applications from OWASP top 10 attacks and features accurate response and remediation via applied intelligence from their threat centre.
         </td>
     </tr>
     <tr>
         <td>
-            <a href="BIG-IP ASM"></a>
+            <a href="https://f5.com/products/big-ip/application-security-manager-asm">Application Security Manager</a>
         </td>
         <td>
             A comprehensive web application firewall from F5 Networks that protects apps and data from known and unknown threats, defends against bots that bypass standard protections, and virtually patches app vulnerabilities.
@@ -84,7 +84,23 @@ Feel free to [contribute]().
     </tr>
     <tr>
         <td>
-            <a href=""></a>
+            <a href="http://binarysec.org">BinarySEC</a>
+        </td>
+        <td>A solution from BinarySec which provides all round security protections from many kinds of threats. BinarySec WAF allows active whitelisting while peotecting your site from major known threats and malware.
+        </td>
+    </tr>
+    <tr>
+        <td>
+             <a href="https://www.blockdos.net>BlockDoS</a>
+        </td>
+        <td>A WAF solution which features high performance in-built content delivery systems, custom SSL, DNS protection, dynamic caching and stable DDoS protection.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://en.chinacache.com/managed-web-application-firewall/">ChinaCache</a>
+        </td>
+        <td>A featured firewall for China which features its own content-delivery network, virtual patching and constant threat discovery transparency report. 
         </td>
     </tr>
     <tr>
@@ -733,4 +749,4 @@ whatwaf -u <target> --ra --throttle 2
 - [WAF Evasion Testing](papers/SANS%20Guide%20-%20WAF%20Evasion%20Testing.pdf) - A WAF evasion testing guide from [SANS](https://www.sans.org).
 - [WAF Evaluation and Analysis](papers/Web%20Application%20Firewalls%20-%20Evaluation%20and%20Analysis) - A paper about WAF evaluation and analysis of 2 most used WAFs (ModSecurity & WebKnight) from [University of Amsterdam](http://www.uva.nl).
 - [Bypassing all WAF XSS Filters](papers/Evading%20All%20Web-Application%20Firewalls%20XSS%20Filters.pdf) - A paper about bypassing all XSS filter rules and evading WAFs for XSS. 
-- [Neural Network based WAF for SQLi](papers/Artificial%20Neural%20Network%20based%20WAF%20for%20SQL%20Injection) - A paper about building a neural network based WAF for detecting SQLi attacks.
+- [Neural Network based WAF for SQLi](papers/Artificial%20Neural%20Network%20based%20WAF%20for%20SQL%20Injection) - A paper about building a neural network based WAF for detecting SQLi attacks.								
