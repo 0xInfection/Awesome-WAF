@@ -658,6 +658,482 @@ Wanna detect WAFs? Lets see how.
             </ul>
         </td>
     </tr>
+    <tr>
+        <td>
+            NAXSI (NBS Systems)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>naxsi/waf</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Netcontinuum (Barracuda)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Session cookies contain <code>NCI__SessionId=</code> cookie field name.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Citrix NetScaler
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers may contain</li>
+                    <ul>
+                        <li><code>Connection:</code> header field name jumbled to <code>nnCoection:</code></li>
+                        <li><code>ns_af=</code> cookie field name.</li>
+                        <li><code>citrix_ns_id</code> field name.</li>
+                        <li><code>NSC_</code> keyword.</li>
+                        <li><code>NS-CACHE</code> field value.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            NewDefend Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>newdefend</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            NSFocus Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>NSFocus</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Palo Alto Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains the following text<br> <code>has been blocked in accordance with company policy</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Profense Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate/Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Set-Cookie</code> headers contain <code>PLBSID=</code> cookie field name.</li>
+                    <li>Response headers may contain <code>Profense</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Radware Appwall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains the following text:<br> <code>Unauthorized Activity Has Been Detected.</code> and <code>Case Number</code> text.</li>
+                    <li>Response headers may contain <code>X-SL-CompState</code> header field name.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Reblaze Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>rbzid=</code> header field name.</li>
+                    <li>Response headers field values might contain <code>Reblaze Secure Web Gateway</code> text.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Request Validation Mode (ASP.NET)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>A firewall found specifically on ASP.NET websites and none others.</li>
+                    <li>Response page contains either of the following text:</li>
+                    <ul>
+                        <li><code>ASP.NET has detected data in the request that is potentially dangerous.</code></li>
+                        <li><code>Request Validation has detected a potentially dangerous client input value.</code></li>
+                        <li><code>HttpRequestValidationException.</code></li>
+                    </ul>
+                    <li>Blocked response code returned is always <code>500 Internal Error</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Safe3 Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>Safe3</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SafeDog Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy/Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers may contain:</li>
+                    <ul>
+                        <li><code>WAF/2.0</code> keyword.</li>
+                        <li><code>safedog</code> field value.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SecureIIS (BeyondTrust)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains either of the following text:</li>
+                    <ul>
+                        <li><code>SecureIIS Web Server Protection.</code></li>
+                        <li>Reference to <code>http://www.eeye.com/SecureIIS/</code> URL.</li>
+                        <li><code>subject={somevalue} SecureIIS Error</code> text.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SEnginx (Neusoft)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains <code>SENGINX-ROBOT-MITIGATION</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SiteLock TrueShield
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page source contains the following:</li>
+                    <ul>
+                        <li><code>SiteLock Incident ID</code> text.</li>
+                        <li><code>sitelock-site-verification</code> keyword.</li>
+                        <li><code>sitelock_shield_logo</code> image.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SonicWall (Dell)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>SonicWALL</code> keyword value.</li>
+                    <li>Blocked response page contains either of the following text:</li>
+                    <ul>
+                        <li><code>This request is blocked by the SonicWALL.</code></li>
+                        <li><code>#shd</code> or <code>#nsa_banner</code> hashtags.</li>
+                        <li><code>Web Site Blocked</code> text.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Sophos UTM Firewall 
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains <code>Powered by UTM Web Protection</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Stingray (RiverBed/Brocade)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response code returns <code>403 Forbidden</code> or <code>500 Internal Error</code>.</li>
+                    <li>Response headers contain the <code>X-Mapping</code> header field name.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Sucuri CloudProxy
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers may contain <code>Sucuri</code> or <code>Cloudproxy</code> values.</li>
+                    <li>Blocked response page contains the following text:</li>
+                    <ul>
+                        <li><code>Access Denied</code> and <code>Sucuri Website Firewall</code> texts.</li>
+                        <li>Email <code>cloudproxy@sucuri.net</code>.</li>
+                    </ul>
+                    <li>Returns <code>403 Forbidden</code> response code upon blocking.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tencent Cloud WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response code returns <code>405 Method Not Allowed</code> error.</li>
+                    <li>Blocked response page contains reference to <code>waf.tencent-cloud.com</code> URL.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            TrafficShield (F5 Networks)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers might contain <code>F5-TrafficShield</code> keyword.</li>
+                    <li><code>ASINFO=</code> value might be detected in response headers.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            URLScan (Microsoft)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers might contain <code>Rejected-by-URLScan</code> field value.</li>
+                    <li>Blocked response page contains <code>Rejected-by-URLScan</code> text.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            USP Secure Entry
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>Secure Entry Server</code> field value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Varnish (OWASP)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains <code>Request rejected by xVarnish-WAF</code> text.</li>
+                    <li>Malicious request returns <code>404 Not Found</code> Error.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            WallArm (Nginx)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>nginx-wallarm</code> text.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            WatchGuard Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>WatchGuard</code> header field value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            WebKnight (Aqtronix)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>WebKnight</code> keyword.</li>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>WebKnight Application Firewall Alert</code> text warning.</li>
+                        <li><code>AQTRONIX WebKnight</code> text.</li>
+                    </ul>
+                    <li>Blocked response code returned is <code>999 No Hacking</code>. :p</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ZenEdge Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains reference to <code>zenedge/assets/</code> directory.</li>
+                    <li>Headers contain the <code>ZENEDGE</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Yundun Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Headers contain the <code>yundun</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Yunsuo Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains image class reference to <code>.yunsuologo</code>.</li>
+                    <li>Response headers contain the <code>yunsuo_session</code> field name.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
 </table>
 
 ## Evasion Techniques
