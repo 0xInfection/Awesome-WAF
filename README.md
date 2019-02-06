@@ -1223,19 +1223,20 @@ Wanna detect WAFs? Lets see how.
 Lets look at some methods of bypassing and evading WAFs.
 
 ### Fuzzing/Bruteforcing:
-__Method:__
+__Method:__  
 Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 - Wordlists specifically for fuzzing - [Seclists Fuzzing](https://github.com/danielmiessler/SecLists/tree/master/Fuzzing).
 - Can be done with automated tools like BurpSuite Intruder.
 
 __Technique:__
+
 - Load up your wordlist into Burp Intruder/custom fuzzer and start the bruteforce.
 - Record/log all responses from the different payloads fuzzed.
 - Use random user-agents, ranging from Chrome Desktop to iPhone browser.
 - If blocking noticed, increase fuzz latency (eg. 2-4 secs)
 - Always use proxies, since chances are real that your IP gets blocked.
 
-- __Drawback:__
+__Drawback:__
 - This method often fails. 
 - Many a times your IP will be blocked (temporarily/permanently).
 
