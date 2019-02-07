@@ -624,6 +624,22 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            GreyWizard Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page content contains:<br><code>We've detected attempted attack or non standard traffic from your IP address</code> text.</li>
+                    <li>Blocked response page title contains <code>Grey Wizard</code> keyword.</li>
+                    <li>Response headers contain <code>greywizard</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             HyperGuard Firewall
         </td>
         <td>
@@ -638,7 +654,7 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Imperva Incapsula
+            Imperva SecureSphere
         </td>
         <td>
             <ul>
@@ -654,6 +670,40 @@ Wanna detect WAFs? Lets see how.
                     <li>Normal GET request headers contain <code>visid_incap</code> value.</li>
                     <li>Response headers may contain <code>X-Iinfo</code> header field name.</li>
                     <li><code>Set-Cookie</code> header has cookie field <code>incap_ses</code> in response headers.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Immunify360 (CloudLinux Inc.)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Headers contain <code>imunify360</code> keyword.</li>
+                    <li>Response page contains:</li>
+                    <ul>
+                        <li><code>Powered by Imunify360</code> text.</li>
+                        <li><code>imunify360 preloader</code> if response type is JSON.</li>
+                    </ul>
+                    <li>Blocked response page contains <code>protected by Imunify360</code> text.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Janusec Application Gateway
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page displays <code>Janusec Application Gateway</code> on malicious requests.</li>
                 </ul>
             </ul>
         </td>
@@ -681,7 +731,7 @@ Wanna detect WAFs? Lets see how.
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page displays <code>ks-waf-error.png</code> image (view source to see).</li>
@@ -816,6 +866,20 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            PerimeterX Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains reference to<br> <code>https://www.perimeterx.com/whywasiblocked</code> URL.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Profense Firewall
         </td>
         <td>
@@ -882,6 +946,24 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            RSFirewall (RSJoomla)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains:</li>
+                    <ul>
+                        <li><code>COM_RSFIREWALL_403_FORBIDDEN</code> keyword.</li>
+                        <li><code>COM_RSFIREWALL_EVENT</code> keyword.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Safe3 Firewall
         </td>
         <td>
@@ -941,6 +1023,20 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page contains <code>SENGINX-ROBOT-MITIGATION</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ShieldSecurity
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains<br> <code>Something in the URL, Form or Cookie data wasn't appropriate</code> text.</li>
                 </ul>
             </ul>
         </td>
@@ -1109,6 +1205,26 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            VirusDie Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains:</li>
+                    <ul>
+                        <li><code>http://cdn.virusdie.ru/splash/firewallstop.png</code> picture.</li>
+                        <li><code>copy; Virusdie.ru</p></code> text.</li>
+                        <li>Response page title contains <code>Virusdie</code> keyword.</li>
+                        <li>Page metadata contains <code>name="FW_BLOCK"</code> keyword</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             WallArm (Nginx)
         </td>
         <td>
@@ -1223,12 +1339,12 @@ Wanna detect WAFs? Lets see how.
 Lets look at some methods of bypassing and evading WAFs.
 
 ### Fuzzing/Bruteforcing:
-__Method:__  
+#### Method:  
 Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 - Wordlists specifically for fuzzing - [Seclists Fuzzing](https://github.com/danielmiessler/SecLists/tree/master/Fuzzing).
 - Can be done with automated tools like BurpSuite Intruder.
 
-__Technique:__
+#### Technique:
 
 - Load up your wordlist into Burp Intruder/custom fuzzer and start the bruteforce.
 - Record/log all responses from the different payloads fuzzed.
@@ -1241,12 +1357,12 @@ __Drawback:__
 - Many a times your IP will be blocked (temporarily/permanently).
 
 ### Regex-Reversing:
-__Method:__
+#### Method:
 - Most efficient method of bypassing WAFs.
 - Some WAFs rely upon matching the attack payloads with the signatures in their databases.
 - Payload matches the reg-ex the WAF triggers alarm.
 
-__Techniques:__
+#### Techniques:
 
 ##### • Step 1:
 __Keyword filer__: `and`, `or`, `union`  
@@ -1289,7 +1405,7 @@ __Possible PHP Filter Code__: `preg_match('/(and|or|union|where|limit|group by|s
 
 ##### • Step 7:
 __Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`  
-Possible __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex)/i', $id)`
+__Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex)/i', $id)`
 - __Filtered Injection__: `1 || substr(user,1,1) = unhex(61)`
 - __Bypassed Injection__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
 
