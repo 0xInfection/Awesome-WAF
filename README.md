@@ -33,12 +33,12 @@ Feel free to [contribute](CONTRIBUTING.md).
             <a href="http://www.anquanbao.com">Anquanbao</a>
         </td>
         <td>
-            The Airlock Web Application Firewall offers a unique combination of protective mechanisms for web applications. Each access is systematically monitored and filtered at every level. It features reverse proxy, central checkpoint, filtering, API security and dynamic whitelisting.
+            <a href="https://www.armor.com/armor-web-application-firewall-service">Armor</a>
         </td>
     </tr>
     <tr>
         <td>
-            
+            <a href="https://f5.com/products/big-ip/application-security-manager-asm">Application Security Manager</a>
         </td>
         <td>
             A cloud based WAF solution for enterprises featuring big data analysis, clustering solutions, content optimisations, and access accelerations.
@@ -46,7 +46,7 @@ Feel free to [contribute](CONTRIBUTING.md).
     </tr>
     <tr>
         <td>
-            <a href="https://www.armor.com/armor-web-application-firewall-service">Armor</a>
+            
         </td>
         <td>
             A virtual WAF solution by Armor technologies which protects web-applications from OWASP top 10 attacks and features accurate response and remediation via applied intelligence from their threat centre.
@@ -54,7 +54,7 @@ Feel free to [contribute](CONTRIBUTING.md).
     </tr>
     <tr>
         <td>
-            <a href="https://f5.com/products/big-ip/application-security-manager-asm">Application Security Manager</a>
+            
         </td>
         <td>
             A comprehensive web application firewall from F5 Networks that protects apps and data from known and unknown threats, defends against bots that bypass standard protections, and virtually patches app vulnerabilities.
@@ -1635,5 +1635,5 @@ whatwaf -u <target> --ra --throttle 2
 - [WAF Bypasses and PHP Exploits](presentations/WAF%20Bypasses%20and%20PHP%20Exploits%20(Slides).pdf) - A presentation about evading WAFs and developing related PHP exploits.
 - [Playing Around with WAFs](presentations/Playing%20Around%20with%20WAFs.pdf) - A small presentation about WAF profiling and playing around with them from [Defcon 16](http://www.defcon.org/html/defcon-16/dc-16-post.html).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDA2MDI4MjNdfQ==
+eyJoaXN0b3J5IjpbLTExNTAxMTExNzldfQ==
 -->
