@@ -19,101 +19,11 @@ Feel free to [contribute](CONTRIBUTING.md).
 - [Awesome Presentations & Papers](#presentations--research-papers)
 
 ## Awesome WAFs List
-<table>
-    <tr>
-        <td>
-            <a href="http://360.cn">360 WangZhanBao</a>
-        </td>
-        <td>
-            A WAF solution from 360 Security Team.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://www.airlock.com/products/airlock-waf/">Airlock</a>
-        </td>
-        <td>
-            The Airlock Web Application Firewall offers a unique combination of protective mechanisms for web applications. Each access is systematically monitored and filtered at every level. It features reverse proxy, central checkpoint, filtering, API security and dynamic whitelisting.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="http://www.anquanbao.com">Anquanbao</a>
-        </td>
-        <td>
-            A cloud based WAF solution for enterprises featuring big data analysis, clustering solutions, content optimisations, and access accelerations.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://www.armor.com/armor-web-application-firewall-service">Armor</a>
-        </td>
-        <td>
-            A virtual WAF solution by Armor technologies which protects web-applications from OWASP top 10 attacks and features accurate response and remediation via applied intelligence from their threat centre.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://f5.com/products/big-ip/application-security-manager-asm">Application Security Manager</a>
-        </td>
-        <td>
-            A comprehensive web application firewall from F5 Networks that protects apps and data from known and unknown threats, defends against bots that bypass standard protections, and virtually patches app vulnerabilities.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://aws.amazon.com/waf/">Amazon AWS WAF</a>
-        </td>
-        <td>
-            A WAF solution from Amazon AWS that features full time web-traffic filtering, virtual patching, traffic visibility, attack transparency integrated with customisable rules.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://cloud.baidu.com">Baidu Cloud WAF</a>
-        </td>
-        <td>
-            A cloud based protection system from Baidu to effectively defend against web application attacks. It features cloud based real-time protections, load balancing, DDoS protection and its own content-delivery network. 
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://www.barracuda.com/products/webapplicationfirewall">Barracuda</a>
-        </td>
-        <td>
-            A WAF solution from Barracuda Networks featuring web aplication, API, and mobile apps against various attacks. Beside it provides DDoS protections, automated attack and bot protections, access controls and authentication protections.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="http://binarysec.org">BinarySEC</a>
-        </td>
-        <td>A solution from BinarySec which provides all round security protections from many kinds of threats. BinarySec WAF allows active whitelisting while peotecting your site from major known threats and malware.
-        </td>
-    </tr>
-    <tr>
-        <td>
-             <a href="https://www.blockdos.net">BlockDoS</a>
-        </td>
-        <td>A WAF solution which features high performance in-built content delivery systems, custom SSL, DNS protection, dynamic caching and stable DDoS protection.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://en.chinacache.com/managed-web-application-firewall/">ChinaCache</a>
-        </td>
-        <td>A featured firewall for China which features its own content-delivery network, virtual patching and constant threat discovery transparency report. 
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="">Kona Site Defender</a>
-        </td>
-        <td>
-            A cloud based WAF solution from Akamai technologies that feaures a proprietary WAF rule set, created and automatically updated based on visibility into the latest attacks with protections. It provides API security integrated with DevOps security, report visibility, etc. 
-        </td>
-    </tr>
-</table>
+Here are all commonly known WAFs:
+|<a href="https://f5.com/products/big-ip/appl|  |
+|--|--|
+|  |  |
+
 
 ## Testing Methodology
 Alright, now lets see the approach of testing WAFs. Wait, before that we need to know how they work right? Here you go.
@@ -1693,3 +1603,6 @@ X-Remote-Addr: 127.0.0.1
 - [Analysing Attacking Detection Logic Mechanisms](presentations/BlackHat%20US%2016%20-%20Analysis%20of%20Attack%20Detection%20Logic.pdf) - A presentation about WAF logic applied to detecting attacks from [BlackHat US 16](https://www.blackhat.com/html/bh-us-16/).
 - [WAF Bypasses and PHP Exploits](presentations/WAF%20Bypasses%20and%20PHP%20Exploits%20(Slides).pdf) - A presentation about evading WAFs and developing related PHP exploits.
 - [Playing Around with WAFs](presentations/Playing%20Around%20with%20WAFs.pdf) - A small presentation about WAF profiling and playing around with them from [Defcon 16](http://www.defcon.org/html/defcon-16/dc-16-post.html).
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTgwNDI2NTY1OF19
+-->
