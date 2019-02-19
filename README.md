@@ -1414,16 +1414,16 @@ Wanna detect WAFs? Lets see how.
     </tr>
 </table>
 
-## Evasion Techniques
+# Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
 
-### Fuzzing/Bruteforcing:
-#### Method:  
+## Fuzzing/Bruteforcing:
+### Method:  
 Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 - Wordlists specifically for fuzzing - [Seclists Fuzzing](https://github.com/danielmiessler/SecLists/tree/master/Fuzzing).
 - Can be done with automated tools like BurpSuite Intruder.
 
-#### Technique:
+### Technique:
 
 - Load up your wordlist into Burp Intruder/custom fuzzer and start the bruteforce.
 - Record/log all responses from the different payloads fuzzed.
@@ -1431,17 +1431,17 @@ Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 - If blocking noticed, increase fuzz latency (eg. 2-4 secs)
 - Always use proxies, since chances are real that your IP gets blocked.
 
-__Drawback:__
+### Drawbacks:
 - This method often fails. 
 - Many a times your IP will be blocked (temporarily/permanently).
 
-### Regex-Reversing:
-#### Method:
+## Regex-Reversing:
+### Method:
 - Most efficient method of bypassing WAFs.
 - Some WAFs rely upon matching the attack payloads with the signatures in their databases.
 - Payload matches the reg-ex the WAF triggers alarm.
 
-#### Techniques:
+### Techniques:
 
 ### __Keyword Filter Detection/Bypass__
 
