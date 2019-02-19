@@ -1,11 +1,11 @@
 # Awesome WAF ![Awesome](https://camo.githubusercontent.com/13c4e50d88df7178ae1882a203ed57b641674f94/68747470733a2f2f63646e2e7261776769742e636f6d2f73696e647265736f726875732f617765736f6d652f643733303566333864323966656437386661383536353265336136336531353464643865383832392f6d656469612f62616467652e737667 "Awesome")
 > A curated list of awesome WAF stuff. 
 >
-> __Foreword:__ This was originally my own collection on WAFs. I am making it public in the hope that it will be useful for pentesters and researchers out there. "The community just learns from each other." __#SharingisCaring__
+> __Foreword:__ This was originally my own collection on WAFs. I am open-sourcing it in the hope that it will be useful for pentesters and researchers out there. "The community just learns from each other." __#SharingisCaring__
 
 ![Main Logo](images/how-wafs-work.png 'How wafs work')
 
-__A Concise Definition:__ A web application firewall is a form of firewall with a set of configured rules that controls input, output, and/or access from, to, or by an application or service. It operates by monitoring and potentially blocking the input, output, or system service calls that do not meet the configured policy of the firewall. *(Source [Wikipedia](https://en.wikipedia.org/wiki/Application_firewall))*
+__A Concise Definition:__ A web application firewall is a security policy enforcement point positioned between a web application and the client endpoint. This functionality can be implemented in software or hardware, running in an appliance device, or in a typical server running a common operating system. It may be a stand-alone device or integrated into other network components. *(Source [PCI DSS IS 6.6](https://www.pcisecuritystandards.org/documents/information_supplement_6.6.pdf))*
 
 Feel free to [contribute](CONTRIBUTING.md).
 
@@ -23,8 +23,8 @@ Feel free to [contribute](CONTRIBUTING.md).
 - Sometimes they use a learning mode to add rules automatically through learning about user behaviour.
 
 ## Operation Modes:
-- __Negative Model (Blacklist based)__ - A blacklisting model uses pre-set signatures to block web traffic that is clearly malicious, and signatures designed to prevent attacks which exploit certain website and web application vulnerabilities. For example, if a number of IP addresses send a lot more packets than is typical for that many IP addresses being used to surf a website, a blacklisting firewall can effectively prevent DDoS attacks. Blacklisting model web application firewalls are a great choice for websites and web applications on the public internet, because those targets can get a lot of legitimate web traffic from unfamiliar client machines. Eg. Block all `<script>*</script>` inputs.
-- __Positive Model (Whitelist based)__ - A whitelisting model only allows web traffic according to specifically configured criteria. For example, it can be configured to only allow HTTP GET requests from certain IP addresses. This model can be very effective for casting a wide metaphorical fishing net for blocking possible cyber-attacks, but just as fishing nets also catch a lot of matter that a fisherman can't sell, whitelisting will block a lot of legitimate traffic. Whitelisting model firewalls are probably best for web applications on an internal network that are designed to be used by only a limited group of people, such as employees.
+- __Negative Model (Blacklist based)__ - A blacklisting model uses pre-set signatures to block web traffic that is clearly malicious, and signatures designed to prevent attacks which exploit certain website and web application vulnerabilities. Blacklisting model web application firewalls are a great choice for websites and web applications on the public internet, and are highly effective against an major types of DDoS attacks. Eg. Rule for blocking all `<script>*</script>` inputs.
+- __Positive Model (Whitelist based)__ - A whitelisting model only allows web traffic according to specifically configured criteria. For example, it can be configured to only allow HTTP GET requests from certain IP addresses. This model can be very effective for blocking possible cyber-attacks, but whitelisting will block a lot of legitimate traffic. Whitelisting model firewalls are probably best for web applications on an internal network that are designed to be used by only a limited group of people, such as employees.
 - __Mixed/Hybrid Model (Inclusive model)__ - A hybrid security model is one that blends both whitelisting and blacklisting. Depending on all sorts of configuration specifics, hybrid firewalls could be the best choice for both web applications on internal networks and web applications on the public internet.
 
 ## Testing Methodology:
@@ -95,8 +95,11 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate/Difficult</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li><code>Set-Cookie</code> headers may contain <code>AL-SESS={some value}</code> value (case insensitive).</li>
-                    <li>Response headers may contain <code>AL-LB={some value}</code> value (case insensitive).</li>
+                    <li><code>Set-Cookie</code> headers may contain:</li>
+                    <ul>
+                        <li><code>AL-SESS</code> cookie field name (case insensitive).</li>
+                        <li><code>AL-LB</code> value (case insensitive).</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -1414,36 +1417,37 @@ Wanna detect WAFs? Lets see how.
     </tr>
 </table>
 
-# Evasion Techniques
+## Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
 
-## Fuzzing/Bruteforcing:
-### Method:  
+### Fuzzing/Bruteforcing:
+#### Method:  
 Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
-- Wordlists specifically for fuzzing - [Seclists Fuzzing](https://github.com/danielmiessler/SecLists/tree/master/Fuzzing).
-- Can be done with automated tools like BurpSuite Intruder.
+- Wordlists specifically for fuzzing 
+    - [Seclists/Fuzzing](https://github.com/danielmiessler/SecLists/tree/master/Fuzzing).
+    - [Fuzz-DB/Attack](https://github.com/fuzzdb-project/fuzzdb/tree/master/attack)
 
-### Technique:
+#### Technique:
 
-- Load up your wordlist into Burp Intruder/custom fuzzer and start the bruteforce.
+- Load up your wordlist into Burp Suite Intruder/custom fuzzer and start the bruteforce.
 - Record/log all responses from the different payloads fuzzed.
 - Use random user-agents, ranging from Chrome Desktop to iPhone browser.
 - If blocking noticed, increase fuzz latency (eg. 2-4 secs)
 - Always use proxies, since chances are real that your IP gets blocked.
 
-### Drawbacks:
+#### Drawbacks:
 - This method often fails. 
 - Many a times your IP will be blocked (temporarily/permanently).
 
-## Regex-Reversing:
-### Method:
+### Regex-Reversing:
+#### Method:
 - Most efficient method of bypassing WAFs.
 - Some WAFs rely upon matching the attack payloads with the signatures in their databases.
 - Payload matches the reg-ex the WAF triggers alarm.
 
-### Techniques:
+#### Techniques:
 
-### __Keyword Filter Detection/Bypass__
+##### Keyword Filter Detection/Bypass
 
 __SQL Injection__
 
@@ -1517,7 +1521,7 @@ __Scenario 2: Cross Site Scripting__
 ```
 <sCRipT>alert(1)</sCRiPt>
 ```
-- Breaking firewall regex with new line (`\r\n`):
+- Bypassing firewall regex with new line (`\r\n`):
 ```
 <script>
 alert(1)</script>
@@ -1607,6 +1611,24 @@ Here is a compiled list of separators:
 An exotic payload: 
 ```
 <a/onmouseover[\x0b]=location='\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3A\x61\x6C\x65\x72\x74\x28\x30\x29\x3B'>pwn3d
+```
+
+### HTTP Header Spoofing:
+#### Method:
+- The target is to fool the WAF/server into believing it was from their internal network.
+- Adding some spoofed headers to represent the internal network, does the trick.
+
+#### Technique:
+- With each request some set of headers are to be added simultaneously thus spoofing the origin.
+- The upstream proxy/WAF will misinterpret believing the request was from their internal network, and lets our gory payload through.
+
+Some common headers used:
+```
+X-Originating-IP: 127.0.0.1
+X-Forwarded-For: 127.0.0.1
+X-Remote-IP: 127.0.0.1
+X-Remote-Addr: 127.0.0.1
+X-Client-IP: 127.0.0.1
 ```
 
 ### Google Dorks Approach:
