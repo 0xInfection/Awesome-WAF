@@ -1,18 +1,18 @@
 I appreciate and recognize [all contributors](https://github.com/0xInfection/awesome-waf/graphs/contributors).
 
-Please note that this project is released with a [Contributor Code of Conduct](https://github.com/0xinfection/awesome-waf/blob/master/code-of-conduct.md). By participating in this project you agree to abide by its terms.
+> First of all thank you for even considering of contributing to this awesome list. __"The community just learns from each other"__.
 
-# Table of Contents
+## Table of Contents
 
-- [Awesome WAF contribution guidelines](#contribution-guidelines)
+- [Contribution guidelines](#contribution-guidelines)
 - [Quality Standard](#quality-standard)
 - [Adding to this list](#adding-to-this-list)
 - [Adding something to an awesome list](#adding-something-to-an-awesome-list)
 - [Updating your Pull Request](#updating-your-pull-request)
 
-# Contribution Guidelines
+## Contribution Guidelines
 
-__Your pull request/commit message will be a tweet, keep that in mind.__ :)
+__Your pull request/commit message will be a tweet, please keep that in mind.__ :)
 
 - **To add to the list:** Submit a pull request.
 - **To remove from the list:** Submit a pull request.
@@ -20,7 +20,7 @@ __Your pull request/commit message will be a tweet, keep that in mind.__ :)
 - Want to try something else: Submit a pull request.
 - Don't know what to do: Submit a pull request or open an issue, let me know what's going on.
 
-[`Awesome-WAF`](https://github.com/0xinfection/awesome-waf) is a hand-crafted list for high-quality information about web application firewalls and its resources. Foolowing items are recommended to be kept in mind.
+[Awesome-WAF](https://github.com/0xinfection/awesome-waf) is a hand-crafted list for high-quality information about web application firewalls and its resources. Following items are recommended to be kept in mind.
 
 - Each item should be limited to one link, no duplicates, no redirection (careful with `http` vs `https`!).
 - The link should be the name of the slide or project or website.
@@ -28,9 +28,9 @@ __Your pull request/commit message will be a tweet, keep that in mind.__ :)
 - Description should follow the link, on the same line.
 - if you want to add more than one link, please don't do all PR on the exact same line, it usually results in conflicts and your PR cannot be automatically merged.
 
-Please contribute links to slides/projects you have used or are familiar with. This will help ensure high-quality entries.
+Please contribute links to slides/tools you have used or are familiar with. This will help ensure high-quality entries.
 
-# Quality standard
+## Quality Standard
 
 Note that we can help you achieve those standards, just try your best, be brave.
 We'll guide you to the best of our abilities.
@@ -40,13 +40,13 @@ To be on the list, it would be *nice* if entries adhere to these quality standar
 - Generally useful to the community
 - Clearly stating "what is it for": mention the problem it solves. Just try your best, make it clear for the next person.
 - Solves a real problem (even a small one)
-- if it is a **WIP** (work in progress, not safe for production), mention it.
+- If your PR is a **WIP** (work in progress, not safe for production), mention it.
 
-If your PR is not merged, we will tell you why so that you may be able to improve it.
+If your PR is not merged, I will tell you why so that you may be able to improve it.
 
-# Awesome Related Contribution Guidelines
+## Awesome Related Contribution Guidelines
 
-## Adding to this List
+### Adding to this List
 
 Please ensure your pull request adheres to the following guidelines:
 
@@ -62,9 +62,9 @@ Please ensure your pull request adheres to the following guidelines:
 - The pull request and commit should have a useful title.
 - The body of your commit message should contain a link to the repository.
 
-Thank you for your suggestions!
+Thank you for your contributions!
 
-## Adding something to an Awesome List
+### Adding something to an Awesome List
 
 If you have something awesome to contribute to an awesome list, this is how you do it.
 
@@ -89,7 +89,7 @@ You'll need a [GitHub account](https://github.com/join)!
 
 6. Submit the [pull request](https://help.github.com/articles/using-pull-requests/)!
 
-## Updating your Pull Request
+### Updating your Pull Request
 
 Sometimes, a maintainer of an awesome list will ask you to edit your Pull Request before it is included. This is normally due to spelling errors or because your PR didn't match the awesome-* list guidelines.
 
