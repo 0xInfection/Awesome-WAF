@@ -1747,7 +1747,7 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 - On [Pastebin](https://pastebin.com)  
 `site:pastebin.com +<wafname> bypass`
 
-## Known Bypasses:
+## Known Bypasses: `Incomplete`
 ### Citrix NetScaler
 - HTTP Parameter Pollution (NS10.5) [@BGA Security](https://www.exploit-db.com/?author=7396)
 ```
