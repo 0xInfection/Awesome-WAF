@@ -135,7 +135,7 @@ Wanna detect WAFs? Lets see how.
                     <li>Blocked response page contains:</li>
                     <ul>
                         <li><code>Sorry, your request has been blocked as it may cause potential threats to the server's security</code> text snippet.</li>
-                        <li>Reference to <code>error.aliyun.com</code> site.</li>
+                        <li>Reference to <code>errors.aliyun.com</code> site.</li>
                     </ul>
                 </ul>
             </ul>
@@ -349,6 +349,20 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            CDN NS Application Gateway
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains <code>by CdnNsWAF Application Gateway</code> text snippet.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             ChinaCache Firewall
         </td>
         <td>
@@ -364,7 +378,7 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            ACE XML Gateway (Cisco)
+            Cisco ACE XML Gateway
         </td>
         <td>
             <ul>
@@ -923,6 +937,20 @@ Wanna detect WAFs? Lets see how.
                 <ul>
                     <li><code>Set-Cookie</code> headers contain <code>PLBSID=</code> cookie field name.</li>
                     <li>Response headers may contain <code>Profense</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Proventia (IBM)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page might contain to <code>request does not match Proventia rules</code> text snippet.</li>
                 </ul>
             </ul>
         </td>
