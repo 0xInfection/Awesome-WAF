@@ -125,6 +125,24 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Aliyundun Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability:</b> Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>Sorry, your request has been blocked as it may cause potential threats to the server's security</code> text snippet.</li>
+                        <li>Reference to <code>error.aliyun.com</code> site.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Anquanbao WAF
         </td>
         <td>
