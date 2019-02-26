@@ -2128,4 +2128,4 @@ X-Remote-Addr: 127.0.0.1
 - [Playing Around with WAFs](presentations/Playing%20Around%20with%20WAFs.pdf) - A small presentation about WAF profiling and playing around with them from [Defcon 16](http://www.defcon.org/html/defcon-16/dc-16-post.html).
 
 ## Credits & License:
-This work has been presented by [Infected Drake](https://twitter.com/0xInfection) and is licensed under the [Apache 2.0 License](LICENSE). 
+This work has been presented by [Infected Drake](https://twitter.com/0xInfection) [(0xInfection)](https://github.com/0xinfection) and is licensed under the [Apache 2.0 License](LICENSE). 
