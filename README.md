@@ -1,5 +1,5 @@
 # Awesome WAF ![Awesome](https://camo.githubusercontent.com/13c4e50d88df7178ae1882a203ed57b641674f94/68747470733a2f2f63646e2e7261776769742e636f6d2f73696e647265736f726875732f617765736f6d652f643733303566333864323966656437386661383536353265336136336531353464643865383832392f6d656469612f62616467652e737667 "Awesome")
-> A curated list of awesome WAF stuff. 
+> A curated list of awesome WAF stuff. 🔥
 >
 > __Foreword:__ This was originally my own collection on WAFs. I am open-sourcing it in the hope that it will be useful for pentesters and researchers out there. "The community just learns from each other." __#SharingisCaring__
 
