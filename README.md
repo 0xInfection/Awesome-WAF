@@ -1531,7 +1531,7 @@ __1. Case Toggling__
 __Standard__: `<script>alert()</script>`  
 __Bypassed__: `<ScRipT>alert()</sCRipT>`
 
-__Standard__: `SELECT * FROM all_tables WHERE OWNER = 'DATABASE_NAME'`
+__Standard__: `SELECT * FROM all_tables WHERE OWNER = 'DATABASE_NAME'`  
 __Bypassed__: `sELecT * FrOM all_tables whERe OwNeR = 'DATABASE_NAME'`
 
 __2. URL Encoding__  
