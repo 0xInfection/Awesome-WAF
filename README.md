@@ -70,7 +70,7 @@ Feel free to [contribute](CONTRIBUTING.md).
 
 ## WAF Fingerprints
 Wanna detect WAFs? Lets see how.
-> __NOTE__: This section contains manual WAF detection techniques. You might want to switch over to [next section](#awesome-tools). 
+> __NOTE__: This section contains manual WAF detection techniques. You might want to switch over to [next section](#evasion-techniques). 
 
 <table>
     <tr>
