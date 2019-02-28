@@ -48,7 +48,7 @@ Feel free to [contribute](CONTRIBUTING.md).
 
 ## Testing Methodology:
 ### Where To Look:
-- Always look out for common ports that expose that a WAF `80`, `443`, `8000`, `8008`, `8080`, `8088`.
+- Always look out for common ports that expose that a WAF, namely `80`, `443`, `8000`, `8008`, `8080`, `8088` ports.
     > __Tip:__ You can use automate this easily by commandline using a screenshot taker like [WebScreenShot](https://github.com/maaaaz/webscreenshot).
 - Some WAFs set their own cookies in requests (eg. Citrix Netscaler, Yunsuo WAF).
 - Some associate themselves with separate headers (eg. Anquanbao WAF, Amazon AWS WAF). 
@@ -61,15 +61,16 @@ Feel free to [contribute](CONTRIBUTING.md).
 To identify WAFs, we need to (dummy) provoke it.
 1. Make a normal GET request from a browser, intercept and test response headers (specifically cookies).
 2. Make a request from command line (eg. cURL), and test response content and headers (no user-agent included).
-3. If there is a login page somewhere, try some common (easily detectable) payloads like `" or 1 = 1 --`.
-4. If there is some input field somewhere, try with noisy payloads like `<script>alert()</script>`.
-5. Attach a dummy `../../../etc/passwd` to a random parameter at end of URL.
-6. Append some catchy keywords like `' OR SLEEP(5) OR '` at end of URLs to any random parameter.
-6. Make GET requests with outdated protocols like `HTTP/0.9` (`HTTP/0.9` does not support POST type queries).
-7. Many a times, the WAF varies the `Server` header upon different types of interactions.
-8. Drop Action Technique - Send a raw crafted FIN/RST packet to server and identify response.
+3. Make GET requests to random open ports and grab banners which might expose the WAFs identity.
+4. If there is a login page somewhere, try some common (easily detectable) payloads like `" or 1 = 1 --`.
+5. If there is some input field somewhere, try with noisy payloads like `<script>alert()</script>`.
+6. Attach a dummy `../../../etc/passwd` to a random parameter at end of URL.
+7. Append some catchy keywords like `' OR SLEEP(5) OR '` at end of URLs to any random parameter.
+8. Make GET requests with outdated protocols like `HTTP/0.9` (`HTTP/0.9` does not support POST type queries).
+9. Many a times, the WAF varies the `Server` header upon different types of interactions.
+10. Drop Action Technique - Send a raw crafted FIN/RST packet to server and identify response.
     > __Tip:__ This method could be easily achieved with tools like [HPing3](http://www.hping.org) or [Scapy](https://scapy.net).
-9. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
+11. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
 
 ## WAF Fingerprints
 Wanna detect WAFs? Lets see how.
