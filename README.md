@@ -143,7 +143,7 @@ Wanna detect WAFs? Lets see how.
                     <li>Blocked response page contains:</li>
                     <ul>
                         <li><code>Sorry, your request has been blocked as it may cause potential threats to the server's security</code> text snippet.</li>
-                        <li>Reference to <code>errors.aliyun.com</code> site.</li>
+                        <li>Reference to <code>errors.aliyun.com</code> site URL.</li>
                     </ul>
                 </ul>
             </ul>
@@ -220,7 +220,27 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Amazon AWS WAF
+            ASP.NET Generic (IIS)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers may contain <code>X-ASPNET-Version</code> header value.</li>
+                    <li>Blocked response page content may contain:</li>
+                        <ul>
+                            <li><code>This generic 403 error means that the authenticated user is not authorized to use the requested resource</code>.</li>
+                            <li><code>Error Code 0x00000000<</code> keyword.</li>
+                        </ul>
+                    <li><code>X-Powered-By</code> header has field value set to <code>ASP.NET</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            AWS (Amazon)
         </td>
         <td>
             <ul>
@@ -243,6 +263,25 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Response headers contain <code>Yunjiasu-ngnix</code> value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Barikode Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page content may contain:
+                        <ul>
+                            <li><code>barikode</code> keyword.</li>
+                            <li><code>Forbidden Access</code> text snippet in <code>h1</code>.</li>
+                        </ul>
+                    </li>
                 </ul>
             </ul>
         </td>
@@ -273,6 +312,22 @@ Wanna detect WAFs? Lets see how.
                 <ul>
                     <li>Blocked response headers contains <code>Bekchy - Access Denied</code>.</li>
                     <li>Blocked response page contains reference to <code>https://bekchy.com/report</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Better WP Security
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Specific to only sites using CMS as Wordpress.</li>
+                    <li>Plugin enumeration reveals the WAF plugin presence.</li>
+                    <li>Making a GET request to <code>wp-content/plugins/better-wp-security/</code> directory yeilds<code>200 OK</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -386,6 +441,25 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Chuangyu WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page has refernce to:
+                        <ul>
+                            <li><code>365cyd.com</code> or <code>365cyd.net</code> URL.</li>
+                            <li>Help page at <code>http://help.365cyd.com/cyd-error-help.html?code=403</code>.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Cisco ACE XML Gateway
         </td>
         <td>
@@ -474,34 +548,6 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            GoDaddy Firewall
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Easy</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Blocked response page contains value<br> <code>Access Denied - GoDaddy Website Firewall</code>.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            IBM WebSphere DataPower
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Difficult</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Response headers contains field value value <code>X-Backside-Transport</code> with value <code>OK</code> or <code>FAIL</code>.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
             Deny-All Firewall
         </td>
         <td>
@@ -555,6 +601,20 @@ Wanna detect WAFs? Lets see how.
                 <ul>
                     <li>Blocked response content contains value<br> <code>dotDefender Blocked Your Request</code>.</li>
                     <li>Blocked response headers contain <code>X-dotDefender-denied</code> field value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            DynamicWeb Injection Check
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response headers contain <code>X-403-Status-By</code> field with value <code>dw-inj-check</code> value.</li>
                 </ul>
             </ul>
         </td>
@@ -623,6 +683,20 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            GoDaddy Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains value<br> <code>Access Denied - GoDaddy Website Firewall</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             HyperGuard Firewall
         </td>
         <td>
@@ -631,6 +705,20 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li><code>Set-Cookie</code> header has cookie field <code>ODSESSION=</code> in response headers.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            IBM DataPower
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contains field value value <code>X-Backside-Transport</code> with value <code>OK</code> or <code>FAIL</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -966,6 +1054,24 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            pkSecurityModule IDS
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response content may contain</li>
+                    <ul>
+                        <li><code>pkSecurityModule: Security.Alert</code>.</li>
+                        <li><code>A safety critical request was discovered and blocked</code> text snippet.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Radware Appwall
         </td>
         <td>
@@ -1035,6 +1141,27 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Sabre Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Returns status code <code>500 Internal Error</code> upon malicious requests.</li>
+                    <li>Response content has:
+                        <ul>
+                            <li>Contact email <code>dxsupport@sabre.com</code>.</li>
+                            <li><code>Your request has been blocked</code> bold warning.</li>
+                            <li><code>clicking the above email link will automatically add some important details to the email for us to investigate the problem</code> text snippet.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Safe3 Firewall
         </td>
         <td>
@@ -1094,6 +1221,20 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page contains <code>SENGINX-ROBOT-MITIGATION</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Shadow Daemon WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains <code>request forbidden by administrative rules.</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -1468,6 +1609,20 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Xuanwudun WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains reference to <code>http://admin.dbappwaf.cn/index.php/Admin/ClientMisinform/</code> site URL.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Yundun Firewall
         </td>
         <td>
@@ -1506,6 +1661,27 @@ Wanna detect WAFs? Lets see how.
                 <ul>
                     <li>Blocked response page contains reference to <code>zenedge/assets/</code> directory.</li>
                     <li>Headers contain the <code>ZENEDGE</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ZScaler (Accenture)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>Access Denied: Accenture Policy</code> text.</li>
+                        <li>Reference to <code>https://policies.accenture.com</code> URL.</li>
+                        <li><code>Your organization has selected Zscaler to protect you from internet threats</code>.</li>
+                        <li><code>The Internet site you have attempted to access is prohibited. Accenture's webfilters indicate that the site likely contains content considered inappropriate</code>.</li>
+                    </ul> 
+                    <li><code>Server</code> header has value set to <code>ZScaler</code>.</li>
                 </ul>
             </ul>
         </td>
