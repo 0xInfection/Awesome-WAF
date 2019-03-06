@@ -48,18 +48,18 @@ Feel free to [contribute](CONTRIBUTING.md).
 
 ## Testing Methodology:
 ### Where To Look:
-- Always look out for common ports that expose that a WAF, namely `80`, `443`, `8000`, `8008`, `8080`, `8088` ports.
-    > __Tip:__ You can use automate this easily by commandline using a screenshot taker like [WebScreenShot](https://github.com/maaaaz/webscreenshot).
+- Always look out for common ports that expose that a WAF, namely `80`, `443`, `8000`, `8008`, `8080` and `8088` ports.
+    > __Tip:__ You can use automate this easily by commandline using tools like like [cURL](https://github.com/curl/curl).
 - Some WAFs set their own cookies in requests (eg. Citrix Netscaler, Yunsuo WAF).
 - Some associate themselves with separate headers (eg. Anquanbao WAF, Amazon AWS WAF). 
-- Some often alter headers and jumble characters to confuse attacker (eg. Citrix Netscaler, F5 Big IP).
-- Some (often rare) expose themselves in the `Server` header (eg. Approach, WTS WAF).
+- Some often alter headers and jumble characters to confuse attacker (eg. Netscaler, Big-IP).
+- Some expose themselves in the `Server` header (eg. Approach, WTS WAF).
 - Some WAFs expose themselves in the response content (eg. DotDefender, Armor, Sitelock).
 - Other WAFs reply with unusual response codes upon malicious requests (eg. WebKnight, 360 WAF).
 
 ### Detection Techniques:
 To identify WAFs, we need to (dummy) provoke it.
-1. Make a normal GET request from a browser, intercept and test response headers (specifically cookies).
+1. Make a normal GET request from a browser, intercept and record response headers (specifically cookies).
 2. Make a request from command line (eg. cURL), and test response content and headers (no user-agent included).
 3. Make GET requests to random open ports and grab banners which might expose the WAFs identity.
 4. If there is a login page somewhere, try some common (easily detectable) payloads like `" or 1 = 1 --`.
@@ -73,7 +73,7 @@ To identify WAFs, we need to (dummy) provoke it.
 11. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
 
 ## WAF Fingerprints
-Wanna detect WAFs? Lets see how.
+Wanna fingerprint WAFs? Lets see how.
 > __NOTE__: This section contains manual WAF detection techniques. You might want to switch over to [next section](#evasion-techniques). 
 
 <table>
@@ -273,12 +273,12 @@ Wanna detect WAFs? Lets see how.
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page content may contain:
+                    <li>Blocked response page content contains:
                         <ul>
-                            <li><code>barikode</code> keyword.</li>
+                            <li><code>BARIKODE</code> keyword.</li>
                             <li><code>Forbidden Access</code> text snippet in <code>h1</code>.</li>
                         </ul>
                     </li>
@@ -852,15 +852,30 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page may contains:</li>
+                    <li>Blocked response page may contains:
                         <ul>
                             <li><code>Blocked because of Malicious Activities</code> text snippet.</li>
                             <li><code>Firewall powered by MalCare</code> text snippet.</li>
                         </ul>
+                    </li>
                </ul>
             </ul>
         </td>
-    </tr>    
+    </tr>
+    <tr>
+        <td>
+            MissionControl WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header field contains <code>Mission Control</code> value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
     <tr>
         <td>
             ModSecurity (Trustwave)
@@ -905,6 +920,20 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Session cookies contain <code>NCI__SessionId=</code> cookie field name.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            NevisProxy (AdNovum)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response header cookies contain <code>Navajo</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -988,7 +1017,7 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain unusual header <code>X-Engine</code> field with value <code>onMessage Shield</code>.</li>
+                    <li>Response headers contain header <code>X-Engine</code> field with value <code>onMessage Shield</code>.</li>
                     <li>Response page may contain <code>onMessage SHIELD</code> keyword.</li>
                     <li>You might encounter response page with<br><code>This site is protected by an enhanced security system to ensure a safe browsing experience</code>.</li>
                 </ul>
@@ -1029,11 +1058,11 @@ Wanna detect WAFs? Lets see how.
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Moderate/Difficult</li>
+                <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li><code>Set-Cookie</code> headers contain <code>PLBSID=</code> cookie field name.</li>
-                    <li>Response headers may contain <code>Profense</code> keyword.</li>
+                    <li><code>Server</code> header contain <code>Profense</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -1194,7 +1223,7 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            SecureIIS (BeyondTrust)
+            SecureIIS (eEye)
         </td>
         <td>
             <ul>
@@ -1205,7 +1234,7 @@ Wanna detect WAFs? Lets see how.
                     <ul>
                         <li><code>SecureIIS Web Server Protection.</code></li>
                         <li>Reference to <code>http://www.eeye.com/SecureIIS/</code> URL.</li>
-                        <li><code>subject={somevalue} SecureIIS Error</code> text snippet.</li>
+                        <li><code>SecureIIS Error</code> text snippet.</li>
                     </ul>
                 </ul>
             </ul>
@@ -1423,6 +1452,20 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Teros WAF (Citrix)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain cookie field <code>st8id</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             TrafficShield (F5 Networks)
         </td>
         <td>
@@ -1570,6 +1613,20 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            West263 Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>X-Cache</code> header field with <code>WT263CDN</code> value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>    
+    <tr>
+        <td>
             Wordfence (Feedjit)
         </td>
         <td>
@@ -1591,7 +1648,7 @@ Wanna detect WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WP Cerber Firewall
+            WordPress Cerber
         </td>
         <td>
             <ul>
@@ -1607,6 +1664,20 @@ Wanna detect WAFs? Lets see how.
             </ul>
         </td>
     </tr>
+    <tr>
+        <td>
+            XLabs Security WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>X-CDN</code> header field with <code>XLabs Security</code> value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>    
     <tr>
         <td>
             Xuanwudun WAF
@@ -1674,14 +1745,16 @@ Wanna detect WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page contains:</li>
-                    <ul>
-                        <li><code>Access Denied: Accenture Policy</code> text.</li>
-                        <li>Reference to <code>https://policies.accenture.com</code> URL.</li>
-                        <li><code>Your organization has selected Zscaler to protect you from internet threats</code>.</li>
-                        <li><code>The Internet site you have attempted to access is prohibited. Accenture's webfilters indicate that the site likely contains content considered inappropriate</code>.</li>
-                    </ul> 
                     <li><code>Server</code> header has value set to <code>ZScaler</code>.</li>
+                    <li>Blocked response page contains:
+                        <ul>
+                            <li><code>Access Denied: Accenture Policy</code> text.</li>
+                            <li>Reference to <code>https://policies.accenture.com</code> URL.</li>
+                            <li>Reference to image at <code>https://login.zscloud.net/img_logo_new1.png</code>.</li>
+                            <li><code>Your organization has selected Zscaler to protect you from internet threats</code>.</li>
+                            <li><code>The Internet site you have attempted to access is prohibited. Accenture's webfilters indicate that the site likely contains content considered inappropriate</code>.</li>
+                        </ul>
+                    </li>
                 </ul>
             </ul>
         </td>
@@ -1928,7 +2001,7 @@ __12. Random Tabs__
 
 __Standard__: `<IMG SRC="javascript:alert();">`  
 __Bypassed__: `<IMG SRC="    javascript:alert();">`  
-__Variant__: `<IMG SRC="    jav    ascript:alert    ();">`
+__Variant__: `<IMG SRC="    jav    ascri    pt:alert    ();">`
 
 __Standard__: `<iframe src=javascript:alert(1)></iframe>`  
 __Obfuscated__: 
@@ -1943,7 +2016,7 @@ __Obfuscated__:
 
 Example request:
 <pre>
-GET <b>/page.php?p=%00%00%00%00%00%3C%00%00%00s%00%00%00v%00%00%00g%00%00%00/%00%00%00o%00%00%00n%00%00%00l%00%00%00o%00%00%00a%00%00%00d%00%00%00=%00%00%00a%00%00%00l%00%00%00e%00%00%00r%00%00%00t%00%00%00(%00%00%00)%00%00%00%3E</b> HTTP/1.1
+GET <b>/page.php?p=∀㸀㰀script㸀alert(1)㰀/script㸀</b> HTTP/1.1
 Host: site.com
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0
 <b>Accept-Charset:utf-32; q=0.5</b>
@@ -1951,7 +2024,12 @@ Accept-Language: en-US,en;q=0.5
 Accept-Encoding: gzip, deflate
 </pre>
 When the site loads, it will be encoded to the UTF-32 encoding that we set, and
-then as the output encoding of the page is UTF-8, it will be rendered as: `<svg/onload=alert()>` which will trigger XSS.
+then as the output encoding of the page is UTF-8, it will be rendered as: `"<script>alert (1) </ script>` which will trigger XSS.
+
+Final URL encoded payload:
+```
+%E2%88%80%E3%B8%80%E3%B0%80script%E3%B8%80alert(1)%E3%B0%80/script%E3%B8%80 
+```
 
 #### Null Bytes:
 - The null bytes are commonly used as string terminator.
