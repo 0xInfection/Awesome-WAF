@@ -22,7 +22,10 @@ __Your pull request/commit message will be a tweet, please keep that in mind.__ 
 
 [Awesome-WAF](https://github.com/0xinfection/awesome-waf) is a hand-crafted list for high-quality information about web application firewalls and its resources. Following items are recommended to be kept in mind.
 
-- Each item should be limited to one link, no duplicates, no redirection (careful with `http` vs `https`!).
+- If you are submitting a new fingerprint, include the headers/page source, etc.
+- Do not include the URL as it may expose the integrity of the site.
+> I will contact you personally if necessary via email.
+- Item you're adding should not be duplicate, no redirection (be careful with `http` vs `https`!).
 - The link should be the name of the slide or project or website.
 - Description should be clear and concise (read it out loud to be sure).
 - Description should follow the link, on the same line.
@@ -37,14 +40,14 @@ We'll guide you to the best of our abilities.
 
 To be on the list, it would be *nice* if entries adhere to these quality standards:
 
-- Generally useful to the community
+- Generally useful to the community.
 - Clearly stating "what is it for": mention the problem it solves. Just try your best, make it clear for the next person.
 - Solves a real problem (even a small one)
 - If your PR is a **WIP** (work in progress, not safe for production), mention it.
 
 If your PR is not merged, I will tell you why so that you may be able to improve it.
 
-## Awesome Related Contribution Guidelines
+## Contribution Guidelines
 
 ### Adding to this List
 

