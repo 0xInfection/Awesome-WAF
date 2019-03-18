@@ -88,10 +88,10 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Returns status code <code>493</code> upon unusual requests.</li>
                     <li>On viewing source-code of error page, you will find reference to <code>wzws-waf-cgi/</code> directory.</li>
-                    <li>Blocked response page source may contain:
+                    <li>Blocked response page source contains:
                     <ul>
                         <li>Reference to <code>wangshan.360.cn</code> URL.</li>
-                        <li><code>Sorry! Your access has been intercepted</code> text snippet.</li>
+                        <li><code>Sorry! Your access has been intercepted because your links may threaten website security.</code> text snippet.</li>
                     </ul>
                     <li>Response headers contain <code>X-Powered-By-360WZB</code> Header.</li>
                 </ul>
@@ -127,6 +127,30 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>AL-SESS</code> cookie field name (case insensitive).</li>
                         <li><code>AL-LB</code> value (case insensitive).</li>
                     </ul>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>Server detected a syntax error in your request</code> text.</li>
+                        <li><code>Check your request and all parameters</code> text snippet.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            AlertLogic Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability:</b> Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>We are sorry, but the page you are looking for cannot be found</code> text snippet.</li>
+                        <li><code>The page has either been removed, renamed or temporarily unavailable</code> text.</li>
+                        <li><code>404 Not Found</code> in red letters.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -145,6 +169,7 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>Sorry, your request has been blocked as it may cause potential threats to the server's security</code> text snippet.</li>
                         <li>Reference to <code>errors.aliyun.com</code> site URL.</li>
                     </ul>
+                    <li>Blocked response code returned is <code>405</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -161,22 +186,6 @@ Wanna fingerprint WAFs? Lets see how.
                     <li>Returns blocked HTTP response code <code>405</code> upon malicious requests.</li>
                     <li>Blocked response content may contain <code>/aqb_cc/error/</code> or <code>hidden_intercept_time</code>.</li>
                     <li>Response headers contain <code>X-Powered-by-Anquanbao</code> header field.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Armor Defense
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Easy</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Blocked response content contains warning<br>
-                        <code>This request has been blocked by website protection from Armor.</code>
-                    </li>
                 </ul>
             </ul>
         </td>
@@ -208,12 +217,31 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Blocked response page content may contain:</li>
                         <ul>
-                            <li><code>Approach Web Application Firewall</code> heading.</li>
+                            <li><code>Approach Web Application Firewall Framework</code> heading.</li>
                             <li><code>Your IP address has been logged and this information could be used by authorities to track you.</code> warning.</li>
                             <li><code>Sorry for the inconvenience!</code> keyword.</li>
-                            <li><code>If this was an legitimate request please contact us with details!</code> text snippet.</li>
+                            <li><code>Approach infrastructure team</code> text snippet.</li>
                         </ul>
-                    <li><code>Server</code> header has field value set to <code>Approach Web Application Firewall</code>.</li>
+                    <li><code>Server</code> header has field value set to <code>Approach</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Armor Defense
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains:
+                        <ul>
+                            <li><code>This request has been blocked by website protection from Armor</code> text.</li>
+                            <li><code>If you manage this domain please create an Armor support ticket</code> snippet.</li>
+                        </ul>
+                    </li>
                 </ul>
             </ul>
         </td>
@@ -259,7 +287,8 @@ Wanna fingerprint WAFs? Lets see how.
                             <li><code>Access Denied</code> in their keyword.</li>
                             <li>Request token ID with length from 20 to 25 between <code>RequestId</code> tag.</li>
                         </ul>
-                    </li> 
+                    </li>
+                    <li><code>Server</code> header field may contain <code>awselb</code> value.</li>
                 </ul>
             </ul>
         </td>
@@ -309,6 +338,11 @@ Wanna fingerprint WAFs? Lets see how.
                     <li>Response cookies may contain <code>barra_counter_session</code> value.</li>
                     <li>Response headers may contain <code>barracuda_</code> keyword.</li>
                 </ul>
+                <li>Response page contains:</li>
+                <ul>
+                    <li><code>You have been blocked</code> heading.</li>
+                    <li><code>You are unable to access this website</code> text.</li>
+                </ul>
             </ul>
         </td>
     </tr>
@@ -357,6 +391,7 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>Security check by BitNinja</code> text snippet.</li>
                         <li><code>your IP will be removed from BitNinja</code>.</li>
                         <li><code>Visitor anti-robot validation</code> text snippet.</li>
+                        <li><code>(You will be challenged by a reCAPTCHA page)</code> text.</li>
                     </ul>
                 </ul>
             </ul>
@@ -430,7 +465,25 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page contains <code>by CdnNsWAF Application Gateway</code> text snippet.</li>
+                    <li>Blocked response page contains <code>CdnNsWAF Application Gateway</code> text snippet.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Cerber (WordPress)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains:
+                    <ul>
+                        <li><code>We're sorry, you are not allowed to proceed</code> text snippet.</li>
+                        <li><code>Your request looks suspicious or similar to automated requests from spam posting software</code> warning.</li>
+                    </ul> 
                 </ul>
             </ul>
         </td>
@@ -485,14 +538,18 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Cloudbric
+            Cloudbric Firewall
         </td>
         <td>
             <ul>
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response content has <code>Cloudbric</code> and <code>Malicious Code Detected</code> texts.</li>
+                    <li>Response content contains:</li>
+                    <ul>
+                        <li><code>Malicious Code Detected</code> heading.</li>
+                        <li><code>Your request was blocked by Cloudbric</code> text snippet.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -524,7 +581,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response content contains <code>Error from cloudfront</code> error upon malicious request.</li>
+                    <li>Blocked response content contains <code>Generated by cloudfront (CloudFront)</code> error upon malicious request.</li>
                 </ul>
             </ul>
         </td>
@@ -538,7 +595,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>Protected by COMODO WAF</code> value.</li>
+                    <li><code>Server</code> header contains <code>Protected by COMODO WAF</code> value.</li>
                 </ul>
             </ul>
         </td>
@@ -552,7 +609,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response content contains value<br> <code>This site is protected by CrawlProtect</code>.</li>
+                    <li>Blocked response content contains value<br> <code>This site is protected by CrawlProtect !!!</code> upon malicious request.</li>
                 </ul>
             </ul>
         </td>
@@ -1653,24 +1710,6 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>Your access to this site has been limited</code> text warning.</li>
                         <li><code>This response was generated by Wordfence</code> text snippet.</li>
                     </ul>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            WordPress Cerber
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Moderate</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Blocked response page contains:
-                    <ul>
-                        <li><code>We're sorry, you are not allowed to proceed</code> text snippet.</li>
-                        <li><code>Your request looks suspicious or similar to automated requests from spam posting software</code> warning.</li>
-                    </ul> 
                 </ul>
             </ul>
         </td>
