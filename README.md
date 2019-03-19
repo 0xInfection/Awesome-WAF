@@ -1026,27 +1026,6 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            NinjaFirewall (NinTechNet)
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Moderate</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Response page title contains <code>NinjaFirewall: 403 Forbidden</code>.</li>
-                    <li>Response page contains:
-                        <ul>
-                            <li><code>For security reasons, it was blocked and logged</code> text snippet.</li>
-                            <li><code>NinjaFirewall</code> keyword.</li>
-                        </ul>
-                    </li>
-                    <li>Returns a <code>403 Forbidden</code> response upon malicious requests.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
             NetScaler (Citrix)
         </td>
         <td>
@@ -1087,6 +1066,27 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            NinjaFirewall (NinTechNet)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page title contains <code>NinjaFirewall: 403 Forbidden</code>.</li>
+                    <li>Response page contains:
+                        <ul>
+                            <li><code>For security reasons, it was blocked and logged</code> text snippet.</li>
+                            <li><code>NinjaFirewall</code> keyword in title.</li>
+                        </ul>
+                    </li>
+                    <li>Returns a <code>403 Forbidden</code> response upon malicious requests.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             NSFocus Firewall
         </td>
         <td>
@@ -1109,8 +1109,13 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Response headers contain header <code>X-Engine</code> field with value <code>onMessage Shield</code>.</li>
-                    <li>Response page may contain <code>onMessage SHIELD</code> keyword.</li>
-                    <li>You might encounter response page with<br><code>This site is protected by an enhanced security system to ensure a safe browsing experience</code>.</li>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>Blackbaud K-12 conducts routine maintenance</code> keyword.</li>
+                        <li><code>This site is protected by an enhanced security system</code>.</li>
+                        <li>Reference to <code>https://status.blackbaud.com</code> URL.</li>
+                        <li>Reference to <code>https://maintenance.blackbaud.com</code> URL.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -1121,10 +1126,10 @@ Wanna fingerprint WAFs? Lets see how.
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page contains the following text snippet<br> <code>has been blocked in accordance with company policy</code>.</li>
+                    <li>Blocked response page contains <code>Virus/Spyware Download Blocked</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -1216,6 +1221,10 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Response headers contain <code>rbzid=</code> header field name.</li>
                     <li>Response headers field values might contain <code>Reblaze Secure Web Gateway</code> text snippet.</li>
+                    <li>Response page contains:</li>
+                    <ul>
+                        <li><code>Current session has been terminated</code> text.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -1289,7 +1298,12 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>Safe3</code> keyword.</li>
+                    <li>Response headers contain:</li>
+                    <ul>
+                        <li><code>X-Powered-By</code> header has field value <code>Safe3WAF</code>.</li>
+                        <li><code>Server</code> header contains field value set to <code>Safe3 Web Firewall</code>.</li>
+                    </ul>
+                    <li>Response page contains <code>Safe3waf</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -1308,6 +1322,20 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>WAF/2.0</code> keyword.</li>
                         <li><code>safedog</code> field value.</li>
                     </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SecureIIS (eEye)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains value set to <code>Secure Entry Server</code>.</li>
                 </ul>
             </ul>
         </td>
