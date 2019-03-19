@@ -1755,6 +1755,25 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            WebARX Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Restricted to specifically WordPress sites only.</li>
+                    <li>Blocked response page contains: </li>
+                    <ul>
+                        <li><code>This request has been blocked by WebARX Web Application Firewall</code> text.</li>
+                        <li>Reference to <code>/wp-content/plugins/webarx/</code> directory where it is installed.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             WebKnight (Aqtronix)
         </td>
         <td>
@@ -1810,6 +1829,21 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            WTS Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page title has <code>WTS-WAF</code> keyword.</li>
+                    <li><code>Server</code> header contains <code>wts</code> as value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>   
+    <tr>
+        <td>
             XLabs Security WAF
         </td>
         <td>
@@ -1842,10 +1876,12 @@ Wanna fingerprint WAFs? Lets see how.
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Headers contain the <code>yundun</code> keyword.</li>
+                    <li><code>Server</code> header contains <code>YUNDUN</code> as value.</li>
+                    <li><code>X-Cache</code> header field contains <code>YUNDUN</code> as value.</li>
+                    <li>Response page contains <code>Blocked by YUNDUN Cloud WAF</code> text snippet.</li>
                 </ul>
             </ul>
         </td>
@@ -1875,7 +1911,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page contains reference to <code>zenedge/assets/</code> directory.</li>
-                    <li>Headers contain the <code>ZENEDGE</code> keyword.</li>
+                    <li><code>Server</code> header contain <code>ZENEDGE</code> keyword.</li>
                 </ul>
             </ul>
         </td>
