@@ -930,6 +930,26 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            LiteSpeed Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header has value set to <code>LiteSpeed</code>.</li>
+                    <li><code>Response page contains:</code></li>
+                    <ul>
+                        <li><code>Proudly powered by LiteSpeed Web Server</code> text.</li>
+                        <li>Reference to <code>http://www.litespeedtech.com/error-page</code></li>
+                        <li><code>Access to resource on this server is denied.</code></li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Malcare (Inactiv)
         </td>
         <td>
@@ -1692,9 +1712,25 @@ Wanna fingerprint WAFs? Lets see how.
                     <li>Malicious request returns <code>404 Not Found</code> Error.</li>
                     <li>Response page contains:</li>
                     <ul>
-                        <li><code>Error 403 Naughty, not Nice!</code> as heading.</li>
-                        <li><code>Varnish cache Server</code> keyword.</li>
                         <li><code>Request rejected by xVarnish-WAF</code> text snippet.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Varnish Cache Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains:</li>
+                    <ul>
+                        <li><code>Error 403 Naughty, not Nice!</code> as heading.</li>
+                        <li><code>Varnish cache Server</code> as text.</li>
                     </ul>
                 </ul>
             </ul>
