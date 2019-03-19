@@ -639,6 +639,12 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Response headers contain field value <code>X-Distil-CS</code> in all requests.</li>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>Pardon Our Interruption...</code> heading.</li>
+                        <li><code>You have disabled javascript in your browser.</code> text snippet.</li>
+                        <li><code>Something about your browser made us think that you are a bot.</code> text.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -711,6 +717,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Difficult</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
+                    <li>Blocked response page returns <code>Invalid URI</code> generally.</li>
                     <li>Blocked response content contains value <code>Invalid GET Request</code> upon malicious GET queries.</li>
                     <li>Blocked POST type queries contain <code>Invalid POST Request</code> in response content.</li>
                 </ul>
@@ -726,25 +733,13 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response content contains value <code>.fgd_icon</code> keyword.</li>
                     <li>Response headers contain <code>FORTIWAFSID=</code> on malicious requests.</li>
-                    <li><code>Set-Cookie</code> header has cookie field <code>cookiesession1=</code>.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            GreyWizard Firewall
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Easy</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Blocked response page content contains:<br><code>We've detected attempted attack or non standard traffic from your IP address</code> text snippet.</li>
-                    <li>Blocked response page title contains <code>Grey Wizard</code> keyword.</li>
-                    <li>Response headers contain <code>greywizard</code> keyword.</li>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li>Reference to <code>.fgd_icon</code> image icon.</li>
+                        <li><code>Server Unavailable!</code> as heading.</li>
+                        <li><code>Server unavailable. Please visit later.</code> as text.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -759,6 +754,27 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page contains value<br> <code>Access Denied - GoDaddy Website Firewall</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            GreyWizard Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page conatins:
+                        <ul>
+                            <li><code>Grey Wizard</code> as title.</li>
+                            <li><code>Contact the website owner or Grey Wizard</code> text snippet.</li>
+                            <li><code>We've detected attempted attack or non standard traffic from your IP address</code> text snippet.</li>
+                        </ul>
+                    </li>
+                    <li>Response headers may contain <code>greywizard</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -793,7 +809,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Imperva SecureSphere
+            Incapsula (Imperva)
         </td>
         <td>
             <ul>
@@ -858,9 +874,10 @@ Wanna fingerprint WAFs? Lets see how.
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
+                    <li>Blocked response page has image displaying <code>JANUSEC</code> name and logo.</li>
                     <li>Blocked response page displays <code>Janusec Application Gateway</code> on malicious requests.</li>
                 </ul>
             </ul>
@@ -973,6 +990,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
+                    <li>Blocked response page conatins <code>This Request Has Been Blocked By NAXSI</code>.</li>
                     <li>Response headers contain unusual field <code>X-Data-Origin</code> with value <code>naxsi/waf</code> keyword.</li>
                 </ul>
             </ul>
@@ -1057,7 +1075,12 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>newdefend</code> keyword.</li>
+                    <li>Response page contains:</li>
+                    <ul>
+                        <li>Reference to <code>http://www.newdefend.com/feedback/misinformation/</code> URL.</li>
+                        <li>Reference to <code>/nd_block/</code> directory.</li>
+                    </ul>
+                    <li><code>Server</code> header contains <code>NewDefend</code> keyword.</li>
                 </ul>
             </ul>
         </td>
