@@ -2234,9 +2234,10 @@ Examples:
 
 #### Unicode Separators:
 - Every browser has their own specific charset of separators.
-- We can fuzz charset range of `0x00` to `0xFF` and get the set of separators for each browser.  
+- We can fuzz charset range of `0x00` to `0xFF` and get the set of separators for each browser.
+- We can use these separators in places where a space is required.
 
-Here is a compiled list of separators:
+Here is a compiled list of separators by [@Masato Kinugawa](https://github.com/masatokinugawa):
 - IExplorer: `0x09`, `0x0B`, `0x0C`, `0x20`, `0x3B`  
 - Chrome: `0x09`, `0x20`, `0x28`, `0x2C`, `0x3B`  
 - Safari: `0x2C`, `0x3B`  
@@ -2244,7 +2245,7 @@ Here is a compiled list of separators:
 - Opera: `0x09`, `0x20`, `0x2C`, `0x3B`  
 - Android: `0x09`, `0x20`, `0x28`, `0x2C`, `0x3B` 
 
-An exotic payload: 
+An exotic payload example: 
 ```
 <a/onmouseover[\x0b]=location='\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3A\x61\x6C\x65\x72\x74\x28\x30\x29\x3B'>pwn3d
 ```
