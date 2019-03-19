@@ -1328,7 +1328,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            SecureIIS (eEye)
+            Secure Entry Firewall
         </td>
         <td>
             <ul>
@@ -1351,9 +1351,28 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Response page contains either of the following text snippet:</li>
                     <ul>
+                        <li>Image displaying <code>beyondtrust</code> logo.</li>
                         <li><code>SecureIIS Web Server Protection.</code></li>
                         <li>Reference to <code>http://www.eeye.com/SecureIIS/</code> URL.</li>
                         <li><code>SecureIIS Error</code> text snippet.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SecureSphere (Imperva)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains either of the following text snippet:</li>
+                    <ul>
+                        <li>Error in <code>h2</code> text.</li>
+                        <li><code>Contact support for additional information.</code> text.</li>
                     </ul>
                 </ul>
             </ul>
@@ -1396,7 +1415,13 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Difficult</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page contains<br> <code>Something in the URL, Form or Cookie data wasn't appropriate</code> text snippet.</li>
+                    <li>Blocked response page contains: 
+                    <ul>
+                        <li><code>You were blocked by the Shield.</code> text.</li>
+                        <li><code>Something in the URL, Form or Cookie data wasn't appropriate</code> text snippet.</li>
+                        <li><code>Warning: You have {number} remaining transgression(s) against this site</code>.</li>
+                        <li><code>Seriously stop repeating what you are doing or you will be locked out</code>.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -1428,6 +1453,7 @@ Wanna fingerprint WAFs? Lets see how.
                     <ul>
                         <li><code>Powered by SiteGuard</code> text snippet.</li>
                         <li><code>The server refuse to browse the page.</code> text snippet.</li>
+                        <li><code>The URL may not be correct. Please confirm the value.</code></li>
                     </ul> 
                 </ul>
             </ul>
@@ -1444,7 +1470,8 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Blocked response page source contains the following:</li>
                     <ul>
-                        <li><code>SiteLock Incident ID</code> text snippet.</li>
+                        <li>Reference to <code>www.sitelock.com</code> URL.</li>
+                        <li><code>Sitelock is leader in Business Website Security Services.</code> text.</li>
                         <li><code>sitelock-site-verification</code> keyword.</li>
                         <li><code>sitelock_shield_logo</code> image.</li>
                     </ul>
@@ -1461,11 +1488,11 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>SonicWALL</code> keyword value.</li>
+                    <li><code>Server</code> header contain <code>SonicWALL</code> keyword value.</li>
                     <li>Blocked response page contains either of the following text snippet:</li>
                     <ul>
+                        <li>Image displaying <code>Dell</code> logo.</li>
                         <li><code>This request is blocked by the SonicWALL.</code></li>
-                        <li><code>#shd</code> or <code>#nsa_banner</code> hashtags.</li>
                         <li><code>Web Site Blocked</code> text snippet.</li>
                     </ul>
                 </ul>
@@ -1511,9 +1538,10 @@ Wanna fingerprint WAFs? Lets see how.
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
+                    <li>Contains image displaying <code>StackPath</code> logo.</li>
                     <li>Blocked response page contains<br> <code>You performed an action that triggered the service and blocked your request</code>.</li>
                 </ul>
             </ul>
@@ -1627,8 +1655,13 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers might contain <code>Rejected-by-URLScan</code> field value.</li>
-                    <li>Blocked response page contains <code>Rejected-by-URLScan</code> text snippet.</li>
+                    <li></li>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>Rejected-by-URLScan</code> text snippet.</li>
+                        <li><code>Server Erro in Application</code> as heading.</li>
+                        <li><code>Module: IIS Web Core</code> in table.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -1656,8 +1689,13 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response page contains <code>Request rejected by xVarnish-WAF</code> text snippet.</li>
                     <li>Malicious request returns <code>404 Not Found</code> Error.</li>
+                    <li>Response page contains:</li>
+                    <ul>
+                        <li><code>Error 403 Naughty, not Nice!</code> as heading.</li>
+                        <li><code>Varnish cache Server</code> keyword.</li>
+                        <li><code>Request rejected by xVarnish-WAF</code> text snippet.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -1691,21 +1729,26 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>nginx-wallarm</code> text snippet.</li>
+                    <li><code>Server</code> headers contain <code>nginx-wallarm</code> value.</li>
                 </ul>
             </ul>
         </td>
     </tr>
     <tr>
         <td>
-            WatchGuard Firewall
+            WatchGuard IPS
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>WatchGuard</code> header field value.</li>
+                    <li><code>Server</code> headers contain <code>WatchGuard</code> header field value.</li>
+                    <li>Blocked response page contains: </li>
+                    <ul>
+                        <li><code>Request denied by WatchGuard Firewall</code> text.</li>
+                        <li><code>WatchGuard Technologies Inc.</code> as footer.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
