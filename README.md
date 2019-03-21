@@ -192,6 +192,22 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Anyu Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains <code>Sorry! your access has been intercepted by AnYu</code></li>
+                    <li>Blocked response page contains <code>AnYu- the green channel</code> text.</li>
+                    <li>Response headers may contain unusual header <code>WZWS-RAY</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Application Security Manager (F5 Networks)
         </td>
         <td>
