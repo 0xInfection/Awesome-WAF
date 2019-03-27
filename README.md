@@ -78,6 +78,10 @@ Wanna fingerprint WAFs? Lets see how.
 
 <table>
     <tr>
+        <td align="center"><b>WAF</b></td>
+        <td align="center"><b>Fingerprints</b></td>
+    </tr>
+    <tr>
         <td>
             360 Firewall
         </td>
@@ -1597,7 +1601,7 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>Access Denied</code> and <code>Sucuri Website Firewall</code> texts.</li>
                         <li>Email <code>cloudproxy@sucuri.net</code>.</li>
                     </ul>
-                    <li>Returns <code>403 Forbidden</code> response code upon blocking.</li>
+                    <li>Response headers contains <code>X-Sucuri-ID</code> header along with normal requests.</li>
                 </ul>
             </ul>
         </td>
@@ -1948,6 +1952,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Blocked response page contains reference to <code>zenedge/assets/</code> directory.</li>
                     <li><code>Server</code> header contain <code>ZENEDGE</code> keyword.</li>
+                    <li>Blocked response headers may contain <code>X-Zen-Fury</code> header.</li>
                 </ul>
             </ul>
         </td>
@@ -2224,6 +2229,114 @@ __Obfuscated__:
 ```
 <iframe  src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>
 ```
+
+__13. Other Formats__  
+- Many web applications support different encoding types (see below).
+- Obfuscating our playload to a format not supported by WAF but the server can smuggle our payload in.
+
+__Case:__ IIS  
+- IIS6, 7.5, 8 and 10 (ASPX v4.x) allow __IBM037__ character interpretations.
+- We can encode our payload and send the encoded parameters with the query.
+
+Original Request:
+```
+POST /sample.aspx?id1=something HTTP/1.1
+HOST: victim.com
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Content-Length: 41
+
+id2='union all select * from users--
+```
+Obfuscated Request + URL Encoding:
+```
+POST /sample.aspx?%89%84%F1=%A2%96%94%85%A3%88%89%95%87 HTTP/1.1
+HOST: victim.com
+Content-Type: application/x-www-form-urlencoded; charset=ibm037
+Content-Length: 115
+
+%89%84%F2=%7D%A4%95%89%96%95%40%81%93%93%40%A2%85%93%85%83%A3%40%5C%40%86%99%96%94%40%A4%A2%85%99%A2%60%60
+```
+
+The following table shows the support of different character encodings on the tested systems (when messages could be obfuscated using them):
+
+<table>
+    <tr>
+        <td width="20%" align="center"><b>Target</b></td>
+        <td width="35%" align="center"><b>Encodings</b></td>
+        <td width="55%" align="center"><b>Notes</b></td>
+    </tr>
+    <tr>
+        <td>Nginx, uWSGI-Django-Python3</td>
+        <td>IBM037, IBM500, cp875, IBM1026, IBM273</td>
+        <td>
+            <ul>
+                <li>Query string and body need to be encoded.</li>
+                <li>Url-decoded parameters in query string and body.</li>
+                <li>Equal sign and ampersand needed to be encoded as well (no url-encoding).</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Nginx, uWSGI-Django-Python2</td>
+        <td>IBM037, IBM500, cp875, IBM1026, utf-16, utf-32, utf-32BE, IBM424</td>
+        <td>
+            <ul>
+                <li>Query string and body need to be encoded.</li>
+                <li>Url-decoded parameters in query string and body afterwards.</li>
+                <li>Equal sign and ampersand should not be encoded in any way.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Apache-TOMCAT8-JVM1.8-JSP</td>
+        <td>IBM037, IBM500, IBM870, cp875, IBM1026,
+        IBM01140, IBM01141, IBM01142, IBM01143, IBM01144,
+        IBM01145, IBM01146, IBM01147, IBM01148, IBM01149,
+        utf-16, utf-32, utf-32BE, IBM273, IBM277, IBM278,
+        IBM280, IBM284, IBM285, IBM290, IBM297, IBM420,
+        IBM424, IBM-Thai, IBM871, cp1025</td>
+        <td>
+            <ul>
+                <li>Query string in its original format (could be url-encoded as usual).</li>
+                <li>Body could be sent with/without url-encoding.</li>
+                <li>Equal sign and ampersand should not be encoded in any way.</li>
+            </ul>
+        </td>           
+    </tr>
+    <tr>
+        <td>Apache-TOMCAT7-JVM1.6-JSP</td>
+        <td>IBM037, IBM500, IBM870, cp875, IBM1026,
+        IBM01140, IBM01141, IBM01142, IBM01143, IBM01144,
+        IBM01145, IBM01146, IBM01147, IBM01148, IBM01149,
+        utf-16, utf-32, utf-32BE, IBM273, IBM277, IBM278,
+        IBM280, IBM284, IBM285, IBM297, IBM420, IBM424,
+        IBM-Thai, IBM871, cp1025</td>
+        <td>
+            <ul>
+                <li>Query string in its original format (could be url-encoded as usual).</li>
+                <li>Body could be sent with/without url-encoding.</li>
+                <li>Equal sign and ampersand should not be encoded in any way.</li>
+            </ul>
+        </td> 
+    </tr>
+    <tr>
+        <td>IIS6, 7.5, 8, 10 -ASPX (v4.x)</td>
+        <td>IBM037, IBM500, IBM870, cp875, IBM1026,
+        IBM01047, IBM01140, IBM01141, IBM01142, IBM01143,
+        IBM01144, IBM01145, IBM01146, IBM01147, IBM01148,
+        IBM01149, utf-16, unicodeFFFE, utf-32, utf-32BE,
+        IBM273, IBM277, IBM278, IBM280, IBM284, IBM285,
+        IBM290, IBM297, IBM420,IBM423, IBM424, x-EBCDIC-KoreanExtended,
+        IBM-Thai, IBM871, IBM880, IBM905, IBM00924, cp1025</td>
+        <td>
+            <ul>
+                <li>Query string in its original format (could be url-encoded as usual).</li>
+                <li>Body could be sent with/without url-encoding.</li>
+                <li>Equal sign and ampersand should not be encoded in any way.</li>
+            </ul>
+        </td> 
+    </tr>
+</table>
 
 ### Browser Bugs:
 #### Charset Bugs:
@@ -2774,8 +2887,9 @@ X-Remote-Addr: 127.0.0.1
 - [Web Application Firewall (WAF) Evasion Techniques #3](https://www.secjuice.com/web-application-firewall-waf-evasion/) - By [@Secjuice](https://www.secjuice.com).
 - [XXE that can Bypass WAF](https://lab.wallarm.com/xxe-that-can-bypass-waf-protection-98f679452ce0) - By [@WallArm](https://labs.wallarm.com).
 - [SQL Injection Bypassing WAF](https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF) - By [@OWASP](https://owasp.com).
-- [How To Reverse Engineer A Web Application Firewall Using Regular Expression Reversing](https://www.sunnyhoi.com/reverse-engineer-web-application-firewall-using-regular-expression-reversing/) - By [@SunnyHoi](https://sunnyhoi.com).
-- [Bypassing Web-Application Firewalls by abusing SSL/TLS](https://0x09al.github.io/waf/bypass/ssl/2018/07/02/web-application-firewall-bypass.html) - By [@0x09AL](https://github.com/0x09al).
+- [How To Reverse Engineer A Web Application Firewall Using Regular Expression Reversing](https://www.sunnyhoi.com/reverse-engineer-web-application-firewall-using-regular-expression-reversing/) - By [@SunnyHoi](https://twitter.com/sunnyhoi).
+- [Bypassing Web-Application Firewalls by abusing SSL/TLS](https://0x09al.github.io/waf/bypass/ssl/2018/07/02/web-application-firewall-bypass.html) - By [@0x09AL](https://twitter.com/0x09al).
+- [Request Encoding to Bypass WAFs](https://www.nccgroup.trust/uk/about-us/newsroom-and-events/blogs/2017/august/request-encoding-to-bypass-web-application-firewalls/) - By [@Soroush Dalili](https://twitter.com/irsdl)
 
 ## Video Presentations
 - [WAF Bypass Techniques Using HTTP Standard and Web Servers Behavior](https://www.youtube.com/watch?v=tSf_IXfuzXk) from [@OWASP](https://owasp.org).
@@ -2817,6 +2931,7 @@ X-Remote-Addr: 127.0.0.1
 - [WAF Bypasses and PHP Exploits](presentations/WAF%20Bypasses%20and%20PHP%20Exploits%20(Slides).pdf) - A presentation about evading WAFs and developing related PHP exploits.
 - [Our Favorite XSS Filters/IDS and how to Attack Them](presentations/Our%20Favourite%20XSS%20WAF%20Filters%20And%20How%20To%20Bypass%20Them.pdf) - A presentation about how to evade XSS filters set by WAF rules from [BlackHat USA 09](https://www.blackhat.com/html/bh-us-09/)
 - [Playing Around with WAFs](presentations/Playing%20Around%20with%20WAFs.pdf) - A small presentation about WAF profiling and playing around with them from [Defcon 16](http://www.defcon.org/html/defcon-16/dc-16-post.html).
+- [A Forgotten HTTP Invisiblity Cloak](presentation/A%20Forgotten%20HTTP%20Invisibility%20Cloak.pdf) - A presentation about techniques that can be used to bypass common WAFs from [BSides Manchester](https://www.bsidesmcr.org.uk/).
 
 ## Credits & License:
 This work has been presented by [Infected Drake](https://twitter.com/0xInfection) [(0xInfection)](https://github.com/0xinfection) and is licensed under the [Apache 2.0 License](LICENSE). 
