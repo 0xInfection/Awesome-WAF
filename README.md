@@ -308,7 +308,7 @@ Wanna fingerprint WAFs? Lets see how.
                             <li>Request token ID with length from 20 to 25 between <code>RequestId</code> tag.</li>
                         </ul>
                     </li>
-                    <li><code>Server</code> header field may contain <code>awselb</code> value.</li>
+                    <li><code>Server</code> header field contains <code>awselb/2.0</code> value.</li>
                 </ul>
             </ul>
         </td>
@@ -471,7 +471,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers may contain reference to <code>BlockDos.net</code> URL.</li>
+                    <li><code>Server</code> header contains value <code>BlockDos.net</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -518,7 +518,6 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Response headers contain <code>Powered-by-ChinaCache</code> field.</li>
-                    <li>Blocked response codes contain <code>400 Bad Request</code> error upon malicious request.</li>
                 </ul>
             </ul>
         </td>
@@ -551,7 +550,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers have <code>ACE XML Gateway</code> value.</li>
+                    <li><code>Server</code> header has value <code>ACE XML Gateway</code> set.</li>
                 </ul>
             </ul>
         </td>
@@ -679,7 +678,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Response headers contain field value <code>X-DIS-Request-ID</code>.</li>
-                    <li>Response headers might contain <code>DOSarrest</code> keyword.</li>
+                    <li><code>Server</code> header contains <code>DOSarrest</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -845,7 +844,7 @@ Wanna fingerprint WAFs? Lets see how.
                         </ul>
                     <li>Normal GET request headers contain <code>visid_incap</code> value.</li>
                     <li>Response headers may contain <code>X-Iinfo</code> header field name.</li>
-                    <li><code>Set-Cookie</code> header has cookie field <code>incap_ses</code> in response headers.</li>
+                    <li><code>Set-Cookie</code> header has cookie field <code>incap_ses</code> and <code>visid_incap</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -1016,7 +1015,7 @@ Wanna fingerprint WAFs? Lets see how.
                             <li><code>One or more things in your request were suspicious</code> text snippet.</li>
                             <li><code>rules of the mod_security module</code> text snippet.</li>
                         </ul>
-                    <li>Response headers may contain <code>Mod_Security</code> or <code>NYOB</code> keywords.</li>
+                    <li><code>Server</code> header may contain <code>Mod_Security</code> or <code>NYOB</code> keywords.</li>
                 </ul>
             </ul>
         </td>
@@ -1032,6 +1031,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Blocked response page conatins <code>This Request Has Been Blocked By NAXSI</code>.</li>
                     <li>Response headers contain unusual field <code>X-Data-Origin</code> with value <code>naxsi/waf</code> keyword.</li>
+                    <li><code>Server</code> header contains <code>naxsi/waf</code> keyword value.</li>
                 </ul>
             </ul>
         </td>
@@ -1134,7 +1134,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>NSFocus</code> keyword.</li>
+                    <li><code>Server</code> header contain <code>NSFocus</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -1409,9 +1409,10 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Difficult</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response page contains either of the following text snippet:</li>
+                    <li>Response page contains the following text snippet:</li>
                     <ul>
                         <li>Error in <code>h2</code> text.</li>
+                        <li>Title contains only text as <code>Error</code>.</li>
                         <li><code>Contact support for additional information.</code> text.</li>
                     </ul>
                 </ul>
@@ -1624,6 +1625,20 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Synology Cloud WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page has <code>Copyright (c) 2019 Synology Inc. All rights reserved.</code>as text.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Tencent Cloud WAF
         </td>
         <td>
@@ -1660,8 +1675,8 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers might contain <code>F5-TrafficShield</code> keyword.</li>
-                    <li><code>ASINFO=</code> value might be detected in response headers.</li>
+                    <li><code>Server</code> might contain <code>F5-TrafficShield</code> keyword.</li>
+                    <li><code>ASINFO=</code> value might be detected in response cookies.</li>
                 </ul>
             </ul>
         </td>
