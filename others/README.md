@@ -5,7 +5,7 @@
 ```
 $ python obfu.py -h
 
-        OBFUSCTOR
+        OBFUSCATOR
 
 usage: python3 obfu.py [-h] [-s STR] [-e ENC] [-ueo] [-udi]
 
