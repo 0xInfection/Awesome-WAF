@@ -46,7 +46,7 @@ def main():
 
     # Required Options
     required.add_argument('-s', '--str', help='String to obfuscate', dest='str')
-    required.add_argument('-e', '--enc', help='Encoding type. eg: ibm037, ibm420, etc', dest='enc')
+    required.add_argument('-e', '--enc', help='Encoding type. eg: ibm037, utf16, etc', dest='enc')
 
     # Optional Arguments (main stuff and necessary)
     optional.add_argument('-ueo', help='URL Encode Output', dest='ueo', action='store_true')
