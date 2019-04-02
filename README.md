@@ -1038,6 +1038,21 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Nemesida Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page conatins <code>Suspicious activity detected. Access to the site is blocked.</code>.</li>
+                    <li>Contains reference to email <code>nwaf@{site.tld}</code></li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Netcontinuum (Barracuda)
         </td>
         <td>
@@ -1392,7 +1407,7 @@ Wanna fingerprint WAFs? Lets see how.
                     <li>Response page contains either of the following text snippet:</li>
                     <ul>
                         <li>Image displaying <code>beyondtrust</code> logo.</li>
-                        <li><code>SecureIIS Web Server Protection.</code></li>
+                        <li><code>Download SecureIIS Personal Edition</code></li>
                         <li>Reference to <code>http://www.eeye.com/SecureIIS/</code> URL.</li>
                         <li><code>SecureIIS Error</code> text snippet.</li>
                     </ul>
@@ -1615,8 +1630,10 @@ Wanna fingerprint WAFs? Lets see how.
                     <li>Response headers may contain <code>Sucuri</code> or <code>Cloudproxy</code> keywords.</li>
                     <li>Blocked response page contains the following text snippet:</li>
                     <ul>
-                        <li><code>Access Denied</code> and <code>Sucuri Website Firewall</code> texts.</li>
-                        <li>Email <code>cloudproxy@sucuri.net</code>.</li>
+                        <li><code>Access Denied - Sucuri Website Firewall</code> text.</li>
+                        <li>Reference to <code>https://sucuri.net/privacy-policy</code> URL.</li>
+                        <li>Sometimes the email <code>cloudproxy@sucuri.net</code>.</li>
+                        <li>Contains copyright notice <code>;copy {year} Sucuri Inc</code>.</li>
                     </ul>
                     <li>Response headers contains <code>X-Sucuri-ID</code> header along with normal requests.</li>
                 </ul>
@@ -2289,6 +2306,7 @@ Content-Length: 115
 ```
 
 The following table shows the support of different character encodings on the tested systems (when messages could be obfuscated using them):
+> __TIP:__ You can use [this small python script](others/obfu.py) to convert your payloads and parameters to your desired encodings.
 
 <table>
     <tr>
