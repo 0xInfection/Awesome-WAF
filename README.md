@@ -925,7 +925,7 @@ Wanna fingerprint WAFs? Lets see how.
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page displays <code>ks-waf-error.png</code> image (view source to see).</li>
@@ -942,7 +942,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Headers contain <code>AkamaiGHost</code> keyword.</li>
+                    <li><code>Server</code> header contains <code>AkamaiGHost</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -995,7 +995,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li><code>Server</code> header field contains <code>Mission Control</code> value.</li>
+                    <li><code>Server</code> header field contains <code>Mission Control Application Shield</code> value.</li>
                 </ul>
             </ul>
         </td>
