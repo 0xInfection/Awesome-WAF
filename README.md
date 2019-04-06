@@ -384,22 +384,6 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Better WP Security
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Easy</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Specific to only sites using CMS as Wordpress.</li>
-                    <li>Plugin enumeration reveals the WAF plugin presence.</li>
-                    <li>Making a GET request to <code>wp-content/plugins/better-wp-security/</code> directory yeilds<code>200 OK</code>.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
             BitNinja Firewall
         </td>
         <td>
