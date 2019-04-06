@@ -1834,7 +1834,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li><code>Server</code> headers contain <code>WatchGuard</code> header field value.</li>
+                    <li><code>Server</code> headers may contain <code>WatchGuard</code> field value.</li>
                     <li>Blocked response page contains: </li>
                     <ul>
                         <li><code>Request denied by WatchGuard Firewall</code> text.</li>
