@@ -532,10 +532,10 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response page has refernce to:
+                    <li>Response page has reference to:
                         <ul>
                             <li><code>365cyd.com</code> or <code>365cyd.net</code> URL.</li>
-                            <li>Help page at <code>http://help.365cyd.com/cyd-error-help.html?code=403</code>.</li>
+                            <li>Reference to help page at <code>http://help.365cyd.com/cyd-error-help.html?code=403</code>.</li>
                         </ul>
                     </li>
                 </ul>
@@ -569,6 +569,9 @@ Wanna fingerprint WAFs? Lets see how.
                     <ul>
                         <li><code>Malicious Code Detected</code> heading.</li>
                         <li><code>Your request was blocked by Cloudbric</code> text snippet.</li>
+                        <li>Reference to <code>https://cloudbric.zendesk.com</code> URL.
+                        <li><code>Cloudbric Help Center</code> text.</li>
+                        <li>Page title starting with <code>Cloudbric | ERROR!</code>.</li>
                     </ul>
                 </ul>
             </ul>
