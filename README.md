@@ -322,7 +322,8 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>Yunjiasu-ngnix</code> value.</li>
+                    <li><code>Server</code> header may contain <code>Yunjiasu-nginx</code> value.</li>
+                    <li><code>Server</code> header may contain <code>Yunjiasu</code> value.
                 </ul>
             </ul>
         </td>
