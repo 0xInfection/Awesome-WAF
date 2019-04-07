@@ -616,6 +616,8 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
+                    <li>Response cookies might contain <code>crawlprotect</code> cookie name.</li>
+                    <li>Block Page title has <code>CrawlProtect</code> keyword in it.</li>
                     <li>Blocked response content contains value<br> <code>This site is protected by CrawlProtect !!!</code> upon malicious request.</li>
                 </ul>
             </ul>
