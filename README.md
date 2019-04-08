@@ -783,7 +783,7 @@ Wanna fingerprint WAFs? Lets see how.
                             <li><code>We've detected attempted attack or non standard traffic from your IP address</code> text snippet.</li>
                         </ul>
                     </li>
-                    <li>Response headers may contain <code>greywizard</code> keyword.</li>
+                    <li><code>Server</code> header contain <code>greywizard</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -848,7 +848,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Headers contain <code>imunify360</code> keyword.</li>
+                    <li><code>Server</code> header contain <code>imunify360-webshield</code> keyword.</li>
                     <li>Response page contains:</li>
                     <ul>
                         <li><code>Powered by Imunify360</code> text snippet.</li>
@@ -902,8 +902,8 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page contains reference to <code>static.jiasule.com/static/js/http_error.js</code> URL.</li>
-                    <li><code>Set-Cookie</code> header has cookie field <code>__jsluid=</code> in response headers.</li>
-                    <li>Response headers have <code>jiasule-WAF</code> or <code>jsl_tracking</code> keywords.</li>
+                    <li><code>Set-Cookie</code> header has cookie field <code>__jsluid=</code> or <code>jsl_tracking</code>in response headers.</li>
+                    <li><code>Server</code> header has <code>jiasule-WAF</code> keywords.</li>
                     <li>Blocked response content has <code>notice-jiasule</code> keyword.</li>
                 </ul>
             </ul>
@@ -1687,6 +1687,21 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li><code>Server</code> might contain <code>F5-TrafficShield</code> keyword.</li>
                     <li><code>ASINFO=</code> value might be detected in response cookies.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            TransIP Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain unique header <code>X-TransIP-Backend</code>.</li>
+                    <li>Response headers contain another header <code>X-TransIP-Balancer</code>.</li>
                 </ul>
             </ul>
         </td>
