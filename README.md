@@ -1178,6 +1178,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page contains <code>Virus/Spyware Download Blocked</code>.</li>
+                    <li>Response page might contain <code>Palo Alto Next Generation Security Platform</code> text snippet.</li>
                 </ul>
             </ul>
         </td>
@@ -1267,11 +1268,13 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers contain <code>rbzid=</code> header field name.</li>
-                    <li>Response headers field values might contain <code>Reblaze Secure Web Gateway</code> text snippet.</li>
+                    <li>Cookies in response headers contain <code>rbzid=</code> header field name.</li>
+                    <li><code>Server</code> field value might contain <code>Reblaze Secure Web Gateway</code> text snippet.</li>
                     <li>Response page contains:</li>
                     <ul>
+                        <li><code>Access Denied (403)</code> in bold.</li>
                         <li><code>Current session has been terminated</code> text.</li>
+                        <li><code>For further information, do not hesitate to contact us</code>.</li>
                     </ul>
                 </ul>
             </ul>
