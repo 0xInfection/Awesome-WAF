@@ -1887,10 +1887,44 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>AQTRONIX WebKnight</code> text snippet.</li>
                     </ul>
                     <li>Blocked response code returned is <code>999 No Hacking</code>. :p</li>
+                    <li>Blocked response code returned is also <code>404 Hack Not Found</code>. :p</li>
                 </ul>
             </ul>
         </td>
     </tr>
+    <tr>
+        <td>
+            WebSEAL (IBM)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contain <code>WebSEAL</code> keyword.</li>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li><code>This is a WebSEAL error message template file</code> text.</li>
+                        <li><code>WebSEAL server received an invalid HTTP request</code> text snippet.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            WebTotem
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains <code>The current request was blocked by WebTotem</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>    
     <tr>
         <td>
             West263 Firewall
