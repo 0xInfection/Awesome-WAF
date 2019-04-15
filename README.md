@@ -2015,6 +2015,7 @@ Wanna fingerprint WAFs? Lets see how.
                     <li><code>Server</code> header contains <code>YUNDUN</code> as value.</li>
                     <li><code>X-Cache</code> header field contains <code>YUNDUN</code> as value.</li>
                     <li>Response page contains <code>Blocked by YUNDUN Cloud WAF</code> text snippet.</li>
+                    <li>Blocked response page contains reference to <code>yundun.com/yd_http_error/</code> URL.</li>
                 </ul>
             </ul>
         </td>
@@ -2028,7 +2029,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page contains image class reference to <code>.yunsuologo</code>.</li>
+                    <li>Blocked response page contains image class reference to <code>yunsuologo</code>.</li>
                     <li>Response headers contain the <code>yunsuo_session</code> field name.</li>
                 </ul>
             </ul>
@@ -2043,7 +2044,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page contains reference to <code>zenedge/assets/</code> directory.</li>
+                    <li>Blocked response page contains reference to <code>/__zenedge/assets/</code> directory.</li>
                     <li><code>Server</code> header contain <code>ZENEDGE</code> keyword.</li>
                     <li>Blocked response headers may contain <code>X-Zen-Fury</code> header.</li>
                 </ul>
