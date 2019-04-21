@@ -1170,6 +1170,22 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            OpenResty Lua WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains <code>openresty/{version}</code> keyword.</li>
+                    <li>Blocked response page contains <code>openresty/{version}</code> text.</li>
+                    <li>Blocked response code returned is <code>406 Not Acceptable</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Palo Alto Firewall
         </td>
         <td>
