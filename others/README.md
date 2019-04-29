@@ -19,11 +19,9 @@ Optional Arguments:
 ```
 ### Example Usage:
 ```
-python3 obfu.py -s param=<svg/onload=prompt()// -e ibm037 -ueo
+$ python3 obfu.py -s 'param=<svg/onload=prompt()//' -e ibm037 -ueo
 ```
 ```
-$ python obfu.py -s 'param=<svg/onload=prompt()//' -e ibm037 -ueo
-
         OBFUSCATOR
 
 Input: param=<svg/onload=prompt()//
