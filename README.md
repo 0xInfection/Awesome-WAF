@@ -547,25 +547,6 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Yunaq Chuangyu
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Moderate</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Response page has reference to:
-                        <ul>
-                            <li><code>365cyd.com</code> or <code>365cyd.net</code> URL.</li>
-                            <li>Reference to help page at <code>http://help.365cyd.com/cyd-error-help.html?code=403</code>.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
             Cisco ACE XML Gateway
         </td>
         <td>
@@ -713,7 +694,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Applicure DotDefender
+            DotDefender
         </td>
         <td>
             <ul>
@@ -899,7 +880,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Microsoft ISA Server
+            ISA Server
         </td>
         <td>
             <ul>
@@ -911,20 +892,6 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>The ISA Server denied the specified Uniform Resource Locator (URL)</code> text snippet.</li>
                         <li><code>The server denied the specified Uniform Resource Locator (URL). Contact the server administrator.</code> text snippet</li>
                     </ul>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Nexusguard Application Wall
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Easy</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Blocked response page has reference to <code>speresources.nexusguard.com/wafpage/index.html</code> URL.</li>
                 </ul>
             </ul>
         </td>
@@ -1077,6 +1044,7 @@ Wanna fingerprint WAFs? Lets see how.
                     <li>Blocked response page conatins <code>This Request Has Been Blocked By NAXSI</code>.</li>
                     <li>Response headers contain unusual field <code>X-Data-Origin</code> with value <code>naxsi/waf</code> keyword.</li>
                     <li><code>Server</code> header contains <code>naxsi/waf</code> keyword value.</li>
+                    <li>Blocked response page may contain <code>NAXSI blocked information</code> error code.</li>
                 </ul>
             </ul>
         </td>
@@ -1112,21 +1080,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            NevisProxy (AdNovum)
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Moderate</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Response header cookies contain <code>Navajo</code> keyword.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            NetScaler (Citrix)
+            NetScaler AppFirewall
         </td>
         <td>
             <ul>
@@ -1147,6 +1101,20 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            NevisProxy (AdNovum)
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response header cookies contain <code>Navajo</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             NewDefend
         </td>
         <td>
@@ -1160,6 +1128,20 @@ Wanna fingerprint WAFs? Lets see how.
                         <li>Reference to <code>/nd_block/</code> directory.</li>
                     </ul>
                     <li><code>Server</code> header contains <code>NewDefend</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Nexusguard Application Wall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page has reference to <code>speresources.nexusguard.com/wafpage/index.html</code> URL.</li>
                 </ul>
             </ul>
         </td>
@@ -2067,6 +2049,25 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page contains reference to <code>http://admin.dbappwaf.cn/index.php/Admin/ClientMisinform/</code> site URL.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Yunaq Chuangyu
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page has reference to:
+                        <ul>
+                            <li><code>365cyd.com</code> or <code>365cyd.net</code> URL.</li>
+                            <li>Reference to help page at <code>http://help.365cyd.com/cyd-error-help.html?code=403</code>.</li>
+                        </ul>
+                    </li>
                 </ul>
             </ul>
         </td>
