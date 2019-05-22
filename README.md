@@ -161,7 +161,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Aliyundun Firewall
+            Aliyundun
         </td>
         <td>
             <ul>
@@ -196,7 +196,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Anyu Firewall
+            Anyu
         </td>
         <td>
             <ul>
@@ -228,7 +228,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Approach Firewall
+            Approach
         </td>
         <td>
             <ul>
@@ -288,6 +288,26 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Astra Protection
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page content may contain:</li>
+                        <ul>
+                            <li><code>Sorry, this is not allowed.</code> in <code>h1</code>.</li>
+                            <li><code>our website protection system has detected an issue with your IP address and wont let you proceed any further</code> text snippet.</li>
+                            <li>Reference to <code>www.getastra.com/assets/images/</code> URL.</li>
+                        </ul>
+                    <li>Response cookies has field value <code>cz_astra_csrf_cookie</code> in response headers.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             AWS (Amazon)
         </td>
         <td>
@@ -330,7 +350,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Barikode Firewall
+            Barikode
         </td>
         <td>
             <ul>
@@ -384,7 +404,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            BitNinja Firewall
+            BitNinja
         </td>
         <td>
             <ul>
@@ -463,6 +483,24 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            BulletProof Security Pro
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains:
+                    <ul>
+                        <li><code>div</code> with id as <code>bpsMessage</code> text snippet.</li>
+                        <li><code>If you arrived here due to a search or clicking on a link click your Browser's back button to return to the previous page.</code> text snippet.</li>
+                    </ul> 
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             CDN NS Application Gateway
         </td>
         <td>
@@ -495,7 +533,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            ChinaCache Firewall
+            ChinaCache
         </td>
         <td>
             <ul>
@@ -509,7 +547,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Chuangyu WAF
+            Yunaq Chuangyu
         </td>
         <td>
             <ul>
@@ -542,7 +580,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Cloudbric Firewall
+            Cloudbric
         </td>
         <td>
             <ul>
@@ -595,7 +633,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Comodo Firewall
+            Comodo cWatch
         </td>
         <td>
             <ul>
@@ -625,7 +663,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Deny-All Firewall
+            Deny-All
         </td>
         <td>
             <ul>
@@ -640,7 +678,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Distil Firewall
+            Distil Web Protection
         </td>
         <td>
             <ul>
@@ -675,7 +713,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            dotDefender
+            Applicure DotDefender
         </td>
         <td>
             <ul>
@@ -728,14 +766,14 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Blocked response page returns <code>Invalid URI</code> generally.</li>
                     <li>Blocked response content contains value <code>Invalid GET Request</code> upon malicious GET queries.</li>
-                    <li>Blocked POST type queries contain <code>Invalid POST Request</code> in response content.</li>
+                    <li>Blocked POST type queries contain <code>Invalid Data</code> in response content.</li>
                 </ul>
             </ul>
         </td>
     </tr>
     <tr>
         <td>
-            FortiWeb Firewall
+            Fortinet FortiWeb
         </td>
         <td>
             <ul>
@@ -755,7 +793,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            GoDaddy Firewall
+            GoDaddy
         </td>
         <td>
             <ul>
@@ -769,7 +807,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            GreyWizard Firewall
+            GreyWizard
         </td>
         <td>
             <ul>
@@ -790,7 +828,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            HyperGuard Firewall
+            HyperGuard
         </td>
         <td>
             <ul>
@@ -861,7 +899,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            ISAServer
+            Microsoft ISA Server
         </td>
         <td>
             <ul>
@@ -873,6 +911,20 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>The ISA Server denied the specified Uniform Resource Locator (URL)</code> text snippet.</li>
                         <li><code>The server denied the specified Uniform Resource Locator (URL). Contact the server administrator.</code> text snippet</li>
                     </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Nexusguard Application Wall
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page has reference to <code>speresources.nexusguard.com/wafpage/index.html</code> URL.</li>
                 </ul>
             </ul>
         </td>
@@ -894,7 +946,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Jiasule Firewall
+            Jiasule
         </td>
         <td>
             <ul>
@@ -911,7 +963,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            KnownSec Firewall
+            KnownSec
         </td>
         <td>
             <ul>
@@ -939,7 +991,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            LiteSpeed Firewall
+            LiteSpeed
         </td>
         <td>
             <ul>
@@ -1031,7 +1083,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Nemesida Firewall
+            Nemesida
         </td>
         <td>
             <ul>
@@ -1095,7 +1147,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            NewDefend Firewall
+            NewDefend
         </td>
         <td>
             <ul>
@@ -1135,7 +1187,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            NSFocus Firewall
+            NSFocus
         </td>
         <td>
             <ul>
@@ -1186,7 +1238,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Palo Alto Firewall
+            Palo Alto
         </td>
         <td>
             <ul>
@@ -1201,7 +1253,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            PerimeterX Firewall
+            PerimeterX
         </td>
         <td>
             <ul>
@@ -1215,7 +1267,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Profense Firewall
+            Profense
         </td>
         <td>
             <ul>
@@ -1277,7 +1329,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Reblaze Firewall
+            Reblaze
         </td>
         <td>
             <ul>
@@ -1337,7 +1389,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Sabre Firewall
+            Sabre
         </td>
         <td>
             <ul>
@@ -1358,7 +1410,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Safe3 Firewall
+            Safe3
         </td>
         <td>
             <ul>
@@ -1377,7 +1429,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            SafeDog Firewall
+            SafeDog
         </td>
         <td>
             <ul>
@@ -1395,7 +1447,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Secure Entry Firewall
+            Secure Entry
         </td>
         <td>
             <ul>
@@ -1496,7 +1548,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            SiteGround Firewall
+            SiteGround
         </td>
         <td>
             <ul>
@@ -1569,7 +1621,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Sophos UTM Firewall 
+            Sophos UTM 
         </td>
         <td>
             <ul>
@@ -1583,7 +1635,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            SquareSpace Firewall
+            SquareSpace
         </td>
         <td>
             <ul>
@@ -1712,7 +1764,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            TransIP Firewall
+            TransIP
         </td>
         <td>
             <ul>
@@ -1799,7 +1851,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Varnish Cache Firewall
+            Varnish Cache
         </td>
         <td>
             <ul>
@@ -1817,7 +1869,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            VirusDie Firewall
+            VirusDie
         </td>
         <td>
             <ul>
@@ -1870,7 +1922,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WebARX Firewall
+            WebARX
         </td>
         <td>
             <ul>
@@ -1943,7 +1995,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>    
     <tr>
         <td>
-            West263 Firewall
+            West263
         </td>
         <td>
             <ul>
@@ -1978,7 +2030,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WTS Firewall
+            WTS
         </td>
         <td>
             <ul>
@@ -2021,7 +2073,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Yundun Firewall
+            Yundun
         </td>
         <td>
             <ul>
@@ -2038,7 +2090,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Yunsuo Firewall
+            Yunsuo
         </td>
         <td>
             <ul>
@@ -2053,7 +2105,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            ZenEdge Firewall
+            ZenEdge
         </td>
         <td>
             <ul>
