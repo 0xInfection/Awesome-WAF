@@ -2442,8 +2442,8 @@ __13. Unsupported SSL/TLS Ciphers__
 - Using a cipher to initialise a connection to server which is not supported by the WAF can do our workload.
 
 #### Technique:
-- Dig out the supported ciphers supported by the firewall (usually the vendor documentation discusses this).
-- Find out the ciphers supported by the server (tools like [SSLScan](https://github.com/rbsec/sslscan) helps here).
+- Dig out the ciphers supported by the firewall (usually the WAF vendor documentation discusses this).
+- Find out the ciphers supported by the server (tools like [SSLScan](https://github.com/rbsec/sslscan) helps).
 - If a specific cipher not supported by WAF but by the server, is found, voila!
 - Initiating a new connection to the server with that specific cipher should smuggle our payload in.
 
@@ -2456,7 +2456,7 @@ CLI tools like cURL can come very handy for PoCs:
 curl --ciphers <cipher> -G <test site> -d <payload with parameter>
 ``` 
 
-__16. Abusing DNS History__
+__14. Abusing DNS History__
 - Often old historical DNS records provide information about the location of the site behind the WAF.
 - The target is to get the location of the site, so that we can route our requests directly to the site and not through the WAF.
 > __TIP:__ Some online services like [IP History](http://www.iphistory.ch/en/) and [DNS Trails](https://securitytrails.com/dns-trails) come to the rescue during the recon process.  
