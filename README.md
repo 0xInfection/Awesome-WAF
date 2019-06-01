@@ -1263,20 +1263,6 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            PerimeterX
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Easy</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Blocked response page contains reference to<br> <code>https://www.perimeterx.com/whywasiblocked</code> URL.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
             Positive Technologies Application Firewall
         </td>
         <td>
