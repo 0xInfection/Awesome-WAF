@@ -851,7 +851,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Incapsula (Imperva)
+            Imperva Incapsula
         </td>
         <td>
             <ul>
@@ -888,6 +888,23 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>imunify360 preloader</code> if response type is JSON.</li>
                     </ul>
                     <li>Blocked response page contains <code>protected by Imunify360</code> text.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Instart DX
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain <code>X-Instart-Request-ID</code> unique header.</li>
+                    <li>Response headers contain <code>X-Instart-WL</code> unique header fingerprint.</li>
+                    <li>Response headers contain <code>X-Instart-Cache</code> unique header fingerprint.</li>
+                    <li>Blocked response page contains <code>The requested URL was rejected. Please consult with your administrator.</code> text.</li>
                 </ul>
             </ul>
         </td>
