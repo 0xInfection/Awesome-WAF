@@ -832,6 +832,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Blocked response page contains:</li>
                     <ul>
+                        <li>Reference to <code>account.hwclouds.com/static/error/images/404img.jpg</code> error image.</li>
                         <li>Reference to <code>www.hwclouds.com</code> URL.</li>
                         <li>Reference to <code>hws_security@{site.tld}</code> e-mail for reporting.</li>
                     </ul>
