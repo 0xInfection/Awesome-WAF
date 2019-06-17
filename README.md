@@ -823,6 +823,24 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Huawei Cloud WAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page contains:</li>
+                    <ul>
+                        <li>Reference to <code>www.hwclouds.com</code> URL.</li>
+                        <li>Reference to <code>hws_security@{site.tld}</code> e-mail for reporting.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             HyperGuard
         </td>
         <td>
