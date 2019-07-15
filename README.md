@@ -212,16 +212,15 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Application Security Manager (F5 Networks)
+            Apptrana
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detectability: </b>Moderate</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response content contains warning<br>
-                        <code>The requested URL was rejected. Please consult with your administrator.</code>
-                    </li>
+                    <li>Blocked response content contains warning<br><code>further investigation and remediation with a screenshot of this page.</code></li>
+                    <li>Response headers contain a unique header <code>X-Version</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -762,6 +761,22 @@ Wanna fingerprint WAFs? Lets see how.
                     <li>Blocked response page returns <code>Invalid URI</code> generally.</li>
                     <li>Blocked response content contains value <code>Invalid GET Request</code> upon malicious GET queries.</li>
                     <li>Blocked POST type queries contain <code>Invalid Data</code> in response content.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            F5 ASM
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response content contains warning<br>
+                        <code>The requested URL was rejected. Please consult with your administrator.</code>
+                    </li>
                 </ul>
             </ul>
         </td>
@@ -1915,6 +1930,26 @@ Wanna fingerprint WAFs? Lets see how.
             </ul>
         </td>
     </tr>
+    <tr>
+        <td>
+            Viettel
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response page contains:</li>
+                    <ul>
+                        <li>Block page has title set to <code>Access denied · Viettel WAF</code>.</li>
+                        <li>Reference to <code>https://cloudrity.com.vn/</code> URL.</li>
+                        <li>Response page contains keywords <code>Viettel WAF system</code>.</li>
+                        <li>Contact information reference to <code>https://cloudrity.com.vn/customer/#/contact</code> URL.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr> 
     <tr>
         <td>
             VirusDie
