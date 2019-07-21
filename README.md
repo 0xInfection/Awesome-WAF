@@ -1386,6 +1386,8 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Response page contains the following text snippet:<br> <code>Unauthorized Activity Has Been Detected.</code> and <code>Case Number</code></li>
+                    <li>Blocked response page has reference to <code>radwarealerting@{site.tld}</code> email.</li>
+                    <li>Blocked response page has title set to <code>Unauthorized Request Blocked</code>.</li>
                     <li>Response headers may contain <code>X-SL-CompState</code> header field name.</li>
                 </ul>
             </ul>
