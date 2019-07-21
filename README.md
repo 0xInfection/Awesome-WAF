@@ -91,13 +91,15 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Returns status code <code>493</code> upon unusual requests.</li>
-                    <li>On viewing source-code of error page, you will find reference to <code>wzws-waf-cgi/</code> directory.</li>
-                    <li>Blocked response page source contains:
+                    <li>Blockpage may contain reference to <code>wzws-waf-cgi/</code> directory.</li>
+                    <li>Blocked response page source may contain:
                     <ul>
                         <li>Reference to <code>wangshan.360.cn</code> URL.</li>
                         <li><code>Sorry! Your access has been intercepted because your links may threaten website security.</code> text snippet.</li>
                     </ul>
-                    <li>Response headers contain <code>X-Powered-By-360WZB</code> Header.</li>
+                    <li>Response headers may contain <code>X-Powered-By-360WZB</code> header.</li>
+                    <li>Blocked response headers contain unique header <code>WZWS-Ray</code>.</li>
+                    <li><code>Server</code> header may contain value <code>qianxin-waf</code>.</li>
                 </ul>
             </ul>
         </td>
