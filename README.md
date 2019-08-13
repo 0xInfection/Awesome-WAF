@@ -608,6 +608,7 @@ Wanna fingerprint WAFs? Lets see how.
                     <li><code>Server</code> header field has value <code>cloudflare</code>.</li>
                     <li><code>Set-Cookie</code> response headers have <code>__cfuid=</code> cookie field.</li>
                     <li>Page content might have <code>Attention Required!</code> or <code>Cloudflare Ray ID:</code>.</li>
+                    <li>Page content may contain <code>DDoS protection by Cloudflare</code>as text.</li>
                     <li>You may encounter <code>CLOUDFLARE_ERROR_500S_BOX</code> upon hitting invalid URLs.</li>
                 </ul>
             </ul>
