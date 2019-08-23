@@ -1012,6 +1012,20 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            KeyCDN
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains <code>KeyCDN</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             KnownSec
         </td>
         <td>
@@ -1386,6 +1400,23 @@ Wanna fingerprint WAFs? Lets see how.
                     <ul>
                         <li><code>pkSecurityModule: Security.Alert</code>.</li>
                         <li><code>A safety critical request was discovered and blocked</code> text snippet.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Qiniu CDN
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response content may contain</li>
+                    <ul>
+                        <li>Response headers contain unusual header <code>X-Qiniu-CDN</code> with value set to either <code>0</code> or <code>1</code>.</li>
                     </ul>
                 </ul>
             </ul>
