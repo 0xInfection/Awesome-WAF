@@ -83,7 +83,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            360 Firewall
+            360
         </td>
         <td>
             <ul>
@@ -121,7 +121,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Airlock (Phion/Ergon)
+            Airlock
         </td>
         <td>
             <ul>
@@ -144,7 +144,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            AlertLogic Firewall
+            AlertLogic
         </td>
         <td>
             <ul>
@@ -182,7 +182,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Anquanbao WAF
+            Anquanbao
         </td>
         <td>
             <ul>
@@ -208,21 +208,6 @@ Wanna fingerprint WAFs? Lets see how.
                     <li>Blocked response content contains <code>Sorry! your access has been intercepted by AnYu</code></li>
                     <li>Blocked response page contains <code>AnYu- the green channel</code> text.</li>
                     <li>Response headers may contain unusual header <code>WZWS-RAY</code>.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Apptrana
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Moderate</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Blocked response content contains warning<br><code>further investigation and remediation with a screenshot of this page.</code></li>
-                    <li>Response headers contain a unique header <code>X-Version</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -283,7 +268,22 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            ASP.NET Generic (IIS)
+            ASPA
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains <code>ASPA-WAF</code> keyword.</li>
+                    <li>Response contain unique header <code>ASPA-Cache-Status</code> with content <code>HIT</code> or <code>MISS</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            ASP.NET Generic
         </td>
         <td>
             <ul>
@@ -303,7 +303,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Astra Protection
+            Astra
         </td>
         <td>
             <ul>
@@ -323,7 +323,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            AWS (Amazon)
+            AWS ELB
         </td>
         <td>
             <ul>
@@ -384,7 +384,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Barracuda WAF
+            Barracuda
         </td>
         <td>
             <ul>
@@ -404,7 +404,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Bekchy (Faydata)
+            Bekchy
         </td>
         <td>
             <ul>
@@ -413,6 +413,25 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Blocked response headers contains <code>Bekchy - Access Denied</code>.</li>
                     <li>Blocked response page contains reference to <code>https://bekchy.com/report</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            BinarySec
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers contain:</li>
+                    <ul>
+                        <li><code>X-BinarySec-Via</code> field.</li>
+                        <li><code>X-BinarySec-NoCache</code> field.</li>
+                        <li><code>Server</code> header contains <code>BinarySec</code> keyword.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -439,22 +458,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Bluedon IST
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Easy</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li><code>Server</code> header contains <code>BDWAF</code> field value.</li>
-                    <li>Blocked response page contains to <code>Bluedon Web Application Firewall</code> text snippet..</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            BIG-IP ASM (F5 Networks)
+            BIG-IP ASM
         </td>
         <td>
             <ul>
@@ -470,20 +474,6 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            BinarySec WAF
-        </td>
-        <td>
-            <ul>
-                <li><b>Detectability: </b>Moderate</li>
-                <li><b>Detection Methodology:</b></li>
-                <ul>
-                    <li>Response headers contain <code>binarysec</code> keyword value.</li>
-                </ul>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td>
             BlockDos
         </td>
         <td>
@@ -492,6 +482,21 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li><code>Server</code> header contains value <code>BlockDos.net</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Bluedon IST
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains <code>BDWAF</code> field value.</li>
+                    <li>Blocked response page contains to <code>Bluedon Web Application Firewall</code> text snippet..</li>
                 </ul>
             </ul>
         </td>
@@ -630,7 +635,23 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Cloudfront (Amazon)
+            CloudfloorDNS
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header field has value <code>CloudfloorDNS WAF</code>.</li>
+                    <li>Block-page title might have <code>CloudfloorDNS - Web Application Firewall Error</code>.</li>
+                    <li>Page content may contain <code>www.cloudfloordns.com/contact</code> URL as a contact link.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Cloudfront
         </td>
         <td>
             <ul>
@@ -658,7 +679,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            CrawlProtect (Jean-Denis Brun)
+            CrawlProtect
         </td>
         <td>
             <ul>
@@ -753,6 +774,20 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            e3Learning Security
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains <code>e3Learning_WAF</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             EdgeCast (Verizon)
         </td>
         <td>
@@ -768,7 +803,27 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Expression Engine (EllisLab)
+            Eisoo Cloud
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response page content may contain:</li>
+                        <ul>
+                            <li><code>/eisoo-firewall-block.css</code> reference.</li>
+                            <li><code>www.eisoo.com</code> URL.</li>
+                            <li><code>&copy; (year) Eisoo Inc.</code> keyword.</li>
+                        </ul>
+                    <li><code>Server</code> header has field value set to <code>EisooWAF-AZURE/EisooWAF</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Expression Engine
         </td>
         <td>
             <ul>
@@ -800,7 +855,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Fortinet FortiWeb
+            FortiWeb
         </td>
         <td>
             <ul>
@@ -855,7 +910,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Huawei Cloud WAF
+            Huawei Cloud
         </td>
         <td>
             <ul>
@@ -925,7 +980,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Immunify360 (CloudLinux Inc.)
+            Immunify360
         </td>
         <td>
             <ul>
@@ -939,6 +994,22 @@ Wanna fingerprint WAFs? Lets see how.
                         <li><code>imunify360 preloader</code> if response type is JSON.</li>
                     </ul>
                     <li>Blocked response page contains <code>protected by Imunify360</code> text.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            IndusGuard
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains value <code>IF_WAF</code>.</li>
+                    <li>Blocked response content contains warning<br><code>further investigation and remediation with a screenshot of this page.</code></li>
+                    <li>Response headers contain a unique header <code>X-Version</code>.</li>
                 </ul>
             </ul>
         </td>
@@ -1074,7 +1145,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Malcare (Inactiv)
+            Malcare
         </td>
         <td>
             <ul>
@@ -1093,7 +1164,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            MissionControl WAF
+            MissionControl Application Shield
         </td>
         <td>
             <ul>
@@ -1107,7 +1178,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            ModSecurity (Trustwave)
+            ModSecurity
         </td>
         <td>
             <ul>
@@ -1130,7 +1201,21 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            NAXSI (NBS Systems)
+            ModSecurity CRS
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Difficult</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blockpage occurs on adding a separate request header <code>X-Scanner</code> when set to a particular paranoa level.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            NAXSI
         </td>
         <td>
             <ul>
@@ -1162,7 +1247,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Netcontinuum (Barracuda)
+            Netcontinuum
         </td>
         <td>
             <ul>
@@ -1197,7 +1282,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            NevisProxy (AdNovum)
+            NevisProxy
         </td>
         <td>
             <ul>
@@ -1230,7 +1315,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Nexusguard Application Wall
+            Nexusguard
         </td>
         <td>
             <ul>
@@ -1244,7 +1329,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            NinjaFirewall (NinTechNet)
+            NinjaFirewall
         </td>
         <td>
             <ul>
@@ -1279,7 +1364,21 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            onMessage Shield (Blackbaud)
+            NullDDoS
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains the <code>NullDDoS System</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            onMessage Shield
         </td>
         <td>
             <ul>
@@ -1331,6 +1430,21 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            PentaWAF
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains <code>PentaWAF/{version}</code> keyword.</li>
+                    <li>Blocked response page contains text <code>PentaWAF/{version}</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             PerimeterX
         </td>
         <td>
@@ -1339,6 +1453,24 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detection Methodology:</b></li>
                 <ul>
                     <li>Blocked response page contains reference to<br> <code>https://www.perimeterx.com/whywasiblocked</code> URL.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            pkSecurityModule IDS
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response content may contain</li>
+                    <ul>
+                        <li><code>pkSecurityModule: Security.Alert</code>.</li>
+                        <li><code>A safety critical request was discovered and blocked</code> text snippet.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -1354,6 +1486,25 @@ Wanna fingerprint WAFs? Lets see how.
                 <ul>
                     <li>Blocked response page contains <code>Forbidden</code> in <code>h1</code> followed by:</li>
                     <li><code>Request ID:</code> in format <code>yyyy-mm-dd-hh-mm-ss-{ref. code}</code></li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            PowerCDN
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response headers may contain</li>
+                    <ul>
+                        <li><code>Via</code> header with content <code>powercdn.com</code>.</li>
+                        <li><code>X-Cache</code> header with content <code>powercdn.com</code>.</li>
+                        <li><code>X-CDN</code> header with content <code>PowerCDN</code>.</li>
+                    </ul>
                 </ul>
             </ul>
         </td>
@@ -1389,18 +1540,14 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            pkSecurityModule IDS
+            Puhui
         </td>
         <td>
             <ul>
-                <li><b>Detectability: </b>Moderate</li>
+                <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Response content may contain</li>
-                    <ul>
-                        <li><code>pkSecurityModule: Security.Alert</code>.</li>
-                        <li><code>A safety critical request was discovered and blocked</code> text snippet.</li>
-                    </ul>
+                    <li><code>Server</code> header contain <code>PuhuiWAF</code> keyword.</li>
                 </ul>
             </ul>
         </td>
@@ -1462,7 +1609,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Request Validation Mode (ASP.NET)
+            Request Validation Mode
         </td>
         <td>
             <ul>
@@ -1483,7 +1630,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            RSFirewall (RSJoomla)
+            RSFirewall
         </td>
         <td>
             <ul>
@@ -1559,6 +1706,43 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            SecKing
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy/Moderate</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header in response may contain:</li>
+                    <ul>
+                        <li><code>SECKINGWAF</code> keyword.</li>
+                        <li><code>SECKING/{version}</code> field value.</li>
+                    </ul>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            SecuPress
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response content may contain:</li>
+                    <ul>
+                        <li><code>SecuPress</code> as text.</li>
+                        <li><code>Block ID: Bad URL Contents</code> as text.</li>
+                    </ul>
+                    <li>Response code returned is <code>503 Service Unavailable</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Secure Entry
         </td>
         <td>
@@ -1573,7 +1757,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            SecureIIS (eEye)
+            SecureIIS
         </td>
         <td>
             <ul>
@@ -1593,7 +1777,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            SecureSphere (Imperva)
+            SecureSphere
         </td>
         <td>
             <ul>
@@ -1612,7 +1796,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            SEnginx (Neusoft)
+            SEnginx
         </td>
         <td>
             <ul>
@@ -1626,7 +1810,21 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Shadow Daemon WAF
+            ServerDefender VP
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked response contains <code>X-Pint</code> header field with <code>p80</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Shadow Daemon
         </td>
         <td>
             <ul>
@@ -1713,7 +1911,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            SonicWall (Dell)
+            SonicWall
         </td>
         <td>
             <ul>
@@ -1767,7 +1965,22 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            StackPath (StackPath LLC)
+            SquidProxy IDS
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains field value <code>squid/{version}</code>.</li>
+                    <li>Blocked response page contains<br> <code>Access control configuration prevents your request from being allowed at this time.</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            StackPath
         </td>
         <td>
             <ul>
@@ -1782,7 +1995,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Stingray (RiverBed/Brocade)
+            Stingray
         </td>
         <td>
             <ul>
@@ -1819,7 +2032,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Synology Cloud WAF
+            Synology Cloud
         </td>
         <td>
             <ul>
@@ -1833,7 +2046,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Tencent Cloud WAF
+            Tencent Cloud
         </td>
         <td>
             <ul>
@@ -1848,7 +2061,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Teros WAF (Citrix)
+            Teros
         </td>
         <td>
             <ul>
@@ -1862,7 +2075,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            TrafficShield (F5 Networks)
+            TrafficShield
         </td>
         <td>
             <ul>
@@ -1892,7 +2105,26 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            URLMaster SecurityCheck (iFinity/DotNetNuke)
+            UCloud UEWaf
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response content might contain:
+                    <ul>
+                        <li>Reference to <code>/uewaf_deny_pages/default/img/</code> inurl directory.</li>
+                        <li><code>ucloud.cn</code> URL.</li>
+                    </ul> 
+                    <li>Response headers returned has <code>Server</code> header set to <code>uewaf/{version}</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            URLMaster SecurityCheck
         </td>
         <td>
             <ul>
@@ -1912,7 +2144,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            URLScan (Microsoft)
+            URLScan
         </td>
         <td>
             <ul>
@@ -1964,7 +2196,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Varnish Cache
+            Varnish CacheWall
         </td>
         <td>
             <ul>
@@ -2022,7 +2254,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WallArm (Nginx)
+            WallArm
         </td>
         <td>
             <ul>
@@ -2055,7 +2287,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WebARX Security Firewall
+            WebARX Security
         </td>
         <td>
             <ul>
@@ -2074,7 +2306,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WebKnight (Aqtronix)
+            WebKnight
         </td>
         <td>
             <ul>
@@ -2095,7 +2327,36 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WebSEAL (IBM)
+            WebLand
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains <code>Apache Protected By WebLand WAF</code> keyword.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            WebRay
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li><code>Server</code> header contains <code>WebRay-WAF</code> keyword.</li>
+                    <li>Response headers may have <code>DrivedBy</code> field with value <code>RaySrv RayEng/{version}</code>.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            WebSEAL
         </td>
         <td>
             <ul>
@@ -2114,7 +2375,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WebTotem Firewall
+            WebTotem
         </td>
         <td>
             <ul>
@@ -2128,7 +2389,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>    
     <tr>
         <td>
-            West263CDN Firewall
+            West263CDN
         </td>
         <td>
             <ul>
@@ -2142,7 +2403,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>    
     <tr>
         <td>
-            Wordfence (Feedjit)
+            Wordfence
         </td>
         <td>
             <ul>
@@ -2163,7 +2424,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            WTS WAF
+            WTS-WAF
         </td>
         <td>
             <ul>
@@ -2257,6 +2518,22 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            YxLink
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Response might have <code>yx_ci_session</code> cookie field.</li>
+                    <li>Response might have <code>yx_language</code> cookie field.</li>
+                    <li><code>Server</code> header contains <code>Yxlink-WAF</code> field value.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             ZenEdge
         </td>
         <td>
@@ -2273,7 +2550,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            ZScaler (Accenture)
+            ZScaler
         </td>
         <td>
             <ul>
