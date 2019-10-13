@@ -3201,6 +3201,21 @@ __Tool__: [bypass-firewalls-by-DNS-history](https://github.com/vincentcox/bypass
 bash bypass-firewalls-by-DNS-history.sh -d <target> --checkall
 ```
 
+### Using Whitelist Strings:
+#### Method:
+- Some WAF developers keep a shared secret with their users/devs which allows them to pass harmful queries through the WAF.
+- This shared secret, if leaked/known, can be used to bypass all protections within the WAF.
+
+#### Technique:
+- Using the whitelist string as a paramter in GET/POST/PUT/DELETE requests smuggles our payload through the WAF.
+- Usually some `*-sync-request` keywords or a shared token value is used as the secret.
+
+Now when making a request to the server, you can append it as a parameter:
+```
+http://host.com/?randomparameter=<malicious-payload>&<shared-secret>=True
+```
+> A real life example how this works can be found at [this blog](https://osandamalith.com/2019/10/12/bypassing-the-webarx-web-application-firewall-waf/).
+
 ### Request Header Spoofing:
 #### Method:
 - The target is to fool the WAF/server into believing it was from their internal network.
