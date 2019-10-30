@@ -1,4 +1,4 @@
-## [`obfu.py`](https://github.com/0xinfection/awesome-waf/blob/master/other/obfu.py)
+## [`obfu.py`](https://github.com/0xinfection/awesome-waf/blob/master/others/obfu.py)
 > A small script to encode and obfuscate your payloads easily to your desired encodings.
 
 ### Usage:
