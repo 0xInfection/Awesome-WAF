@@ -896,7 +896,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page conatins:
+                    <li>Blocked response page contains:
                         <ul>
                             <li><code>Grey Wizard</code> as title.</li>
                             <li><code>Contact the website owner or Grey Wizard</code> text snippet.</li>
@@ -1222,7 +1222,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Easy</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page conatins <code>This Request Has Been Blocked By NAXSI</code>.</li>
+                    <li>Blocked response page contains <code>This Request Has Been Blocked By NAXSI</code>.</li>
                     <li>Response headers contain unusual field <code>X-Data-Origin</code> with value <code>naxsi/waf</code> keyword.</li>
                     <li><code>Server</code> header contains <code>naxsi/waf</code> keyword value.</li>
                     <li>Blocked response page may contain <code>NAXSI blocked information</code> error code.</li>
@@ -1239,7 +1239,7 @@ Wanna fingerprint WAFs? Lets see how.
                 <li><b>Detectability: </b>Difficult</li>
                 <li><b>Detection Methodology:</b></li>
                 <ul>
-                    <li>Blocked response page conatins <code>Suspicious activity detected. Access to the site is blocked.</code>.</li>
+                    <li>Blocked response page contains <code>Suspicious activity detected. Access to the site is blocked.</code>.</li>
                     <li>Contains reference to email <code>nwaf@{site.tld}</code></li>
                 </ul>
             </ul>
@@ -3207,7 +3207,7 @@ bash bypass-firewalls-by-DNS-history.sh -d <target> --checkall
 - This shared secret, if leaked/known, can be used to bypass all protections within the WAF.
 
 #### Technique:
-- Using the whitelist string as a paramter in GET/POST/PUT/DELETE requests smuggles our payload through the WAF.
+- Using the whitelist string as a parameter in GET/POST/PUT/DELETE requests smuggles our payload through the WAF.
 - Usually some `*-sync-request` keywords or a shared token value is used as the secret.
 
 Now when making a request to the server, you can append it as a parameter:
@@ -3849,7 +3849,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ### Evasion:  
 - [WAFNinja](https://github.com/khalilbijjou/wafninja) - A smart tool which fuzzes and can suggest bypasses for a given WAF by [@khalilbijjou](https://github.com/khalilbijjou/).
 - [WAFTester](https://github.com/Raz0r/waftester) - Another tool which can obfuscate payloads to bypass WAFs by [@Raz0r](https://github.com/Raz0r/).
-- [libinjection-fuzzer](https://github.com/migolovanov/libinjection-fuzzer) - A fizzer intended for finding `libinjection` bypasses but can be probably used universally.
+- [libinjection-fuzzer](https://github.com/migolovanov/libinjection-fuzzer) - A fuzzer intended for finding `libinjection` bypasses but can be probably used universally.
 - [bypass-firewalls-by-DNS-history](https://github.com/vincentcox/bypass-firewalls-by-DNS-history) -  A tool which searches for old DNS records for finding actual site behind the WAF.
 - [abuse-ssl-bypass-waf](https://github.com/LandGrey/abuse-ssl-bypass-waf) - A tool which finds out supported SSL/TLS ciphers and helps in evading WAFs.
 - [SQLMap Tamper Scripts](https://github.com/sqlmapproject/sqlmap) - Tamper scripts in SQLMap obfuscate payloads which might evade some WAFs.
@@ -3910,7 +3910,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [Side Channel Attacks for Fingerprinting WAF Filter Rules](presentations/Side%20Channel%20Attacks%20for%20Fingerprinting%20WAF%20Filter%20Rules.pdf) - A presentation about how side channel attacks can be utilised to fingerprint firewall filter rules from [UseNix Woot'12](https://www.usenix.org/conference/woot12).
 - [Our Favorite XSS Filters/IDS and how to Attack Them](presentations/Our%20Favourite%20XSS%20WAF%20Filters%20And%20How%20To%20Bypass%20Them.pdf) - A presentation about how to evade XSS filters set by WAF rules from [BlackHat USA 09](https://www.blackhat.com/html/bh-us-09/).
 - [Playing Around with WAFs](presentations/Playing%20Around%20with%20WAFs.pdf) - A small presentation about WAF profiling and playing around with them from [Defcon 16](http://www.defcon.org/html/defcon-16/dc-16-post.html).
-- [A Forgotten HTTP Invisiblity Cloak](presentation/A%20Forgotten%20HTTP%20Invisibility%20Cloak.pdf) - A presentation about techniques that can be used to bypass common WAFs from [BSides Manchester](https://www.bsidesmcr.org.uk/).
+- [A Forgotten HTTP Invisibility Cloak](presentation/A%20Forgotten%20HTTP%20Invisibility%20Cloak.pdf) - A presentation about techniques that can be used to bypass common WAFs from [BSides Manchester](https://www.bsidesmcr.org.uk/).
 - [Building Your Own WAF as a Service and Forgetting about False Positives](presentations/Building%20Your%20Own%20WAF%20as%20a%20Service%20and%20Forgetting%20about%20False%20Positives.pdf) - A presentation about how to build a hybrid mode waf that can work both in an out-of-band manner as well as inline to reduce false positives and latency [Auscert2019](https://conference.auscert.org.au/).
 
 ## Credits & License:
