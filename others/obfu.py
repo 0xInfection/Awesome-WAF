@@ -1,3 +1,4 @@
+# Modified from @irsdl's script
 import urllib.parse, sys
 from argparse import ArgumentParser
 lackofart = '''
