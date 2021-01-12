@@ -980,7 +980,7 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
-            Immunify360
+            Imunify360
         </td>
         <td>
             <ul>
