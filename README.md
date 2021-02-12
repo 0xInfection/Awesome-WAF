@@ -1,5 +1,5 @@
 # Awesome WAF [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg "Awesome")](https://github.com/0xinfection/awesome-waf)
-> Everything awesome about web application firewalls (WAFs). 🔥
+> Everything about web application firewalls (WAFs). 🔥
 >
 > __Foreword:__ This was originally my own collection on WAFs. I am open-sourcing it in the hope that it will be useful for pentesters and researchers out there. You might want to keep this repo on a watch, since it will be updated regularly. "The community just learns from each other." __#SharingisCaring__
 
@@ -3853,6 +3853,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [IdentYwaf](https://github.com/stamparm/identywaf) - A blind WAF detection tool which utlises a unique method of identifying WAFs based upon previously collected fingerprints by [@stamparm](https://github.com/stamparm).
 
 ### Testing:
+- [GoTestWAF](https://github.com/wallarm/gotestwaf) - A tool to test a WAF's detection logic and bypasses from [@wallarm](https://github.com/wallarm).
 - [Lightbulb Framework](https://github.com/lightbulb-framework/lightbulb-framework) - A WAF testing suite written in Python.
 - [WAFBench](https://github.com/microsoft/wafbench) - A WAF performance testing suite by [Microsoft](https://github.com/microsoft).
 - [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483) - A WAF testing tool by [Imperva](https://imperva.com).
