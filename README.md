@@ -3887,6 +3887,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 
 ### Management:
 - [AWS Firewall Factory](https://github.com/globaldatanet/aws-firewall-factory) - Deploy, update, and stage your WAFs while managing them centrally via FMS.
+
 ## Blogs and Writeups
 > Many of the content mentioned above have been taken from some of the following excellent writeups.
 
@@ -3948,4 +3949,4 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [Building Your Own WAF as a Service and Forgetting about False Positives](presentations/Building%20Your%20Own%20WAF%20as%20a%20Service%20and%20Forgetting%20about%20False%20Positives.pdf) - A presentation about how to build a hybrid mode waf that can work both in an out-of-band manner as well as inline to reduce false positives and latency [Auscert2019](https://conference.auscert.org.au/).
 
 ## Credits & License:
-This work has been presented by [Infected Drake](https://twitter.com/0xInfection) [(0xInfection)](https://github.com/0xinfection) and is licensed under the [Apache 2.0 License](LICENSE). 
+Initial fingerprint compilation and bypasses were put together by [Pinaki](https://twitter.com/0xInfection) [(0xInfection)](https://github.com/0xinfection), but now it largely remains as a community supported repository. Awesome-WAF is licensed under the [Apache 2.0 License](LICENSE). 
