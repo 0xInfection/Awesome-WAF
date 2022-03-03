@@ -3885,6 +3885,8 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [Bypass WAF BurpSuite Plugin](https://portswigger.net/bappstore/ae2611da3bbc4687953a1f4ba6a4e04c) - A plugin for Burp Suite which adds some request headers so that the requests seem from the internal network.
 - [enumXFF](https://github.com/infosec-au/enumXFF) - Eumerating IPs in X-Forwarded-Headers to bypass 403 restrictions
 
+### Management:
+- [AWS Firewall Factory](https://github.com/globaldatanet/aws-firewall-factory) - Deploy, update, and stage your WAFs while managing them centrally via FMS.
 ## Blogs and Writeups
 > Many of the content mentioned above have been taken from some of the following excellent writeups.
 
