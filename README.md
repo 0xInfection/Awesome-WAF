@@ -3191,6 +3191,17 @@ CLI tools like cURL can come very handy for PoCs:
 curl --ciphers <cipher> -G <test site> -d <payload with parameter>
 ```
 
+### Abuse WAF limit on HTTP Responses
+#### Method
+- Many a times, WAFs have a limit on _how much_ of the HTTP request they are meant to handle.
+- By sending a HTTP request with a size __greater than the limit__, we can fully evade WAFs.
+
+#### Technique
+- Use a hit and trial approach to find out how much of the HTTP request is being inspected by the WAF (usually in multiples of 4 kB).
+- Once done, attach your payload to the request after filling the limit with garbage.
+
+> A similar technique was used to [bypass Google Cloud Platform WAF](https://kloudle.com/blog/piercing-the-cloud-armor-the-8kb-bypass-in-google-cloud-platform-waf).
+
 ### Abusing DNS History:
 - Often old historical DNS records provide information about the location of the site behind the WAF.
 - The target is to get the location of the site, so that we can route our requests directly to the site and not through the WAF.
@@ -3209,6 +3220,7 @@ bash bypass-firewalls-by-DNS-history.sh -d <target> --checkall
 #### Technique:
 - Using the whitelist string as a parameter in GET/POST/PUT/DELETE requests smuggles our payload through the WAF.
 - Usually some `*-sync-request` keywords or a shared token value is used as the secret.
+- Often adding specific headers may trigger a similar whitelist behaviour.
 
 Now when making a request to the server, you can append it as a parameter:
 ```
