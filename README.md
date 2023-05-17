@@ -1,11 +1,13 @@
 # Awesome WAF [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg "Awesome")](https://github.com/0xinfection/awesome-waf)
-> Everything about web application firewalls (WAFs). 🔥
+> Everything about web application firewalls (WAFs) from a security perspective. 🔥
 >
 > __Foreword:__ This was originally my own collection on WAFs. I am open-sourcing it in the hope that it will be useful for pentesters and researchers out there. You might want to keep this repo on a watch, since it will be updated regularly. "The community just learns from each other." __#SharingisCaring__
 
 ![Main Logo](images/how-wafs-work.png 'How wafs work')
 
-__A Concise Definition:__ A web application firewall is a security policy enforcement point positioned between a web application and the client endpoint. This functionality can be implemented in software or hardware, running in an appliance device, or in a typical server running a common operating system. It may be a stand-alone device or integrated into other network components. *(Source: [PCI DSS IS 6.6](https://www.pcisecuritystandards.org/documents/information_supplement_6.6.pdf))*
+__A Concise Definition:__ A firewall is a security policy enforcement point positioned between a web application and the client endpoint. This functionality can be implemented in software or hardware, running in an appliance device, or in a typical server running a common operating system. It may be a stand-alone device or integrated into other network components. *(Source: [PCI DSS IS 6.6](https://www.pcisecuritystandards.org/documents/information_supplement_6.6.pdf))*
+
+A web-application firewall sits between a user and a webapp and is tasked to prevent any malicious activity from reaching the webapp. A WAF either filters out the malicious part of the request or just simply blocks it.
 
 Feel free to [contribute](CONTRIBUTING.md).
 
@@ -42,35 +44,35 @@ Feel free to [contribute](CONTRIBUTING.md).
 - Sometimes they use a learning mode to add rules automatically through learning about user behaviour.
 
 ### Operation Modes:
-- __Negative Model (Blacklist based)__ - A blacklisting model uses pre-set signatures to block web traffic that is clearly malicious, and signatures designed to prevent attacks which exploit certain website and web application vulnerabilities. Blacklisting model web application firewalls are a great choice for websites and web applications on the public internet, and are highly effective against an major types of DDoS attacks. Eg. Rule for blocking all `<script>*</script>` inputs.
-- __Positive Model (Whitelist based)__ - A whitelisting model only allows web traffic according to specifically configured criteria. For example, it can be configured to only allow HTTP GET requests from certain IP addresses. This model can be very effective for blocking possible cyber-attacks, but whitelisting will block a lot of legitimate traffic. Whitelisting model firewalls are probably best for web applications on an internal network that are designed to be used by only a limited group of people, such as employees.
-- __Mixed/Hybrid Model (Inclusive model)__ - A hybrid security model is one that blends both whitelisting and blacklisting. Depending on all sorts of configuration specifics, hybrid firewalls could be the best choice for both web applications on internal networks and web applications on the public internet.
+- __Negative Model (Blacklist based)__ - A blacklisting model uses pre-set signatures to block requests that are clearly malicious. The signatures of WAFs operating in a negative model are specifically crafted to prevent attacks which exploit certain web application vulnerabilities. Blacklisting model web application firewalls are a great choice for web applications exposed to the public internet and are highly effective against major vulnerabilities. Eg. Rule for blocking all `<script>*</script>` inputs prevent basic cross-site scripting attacks.
+- __Positive Model (Whitelist based)__ - A whitelisting model only allows web traffic according to specifically configured criteria. For example, it can be configured to only allow HTTP GET requests from certain IP addresses. This model can be very effective for blocking potential large scale attacks, but will also block a lot of legitimate traffic. Whitelisting model firewalls are probably best for web applications on an internal network that are designed to be used by only a limited group of people, such as employees.
+- __Mixed/Hybrid Model (Inclusive model)__ - A hybrid security model blends both whitelisting and blacklisting. Depending on all sorts of configuration specifics, hybrid firewalls could be the best choice for both web applications on internal networks and web applications on the public internet. A good scenario can be when web-application is facing the public internet (use blacklists) while the admin panel needs to be exposed to only a subset of users (use whitelists).
 
 ## Testing Methodology:
 ### Where To Look:
-- Always look out for common ports that expose that a WAF, namely `80`, `443`, `8000`, `8008`, `8080` and `8088` ports.
-    > __Tip:__ You can use automate this easily by commandline using tools like like [cURL](https://github.com/curl/curl).
-- Some WAFs set their own cookies in requests (eg. Citrix Netscaler, Yunsuo WAF).
-- Some associate themselves with separate headers (eg. Anquanbao WAF, Amazon AWS WAF). 
-- Some often alter headers and jumble characters to confuse attacker (eg. Netscaler, Big-IP).
-- Some expose themselves in the `Server` header (eg. Approach, WTS WAF).
-- Some WAFs expose themselves in the response content (eg. DotDefender, Armor, Sitelock).
-- Other WAFs reply with unusual response codes upon malicious requests (eg. WebKnight, 360 WAF).
+- Always look out for common ports that expose that a WAF, namely `80`, `443`, `8000`, `8080` and `8888` ports. However, its important to note that a WAF can be easily deployed on any port running a HTTP service. It is good to enumerate HTTP service ports first hand and then look for WAFs.
+- Some WAFs set their own cookies in requests (e.g. Citrix Netscaler, Yunsuo WAF).
+- Some associate themselves with separate headers (e.g. Anquanbao WAF, Amazon AWS WAF). 
+- Some often alter headers and jumble characters to confuse attacker (e.g. Netscaler, Big-IP).
+- Some expose themselves in the `Server` header (e.g. Approach, WTS WAF).
+- Some WAFs expose themselves in the response content (e.g. DotDefender, Armor, Sitelock).
+- Other WAFs reply with unusual response codes upon malicious requests (e.g. WebKnight, 360 WAF).
 
 ### Detection Techniques:
 To identify WAFs, we need to (dummy) provoke it.
 1. Make a normal GET request from a browser, intercept and record response headers (specifically cookies).
 2. Make a request from command line (eg. cURL), and test response content and headers (no user-agent included).
 3. Make GET requests to random open ports and grab banners which might expose the WAFs identity.
-4. If there is a login page somewhere, try some common (easily detectable) payloads like `" or 1 = 1 --`.
-5. If there is some input field somewhere, try with noisy payloads like `<script>alert()</script>`.
+4. On login pages, inject common (easily detectable) payloads like `" or 1 = 1 --`.
+5. Inject noisy payloads like `<script>alert()</script>` into search bars, contact forms and other input fields.
 6. Attach a dummy `../../../etc/passwd` to a random parameter at end of URL.
 7. Append some catchy keywords like `' OR SLEEP(5) OR '` at end of URLs to any random parameter.
 8. Make GET requests with outdated protocols like `HTTP/0.9` (`HTTP/0.9` does not support POST type queries).
 9. Many a times, the WAF varies the `Server` header upon different types of interactions.
 10. Drop Action Technique - Send a raw crafted FIN/RST packet to server and identify response.
     > __Tip:__ This method could be easily achieved with tools like [HPing3](http://www.hping.org) or [Scapy](https://scapy.net).
-11. Side Channel Attacks - Examine the timing behaviour of the request and response content. 
+11. Side Channel Attacks - Examine the timing behaviour of the request and response content.
+    > __Tip:__ More details can be found in a [blogpost here](https://0xinfection.github.io/posts/fingerprinting-wafs-side-channel/).
 
 ## WAF Fingerprints
 Wanna fingerprint WAFs? Lets see how.
