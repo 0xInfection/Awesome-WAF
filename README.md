@@ -50,7 +50,7 @@ Feel free to [contribute](CONTRIBUTING.md).
 
 ## Testing Methodology:
 ### Where To Look:
-- Always look out for common ports that expose that a WAF, namely `80`, `443`, `8000`, `8080` and `8888` ports. However, its important to note that a WAF can be easily deployed on any port running a HTTP service. It is good to enumerate HTTP service ports first hand and then look for WAFs.
+- Always look out for common ports that expose a WAF, namely `80`, `443`, `8000`, `8080` and `8888` ports. However, its important to note that a WAF can be easily deployed on any port running a HTTP service. It is good to enumerate HTTP service ports first hand and then look for WAFs.
 - Some WAFs set their own cookies in requests (e.g. Citrix Netscaler, Yunsuo WAF).
 - Some associate themselves with separate headers (e.g. Anquanbao WAF, Amazon AWS WAF). 
 - Some often alter headers and jumble characters to confuse attacker (e.g. Netscaler, Big-IP).
