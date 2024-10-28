@@ -3898,6 +3898,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [SQLMap Tamper Scripts](https://github.com/sqlmapproject/sqlmap) - Tamper scripts in SQLMap obfuscate payloads which might evade some WAFs.
 - [Bypass WAF BurpSuite Plugin](https://portswigger.net/bappstore/ae2611da3bbc4687953a1f4ba6a4e04c) - A plugin for Burp Suite which adds some request headers so that the requests seem from the internal network.
 - [enumXFF](https://github.com/infosec-au/enumXFF) - Eumerating IPs in X-Forwarded-Headers to bypass 403 restrictions
+- [WAF Bypass Tool](https://github.com/nemesida-waf/waf-bypass) - WAF bypass Tool from Nemesida is an open source tool to analyze the security of any WAF for False Positives and False Negatives using predefined and customizable payloads.
 
 ### Management:
 - [AWS Firewall Factory](https://github.com/globaldatanet/aws-firewall-factory) - Deploy, update, and stage your WAFs while managing them centrally via FMS.
@@ -3961,7 +3962,6 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [Playing Around with WAFs](presentations/Playing%20Around%20with%20WAFs.pdf) - A small presentation about WAF profiling and playing around with them from [Defcon 16](http://www.defcon.org/html/defcon-16/dc-16-post.html).
 - [A Forgotten HTTP Invisibility Cloak](presentation/A%20Forgotten%20HTTP%20Invisibility%20Cloak.pdf) - A presentation about techniques that can be used to bypass common WAFs from [BSides Manchester](https://www.bsidesmcr.org.uk/).
 - [Building Your Own WAF as a Service and Forgetting about False Positives](presentations/Building%20Your%20Own%20WAF%20as%20a%20Service%20and%20Forgetting%20about%20False%20Positives.pdf) - A presentation about how to build a hybrid mode waf that can work both in an out-of-band manner as well as inline to reduce false positives and latency [Auscert2019](https://conference.auscert.org.au/).
-- [WAF Bypass Tool](https://github.com/nemesida-waf/waf-bypass) - WAF bypass Tool is an open source tool to analyze the security of any WAF for False Positives and False Negatives using predefined and customizable payloads. Check your WAF before an attacker does. WAF Bypass Tool is developed by Nemesida WAF team with the participation of community.
 
 ## Credits & License:
 Initial fingerprint compilation and bypasses were put together by [Pinaki](https://twitter.com/0xInfection) [(0xInfection)](https://github.com/0xinfection), but now it largely remains as a community supported repository. Awesome-WAF is licensed under the [Apache 2.0 License](LICENSE). 
