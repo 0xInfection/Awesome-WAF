@@ -3898,6 +3898,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [SQLMap Tamper Scripts](https://github.com/sqlmapproject/sqlmap) - Tamper scripts in SQLMap obfuscate payloads which might evade some WAFs.
 - [Bypass WAF BurpSuite Plugin](https://portswigger.net/bappstore/ae2611da3bbc4687953a1f4ba6a4e04c) - A plugin for Burp Suite which adds some request headers so that the requests seem from the internal network.
 - [enumXFF](https://github.com/infosec-au/enumXFF) - Eumerating IPs in X-Forwarded-Headers to bypass 403 restrictions
+- [WAF Bypass Tool](https://github.com/nemesida-waf/waf-bypass) - WAF bypass Tool from Nemesida is an open source tool to analyze the security of any WAF for False Positives and False Negatives using predefined and customizable payloads.
 
 ### Management:
 - [AWS Firewall Factory](https://github.com/globaldatanet/aws-firewall-factory) - Deploy, update, and stage your WAFs while managing them centrally via FMS.
