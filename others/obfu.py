@@ -97,36 +97,6 @@ Supported Encodings: IBM037, IBM500, IBM870, cp875, IBM1026, IBM01047, IBM01140-
 - Equal sign and ampersand should NOT be encoded.
 """
 
-def main():
-    print(lackoFart)
-
-    parser = ArgumentParser(
-        description="Obfuscates a given string with specified encoding.\n" + additional_info,
-        formatter_class=RawTextHelpFormatter
-    )
-    
-    # A simple hack to have required arguments and optional arguments separately
-    required = parser.add_argument_group('Required Arguments')
-    optional = parser.add_argument_group('Optional Arguments')
-    
-    # Required Options
-    required.add_argument('-s', '--str', help='String to obfuscate', dest='str', required=True)
-    required.add_argument('-e', '--enc', help='Encoding type (e.g., ibm037, utf-16)', dest='enc', required=True)
-    
-    # Optional Arguments (main stuff and necessary)
-    optional.add_argument('-ueo', help='URL Encode Output', dest='ueo', action='store_true')
-    optional.add_argument('-udi', help='URL Decode Input', dest='udi', action='store_true')
-
-    # If no arguments are provided, print help + additional info and exit
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit(0)
-
-    args = parser.parse_args()
-
-    print('Input: %s' % (args.str))
-    print('Output: %s' % (paramEncode(params=args.str, charset=args.enc, urlDecodeInput=args.udi, urlEncodeOutput=args.ueo)))
-
 def paramEncode(params="", charset="", encodeEqualSign=False, encodeAmpersand=False, urlDecodeInput=True, urlEncodeOutput=True):
     result = ""
     equalSign = "="
@@ -186,6 +156,35 @@ def paramEncode(params="", charset="", encodeEqualSign=False, encodeAmpersand=Fa
 
     return result
 
+def main():
+    print(lackoFart)
+
+    parser = ArgumentParser(
+        description="Obfuscates a given string with specified encoding.\n" + additional_info,
+        formatter_class=RawTextHelpFormatter
+    )
+    
+    # A simple hack to have required arguments and optional arguments separately
+    required = parser.add_argument_group('Required Arguments')
+    optional = parser.add_argument_group('Optional Arguments')
+    
+    # Required Options
+    required.add_argument('-s', '--str', help='String to obfuscate', dest='str', required=True)
+    required.add_argument('-e', '--enc', help='Encoding type (e.g., ibm037, utf-16)', dest='enc', required=True)
+    
+    # Optional Arguments (main stuff and necessary)
+    optional.add_argument('-ueo', help='URL Encode Output', dest='ueo', action='store_true')
+    optional.add_argument('-udi', help='URL Decode Input', dest='udi', action='store_true')
+
+    # If no arguments are provided, print help + additional info and exit
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(0)
+
+    args = parser.parse_args()
+
+    print('Input: %s' % (args.str))
+    print('Output: %s' % (paramEncode(params=args.str, charset=args.enc, urlDecodeInput=args.udi, urlEncodeOutput=args.ueo)))
 
 if __name__ == '__main__':
     main()
