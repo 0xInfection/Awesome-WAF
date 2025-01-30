@@ -17,7 +17,7 @@ $ python obfu.py -h
     `8888888P'     8 888888888P   8 8888            `Y88888P'    `Y8888P ,88P'     `8888888P'  .8'       `8. `88888. 8 8888       `8888888P'     8 8888     `88. 
 
 
-usage: lol.py [-h] -s STR -e ENC [-ueo] [-udi]
+usage: obfu.py [-h] -s STR -e ENC [-ueo] [-udi]
 
 Obfuscates a given string with specified encoding.
 
