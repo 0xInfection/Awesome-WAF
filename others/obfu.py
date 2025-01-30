@@ -103,13 +103,16 @@ def main():
         description="Obfuscates a given string with specified encoding.\n" + additional_info,
         formatter_class=RawTextHelpFormatter
     )
-
+    
+    # A simple hack to have required arguments and optional arguments separately
     required = parser.add_argument_group('Required Arguments')
     optional = parser.add_argument_group('Optional Arguments')
-
+    
+    # Required Options
     required.add_argument('-s', '--str', help='String to obfuscate', dest='str', required=True)
     required.add_argument('-e', '--enc', help='Encoding type (e.g., ibm037, utf-16)', dest='enc', required=True)
-
+    
+    # Optional Arguments (main stuff and necessary)
     optional.add_argument('-ueo', help='URL Encode Output', dest='ueo', action='store_true')
     optional.add_argument('-udi', help='URL Decode Input', dest='udi', action='store_true')
 
