@@ -1,5 +1,6 @@
 # Modified from @irsdl's script
-# Enhancements include UTF support and additional features, with contributions from Wild West CyberSecurity and Tequila_Ninja.
+# Enhancements include improved encoding validation, error handling, and safer parameter parsing, 
+# with contributions from Wild West CyberSecurity and Tequila_Ninja.
 import urllib.parse
 import sys
 from argparse import ArgumentParser, RawTextHelpFormatter
