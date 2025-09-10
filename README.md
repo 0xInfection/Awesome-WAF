@@ -2957,7 +2957,7 @@ The following table shows the support of different character encodings on the te
     </tr>
 </table>
 
-__15. HTTP Content-Encoding__
+__15. HTTP Content-Encoding Evasion__ (by [@Cycloctane](https://github.com/Cycloctane))
 
 - According to RFC9110 Section 8.4, Content-Encoding can also be applied to HTTP requests. But it is not widely used in practice.
 - Some web servers/frameworks actually do support decoding compressed (encoded) requests with Content-Encoding header (and not documented). However, most of WAFs are unaware of this.
