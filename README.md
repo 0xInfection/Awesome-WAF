@@ -2957,6 +2957,60 @@ The following table shows the support of different character encodings on the te
     </tr>
 </table>
 
+__15. HTTP Content-Encoding Evasion__ (by [@Cycloctane](https://github.com/Cycloctane))
+
+- According to RFC9110 Section 8.4, Content-Encoding can also be applied to HTTP requests. But it is not widely used in practice.
+- Some web servers/frameworks actually do support decoding compressed (encoded) requests with Content-Encoding header (and not documented). However, most of WAFs are unaware of this.
+- We can leverage this feature to fully bypass WAF's inspection on request body when the backend server supports it.
+
+```
+POST /api/v0/example HTTP/1.1
+HOST: example.com
+Content-Type: application/json
+Content-Encoding: gzip
+
+<gzip encoded body>
+```
+
+cURL payload:
+
+```bash
+echo $payload | gzip -f | curl http://example.com/api/v0/example \
+-H "Content-Type: application/json" -H "Content-Encoding: gzip" --data-binary @-
+
+# brotli variant:
+echo $payload | brotli -9 -f | curl http://example.com/api/v0/example \
+-H "Content-Type: application/json" -H "Content-Encoding: br" --data-binary @-
+```
+
+<table>
+    <tr>
+        <td align="center"><b>Server</b></td>
+        <td align="center"><b>Supported Content-Encoding</b></td>
+        <td align="center"><b>Note</b></td>
+    </tr>
+    <tr>
+        <td align="center">nodejs (express, koa, etc.)</td>
+        <td align="center">defalte, gzip, brotli</td>
+        <td align="center">enabled by default</td>
+    </tr>
+    <tr>
+        <td align="center">aiohttp (python)</td>
+        <td align="center">deflate, gzip, zstd, brotli</td>
+        <td align="center">brotli needs extra dependency</td>
+    </tr>
+    <tr>
+        <td align="center">apache httpd mod_deflate</td>
+        <td align="center">defalte, gzip</td>
+        <td align="center">needs extra configuration</td>
+    </tr>
+    <tr>
+        <td align="center">warp (rust)</td>
+        <td align="center">defalte, gzip, brotli</td>
+        <td align="center">needs extra configuration</td>
+    </tr>
+</table>
+
 ### HTTP Parameter Pollution
 #### Method:
 - This attack method is based on how a server interprets parameters with the same names.
