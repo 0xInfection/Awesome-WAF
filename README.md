@@ -3892,7 +3892,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [WAFBench](https://github.com/microsoft/wafbench) - A WAF performance testing suite by [Microsoft](https://github.com/microsoft).
 - [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483) - A WAF testing tool by [Imperva](https://imperva.com).
 - [Framework for Testing WAFs (FTW)](https://github.com/coreruleset/ftw) - A framework by the [OWASP CRS team](https://coreruleset.org/) that helps to provide rigorous tests for WAF rules by using the OWASP Core Ruleset V3 as a baseline.
-- [PageGuard](https://pageguard.qiudeqiu.workers.dev) - Website security and best practices audit tool. Identifies configuration weaknesses, missing headers, and security misconfigurations. Free tool with REST API.
+- [PageGuard](https://pageguard.org) - Website security and best practices audit tool. Identifies configuration weaknesses, missing headers, and security misconfigurations. Free tool with REST API.
 
 ### Evasion:  
 - [WAFNinja](https://github.com/khalilbijjou/wafninja) - A smart tool which fuzzes and can suggest bypasses for a given WAF by [@khalilbijjou](https://github.com/khalilbijjou/).
