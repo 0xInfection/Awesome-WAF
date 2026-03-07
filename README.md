@@ -3892,6 +3892,8 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [WAFBench](https://github.com/microsoft/wafbench) - A WAF performance testing suite by [Microsoft](https://github.com/microsoft).
 - [WAF Testing Framework](https://www.imperva.com/lg/lgw_trial.asp?pid=483) - A WAF testing tool by [Imperva](https://imperva.com).
 - [Framework for Testing WAFs (FTW)](https://github.com/coreruleset/ftw) - A framework by the [OWASP CRS team](https://coreruleset.org/) that helps to provide rigorous tests for WAF rules by using the OWASP Core Ruleset V3 as a baseline.
+- [Fray](https://github.com/dalisecurity/Fray) - Open-source WAF security testing toolkit — 6,300+ payloads, AI-assisted bypass, 25-vendor detection, reconnaissance, and OWASP hardening audits.
+
 
 ### Evasion:  
 - [WAFNinja](https://github.com/khalilbijjou/wafninja) - A smart tool which fuzzes and can suggest bypasses for a given WAF by [@khalilbijjou](https://github.com/khalilbijjou/).
@@ -3903,6 +3905,8 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [Bypass WAF BurpSuite Plugin](https://portswigger.net/bappstore/ae2611da3bbc4687953a1f4ba6a4e04c) - A plugin for Burp Suite which adds some request headers so that the requests seem from the internal network.
 - [enumXFF](https://github.com/infosec-au/enumXFF) - Eumerating IPs in X-Forwarded-Headers to bypass 403 restrictions
 - [WAF Bypass Tool](https://github.com/nemesida-waf/waf-bypass) - WAF bypass Tool from Nemesida is an open source tool to analyze the security of any WAF for False Positives and False Negatives using predefined and customizable payloads.
+- [Fray](https://github.com/dalisecurity/Fray) - Open-source WAF security testing toolkit — 6,300+ payloads, AI-assisted bypass, 25-vendor detection, reconnaissance, and OWASP hardening audits.
+
 
 ### Management:
 - [AWS Firewall Factory](https://github.com/globaldatanet/aws-firewall-factory) - Deploy, update, and stage your WAFs while managing them centrally via FMS.
