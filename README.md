@@ -11,6 +11,7 @@ A web-application firewall sits between a user and a webapp and is tasked to pre
 
 Feel free to [contribute](CONTRIBUTING.md).
 
+- [guardian-agent-prompts](https://github.com/milkomida77/guardian-agent-prompts) - 49 production-tested AI agent system prompts including WAF analysis, security scanning, and automated threat detection agents. MIT licensed.
 ### Contents:
 - [Introduction](#introduction)
     - [How WAFs Work](#how-wafs-work)
