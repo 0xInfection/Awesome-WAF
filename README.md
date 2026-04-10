@@ -3882,6 +3882,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
 ## Awesome Tools
+- [Gitstar](https://dev.gitstar.ai?utm_medium=github_readme&utm_source=awesome_list&utm_campaign=0xInfection_Awesome-WAF) - Follow developers on GitHub and get a feed of what they star and build.
 ### Fingerprinting:
 - [WAFW00F](https://github.com/enablesecurity/wafw00f) - The ultimate WAF fingerprinting tool with the largest fingerprint database from [@EnableSecurity](https://github.com/enablesecurity).
 - [IdentYwaf](https://github.com/stamparm/identywaf) - A blind WAF detection tool which utlises a unique method of identifying WAFs based upon previously collected fingerprints by [@stamparm](https://github.com/stamparm).
