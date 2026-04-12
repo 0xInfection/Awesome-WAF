@@ -3882,6 +3882,10 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ```
 
 ## Awesome Tools
+
+### Open Source WAFs:
+- [SBproxy](https://github.com/soapbucket/sbproxy) - Reverse proxy with built-in WAF, DDoS protection, rate limiting, IP filtering, CSRF protection, and bot detection. Also functions as an AI gateway.
+
 ### Fingerprinting:
 - [WAFW00F](https://github.com/enablesecurity/wafw00f) - The ultimate WAF fingerprinting tool with the largest fingerprint database from [@EnableSecurity](https://github.com/enablesecurity).
 - [IdentYwaf](https://github.com/stamparm/identywaf) - A blind WAF detection tool which utlises a unique method of identifying WAFs based upon previously collected fingerprints by [@stamparm](https://github.com/stamparm).
