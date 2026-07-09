@@ -52,6 +52,9 @@ Feel free to [contribute](CONTRIBUTING.md).
 
 - [Violin](https://github.com/Strategic-Automation/violin) - AI-native pentest framework and Hermes agent profile/plugin for autonomous, human-in-the-loop offensive security (IDOR/SSRF/XSS triage, multi-stage agentic testing).
 
+
+- [Violin](https://github.com/Strategic-Automation/violin) - AI-native pentest framework and Hermes agent profile/plugin for autonomous, human-in-the-loop offensive security (IDOR/SSRF/XSS triage, multi-stage agentic testing).
+
 ### Where To Look:
 - Always look out for common ports that expose that a WAF, namely `80`, `443`, `8000`, `8080` and `8888` ports. However, its important to note that a WAF can be easily deployed on any port running a HTTP service. It is good to enumerate HTTP service ports first hand and then look for WAFs.
 - Some WAFs set their own cookies in requests (e.g. Citrix Netscaler, Yunsuo WAF).
