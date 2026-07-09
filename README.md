@@ -49,6 +49,9 @@ Feel free to [contribute](CONTRIBUTING.md).
 - __Mixed/Hybrid Model (Inclusive model)__ - A hybrid security model blends both whitelisting and blacklisting. Depending on all sorts of configuration specifics, hybrid firewalls could be the best choice for both web applications on internal networks and web applications on the public internet. A good scenario can be when web-application is facing the public internet (use blacklists) while the admin panel needs to be exposed to only a subset of users (use whitelists).
 
 ## Testing Methodology:
+
+- [Violin](https://github.com/Strategic-Automation/violin) - AI-native pentest framework and Hermes agent profile/plugin for autonomous, human-in-the-loop offensive security (IDOR/SSRF/XSS triage, multi-stage agentic testing).
+
 ### Where To Look:
 - Always look out for common ports that expose that a WAF, namely `80`, `443`, `8000`, `8080` and `8888` ports. However, its important to note that a WAF can be easily deployed on any port running a HTTP service. It is good to enumerate HTTP service ports first hand and then look for WAFs.
 - Some WAFs set their own cookies in requests (e.g. Citrix Netscaler, Yunsuo WAF).
