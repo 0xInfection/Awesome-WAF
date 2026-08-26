@@ -3905,6 +3905,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 - [enumXFF](https://github.com/infosec-au/enumXFF) - Eumerating IPs in X-Forwarded-Headers to bypass 403 restrictions
 - [WAF Bypass Tool](https://github.com/nemesida-waf/waf-bypass) - WAF bypass Tool from Nemesida is an open source tool to analyze the security of any WAF for False Positives and False Negatives using predefined and customizable payloads.
 - [nowafpls](https://github.com/assetnote/nowafpls) - Burp Plugin to Bypass WAFs through the insertion of Junk Data.
+- [impersonate-proxy](https://github.com/ytkoka/impersonate-proxy) - A local MITM proxy that spoofs TLS (JA3/JA4), HTTP/2, and header fingerprints per connection to test WAF bot-detection, with a Chrome extension for live profile switching, by [@ytkoka](https://github.com/ytkoka).
 
 ### Management:
 - [AWS Firewall Factory](https://github.com/globaldatanet/aws-firewall-factory) - Deploy, update, and stage your WAFs while managing them centrally via FMS.
