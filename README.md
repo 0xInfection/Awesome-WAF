@@ -681,6 +681,29 @@ Wanna fingerprint WAFs? Lets see how.
     </tr>
     <tr>
         <td>
+            Corvus AWPG
+        </td>
+        <td>
+            <ul>
+                <li><b>Detectability: </b>Easy</li>
+                <li><b>Detection Methodology:</b></li>
+                <ul>
+                    <li>Blocked requests return status code <code>403</code> (configurable per rule) with a page titled <code>Access denied</code>.</li>
+                    <li>Blocked response page source contains:
+                    <ul>
+                        <li><code>This request was blocked by the site's security rules.</code> text snippet.</li>
+                        <li><code>Protected by Corvus AWPG</code> footer and a <code>Request ID</code> field.</li>
+                    </ul>
+                    </li>
+                    <li>Browser challenges return <code>403</code> with an <code>X-Corvus-Challenge</code> response header, a page titled <code>Checking your browser</code> and a form posting to <code>/__corvus/challenge/verify</code>; a passed challenge sets the <code>__corvus_ch</code> cookie.</li>
+                    <li>The waiting room answers <code>429</code> with <code>Retry-After</code> and sets <code>corvus_q_*</code> / <code>corvus_a_*</code> cookies.</li>
+                    <li>No <code>Server</code> response header.</li>
+                </ul>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
             CrawlProtect
         </td>
         <td>
