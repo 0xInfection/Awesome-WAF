@@ -3933,6 +3933,7 @@ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 ### Management:
 - [AWS Firewall Factory](https://github.com/globaldatanet/aws-firewall-factory) - Deploy, update, and stage your WAFs while managing them centrally via FMS.
 - [WAF Rule Watch](https://ba-cybersecurity.com/radar/waf/) - A daily tracker of public WAF rule changelogs from Cloudflare, AWS Managed Rules, OWASP CRS, Google Cloud Armor, Azure WAF, Akamai, Imperva and WafCharm, showing which vendors publicly named each CISA KEV CVE; free, no signup, sources linked, raw data in data.json.
+- [Datacenter IP Ranges](https://github.com/moonetix/datacenter-ip-ranges) - Daily cloud, CDN, Tor and search/AI crawler IP ranges from the providers' own feeds, as CIDR lists, nftables sets and ipset files for WAF IP rules.
 
 ## Blogs and Writeups
 > Many of the content mentioned above have been taken from some of the following excellent writeups.
